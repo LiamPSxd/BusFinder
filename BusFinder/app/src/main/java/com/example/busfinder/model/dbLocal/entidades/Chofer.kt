@@ -8,8 +8,10 @@ import androidx.room.PrimaryKey
 data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario: String,
                   @ColumnInfo(name = "rfc") private var rfc: String,
                   @ColumnInfo(name = "nombre") private var nombre: String,
-                  @ColumnInfo(name = "numero_Celular") private var numCelular: Long){
-    constructor(): this("", "", "", 0)
+                  @ColumnInfo(name = "numero_Celular") private var numCelular: Long,
+                  @ColumnInfo(name = "noUsuarios") private var noUsuarios: Int,
+                  @ColumnInfo(name = "calificacion") private var calificacion: Double){
+    constructor(): this("", "", "", 0, 0, 0.0)
 
     fun setUsuario(usuario: String){
         this.usuario = usuario
@@ -41,6 +43,24 @@ data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario:
 
     fun getNumCelular(): Long{
         return numCelular
+    }
+
+    fun setNoUsuarios(noUsuarios: Int){
+        this.noUsuarios = noUsuarios
+    }
+
+    fun getNoUsuarios(): Int{
+        return noUsuarios
+    }
+
+    fun setCalificacion(valor: Double){
+        calificacion = ((calificacion*getNoUsuarios()) + valor)
+        setNoUsuarios(getNoUsuarios() + 1)
+        calificacion /= noUsuarios
+    }
+
+    fun getCalificacion(): Double{
+        return calificacion
     }
 
     override fun toString(): String{
