@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1099088393270",
+    "project_id": "busfinder-9e961",
+    "storage_bucket": "busfinder-9e961.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099088393270:android:9b00406a3dd54310bb5497",
+        "android_client_info": {
+          "package_name": "com.example.busfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099088393270-a2g7gdsqce3jtbhs60hsv330aakahhv0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyDQuj92clibFDw06WcqkzzbY5GCUQlTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099088393270-a2g7gdsqce3jtbhs60hsv330aakahhv0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

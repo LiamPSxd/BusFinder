@@ -28,7 +28,7 @@ abstract class LocalDataBase: RoomDatabase(){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LocalDataBase::class.java,
-                    "local_dataBase"
+                    "localDataBase"
                 ).build()
                 INSTANCE = instance
                 instance

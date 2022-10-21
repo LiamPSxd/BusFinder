@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- <uses-permission
-        android:name="android.permission.ACCESS_FINE_LOCATION"
-        tools:ignore="CoarseFineLocation" /> -->
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,23 +11,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BusFinder"
-        tools:targetApi="32" >
+        tools:targetApi="32">
 
-        <!-- <meta-data
+        <!--
+         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDCpEGLGBLBbjPPqUL10YlHlVkBYn505rM" /> -->
+            android:value="AIzaSyDCpEGLGBLBbjPPqUL10YlHlVkBYn505rM" />
+        -->
 
-        <!-- <activity
-            android:name=".view.activity.MainActivity"
+        <activity
+            android:name=".view.activity.CrearCuenta"
+            android:exported="false"
+            android:parentActivityName=".view.activity.Bienvenida">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.Bienvenida" />
+        </activity>
+
+        <activity
+            android:name=".view.activity.IniciarSesion"
+            android:exported="false"
+            android:parentActivityName=".view.activity.Bienvenida">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.Bienvenida" />
+        </activity>
+
+        <activity
+            android:name=".view.activity.Bienvenida"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity> -->
+        </activity>
     </application>
 </manifest>

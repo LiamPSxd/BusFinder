@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_publico"
+    app:startDestination="@id/nav_publico">
+
+    <!-- <fragment
+        android:id="@+id/navigationVisualizarAdmin"
+        android:name="com.example.mybus.view.fragment.VisualizarAdministrador"
+        android:label="@string/visualizarAdmin"
+        tools:layout="@layout/fragment_visualizar_administrador" />
+
+    <fragment
+        android:id="@+id/navigationBorrarAdmin"
+        android:name="com.example.mybus.view.fragment.BorrarAdministrador"
+        android:label="@string/borrarAdmin"
+        tools:layout="@layout/fragment_borrar_administrador" />
+
+    <fragment
+        android:id="@+id/navigationAgregarAdmin"
+        android:name="com.example.mybus.view.fragment.AgregarAdministrador"
+        android:label="@string/agregarAdmin"
+        tools:layout="@layout/fragment_agregar_administrador" />
+
+    <fragment
+        android:id="@+id/navigationModificarAdmin"
+        android:name="com.example.mybus.view.fragment.ModificarAdministrador"
+        android:label="@string/modificarAdmin"
+        tools:layout="@layout/fragment_modificar_administrador" />
+
+    <fragment
+        android:id="@+id/navigationPerfilAdmin"
+        android:name="com.example.mybus.ui.perfil.MapaFragment"
+        android:label="@string/perfilAdmin"
+        tools:layout="@layout/fragment_maps" /> -->
+</navigation>

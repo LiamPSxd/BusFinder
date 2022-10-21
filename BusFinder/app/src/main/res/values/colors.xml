@@ -5,26 +5,31 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="white">#FFFFFFFF</color>
 
     <!-- Paleta de Colores de la App -->
-    <color name="color1">#FF000000</color>
-    <color name="color2">#a49b97</color>
-    <color name="color3">#bbb4b0</color>
-    <color name="color4">#d2cdc9</color>
-    <color name="color5">#e8e6e2</color>
-    <color name="color6">#fffffb</color>
+    <color name="fondo">#EAE9E7</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="black1">#201E1E</color>
 
-    <color name="color12">#29545b</color>
-    <color name="color13">#406b72</color>
-    <color name="color14">#57828a</color>
-    <color name="color15">#6d99a1</color>
-    <color name="color16">#84b0b8</color>
+    <color name="color">#4A4A4A</color>
+    <color name="color0">#7C7C7C</color>
+    <color name="color1">#a49b97</color>
+    <color name="color2">#bbb4b0</color>
+    <color name="color3">#d2cdc9</color>
+    <color name="color4">#e8e6e2</color>
+    <color name="color5">#fffffb</color>
 
-    <color name="color7">#2933c4</color>
-    <color name="color8">#4849d3</color>
+    <color name="color6">#2933c4</color>
+    <color name="color7">#4849d3</color>
 
-    <color name="color9">#3d707c</color>
-    <color name="color10">#558894</color>
-    <color name="color11">#6da0ad</color>
+    <color name="color8">#3d707c</color>
+    <color name="color9">#558894</color>
+    <color name="color10">#6da0ad</color>
+
+    <color name="color11">#29545b</color>
+    <color name="color12">#406b72</color>
+    <color name="color13">#57828a</color>
+    <color name="color14">#6d99a1</color>
+    <color name="color15">#84b0b8</color>
 </resources>

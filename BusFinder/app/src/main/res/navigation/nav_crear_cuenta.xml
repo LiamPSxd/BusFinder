@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_crear_cuenta"
+    app:startDestination="@id/FragmentTipoCuenta">
+
+    <fragment
+        android:id="@+id/FragmentTipoCuenta"
+        android:name="com.example.busfinder.view.fragment.TipoCuenta"
+        android:label="Tipo Cuenta"
+        tools:layout="@layout/fragment_tipo_cuenta">
+
+        <action
+            android:id="@+id/action_fragment_tipo_cuenta_TO_fragment_tipo_administrador"
+            app:destination="@+id/FragmentTipoAdministrador" />
+
+        <action
+            android:id="@+id/action_fragment_tipo_cuenta_TO_fragment_tipo_chofer"
+            app:destination="@+id/FragmentTipoChofer" />
+
+        <action
+            android:id="@+id/action_fragment_tipo_cuenta_TO_fragment_tipo_publico"
+            app:destination="@+id/FragmentTipoPublico" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentTipoAdministrador"
+        android:name="com.example.busfinder.view.fragment.TipoAdministrador"
+        android:label="Tipo Administrador"
+        tools:layout="@layout/fragment_tipo_administrador">
+
+        <action
+            android:id="@+id/action_fragment_tipo_administrador_TO_fragment_tipo_administrador_2"
+            app:destination="@+id/FragmentTipoAdministrador2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentTipoAdministrador2"
+        android:name="com.example.busfinder.view.fragment.TipoAdministrador2"
+        android:label="Tipo Administrador 2"
+        tools:layout="@layout/fragment_tipo_administrador_2">
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentTipoChofer"
+        android:name="com.example.busfinder.view.fragment.TipoChofer"
+        android:label="Tipo Chofer"
+        tools:layout="@layout/fragment_tipo_chofer">
+
+        <action
+            android:id="@+id/action_fragment_tipo_chofer_TO_fragment_tipo_chofer_2"
+            app:destination="@+id/FragmentTipoChofer2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentTipoChofer2"
+        android:name="com.example.busfinder.view.fragment.TipoChofer2"
+        android:label="Tipo Chofer 2"
+        tools:layout="@layout/fragment_tipo_chofer_2">
+    </fragment>
+
+    <fragment
+        android:id="@+id/FragmentTipoPublico"
+        android:name="com.example.busfinder.view.fragment.TipoPublico"
+        android:label="Tipo Publico"
+        tools:layout="@layout/fragment_tipo_publico">
+    </fragment>
+</navigation>
