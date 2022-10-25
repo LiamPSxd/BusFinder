@@ -10,24 +10,20 @@
     <item
         android:id="@+id/borrar"
         android:icon="@drawable/borrar"
-        android:titleCondensed="Borrar"
-        android:title="" />
+        android:title="Borrar" />
 
     <item
         android:id="@+id/agregar"
         android:icon="@drawable/agregar"
-        android:titleCondensed="Agregar"
-        android:title="" />
+        android:title="Agregar" />
 
     <item
         android:id="@+id/modificar"
         android:icon="@drawable/modificar"
-        android:titleCondensed="Modificar"
-        android:title="" />
+        android:title="Modificar" />
 
     <item
         android:id="@+id/perfil"
         android:icon="@drawable/perfil"
-        android:titleCondensed="Perfil"
-        android:title="" />
+        android:title="Perfil" />
 </menu>

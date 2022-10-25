@@ -22,6 +22,7 @@ class CrearCuenta: AppCompatActivity(){
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.hide()
 
         navController = findNavController(R.id.nav_host_fragment_crear_cuenta_tipo)
 

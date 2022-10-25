@@ -3,35 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_chofer"
-    app:startDestination="@id/nav_chofer">
-
-    <!-- <fragment
-        android:id="@+id/navigationVisualizarAdmin"
-        android:name="com.example.mybus.view.fragment.VisualizarAdministrador"
-        android:label="@string/visualizarAdmin"
-        tools:layout="@layout/fragment_visualizar_administrador" />
+    app:startDestination="@id/navVisualizarChofer">
 
     <fragment
-        android:id="@+id/navigationBorrarAdmin"
-        android:name="com.example.mybus.view.fragment.BorrarAdministrador"
-        android:label="@string/borrarAdmin"
-        tools:layout="@layout/fragment_borrar_administrador" />
+        android:id="@+id/navMapaChofer"
+        android:name="com.example.mybus.view.fragment.MapaChofer"
+        android:label="@string/mapaChofer"
+        tools:layout="@layout/fragment_mapa_chofer" />
 
     <fragment
-        android:id="@+id/navigationAgregarAdmin"
-        android:name="com.example.mybus.view.fragment.AgregarAdministrador"
-        android:label="@string/agregarAdmin"
-        tools:layout="@layout/fragment_agregar_administrador" />
+        android:id="@+id/navVisualizarChofer"
+        android:name="com.example.mybus.view.fragment.VisualizarChofer"
+        android:label="@string/visualizarChofer"
+        tools:layout="@layout/fragment_visualizar_chofer" />
 
     <fragment
-        android:id="@+id/navigationModificarAdmin"
-        android:name="com.example.mybus.view.fragment.ModificarAdministrador"
-        android:label="@string/modificarAdmin"
-        tools:layout="@layout/fragment_modificar_administrador" />
-
-    <fragment
-        android:id="@+id/navigationPerfilAdmin"
-        android:name="com.example.mybus.ui.perfil.MapaFragment"
-        android:label="@string/perfilAdmin"
-        tools:layout="@layout/fragment_maps" /> -->
+        android:id="@+id/navPerfilChofer"
+        android:name="com.example.mybus.view.fragment.PerfilChofer"
+        android:label="@string/perfilChofer"
+        tools:layout="@layout/fragment_perfil_chofer" />
 </navigation>
