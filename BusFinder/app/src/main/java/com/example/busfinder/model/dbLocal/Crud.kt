@@ -1,13 +1,7 @@
 package com.example.busfinder.model.dbLocal
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Insert
-import androidx.room.Update
-import androidx.room.Delete
-import com.example.busfinder.model.dbLocal.entidades.Administrador
-import com.example.busfinder.model.dbLocal.relaciones.CalleCoordenada
+import androidx.room.*
 import com.example.busfinder.model.dbLocal.entidades.*
 import com.example.busfinder.model.dbLocal.relaciones.*
 
@@ -115,6 +109,22 @@ interface Crud{
     @Delete
     fun deleteCalle(calle: Calle)
 
+//Parada
+    @Query("SELECT * FROM Parada")
+    fun getParadas(): LiveData<List<Parada>>
+
+    @Query("SELECT * FROM Parada WHERE id = :id")
+    fun getParadaById(id: Int): LiveData<Parada>
+
+    @Insert
+    fun addParadas(vararg paradas: Parada)
+
+    @Update
+    fun updateParada(vararg parada: Parada)
+
+    @Delete
+    fun deleteParada(parada: Parada)
+
 //Unidad
     @Query("SELECT * FROM Unidad")
     fun getUnidades(): LiveData<List<Unidad>>
@@ -187,7 +197,7 @@ interface Crud{
     fun getCuentaAdministradorByUsuario(usuario: String): LiveData<CuentaAdministrador>
 
     @Query("SELECT correo, contrasenia, foto, tipo, estado FROM Cuenta INNER JOIN CuentaAdministrador " +
-            "WHERE CuentaAdministrador.administrador_Usuario = :usuarioOCorreo OR CuentaAdministrador.cuenta_Correo = :usuarioOCorreo")
+            "WHERE administrador_Usuario = :usuarioOCorreo OR cuenta_Correo = :usuarioOCorreo")
     fun getCuentaByAdministradorUsuarioOCuentaCorreo(usuarioOCorreo: String): LiveData<Cuenta>
 
     @Insert
@@ -207,7 +217,7 @@ interface Crud{
     fun getCuentaChoferByUsuario(usuario: String): LiveData<CuentaChofer>
 
     @Query("SELECT correo, contrasenia, foto, tipo, estado FROM Cuenta INNER JOIN CuentaChofer " +
-            "WHERE CuentaChofer.chofer_Usuario = :usuarioOCorreo OR CuentaChofer.cuenta_Correo = :usuarioOCorreo")
+            "WHERE chofer_Usuario = :usuarioOCorreo OR cuenta_Correo = :usuarioOCorreo")
     fun getCuentaByChoferUsuarioOCuentaCorreo(usuarioOCorreo: String): LiveData<Cuenta>
 
     @Insert
@@ -227,7 +237,7 @@ interface Crud{
     fun getCuentaPublicoByUsuario(usuario: String): LiveData<CuentaPublico>
 
     @Query("SELECT correo, contrasenia, foto, tipo, estado FROM Cuenta INNER JOIN CuentaPublico " +
-            "WHERE CuentaPublico.publico_General_Usuario = :usuarioOCorreo OR CuentaPublico.cuenta_Correo = :usuarioOCorreo")
+            "WHERE publico_General_Usuario = :usuarioOCorreo OR cuenta_Correo = :usuarioOCorreo")
     fun getCuentaByPublicoUsuarioOCuentaCorreo(usuarioOCorreo: String): LiveData<Cuenta>
 
     @Insert
@@ -256,6 +266,9 @@ interface Crud{
     @Query("SELECT * FROM RutaCalle")
     fun getRutaCalles(): LiveData<List<RutaCalle>>
 
+    @Query("SELECT * FROM RutaCalle WHERE ruta_ID = :rutaID")
+    fun getCallesIDByRutaID(rutaID: Int): LiveData<List<RutaCalle>>
+
     @Insert
     fun addRutaCalles(vararg rutaCalles: RutaCalle)
 
@@ -264,6 +277,35 @@ interface Crud{
 
     @Delete
     fun deleteRutaCalle(rutaCalle: RutaCalle)
+
+//RutaParada
+    @Query("SELECT * FROM RutaParada")
+    fun getRutaParadas(): LiveData<List<RutaParada>>
+
+    @Query("SELECT * FROM RutaParada WHERE parada_ID = :paradaID")
+    fun getRutaIDByParadaID(paradaID: Int): LiveData<RutaParada>
+
+    @Insert
+    fun addRutaParadas(vararg rutaParadas: RutaParada)
+
+    @Update
+    fun updateRutaParada(vararg rutaParada: RutaParada)
+
+    @Delete
+    fun deleteRutaParada(rutaParada: RutaParada)
+
+//ParadaCoordenada
+    @Query("SELECT * FROM ParadaCoordenada")
+    fun getParadaCoordenadas(): LiveData<List<ParadaCoordenada>>
+
+    @Insert
+    fun addParadaCoordenadas(vararg paradaCoordenadas: ParadaCoordenada)
+
+    @Update
+    fun updateParadaCoordenada(vararg paradaCoordenada: ParadaCoordenada)
+
+    @Delete
+    fun deleteParadaCoordenada(paradaCoordenada: ParadaCoordenada)
 
 //UnidadCoordenada
     @Query("SELECT * FROM UnidadCoordenada")

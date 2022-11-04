@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navVisualizarAdmin"
-        android:name="com.example.mybus.view.fragment.VisualizarAdministrador"
-        android:label="@string/visualizarAdmin"
-        tools:layout="@layout/fragment_visualizar_administrador" />
+        android:name="com.example.busfinder.view.fragment.VisualizarAdministrador"
+        android:label="visualizarAdmin"
+        tools:layout="@layout/fragment_administrador" />
 
     <fragment
         android:id="@+id/navBorrarAdmin"
-        android:name="com.example.mybus.view.fragment.BorrarAdministrador"
-        android:label="@string/borrarAdmin"
-        tools:layout="@layout/fragment_borrar_administrador" />
+        android:name="com.example.busfinder.view.fragment.BorrarAdministrador"
+        android:label="borrarAdmin"
+        tools:layout="@layout/fragment_administrador" />
 
     <fragment
         android:id="@+id/navAgregarAdmin"
-        android:name="com.example.mybus.view.fragment.AgregarAdministrador"
-        android:label="@string/agregarAdmin"
-        tools:layout="@layout/fragment_agregar_administrador" />
+        android:name="com.example.busfinder.view.fragment.AgregarAdministrador"
+        android:label="agregarAdmin"
+        tools:layout="@layout/fragment_administrador" />
 
-    <fragment
+    <!-- <fragment
         android:id="@+id/navModificarAdmin"
-        android:name="com.example.mybus.view.fragment.ModificarAdministrador"
-        android:label="@string/modificarAdmin"
+        android:name="com.example.busfinder.view.fragment.ModificarAdministrador"
+        android:label="modificarAdmin"
         tools:layout="@layout/fragment_modificar_administrador" />
 
     <fragment
         android:id="@+id/navPerfilAdmin"
-        android:name="com.example.mybus.view.fragment.PerfilAdministrador"
-        android:label="@string/perfilAdmin"
-        tools:layout="@layout/fragment_perfil_administrador" />
+        android:name="com.example.busfinder.view.fragment.PerfilAdministrador"
+        android:label="perfilAdmin"
+        tools:layout="@layout/fragment_perfil_administrador" /> -->
 </navigation>

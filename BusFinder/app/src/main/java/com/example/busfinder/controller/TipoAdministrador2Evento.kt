@@ -4,21 +4,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.example.busfinder.R
 import com.example.busfinder.databinding.FragmentTipoAdministrador2Binding
 import com.example.busfinder.model.dbLocal.LocalDataBase
 import com.example.busfinder.model.dbLocal.entidades.Administrador
 import com.example.busfinder.model.dbLocal.entidades.Cuenta
 import com.example.busfinder.model.dbLocal.relaciones.CuentaAdministrador
-import com.example.busfinder.view.dialog.MensajeAlertaDialog
+import com.example.busfinder.view.dialog.MensajeAlerta
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TipoAdministrador2Evento(private var fragment: Fragment,
-                               private var binding: FragmentTipoAdministrador2Binding): View.OnClickListener{
+class TipoAdministrador2Evento(private val fragment: Fragment,
+                               private val binding: FragmentTipoAdministrador2Binding): View.OnClickListener{
     private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
     private var internet = false
@@ -61,7 +60,7 @@ class TipoAdministrador2Evento(private var fragment: Fragment,
                     if(it.isSuccessful){
                         Toast.makeText(fragment.context, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
                     }else{
-                        MensajeAlertaDialog(fragment.requireContext(), "Error", "Se ha producido un error al autenticarte").mostrarAlerta()
+                        MensajeAlerta("Error", "Se ha producido un error al autenticarte").mostrar(R.anim.zoom_in, R.anim.zoom_out)
                     }
                 }
 

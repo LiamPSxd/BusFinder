@@ -11,14 +11,14 @@
         android:id="@+id/imageBus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_above="@id/etqApp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:contentDescription="After Splash"
-        tools:srcCompat="@drawable/bus" />
+        android:src="@drawable/bus" />
 
     <TextView
         android:id="@+id/etqApp"
@@ -37,7 +37,7 @@
 
     <Button
         android:id="@+id/btnIniciarSesion"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="46dp"
         android:layout_marginEnd="46dp"

@@ -10,9 +10,6 @@ class TipoCuentaEvento2(private var fragment: TipoCuenta,
                         private var binding: FragmentTipoCuentaBinding): OnCheckedChangeListener{
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int){
         when(checkedId){
-            binding.btnCrearAdmin.id -> fragment.tipo = "Admin"
-            binding.btnCrearChofer.id -> fragment.tipo = "Chofer"
-            binding.btnCrearPublico.id -> fragment.tipo = "Publico"
             else -> Toast.makeText(fragment.context, "Error: Acción no encontrada", Toast.LENGTH_SHORT).show()
         }
     }

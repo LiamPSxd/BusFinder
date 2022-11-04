@@ -4,14 +4,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.example.busfinder.R
 import com.example.busfinder.databinding.FragmentTipoPublicoBinding
 import com.example.busfinder.model.dbLocal.LocalDataBase
 import com.example.busfinder.model.dbLocal.entidades.Cuenta
 import com.example.busfinder.model.dbLocal.entidades.PublicoGeneral
 import com.example.busfinder.model.dbLocal.relaciones.CuentaPublico
-import com.example.busfinder.view.dialog.MensajeAlertaDialog
+import com.example.busfinder.view.dialog.MensajeAlerta
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +59,7 @@ class TipoPublicoEvento(private var fragment: Fragment,
                     if(it.isSuccessful){
                         Toast.makeText(fragment.context, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
                     }else{
-                        MensajeAlertaDialog(fragment.requireContext(), "Error", "Se ha producido un error al autenticarte").mostrarAlerta()
+                        MensajeAlerta("Error", "Se ha producido un error al autenticarte").mostrar(R.anim.zoom_in, R.anim.zoom_out)
                     }
                 }
 

@@ -32,4 +32,6 @@
     <color name="color13">#57828a</color>
     <color name="color14">#6d99a1</color>
     <color name="color15">#84b0b8</color>
+    <color name="cancelar">#931414</color>
+    <color name="btnBorrar">#F47474</color>
 </resources>

@@ -25,7 +25,7 @@ class PrincipalChofer: AppCompatActivity(){
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navMapaChofer, R.id.navVisualizarChofer, R.id.navPerfilChofer
+                //R.id.navMapaChofer, R.id.navVisualizarChofer, R.id.navPerfilChofer
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

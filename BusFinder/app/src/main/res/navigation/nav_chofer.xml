@@ -2,24 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_chofer"
-    app:startDestination="@id/navVisualizarChofer">
+    android:id="@+id/nav_chofer">
+    <!--app:startDestination="@id/navVisualizarChofer">-->
 
-    <fragment
+    <!-- <fragment
         android:id="@+id/navMapaChofer"
-        android:name="com.example.mybus.view.fragment.MapaChofer"
-        android:label="@string/mapaChofer"
+        android:name="com.example.busfinder.view.fragment.MapaChofer"
+        android:label="mapaChofer"
         tools:layout="@layout/fragment_mapa_chofer" />
 
     <fragment
         android:id="@+id/navVisualizarChofer"
-        android:name="com.example.mybus.view.fragment.VisualizarChofer"
-        android:label="@string/visualizarChofer"
+        android:name="com.example.busfinder.view.fragment.VisualizarChofer"
+        android:label="visualizarChofer"
         tools:layout="@layout/fragment_visualizar_chofer" />
 
     <fragment
         android:id="@+id/navPerfilChofer"
-        android:name="com.example.mybus.view.fragment.PerfilChofer"
-        android:label="@string/perfilChofer"
-        tools:layout="@layout/fragment_perfil_chofer" />
+        android:name="com.example.busfinder.view.fragment.PerfilChofer"
+        android:label="perfilChofer"
+        tools:layout="@layout/fragment_perfil_chofer" /> -->
 </navigation>

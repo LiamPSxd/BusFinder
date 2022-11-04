@@ -25,7 +25,7 @@ class PrincipalPublico: AppCompatActivity(){
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navVisualizarPublico, R.id.navMapaPublico, R.id.navPerfilPublico
+                //R.id.navVisualizarPublico, R.id.navMapaPublico, R.id.navPerfilPublico
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

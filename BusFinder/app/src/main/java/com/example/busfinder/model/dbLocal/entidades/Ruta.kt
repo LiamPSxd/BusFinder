@@ -1,11 +1,12 @@
 package com.example.busfinder.model.dbLocal.entidades
 
-import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "Ruta")
-data class Ruta(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") private var id: Int,
+data class Ruta(@PrimaryKey(autoGenerate = true)
+                @ColumnInfo(name = "id") private var id: Int,
                 @ColumnInfo(name = "nombre") private var nombre: String){
     constructor(): this(0, "")
 

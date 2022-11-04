@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DialogAnimationsFromLeft">
+        <item name="android:windowEnterAnimation">@anim/float_right</item>
+        <item name="android:windowExitAnimation">@anim/sink_left</item>
+    </style>
+
+    <style name="DialogAnimationsFromRight">
+        <item name="android:windowEnterAnimation">@anim/float_left</item>
+        <item name="android:windowExitAnimation">@anim/sink_right</item>
+    </style>
+
+    <style name="DialogAnimationsFromTop">
+        <item name="android:windowEnterAnimation">@anim/float_down</item>
+        <item name="android:windowExitAnimation">@anim/sink_up</item>
+    </style>
+
+    <style name="DialogAnimationsFromBottom">
+        <item name="android:windowEnterAnimation">@anim/float_up</item>
+        <item name="android:windowExitAnimation">@anim/sink_down</item>
+    </style>
+
+    <style name="DialogAnimationsFromCenter">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
+
+    <style name="BlurLayoutFullScreen">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:visibility">invisible</item>
+        <item name="blk_blurRadius">20</item>
+        <item name="blk_downscaleFactor">0.12</item>
+        <item name="blk_fps">0</item>
+    </style>
+
+    <style name="DragHandleLight">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/drag_handle_light</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:layout_gravity">top|center_horizontal</item>
+    </style>
+
+    <style name="DragAreaWrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:layout_gravity">top|center_horizontal</item>
+    </style>
+</resources>

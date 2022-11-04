@@ -33,8 +33,6 @@ class TipoCuenta: Fragment(){
 
         evento2 = TipoCuentaEvento2(this, binding)
 
-        binding.radioGroup.setOnCheckedChangeListener(evento2)
-
         binding.btnContinuarTipoCuenta.setOnClickListener(evento)
     }
 

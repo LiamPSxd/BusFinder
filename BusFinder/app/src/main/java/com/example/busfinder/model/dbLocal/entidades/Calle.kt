@@ -5,7 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Calle")
-data class Calle(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") private var id: Int,
+data class Calle(@PrimaryKey(autoGenerate = true)
+                 @ColumnInfo(name = "id") private var id: Int,
                  @ColumnInfo(name = "nombre") private var nombre: String){
     constructor(): this(0, "")
 

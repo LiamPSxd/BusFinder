@@ -11,7 +11,7 @@
         <item name="colorOnSecondary">@color/fondo</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -24,4 +24,14 @@
     <style name="Theme.BusFinder.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.BusFinder.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Titulos">
+        <item name="fontFamily">@font/blogger_sans_medium</item>
+        <item name="paddingStart">35dp</item>
+        <item name="paddingEnd">35dp</item>
+        <item name="layout_scrollFlags">scroll|snap|enterAlways</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="android:textSize">45sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

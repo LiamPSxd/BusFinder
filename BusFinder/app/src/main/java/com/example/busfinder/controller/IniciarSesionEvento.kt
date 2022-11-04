@@ -5,17 +5,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.example.busfinder.R
 import com.example.busfinder.databinding.ActivityIniciarSesionBinding
 import com.example.busfinder.model.dbLocal.LocalDataBase
 import com.example.busfinder.model.dbLocal.entidades.Cuenta
 import com.example.busfinder.view.activity.PrincipalAdministrador
 import com.example.busfinder.view.activity.PrincipalChofer
 import com.example.busfinder.view.activity.PrincipalPublico
-import com.example.busfinder.view.dialog.MensajeAlertaDialog
+import com.example.busfinder.view.dialog.MensajeAlerta
 import com.google.firebase.auth.FirebaseAuth
 
-class IniciarSesionEvento(private var activity: AppCompatActivity,
-                          private var binding: ActivityIniciarSesionBinding): View.OnClickListener{
+class IniciarSesionEvento(private val activity: AppCompatActivity,
+                          private val binding: ActivityIniciarSesionBinding): View.OnClickListener{
     private val localDB = LocalDataBase.getDB(activity).crud()
 
     private var internet = false
@@ -51,7 +52,7 @@ class IniciarSesionEvento(private var activity: AppCompatActivity,
                         if(it.isSuccessful){
                             activity.startActivity(Intent(activity, PrincipalAdministrador::class.java))
                         }else{
-                            MensajeAlertaDialog(activity, "Error", "Se ha producido un error al autenticarte por Google").mostrarAlerta()
+                            MensajeAlerta("Error", "Se ha producido un error al autenticarte por Google").mostrar(R.anim.zoom_in, R.anim.zoom_out)
                         }
                     }
             }else{
@@ -61,7 +62,7 @@ class IniciarSesionEvento(private var activity: AppCompatActivity,
                     if(admin != null){
                         cuenta = admin
                     }else{
-                        localDB.getCuentaByChoferUsuarioOCuentaCorreo(usuarioOCorreo).observe(activity, Observer{ chofer ->
+                        localDB.getCuentaByChoferUsuarioOCuentaCorreo(usuarioOCorreo).observe(activity){ chofer ->
                             if(chofer != null){
                                 cuenta = chofer
                             }else{
@@ -69,7 +70,7 @@ class IniciarSesionEvento(private var activity: AppCompatActivity,
                                     if(publico != null) cuenta = publico
                                 })
                             }
-                        })
+                        }
                     }
                 })
 

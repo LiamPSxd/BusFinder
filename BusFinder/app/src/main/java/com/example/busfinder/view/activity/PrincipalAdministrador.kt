@@ -21,11 +21,14 @@ class PrincipalAdministrador: AppCompatActivity(){
         binding = ActivityAdministradorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.hide()
+
         navController = findNavController(R.id.navHostAdministrador)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navVisualizarAdmin, R.id.navBorrarAdmin, R.id.navAgregarAdmin, R.id.navModificarAdmin, R.id.navPerfilAdmin
+                R.id.navVisualizarAdmin, R.id.navBorrarAdmin, R.id.navAgregarAdmin /*, R.id.navModificarAdmin, R.id.navPerfilAdmin*/
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -5,7 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Coordenada")
-data class Coordenada(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id")  private var id: Int,
+data class Coordenada(@PrimaryKey(autoGenerate = true)
+                      @ColumnInfo(name = "id")  private var id: Int,
                       @ColumnInfo(name = "latitud") private var latitud: String,
                       @ColumnInfo(name = "longitud") private var longitud: String){
     constructor(): this(0, "", "")
