@@ -1,5 +1,6 @@
 package com.example.busfinder.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.busfinder.controller.TipoChofer2Evento
 import com.example.busfinder.databinding.FragmentTipoChofer2Binding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class TipoChofer2: Fragment(){
     private var _binding: FragmentTipoChofer2Binding? = null
@@ -37,6 +39,13 @@ class TipoChofer2: Fragment(){
         binding.btnTwitter.setOnClickListener(evento)
 
         binding.btnContinuarTipoChofer2.setOnClickListener(evento)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == evento.GOOGLE_SIGN_IN) evento.iniciarByGoogle(GoogleSignIn.getSignedInAccountFromIntent(data))
     }
 
     override fun onDestroyView(){

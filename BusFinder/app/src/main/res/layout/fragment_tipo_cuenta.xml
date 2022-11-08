@@ -11,10 +11,9 @@
         android:id="@+id/etqCrearCuenta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
-        android:layout_above="@+id/fondo"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -25,167 +24,165 @@
         android:textSize="45sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/fondo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/ly"
-        android:layout_alignStart="@+id/ly"
-        android:layout_alignEnd="@+id/ly"
-        android:layout_alignBottom="@+id/ly"
-        android:backgroundTint="@color/white"
-        android:clickable="false"
-        android:enabled="false"
-        app:cornerRadius="25dp" />
-
-    <LinearLayout
-        android:id="@+id/ly"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/trjAdmin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="60dp"
-        android:layout_above="@+id/btnContinuarTipoCuenta"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_above="@+id/trjChofer"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/trjAdmin"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="#CFC465"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="4dp">
+            android:layout_height="match_parent"
+            android:padding="15dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/etqAdmin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/blogger_sans_bold"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:text="ADMINISTRADOR"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/black1"
+                android:textSize="33sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/blogger_sans_bold"
-                    android:gravity="center"
-                    android:text="ADMINISTRADOR"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/black"
-                    android:textSize="33sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/blogger_sans_medium"
-                    android:gravity="center"
-                    android:text="Para quienes son dueños o administran una línea de autobuses en Xalapa."
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="#151414"
-                    android:textSize="19sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/trjChofer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardBackgroundColor="#9F9898"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etqAdmin"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/blogger_sans_medium"
+                android:gravity="start|center"
+                android:text="Para quienes son dueños o administran una línea de autobuses en Xalapa."
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/color"
+                android:textSize="19sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/blogger_sans_bold"
-                    android:gravity="center"
-                    android:text="CHOFER"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/black"
-                    android:textSize="33sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/blogger_sans_medium"
-                    android:gravity="center"
-                    android:text="Para quienes trabajan para una línea de autobuses en Xalapa."
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="#151414"
-                    android:textSize="19sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/trjPublico"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="30dp"
-            app:cardBackgroundColor="#5081E6"
-            app:cardCornerRadius="30dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/blogger_sans_bold"
-                    android:gravity="center"
-                    android:text="PASAJERO"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    android:textColor="@color/black"
-                    android:textSize="33sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/blogger_sans_medium"
-                    android:gravity="center"
-                    android:text="Para quienes hacen uso de los autobuses como transporte púnlico."
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="#151414"
-                    android:textSize="19sp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnContinuarTipoCuenta"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/trjChofer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/etqChofer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/blogger_sans_bold"
+                android:gravity="center"
+                android:text="CHOFER"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/black1"
+                android:textSize="33sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etqChofer"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/blogger_sans_medium"
+                android:gravity="start|center"
+                android:text="Para quienes trabajan para una línea de autobuses en Xalapa."
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/color"
+                android:textSize="19sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/trjPublico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_below="@+id/trjChofer"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:contentDescription="Pasa a la pantalla siguiente"
-        android:focusable="true"
-        app:backgroundTint="@color/color12"
-        app:fabSize="normal"
-        app:maxImageSize="50dp"
-        app:srcCompat="@drawable/ingresar" />
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/etqPublico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/blogger_sans_bold"
+                android:gravity="center"
+                android:text="PASAJERO"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/black1"
+                android:textSize="33sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etqPublico"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/blogger_sans_medium"
+                android:gravity="start|center"
+                android:text="Para quienes hacen uso de los autobuses como transporte púnlico."
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/color"
+                android:textSize="19sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

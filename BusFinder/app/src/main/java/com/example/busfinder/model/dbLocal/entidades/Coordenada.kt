@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Coordenada")
 data class Coordenada(@PrimaryKey(autoGenerate = true)
                       @ColumnInfo(name = "id")  private var id: Int,
-                      @ColumnInfo(name = "latitud") private var latitud: String,
-                      @ColumnInfo(name = "longitud") private var longitud: String){
-    constructor(): this(0, "", "")
+                      @ColumnInfo(name = "latitud") private var latitud: Double,
+                      @ColumnInfo(name = "longitud") private var longitud: Double){
+    constructor(): this(0, 0.0, 0.0)
 
     fun setId(id: Int){
         this.id = id
@@ -19,19 +19,19 @@ data class Coordenada(@PrimaryKey(autoGenerate = true)
         return id
     }
 
-    fun setLatitud(latitud: String){
+    fun setLatitud(latitud: Double){
         this.latitud = latitud
     }
 
-    fun getLatitud(): String{
+    fun getLatitud(): Double{
         return latitud
     }
 
-    fun setLongitud(longitud: String){
+    fun setLongitud(longitud: Double){
         this.longitud = longitud
     }
 
-    fun getLongitud(): String{
+    fun getLongitud(): Double{
         return longitud
     }
 

@@ -2,27 +2,78 @@ package com.example.busfinder.controller
 
 import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.busfinder.R
 import com.example.busfinder.databinding.ActivityBienvenidaBinding
-import com.example.busfinder.view.activity.CrearCuenta
-import com.example.busfinder.view.activity.IniciarSesion
+import com.example.busfinder.model.dbLocal.LocalDataBase
+import com.example.busfinder.model.dbLocal.entidades.Cuenta
+import com.example.busfinder.model.dbNube.CloudDataBase
+import com.example.busfinder.view.activity.*
+import com.example.busfinder.view.dialog.MensajeAlerta
 
 class BienvenidaEvento(private var activity: AppCompatActivity,
                        private var binding: ActivityBienvenidaBinding): View.OnClickListener{
     override fun onClick(v: View?){
         when(v?.id){
-            binding.btnCrearCuenta.id -> crearCuenta()
             binding.btnIniciarSesion.id -> iniciarSesion()
-            else -> Toast.makeText(activity, "Error: Acción no encontrada", Toast.LENGTH_SHORT).show()
+            binding.btnCrearCuenta.id -> crearCuenta()
+            else -> MensajeAlerta("ERROR", "Acción no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
         }
+    }
+
+    private fun iniciarSesion(){
+        activity.startActivity(Intent(activity, IniciarSesion::class.java))
     }
 
     private fun crearCuenta(){
         activity.startActivity(Intent(activity, CrearCuenta::class.java))
     }
 
-    private fun iniciarSesion(){
-        activity.startActivity(Intent(activity, IniciarSesion::class.java))
+    fun sesion(): Boolean{
+        var res = false
+        lateinit var cuentas: List<Cuenta>
+        activity.setVisible(false)
+
+        when(Conexion.comprobarConexion(activity)){
+            "WIFI" -> {
+                val cloudDB = CloudDataBase
+
+                cuentas = cloudDB.getCuentas()
+            }
+
+            "MOBILE", "NO INTERNET" -> {
+                val localDB = LocalDataBase.getDB(activity).crud()
+
+                localDB.getCuentas().observe(activity){
+                    cuentas = it
+                }
+            }
+        }
+
+        for(cuenta in cuentas){
+            if(cuenta.getEstado()){
+                when(cuenta.mostrarTipo()){
+                    "Administrador" -> {
+                        activity.startActivity(Intent(activity, PrincipalAdministrador::class.java))
+                        res = true
+                    }
+
+                    "Chofer" -> {
+                        activity.startActivity(Intent(activity, PrincipalChofer::class.java))
+                        res = true
+                    }
+
+                    "Publico General" -> {
+                        activity.startActivity(Intent(activity, PrincipalPublico::class.java))
+                        res = true
+                    }
+
+                    "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la cuenta").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                    else -> MensajeAlerta("ERROR", "Actividad no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                }
+            }
+        }
+
+        return res
     }
 }

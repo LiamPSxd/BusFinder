@@ -23,15 +23,15 @@
         android:label="agregarAdmin"
         tools:layout="@layout/fragment_administrador" />
 
-    <!-- <fragment
+    <fragment
         android:id="@+id/navModificarAdmin"
-        android:name="com.example.busfinder.view.fragment.ModificarAdministrador"
+        android:name="com.example.busfinder.view.fragment.AgregarAdministrador"
         android:label="modificarAdmin"
-        tools:layout="@layout/fragment_modificar_administrador" />
+        tools:layout="@layout/fragment_administrador" />
 
     <fragment
         android:id="@+id/navPerfilAdmin"
-        android:name="com.example.busfinder.view.fragment.PerfilAdministrador"
+        android:name="com.example.busfinder.view.fragment.AgregarAdministrador"
         android:label="perfilAdmin"
-        tools:layout="@layout/fragment_perfil_administrador" /> -->
+        tools:layout="@layout/fragment_administrador" />
 </navigation>

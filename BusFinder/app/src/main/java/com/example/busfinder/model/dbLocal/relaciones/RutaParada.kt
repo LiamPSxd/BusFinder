@@ -22,6 +22,8 @@ import com.example.busfinder.model.dbLocal.entidades.Ruta
         ])
 data class RutaParada(@ColumnInfo(name = "ruta_ID") private var rutaID: Int,
                       @ColumnInfo(name = "parada_ID") private var paradaID: Int){
+    constructor(): this(0, 0)
+
     fun setRutaID(rutaID: Int){
         this.rutaID = rutaID
     }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.busfinder.controller.TipoCuentaEvento
-import com.example.busfinder.controller.TipoCuentaEvento2
 import com.example.busfinder.databinding.FragmentTipoCuentaBinding
 
 class TipoCuenta: Fragment(){
@@ -14,8 +13,6 @@ class TipoCuenta: Fragment(){
     private val binding get() = _binding!!
 
     private lateinit var evento: TipoCuentaEvento
-    private lateinit var evento2: TipoCuentaEvento2
-    var tipo = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +28,11 @@ class TipoCuenta: Fragment(){
 
         evento = TipoCuentaEvento(this, binding)
 
-        evento2 = TipoCuentaEvento2(this, binding)
+        binding.trjAdmin.setOnClickListener(evento)
 
-        binding.btnContinuarTipoCuenta.setOnClickListener(evento)
+        binding.trjChofer.setOnClickListener(evento)
+
+        binding.trjPublico.setOnClickListener(evento)
     }
 
     override fun onDestroyView(){

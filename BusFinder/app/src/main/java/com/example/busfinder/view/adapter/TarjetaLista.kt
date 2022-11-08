@@ -88,7 +88,7 @@ class TarjetaLista(private val titulo: String,
             chofer.txtRFC.text = choferes[i].getRfc()
             chofer.txtNombre.text = choferes[i].getNombre()
             chofer.txtCelular.text = choferes[i].getNumCelular().toString()
-            chofer.txtCalificacion.text = choferes[i].getCalificacion().toString()
+            chofer.txtCalificacion.progress = choferes[i].getCalificacion().toString().toInt()
         }
     }
 

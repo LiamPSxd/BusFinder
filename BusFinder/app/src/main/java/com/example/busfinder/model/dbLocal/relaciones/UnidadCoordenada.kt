@@ -21,7 +21,9 @@ import com.example.busfinder.model.dbLocal.entidades.Unidad
                 childColumns = ["coordenada_ID"])
         ])
 data class UnidadCoordenada(@ColumnInfo(name = "unidad_Placa") private var unidadPlaca: String,
-                            @ColumnInfo(name = "coordenada_ID") private var coorID: Int){
+                            @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
+    constructor(): this("", 0)
+
     fun setUnidadPlaca(unidadPlaca: String){
         this.unidadPlaca = unidadPlaca
     }
@@ -30,11 +32,11 @@ data class UnidadCoordenada(@ColumnInfo(name = "unidad_Placa") private var unida
         return unidadPlaca
     }
 
-    fun setCoorID(coorID: Int){
-        this.coorID = coorID
+    fun setCoordenadaID(coordenadaID: Int){
+        this.coordenadaID = coordenadaID
     }
 
-    fun getCoorID(): Int{
-        return coorID
+    fun getCoordenadaID(): Int{
+        return coordenadaID
     }
 }

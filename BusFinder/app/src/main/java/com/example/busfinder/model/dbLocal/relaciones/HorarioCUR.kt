@@ -42,6 +42,8 @@ data class HorarioCUR(@ColumnInfo(name = "horario_ID") private var horarioId: In
                       @ColumnInfo(name = "unidad_Placa") private var unidadPlaca: String,
                       @ColumnInfo(name = "ruta_Ida_ID") private var rutaIdaId: Int,
                       @ColumnInfo(name = "ruta_Venida_ID") private var rutaVenidaId: Int){
+    constructor(): this(0, "", "", 0, 0)
+
     fun setHorarioId(horarioId: Int){
         this.horarioId = horarioId
     }

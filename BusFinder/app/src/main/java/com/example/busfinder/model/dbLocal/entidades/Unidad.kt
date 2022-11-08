@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Unidad")
 data class Unidad(@PrimaryKey @ColumnInfo(name = "placa")private var placa: String,
                   @ColumnInfo(name = "marca") private var marca: String,
-                  @ColumnInfo(name = "com/example/mybus/model") private var modelo: String,
+                  @ColumnInfo(name = "modelo") private var modelo: String,
                   @ColumnInfo(name = "numero") private var numero: Int,
                   @ColumnInfo(name = "hora") private var hora: String,
                   @ColumnInfo(name = "fecha") private var fecha: String){

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tarjeta"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,31 +17,31 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
 
         <TextView
             android:id="@+id/pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bg_translucent"
             android:gravity="center"
+            android:background="@drawable/bg_translucent"
             android:paddingTop="2dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingBottom="2dp"
-            android:textColor="@color/white"
             android:fontFamily="@font/blogger_sans_bold_italic"
             android:text="contador"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:background="@color/black" />

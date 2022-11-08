@@ -9,7 +9,7 @@ import com.example.busfinder.model.dbLocal.entidades.Cuenta
 
 @Entity(tableName = "CuentaAdministrador",
         primaryKeys = ["cuenta_Correo", "administrador_Usuario"],
-        indices = [Index(value = ["administrador_Usuario"])],
+        indices = [Index(value = ["cuenta_Correo"]), Index(value = ["administrador_Usuario"])],
         foreignKeys = [
             ForeignKey(
                 entity = Cuenta::class,
@@ -22,6 +22,8 @@ import com.example.busfinder.model.dbLocal.entidades.Cuenta
         ])
 data class CuentaAdministrador(@ColumnInfo(name = "cuenta_Correo") private var cuentaCorreo: String,
                                @ColumnInfo(name = "administrador_Usuario") private var adminUsuario: String){
+    constructor(): this("", "")
+
     fun setCuentaCorreo(cuentaCorreo: String){
         this.cuentaCorreo = cuentaCorreo
     }

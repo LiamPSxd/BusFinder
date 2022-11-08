@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="30dp"
         app:cardElevation="15dp">
 
@@ -41,40 +42,40 @@
                 layout="@layout/frame_agregar_chofer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/dragHandleImage"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp" />
+                android:layout_alignParentEnd="true" />
 
             <include
                 android:id="@+id/frameAgregarRuta"
                 layout="@layout/frame_agregar_ruta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/dragHandleImage"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp" />
+                android:layout_alignParentEnd="true" />
 
             <include
                 android:id="@+id/frameAgregarParada"
                 layout="@layout/frame_agregar_parada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/dragHandleImage"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp" />
+                android:layout_alignParentEnd="true" />
 
             <include
                 android:id="@+id/frameAgregarTarifa"
                 layout="@layout/frame_agregar_tarifa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/dragHandleImage"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="5dp" />
+                android:layout_alignParentEnd="true" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -82,8 +83,8 @@
         android:id="@+id/dragArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignStart="@+id/tarjeta"
         android:layout_alignTop="@+id/tarjeta"
+        android:layout_alignStart="@+id/tarjeta"
         android:layout_alignEnd="@+id/tarjeta"
         android:layout_alignBottom="@+id/tarjeta"
         android:elevation="15dp"/>

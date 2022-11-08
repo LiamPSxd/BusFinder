@@ -22,6 +22,8 @@ import com.example.busfinder.model.dbLocal.entidades.Parada
         ])
 data class ParadaCoordenada(@ColumnInfo(name = "parada_ID") private var paradaID: Int,
                             @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
+    constructor(): this(0, 0)
+
     fun setParadaID(paradaID: Int){
         this.paradaID = paradaID
     }

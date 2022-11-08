@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import com.example.busfinder.model.dbLocal.entidades.PublicoGeneral
 import com.example.busfinder.model.dbLocal.entidades.Cuenta
+import com.example.busfinder.model.dbLocal.entidades.PublicoGeneral
 
 @Entity(tableName = "CuentaPublico",
         primaryKeys = ["cuenta_Correo", "publico_General_Usuario"],
@@ -22,6 +22,8 @@ import com.example.busfinder.model.dbLocal.entidades.Cuenta
         ])
 data class CuentaPublico(@ColumnInfo(name = "cuenta_Correo") private var cuentaCorreo: String,
                          @ColumnInfo(name = "publico_General_Usuario") private var publicoUsuario: String){
+    constructor(): this("", "")
+
     fun setCuentaCorreo(cuentaCorreo: String){
         this.cuentaCorreo = cuentaCorreo
     }

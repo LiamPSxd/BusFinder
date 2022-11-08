@@ -1,9 +1,9 @@
 package com.example.busfinder.model.dbLocal.relaciones
 
-import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.ColumnInfo
+import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import com.example.busfinder.model.dbLocal.entidades.Calle
 import com.example.busfinder.model.dbLocal.entidades.Coordenada
 
@@ -22,6 +22,8 @@ import com.example.busfinder.model.dbLocal.entidades.Coordenada
         ])
 data class CalleCoordenada(@ColumnInfo(name = "calle_ID") private var calleID: Int,
                            @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
+    constructor(): this(0, 0)
+
     fun setCalleID(calleID: Int){
         this.calleID = calleID
     }

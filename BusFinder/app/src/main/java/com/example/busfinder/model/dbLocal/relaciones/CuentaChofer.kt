@@ -22,6 +22,8 @@ import com.example.busfinder.model.dbLocal.entidades.Cuenta
         ])
 data class CuentaChofer(@ColumnInfo(name = "cuenta_Correo") private var cuentaCorreo: String,
                         @ColumnInfo(name = "chofer_Usuario") private var choferUsuario: String){
+    constructor(): this("", "")
+
     fun setCuentaCorreo(cuentaCorreo: String){
         this.cuentaCorreo = cuentaCorreo
     }

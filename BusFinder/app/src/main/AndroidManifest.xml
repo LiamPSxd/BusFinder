@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
 
     <application
         android:allowBackup="true"
@@ -16,11 +21,9 @@
         android:theme="@style/Theme.BusFinder"
         tools:targetApi="32">
 
-        <!--
-         <meta-data
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDCpEGLGBLBbjPPqUL10YlHlVkBYn505rM" />
-        -->
 
         <activity
             android:name=".view.activity.CrearCuenta"
@@ -43,12 +46,22 @@
         </activity>
 
         <activity
-            android:name=".view.activity.Bienvenida"
+            android:name=".view.activity.PrincipalAdministrador"
             android:exported="false">
         </activity>
 
         <activity
-            android:name=".view.activity.PrincipalAdministrador"
+            android:name=".view.activity.PrincipalChofer"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".view.activity.PrincipalPublico"
+            android:exported="false">
+        </activity>
+
+        <activity
+            android:name=".view.activity.Bienvenida"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
