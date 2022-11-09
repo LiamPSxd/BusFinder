@@ -7,8 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.busfinder.R
-import com.example.busfinder.databinding.ActivityPublicoBinding
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.ActivityPublicoBinding
 
 class PrincipalPublico: AppCompatActivity(){
     private lateinit var binding: ActivityPublicoBinding

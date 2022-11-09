@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import com.example.busfinder.model.dbLocal.entidades.Administrador
-import com.example.busfinder.model.dbLocal.entidades.Cuenta
+import com.gammasoft.busfinder.model.dbLocal.entidades.Administrador
+import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
 
 @Entity(tableName = "CuentaAdministrador",
         primaryKeys = ["cuenta_Correo", "administrador_Usuario"],

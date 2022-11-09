@@ -1,8 +1,8 @@
 package com.gammasoft.busfinder.model.dbNube
 
 import android.annotation.SuppressLint
-import com.example.busfinder.model.dbLocal.entidades.*
-import com.example.busfinder.model.dbLocal.relaciones.*
+import com.gammasoft.busfinder.model.dbLocal.entidades.*
+import com.gammasoft.busfinder.model.dbLocal.relaciones.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

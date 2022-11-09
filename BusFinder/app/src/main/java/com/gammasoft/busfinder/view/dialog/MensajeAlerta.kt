@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AnimRes
-import com.example.busfinder.R
-import com.example.busfinder.databinding.TarjetaAlertaBinding
-import com.example.busfinder.view.util.withEnterAnim
-import com.example.busfinder.view.util.withExitAnim
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.TarjetaAlertaBinding
+import com.gammasoft.busfinder.view.util.withEnterAnim
+import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
 
 class MensajeAlerta(private var titulo: String?,

@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.busfinder.databinding.FragmentListaTarjetaBinding
-import com.example.busfinder.view.adapter.TarjetaLista
+import com.gammasoft.busfinder.databinding.FragmentListaTarjetaBinding
+import com.gammasoft.busfinder.view.adapter.TarjetaLista
 
 class ListaTarjeta(private var titulo: String,
                    private var color: Int): BaseTarjeta(){

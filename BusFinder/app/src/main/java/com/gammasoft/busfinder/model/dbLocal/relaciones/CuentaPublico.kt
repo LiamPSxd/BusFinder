@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import com.example.busfinder.model.dbLocal.entidades.Cuenta
-import com.example.busfinder.model.dbLocal.entidades.PublicoGeneral
+import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
+import com.gammasoft.busfinder.model.dbLocal.entidades.PublicoGeneral
 
 @Entity(tableName = "CuentaPublico",
         primaryKeys = ["cuenta_Correo", "publico_General_Usuario"],

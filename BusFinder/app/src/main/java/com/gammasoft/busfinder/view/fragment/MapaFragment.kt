@@ -11,12 +11,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.busfinder.R
-import com.example.busfinder.databinding.TarjetaAgregarBinding
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.TarjetaAgregarBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 
 class MapaFragment(private var binding: TarjetaAgregarBinding): Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener{

@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
-import com.example.busfinder.view.activity.TarjetaBase
-import com.example.busfinder.view.dialog.BaseDialogFragment
-import com.example.busfinder.view.util.*
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.dialog.BaseDialogFragment
+import com.gammasoft.busfinder.view.util.*
 import io.alterac.blurkit.BlurLayout
 
 abstract class BaseTarjeta: Base(), TarjetaContenedor{

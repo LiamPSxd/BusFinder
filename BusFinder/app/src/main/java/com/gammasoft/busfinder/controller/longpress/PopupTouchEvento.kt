@@ -6,10 +6,10 @@ import android.view.MotionEvent
 import android.view.MotionEvent.*
 import android.view.View
 import androidx.annotation.IntDef
-import com.example.busfinder.controller.longpress.PopupTouchEvento.PressStatus.Companion.STATUS_LONG_PRESSING
-import com.example.busfinder.controller.longpress.PopupTouchEvento.PressStatus.Companion.STATUS_NOT_PRESSED
-import com.example.busfinder.controller.longpress.PopupTouchEvento.PressStatus.Companion.STATUS_PRESSING
-import com.example.busfinder.view.util.vibrate
+import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento.PressStatus.Companion.STATUS_LONG_PRESSING
+import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento.PressStatus.Companion.STATUS_NOT_PRESSED
+import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento.PressStatus.Companion.STATUS_PRESSING
+import com.gammasoft.busfinder.view.util.vibrate
 
 class PopupTouchEvento internal constructor(private val mPressPopupInterface: PopupInterface,
                                             private val mLongPressDuration: Int = DEFAULT_LONG_PRESS_DURATION): View.OnTouchListener{

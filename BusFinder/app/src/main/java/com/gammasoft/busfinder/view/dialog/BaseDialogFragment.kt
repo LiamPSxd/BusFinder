@@ -1,7 +1,7 @@
 package com.gammasoft.busfinder.view.dialog
 
 import androidx.fragment.app.DialogFragment
-import com.example.busfinder.view.util.doAfterDelay
+import com.gammasoft.busfinder.view.util.doAfterDelay
 
 abstract class BaseDialogFragment: DialogFragment(){
     @Suppress("DeferredResultUnused")

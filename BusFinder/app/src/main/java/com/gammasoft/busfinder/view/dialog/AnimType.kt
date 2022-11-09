@@ -1,11 +1,11 @@
 package com.gammasoft.busfinder.view.dialog
 
 import androidx.annotation.IntDef
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_CENTER
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_LEFT
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_RIGHT
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_TOP
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_CENTER
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_LEFT
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_RIGHT
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_TOP
 
 @Retention
 @IntDef(ANIM_FROM_LEFT, ANIM_FROM_RIGHT, ANIM_FROM_TOP, ANIM_FROM_BOTTOM, ANIM_FROM_CENTER)

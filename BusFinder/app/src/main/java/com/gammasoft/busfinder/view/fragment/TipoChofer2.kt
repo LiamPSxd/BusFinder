@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.busfinder.controller.TipoChofer2Evento
-import com.example.busfinder.databinding.FragmentTipoChofer2Binding
+import com.gammasoft.busfinder.controller.TipoChofer2Evento
+import com.gammasoft.busfinder.databinding.FragmentTipoChofer2Binding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class TipoChofer2: Fragment(){

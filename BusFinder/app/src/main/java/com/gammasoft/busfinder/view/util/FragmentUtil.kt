@@ -4,12 +4,13 @@ import android.util.Log
 import androidx.annotation.AnimRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.busfinder.R
-import com.example.busfinder.view.dialog.BaseBlurPopup
-import com.example.busfinder.view.dialog.BaseDialogFragment
-import com.example.busfinder.view.fragment.Base
-import com.example.busfinder.view.fragment.BaseTarjeta
-import com.example.busfinder.view.fragment.TarjetaContenedor
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.dialog.BaseDialogFragment
+import com.gammasoft.busfinder.view.fragment.Base
+import com.gammasoft.busfinder.view.fragment.BaseTarjeta
+import com.gammasoft.busfinder.view.fragment.TarjetaContenedor
 
 fun FragmentManager.findCard(tag: String): BaseTarjeta? = this.findFragmentByTag(tag) as? BaseTarjeta
 
@@ -39,7 +40,7 @@ fun FragmentManager.findPopupDialog(tag: String): BaseBlurPopup?{
     return findFragmentByTag(tag) as? BaseBlurPopup
 }
 
-inline fun <reified T: Base> com.example.busfinder.view.activity.TarjetaBase.removeFragmentIfExists(){
+inline fun <reified T: Base> TarjetaBase.removeFragmentIfExists(){
     for(fragment in activity?.supportFragmentManager?.fragments!!.reversed()){
         if(fragment is T) popBackStack()
     }

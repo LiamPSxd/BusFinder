@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import androidx.viewpager.widget.ViewPager
-import com.example.busfinder.R
+import com.gammasoft.busfinder.R
 
 private const val DEFAULT_PERCENTAGE_PADDING = 8
 private const val MIN_ALPHA = .5f

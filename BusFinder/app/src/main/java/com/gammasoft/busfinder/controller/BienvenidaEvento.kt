@@ -3,13 +3,13 @@ package com.gammasoft.busfinder.controller
 import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.busfinder.R
-import com.example.busfinder.databinding.ActivityBienvenidaBinding
-import com.example.busfinder.model.dbLocal.LocalDataBase
-import com.example.busfinder.model.dbLocal.entidades.Cuenta
-import com.example.busfinder.model.dbNube.CloudDataBase
-import com.example.busfinder.view.activity.*
-import com.example.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.ActivityBienvenidaBinding
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
+import com.gammasoft.busfinder.model.dbNube.CloudDataBase
+import com.gammasoft.busfinder.view.activity.*
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 
 class BienvenidaEvento(private var activity: AppCompatActivity,
                        private var binding: ActivityBienvenidaBinding): View.OnClickListener{
@@ -34,7 +34,7 @@ class BienvenidaEvento(private var activity: AppCompatActivity,
         lateinit var cuentas: List<Cuenta>
         activity.setVisible(false)
 
-        when(com.gammasoft.busfinder.controller.Conexion.Companion.comprobarConexion(activity)){
+        when(Conexion.comprobarConexion(activity)){
             "WIFI" -> {
                 val cloudDB = CloudDataBase
 

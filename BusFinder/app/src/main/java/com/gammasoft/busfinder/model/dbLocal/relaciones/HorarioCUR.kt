@@ -4,10 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import com.example.busfinder.model.dbLocal.entidades.Chofer
-import com.example.busfinder.model.dbLocal.entidades.Horario
-import com.example.busfinder.model.dbLocal.entidades.Ruta
-import com.example.busfinder.model.dbLocal.entidades.Unidad
+import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
+import com.gammasoft.busfinder.model.dbLocal.entidades.Horario
+import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
+import com.gammasoft.busfinder.model.dbLocal.entidades.Unidad
 
 @Entity(tableName = "HorarioChoferUnidadRuta",
     primaryKeys = ["horario_ID", "chofer_Usuario", "unidad_Placa", "ruta_Ida_ID", "ruta_Venida_ID"],

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.busfinder.controller.TipoAdministradorEvento
-import com.example.busfinder.databinding.FragmentTipoAdministradorBinding
+import com.gammasoft.busfinder.controller.TipoAdministradorEvento
+import com.gammasoft.busfinder.databinding.FragmentTipoAdministradorBinding
 
 class TipoAdministrador: Fragment(){
     private var _binding: FragmentTipoAdministradorBinding? = null

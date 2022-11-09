@@ -2,8 +2,8 @@ package com.gammasoft.busfinder.model.dbLocal
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.busfinder.model.dbLocal.entidades.*
-import com.example.busfinder.model.dbLocal.relaciones.*
+import com.gammasoft.busfinder.model.dbLocal.entidades.*
+import com.gammasoft.busfinder.model.dbLocal.relaciones.*
 
 @Dao
 interface Crud{

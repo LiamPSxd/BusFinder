@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.busfinder'
+    namespace 'com.gammasoft.busfinder'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.busfinder"
+        applicationId "com.gammasoft.busfinder"
         minSdk 21
         targetSdk 33
         versionCode 1

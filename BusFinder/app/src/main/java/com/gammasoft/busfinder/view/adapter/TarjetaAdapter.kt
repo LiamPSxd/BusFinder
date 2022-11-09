@@ -4,18 +4,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busfinder.controller.longpress.PopupHoverEvento
-import com.example.busfinder.controller.longpress.PopupInflaterEvento
-import com.example.busfinder.controller.longpress.PopupStateEvento
-import com.example.busfinder.databinding.TarjetaTituloBinding
-import com.example.busfinder.view.activity.TarjetaBase
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
-import com.example.busfinder.view.dialog.BlurPopup
-import com.example.busfinder.view.dialog.MensajeAlerta
-import com.example.busfinder.view.fragment.*
-import com.example.busfinder.view.util.DebouncingClickListener
-import com.example.busfinder.view.util.checkAndUnregister
-import com.example.busfinder.view.util.onDebouncingClick
+import com.gammasoft.busfinder.controller.longpress.PopupHoverEvento
+import com.gammasoft.busfinder.controller.longpress.PopupInflaterEvento
+import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
+import com.gammasoft.busfinder.databinding.TarjetaTituloBinding
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
+import com.gammasoft.busfinder.view.dialog.BlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.view.fragment.*
+import com.gammasoft.busfinder.view.util.DebouncingClickListener
+import com.gammasoft.busfinder.view.util.checkAndUnregister
+import com.gammasoft.busfinder.view.util.onDebouncingClick
 
 class TarjetaAdapter(private val fragment: TarjetaBase,
                      private val titulos: ArrayList<String>,

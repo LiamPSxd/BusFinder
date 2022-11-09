@@ -7,12 +7,52 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1099088393270:android:9b00406a3dd54310bb5497",
+        "mobilesdk_app_id": "1:1099088393270:android:b7b431c53ec2c8e0bb5497",
         "android_client_info": {
-          "package_name": "com.example.busfinder"
+          "package_name": "com.gammasoft.busfinder"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1099088393270-5d0faiqou6qo1evkq5u0obabq3276tbt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gammasoft.busfinder",
+            "certificate_hash": "84def9b4751684f72c386729cdc2bf92fb2d507e"
+          }
+        },
+        {
+          "client_id": "1099088393270-bl7sjfjukb9ouh9brisoji00145t40p5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gammasoft.busfinder",
+            "certificate_hash": "325220a6ba074b60c169cb7eab99de356d87e26a"
+          }
+        },
+        {
+          "client_id": "1099088393270-eqiqsrdm917od0890k9vog6jehbt2iuf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gammasoft.busfinder",
+            "certificate_hash": "a552b39a3073f959a6e808aa616286650a766965"
+          }
+        },
+        {
+          "client_id": "1099088393270-jf6btsp975j74kg1504gm7aaivbkhggp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gammasoft.busfinder",
+            "certificate_hash": "fc1d4fe20dff930b659a365a920494ba32af156e"
+          }
+        },
+        {
+          "client_id": "1099088393270-mbp0965daba3q3io97s56sbsl02o0kn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gammasoft.busfinder",
+            "certificate_hash": "ea943f03898645e1770899ee948d27bf7aa8df91"
+          }
+        },
         {
           "client_id": "1099088393270-a2g7gdsqce3jtbhs60hsv330aakahhv0.apps.googleusercontent.com",
           "client_type": 3

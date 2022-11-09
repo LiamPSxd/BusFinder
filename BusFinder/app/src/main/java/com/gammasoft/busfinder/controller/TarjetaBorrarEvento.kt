@@ -2,9 +2,9 @@ package com.gammasoft.busfinder.controller
 
 import android.view.View
 import android.widget.AdapterView
-import com.example.busfinder.databinding.TarjetaBorrarBinding
-import com.example.busfinder.model.dbLocal.Crud
-import com.example.busfinder.view.fragment.BaseTarjeta
+import com.gammasoft.busfinder.databinding.TarjetaBorrarBinding
+import com.gammasoft.busfinder.model.dbLocal.Crud
+import com.gammasoft.busfinder.view.fragment.BaseTarjeta
 
 class TarjetaBorrarEvento(private val fragment: BaseTarjeta,
                           private val titulo: String,

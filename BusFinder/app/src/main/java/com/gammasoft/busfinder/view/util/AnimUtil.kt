@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
 import androidx.annotation.AnimRes
 import androidx.annotation.AnimatorRes
-import com.example.busfinder.R
+import com.gammasoft.busfinder.R
 import io.alterac.blurkit.BlurLayout
 
 fun View.fadeIn(duration: Long = 280) = animate().alpha(1f).setDuration(duration).begin()

@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.example.busfinder.R
-import com.example.busfinder.controller.TarjetaAgregarEvento
-import com.example.busfinder.databinding.*
-import com.example.busfinder.model.dbLocal.LocalDataBase
-import com.example.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.controller.TarjetaAgregarEvento
+import com.gammasoft.busfinder.databinding.*
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 
 class TarjetaAgregar(private val fragment: AgregarAdministrador,
                      private val titulo: String): BaseTarjeta(){

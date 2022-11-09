@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import com.example.busfinder.controller.TipoChoferEvento
-import com.example.busfinder.databinding.FragmentTipoChoferBinding
-import com.example.busfinder.model.dbNube.CloudDataBase
+import com.gammasoft.busfinder.controller.TipoChoferEvento
+import com.gammasoft.busfinder.databinding.FragmentTipoChoferBinding
+import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 
 class TipoChofer: Fragment(){
     private var _binding: FragmentTipoChoferBinding? = null

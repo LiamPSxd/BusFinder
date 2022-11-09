@@ -2,7 +2,8 @@ package com.gammasoft.busfinder.controller
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import java.io.IOException
 import java.net.UnknownHostException
 
@@ -18,11 +19,11 @@ abstract class Conexion{
 
                 return exitValue == 0
             }catch(e: UnknownHostException){
-                MensajeAlerta("UnknownHostException", "${e.printStackTrace()}")
+                MensajeAlerta("UnknownHostException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
             }catch(e: IOException){
-                MensajeAlerta("IOException", "${e.printStackTrace()}")
+                MensajeAlerta("IOException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
             }catch(e: InterruptedException){
-                MensajeAlerta("InterruptedException", "${e.printStackTrace()}")
+                MensajeAlerta("InterruptedException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
             }
 
             return false

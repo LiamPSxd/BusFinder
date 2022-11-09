@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import com.example.busfinder.model.dbLocal.entidades.Coordenada
-import com.example.busfinder.model.dbLocal.entidades.Parada
+import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
+import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
 
 @Entity(tableName = "ParadaCoordenada",
         primaryKeys = ["parada_ID", "coordenada_ID"],

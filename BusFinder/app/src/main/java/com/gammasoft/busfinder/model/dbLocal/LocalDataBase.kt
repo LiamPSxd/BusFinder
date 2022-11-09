@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.busfinder.model.dbLocal.entidades.*
-import com.example.busfinder.model.dbLocal.relaciones.*
+import com.gammasoft.busfinder.model.dbLocal.entidades.*
+import com.gammasoft.busfinder.model.dbLocal.relaciones.*
 
 @Database(entities = [Cuenta::class, Administrador::class, Chofer::class,
     PublicoGeneral::class, Ruta::class, Calle::class, Parada::class,

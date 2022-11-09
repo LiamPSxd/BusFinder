@@ -3,9 +3,9 @@ package com.gammasoft.busfinder.view.activity
 import android.util.Log
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
-import com.example.busfinder.view.dialog.BaseDialogFragment
-import com.example.busfinder.view.fragment.Base
-import com.example.busfinder.view.util.*
+import com.gammasoft.busfinder.view.dialog.BaseDialogFragment
+import com.gammasoft.busfinder.view.fragment.Base
+import com.gammasoft.busfinder.view.util.*
 
 abstract class TarjetaBase: Fragment(){
     var index: Int = 0

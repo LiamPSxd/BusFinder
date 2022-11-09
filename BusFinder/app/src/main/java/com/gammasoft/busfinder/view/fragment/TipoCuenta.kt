@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.busfinder.controller.TipoCuentaEvento
-import com.example.busfinder.databinding.FragmentTipoCuentaBinding
+import com.gammasoft.busfinder.controller.TipoCuentaEvento
+import com.gammasoft.busfinder.databinding.FragmentTipoCuentaBinding
 
 class TipoCuenta: Fragment(){
     private var _binding: FragmentTipoCuentaBinding? = null

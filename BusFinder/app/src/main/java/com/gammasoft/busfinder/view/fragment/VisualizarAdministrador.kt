@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.busfinder.R
-import com.example.busfinder.databinding.FragmentAdministradorBinding
-import com.example.busfinder.view.activity.TarjetaBase
-import com.example.busfinder.view.adapter.TarjetaAdapter
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.adapter.TarjetaAdapter
 
 class VisualizarAdministrador: TarjetaBase(){
     private var _binding: FragmentAdministradorBinding? = null

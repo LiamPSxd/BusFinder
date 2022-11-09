@@ -3,8 +3,8 @@ package com.gammasoft.busfinder.view.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.busfinder.controller.IniciarSesionEvento
-import com.example.busfinder.databinding.ActivityIniciarSesionBinding
+import com.gammasoft.busfinder.controller.IniciarSesionEvento
+import com.gammasoft.busfinder.databinding.ActivityIniciarSesionBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class IniciarSesion: AppCompatActivity(){
@@ -30,6 +30,8 @@ class IniciarSesion: AppCompatActivity(){
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        evento.callbackManager.onActivityResult(requestCode, resultCode, data)
+
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == evento.GOOGLE_SIGN_IN) evento.iniciarByGoogle(GoogleSignIn.getSignedInAccountFromIntent(data))

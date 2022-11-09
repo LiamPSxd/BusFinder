@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.busfinder.view.activity.TarjetaBase
-import com.example.busfinder.view.util.floatUp
-import com.example.busfinder.view.util.moveToBackGround
-import com.example.busfinder.view.util.moveToForeGround
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.util.floatUp
+import com.gammasoft.busfinder.view.util.moveToBackGround
+import com.gammasoft.busfinder.view.util.moveToForeGround
 import java.lang.ref.WeakReference
 
 abstract class BaseTarjetaContenedor: Base(), TarjetaContenedor{
@@ -40,7 +40,7 @@ abstract class BaseTarjetaContenedor: Base(), TarjetaContenedor{
 
     override fun getRootView(): ViewGroup? = viewPager()
 
-    abstract fun baseCardToInflate(position: Int): com.example.busfinder.view.fragment.BaseTarjeta
+    abstract fun baseCardToInflate(position: Int): com.gammasoft.busfinder.view.fragment.BaseTarjeta
 
     override fun moveToBackGround(){
         viewPager().moveToBackGround(parentActivity().index)
@@ -66,14 +66,14 @@ abstract class BaseTarjetaContenedor: Base(), TarjetaContenedor{
 
     internal class BaseCardContainerPagerAdapter(fm: FragmentManager, baseCardContainerFragment: BaseTarjetaContenedor): FragmentStatePagerAdapter(fm){
         private val ref: WeakReference<BaseTarjetaContenedor> = WeakReference(baseCardContainerFragment)
-        var currentCard: com.example.busfinder.view.fragment.BaseTarjeta? = null
+        var currentCard: com.gammasoft.busfinder.view.fragment.BaseTarjeta? = null
 
         override fun getItem(position: Int): Fragment = ref.get()?.baseCardToInflate(position)!!
 
         override fun getCount(): Int = ref.get()?.baseCardCount() ?: 0
 
         override fun setPrimaryItem(container: ViewGroup, position: Int, `object`: Any){
-            if(currentCard !== `object`) currentCard = `object` as? com.example.busfinder.view.fragment.BaseTarjeta
+            if(currentCard !== `object`) currentCard = `object` as? com.gammasoft.busfinder.view.fragment.BaseTarjeta
             super.setPrimaryItem(container, position, `object`)
         }
     }

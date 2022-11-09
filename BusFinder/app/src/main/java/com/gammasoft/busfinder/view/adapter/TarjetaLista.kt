@@ -5,11 +5,11 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.busfinder.R
-import com.example.busfinder.databinding.*
-import com.example.busfinder.model.dbLocal.LocalDataBase
-import com.example.busfinder.view.dialog.MensajeAlerta
-import com.example.busfinder.view.fragment.ListaTarjeta
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.*
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.view.fragment.ListaTarjeta
 
 class TarjetaLista(private val titulo: String,
                    private val fragment: ListaTarjeta): RecyclerView.Adapter<TarjetaLista.ViewHolder>(){

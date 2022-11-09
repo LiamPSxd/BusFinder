@@ -3,9 +3,9 @@ package com.gammasoft.busfinder.controller
 import android.view.View
 import android.widget.AdapterView
 import android.widget.SeekBar
-import com.example.busfinder.databinding.TarjetaAgregarBinding
-import com.example.busfinder.model.dbLocal.Crud
-import com.example.busfinder.view.fragment.BaseTarjeta
+import com.gammasoft.busfinder.databinding.TarjetaAgregarBinding
+import com.gammasoft.busfinder.model.dbLocal.Crud
+import com.gammasoft.busfinder.view.fragment.BaseTarjeta
 
 class TarjetaAgregarEvento(private val fragment: BaseTarjeta,
                            private val titulo: String,

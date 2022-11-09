@@ -4,20 +4,27 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.busfinder.R
-import com.example.busfinder.databinding.ActivityIniciarSesionBinding
-import com.example.busfinder.model.dbLocal.LocalDataBase
-import com.example.busfinder.model.dbLocal.entidades.Cuenta
-import com.example.busfinder.model.dbNube.CloudDataBase
-import com.example.busfinder.view.activity.PrincipalAdministrador
-import com.example.busfinder.view.activity.PrincipalChofer
-import com.example.busfinder.view.activity.PrincipalPublico
-import com.example.busfinder.view.dialog.MensajeAlerta
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.ActivityIniciarSesionBinding
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
+import com.gammasoft.busfinder.model.dbNube.CloudDataBase
+import com.gammasoft.busfinder.view.activity.PrincipalAdministrador
+import com.gammasoft.busfinder.view.activity.PrincipalChofer
+import com.gammasoft.busfinder.view.activity.PrincipalPublico
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 class IniciarSesionEvento(private val activity: AppCompatActivity,
@@ -26,6 +33,7 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
     private val cloudDB = CloudDataBase
 
     val GOOGLE_SIGN_IN = 100
+    val callbackManager = CallbackManager.Factory.create()
 
     override fun onClick(v: View?){
         when(v?.id){
@@ -51,7 +59,7 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
                 activity.startActivityForResult(googleCliente.signInIntent, GOOGLE_SIGN_IN)
             }
 
-            "NO INTERNET" -> MensajeAlerta("ERROR", "No tienes una conexión a Internet")
+            "NO INTERNET" -> MensajeAlerta("ERROR", "No tienes una conexión a Internet").mostrar(R.anim.zoom_in, R.anim.zoom_out)
         }
     }
 
@@ -60,10 +68,9 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
             val cuenta = task.getResult(ApiException::class.java)
 
             if(cuenta != null){
-                val correo = cuenta.email
-
                 cloudDB.getAuth().signInWithCredential(GoogleAuthProvider.getCredential(cuenta.idToken, null)).addOnCompleteListener{
                     if(it.isSuccessful){
+                        val correo = cuenta.email
                         var x = ""
 
                         val publico = cloudDB.getCuentaPublico(correo!!)
@@ -85,17 +92,62 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
                             "Chofer" -> activity.startActivity(Intent(activity, PrincipalChofer::class.java))
                             "Publico General" -> activity.startActivity(Intent(activity, PrincipalPublico::class.java))
                             "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la cuenta").mostrar(R.anim.zoom_in, R.anim.zoom_out)
-                            else -> MensajeAlerta("ERROR", "Actividad no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                            else -> MensajeAlerta("ERROR", "Actividad no encontrada, cree una cuenta con Google").mostrar(R.anim.zoom_in, R.anim.zoom_out)
                         }
                     }else MensajeAlerta("ERROR", "Se ha producido un error al autenticar tu cuenta por Google").mostrar(R.anim.zoom_in, R.anim.zoom_out)
                 }
             }
         }catch(e: ApiException){
-            MensajeAlerta("ApiException", "${e.printStackTrace()}")
+            MensajeAlerta("ApiException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
         }
     }
 
     private fun verificarFacebook(){
+        LoginManager.getInstance().logInWithReadPermissions(activity, listOf("email"))
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+        object: FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?){
+                result?.let{
+                    val token = it.accessToken
+
+                    cloudDB.getAuth().signInWithCredential(FacebookAuthProvider.getCredential(token.token)).addOnCompleteListener{
+                        val correo = FirebaseAuth.getInstance().currentUser?.email
+                        if(it.isSuccessful){
+                            var x = ""
+
+                            val publico = cloudDB.getCuentaPublico(correo!!)
+
+                            if(publico.getCuentaCorreo().isNotEmpty()) x = publico.getCuentaCorreo()
+                            else{
+                                val chofer = cloudDB.getCuentaChofer(correo)
+
+                                if(chofer.getCuentaCorreo().isNotEmpty()) x = chofer.getCuentaCorreo()
+                                else{
+                                    val admin = cloudDB.getCuentaAdministrador(correo)
+
+                                    if(admin.getCuentaCorreo().isNotEmpty()) x = admin.getCuentaCorreo()
+                                }
+                            }
+
+                            when(cloudDB.getCuenta(x).mostrarTipo()){
+                                "Administrador" -> activity.startActivity(Intent(activity, PrincipalAdministrador::class.java))
+                                "Chofer" -> activity.startActivity(Intent(activity, PrincipalChofer::class.java))
+                                "Publico General" -> activity.startActivity(Intent(activity, PrincipalPublico::class.java))
+                                "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la cuenta").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                                else -> MensajeAlerta("ERROR", "Actividad no encontrada, cree una cuenta con Facebook").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                            }
+                        }else MensajeAlerta("ERROR", "Se ha producido un error al autenticar tu cuenta por Facebook").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                    }
+                }
+            }
+
+            override fun onCancel(){}
+
+            override fun onError(error: FacebookException?){
+                MensajeAlerta("ERROR", "$error").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+            }
+        })
     }
 
     private fun verificarTwitter(){

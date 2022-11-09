@@ -13,8 +13,8 @@ import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
-import com.example.busfinder.view.util.getDp
-import com.example.busfinder.view.util.getScreenSize
+import com.gammasoft.busfinder.view.util.getDp
+import com.gammasoft.busfinder.view.util.getScreenSize
 import kotlin.math.abs
 import kotlin.math.atan
 import kotlin.math.cos
@@ -24,9 +24,9 @@ private const val SWIPE_VELOCITY_THRESHOLD = 200
 private const val SWIPE_THRESHOLD_PERCENT = 0.5f
 
 abstract class SwipeEvento(activity: Activity,
-                             private val dragView: View,
-                             private val rootView: View,
-                             backgroundLayout: ViewGroup? = null): OnTouchListener{
+                           private val dragView: View,
+                           private val rootView: View,
+                           backgroundLayout: ViewGroup? = null): OnTouchListener{
     private val gestureDetector: GestureDetector
     private val screenHeight: Int
     private val screenWidth: Float

@@ -4,13 +4,13 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import com.example.busfinder.controller.longpress.*
-import com.example.busfinder.controller.longpress.PopupTouchEvento.Companion.DEFAULT_LONG_PRESS_DURATION
-import com.example.busfinder.view.activity.TarjetaBase
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
-import com.example.busfinder.view.util.isTouchInsideView
-import com.example.busfinder.view.util.setDismissOnTouchOutside
-import com.example.busfinder.view.util.withAnimType
+import com.gammasoft.busfinder.controller.longpress.*
+import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento.Companion.DEFAULT_LONG_PRESS_DURATION
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
+import com.gammasoft.busfinder.view.util.isTouchInsideView
+import com.gammasoft.busfinder.view.util.setDismissOnTouchOutside
+import com.gammasoft.busfinder.view.util.withAnimType
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 open class BlurPopup private constructor(builder: Builder): PopupInterface{

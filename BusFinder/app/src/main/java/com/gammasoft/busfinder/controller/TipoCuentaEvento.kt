@@ -2,10 +2,10 @@ package com.gammasoft.busfinder.controller
 
 import android.view.View
 import androidx.navigation.findNavController
-import com.example.busfinder.R
-import com.example.busfinder.databinding.FragmentTipoCuentaBinding
-import com.example.busfinder.view.dialog.MensajeAlerta
-import com.example.busfinder.view.fragment.TipoCuenta
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentTipoCuentaBinding
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.view.fragment.TipoCuenta
 
 class TipoCuentaEvento(private var fragment: TipoCuenta,
                        private var binding: FragmentTipoCuentaBinding): View.OnClickListener{

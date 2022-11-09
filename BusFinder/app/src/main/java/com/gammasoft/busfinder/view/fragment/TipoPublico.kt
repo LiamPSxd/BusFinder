@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.busfinder.controller.TipoPublicoEvento
-import com.example.busfinder.databinding.FragmentTipoPublicoBinding
+import com.gammasoft.busfinder.controller.TipoPublicoEvento
+import com.gammasoft.busfinder.databinding.FragmentTipoPublicoBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class TipoPublico: Fragment(){

@@ -7,8 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.busfinder.R
-import com.example.busfinder.databinding.ActivityCrearCuentaBinding
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.ActivityCrearCuentaBinding
 
 class CrearCuenta: AppCompatActivity(){
     private lateinit var binding: ActivityCrearCuentaBinding

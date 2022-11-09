@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AnimRes
 import androidx.annotation.CallSuper
-import com.example.busfinder.R
-import com.example.busfinder.controller.longpress.PopupStateEvento
-import com.example.busfinder.controller.longpress.PopupTouchEvento
-import com.example.busfinder.view.activity.TarjetaBase
-import com.example.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
-import com.example.busfinder.view.fragment.Base
-import com.example.busfinder.view.util.*
+import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
+import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento
+import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
+import com.gammasoft.busfinder.view.fragment.Base
+import com.gammasoft.busfinder.view.util.*
 import io.alterac.blurkit.BlurLayout
 
 @Suppress("DeferredResultUnused")
