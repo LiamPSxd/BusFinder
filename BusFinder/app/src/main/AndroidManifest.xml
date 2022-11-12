@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
@@ -20,64 +19,65 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BusFinder"
         tools:targetApi="32">
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDCpEGLGBLBbjPPqUL10YlHlVkBYn505rM" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
-
-        <activity android:name="com.facebook.FacebookActivity"
+        <activity
+            android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" />
-
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.activity.CrearCuenta"
             android:exported="false"
             android:parentActivityName=".view.activity.Bienvenida">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.Bienvenida" />
         </activity>
-
         <activity
             android:name=".view.activity.IniciarSesion"
             android:exported="false"
             android:parentActivityName=".view.activity.Bienvenida">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.Bienvenida" />
         </activity>
-
         <activity
             android:name=".view.activity.PrincipalAdministrador"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".view.activity.PrincipalChofer"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".view.activity.PrincipalPublico"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".view.activity.Bienvenida"
             android:exported="true">
@@ -92,4 +92,5 @@
                 android:value="" />
         </activity>
     </application>
+
 </manifest>

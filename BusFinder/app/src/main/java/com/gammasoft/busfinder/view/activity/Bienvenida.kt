@@ -2,8 +2,9 @@ package com.gammasoft.busfinder.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.gammasoft.busfinder.databinding.ActivityBienvenidaBinding
+import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.controller.BienvenidaEvento
+import com.gammasoft.busfinder.databinding.ActivityBienvenidaBinding
 
 class Bienvenida: AppCompatActivity(){
     private lateinit var binding: ActivityBienvenidaBinding
@@ -13,7 +14,10 @@ class Bienvenida: AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         binding = ActivityBienvenidaBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //Para ejecutar la prueba de conexion
+        setContentView(R.layout.activity_main)
+
+        //setContentView(binding.root)
 
         evento = BienvenidaEvento(this, binding)
 
@@ -25,3 +29,4 @@ class Bienvenida: AppCompatActivity(){
         else setVisible(true)
     }
 }
+
