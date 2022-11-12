@@ -26,3 +26,4 @@ class Bienvenida: AppCompatActivity(){
         else binding.bienvenida.visibility = View.VISIBLE
     }
 }
+
