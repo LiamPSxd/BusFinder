@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bienvenida"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fondo"
@@ -11,8 +12,8 @@
         android:id="@+id/imageBus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -24,15 +25,31 @@
         android:id="@+id/etqApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="118dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_above="@id/btnIniciarSesion"
-        android:fontFamily="@font/baloo_thambi"
+        android:fontFamily="@font/intro_script_trial_black"
         android:gravity="center"
         android:text="BusFinder"
         android:textColor="@color/black"
-        android:textSize="60sp"
+        android:textSize="75sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="19dp"
+        android:paddingEnd="3dp"
+        android:layout_marginBottom="124dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@id/btnIniciarSesion"
+        android:fontFamily="@font/intro_script_trial_black"
+        android:gravity="center"
+        android:text="BusFinder"
+        android:textColor="@color/color11"
+        android:textSize="75sp"
         android:textStyle="bold" />
 
     <Button
@@ -45,7 +62,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/btnCrearCuenta"
-        android:backgroundTint="@color/color12"
+        android:backgroundTint="@color/color11"
         android:fontFamily="@font/baloo_thambi"
         android:gravity="center"
         android:text="Iniciar Sesión"
@@ -55,7 +72,6 @@
 
     <Button
         android:id="@+id/btnCrearCuenta"
-        style="?attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginStart="46dp"
@@ -67,9 +83,10 @@
         android:fontFamily="@font/baloo_thambi"
         android:gravity="center"
         android:text="Crear Cuenta"
-        android:textColor="@color/color12"
+        android:textColor="@color/color11"
         android:textSize="22sp"
         app:cornerRadius="50dp"
-        app:strokeColor="@color/color12"
-        app:strokeWidth="5dp" />
+        app:strokeColor="@color/color11"
+        app:strokeWidth="5dp"
+        style="?attr/borderlessButtonStyle" />
 </RelativeLayout>

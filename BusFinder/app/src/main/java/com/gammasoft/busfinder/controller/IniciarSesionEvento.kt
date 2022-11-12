@@ -107,13 +107,13 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
 
         LoginManager.getInstance().registerCallback(callbackManager,
         object: FacebookCallback<LoginResult>{
-            override fun onSuccess(result: LoginResult?){
-                result?.let{
+            override fun onSuccess(result: LoginResult){
+                result.let{
                     val token = it.accessToken
 
-                    cloudDB.getAuth().signInWithCredential(FacebookAuthProvider.getCredential(token.token)).addOnCompleteListener{
-                        val correo = FirebaseAuth.getInstance().currentUser?.email
-                        if(it.isSuccessful){
+                    cloudDB.getAuth().signInWithCredential(FacebookAuthProvider.getCredential(token.token)).addOnCompleteListener{ fb ->
+                        if(fb.isSuccessful){
+                            val correo = FirebaseAuth.getInstance().currentUser?.email
                             var x = ""
 
                             val publico = cloudDB.getCuentaPublico(correo!!)
@@ -144,7 +144,7 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
 
             override fun onCancel(){}
 
-            override fun onError(error: FacebookException?){
+            override fun onError(error: FacebookException){
                 MensajeAlerta("ERROR", "$error").mostrar(R.anim.zoom_in, R.anim.zoom_out)
             }
         })

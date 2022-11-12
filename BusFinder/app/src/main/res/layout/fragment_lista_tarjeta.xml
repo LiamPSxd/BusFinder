@@ -14,9 +14,9 @@
         android:id="@+id/lista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
         app:cardCornerRadius="30dp"
-        app:cardElevation="15dp"
-        app:cardUseCompatPadding="true">
+        app:cardElevation="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,11 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingTop="30dp"
+                android:paddingTop="20dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
-                android:paddingBottom="10dp"
-                android:fontFamily="@font/blogger_sans_bold"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:text="TÍTULO"
                 android:gravity="center"
                 android:textColor="@color/black"

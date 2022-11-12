@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/modificarTarifa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:animateLayoutChanges="true"
+    tools:context=".view.fragment.AgregarAdministrador">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/dragHandleImage"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                style="@style/DragHandleLight"
+                android:contentDescription="drag_handle" />
+
+            <TextView
+                android:id="@+id/ins1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="Modifique los siguientes datos"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqTarifa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/ins1"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="PÚBLICO"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtTarifa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/ins1"
+                android:layout_toEndOf="@+id/etqTarifa"
+                android:layout_alignParentEnd="true"
+                android:autofillHints="rfc"
+                android:backgroundTint="@color/color"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|center"
+                android:hint="ingrese el otro público"
+                android:inputType="textPersonName"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:enabled="false"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/etqPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/etqTarifa"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="PRECIO  $"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="2dp"
+                android:layout_below="@+id/txtTarifa"
+                android:layout_toEndOf="@+id/etqPrecio"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="00"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/skPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/txtTarifa"
+                android:layout_toEndOf="@+id/txtPrecio"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:max="20"
+                android:progress="3"
+                android:progressTint="@color/color12"
+                android:progressBackgroundTint="@color/color11"
+                android:splitTrack="true"
+                android:thumbTint="@color/color11"
+                android:thumb="@drawable/dinero"/>
+
+            <Button
+                android:id="@+id/btnModificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@+id/txtPrecio"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/color15"
+                android:fontFamily="@font/phenomena_black"
+                android:gravity="center"
+                android:text="Agregar"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="50dp" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/txtPrecio"
+                android:layout_toStartOf="@+id/btnModificar"
+                android:fontFamily="@font/phenomena_black"
+                android:gravity="center"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/cancelar"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="50dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/dragArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/tarjeta"
+        android:layout_alignStart="@+id/tarjeta"
+        android:layout_alignEnd="@+id/tarjeta"
+        android:layout_alignBottom="@+id/tarjeta"
+        android:elevation="15dp"/>
+</RelativeLayout>

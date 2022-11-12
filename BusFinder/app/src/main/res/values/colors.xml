@@ -34,4 +34,5 @@
     <color name="color15">#84b0b8</color>
     <color name="cancelar">#931414</color>
     <color name="btnBorrar">#F47474</color>
+    <color name="btnModificar">#DDCC5E</color>
 </resources>

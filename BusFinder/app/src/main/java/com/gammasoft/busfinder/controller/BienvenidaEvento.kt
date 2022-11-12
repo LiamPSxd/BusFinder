@@ -32,7 +32,7 @@ class BienvenidaEvento(private var activity: AppCompatActivity,
     fun sesion(): Boolean{
         var res = false
         lateinit var cuentas: List<Cuenta>
-        activity.setVisible(false)
+        binding.bienvenida.visibility = View.INVISIBLE
 
         when(Conexion.comprobarConexion(activity)){
             "WIFI" -> {

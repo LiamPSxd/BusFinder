@@ -2,24 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_chofer">
-    <!--app:startDestination="@id/navVisualizarChofer">-->
-
-    <!-- <fragment
-        android:id="@+id/navMapaChofer"
-        android:name="com.example.busfinder.view.fragment.MapaChofer"
-        android:label="mapaChofer"
-        tools:layout="@layout/fragment_mapa_chofer" />
+    android:id="@+id/nav_chofer"
+    app:startDestination="@id/fragmentHome">
 
     <fragment
-        android:id="@+id/navVisualizarChofer"
-        android:name="com.example.busfinder.view.fragment.VisualizarChofer"
-        android:label="visualizarChofer"
-        tools:layout="@layout/fragment_visualizar_chofer" />
+        android:id="@+id/fragmentMapa"
+        android:name="com.gammasoft.busfinder.view.fragment.Mapa"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_mapa" />
 
     <fragment
-        android:id="@+id/navPerfilChofer"
-        android:name="com.example.busfinder.view.fragment.PerfilChofer"
-        android:label="perfilChofer"
-        tools:layout="@layout/fragment_perfil_chofer" /> -->
+        android:id="@+id/fragmentHome"
+        android:name="com.gammasoft.busfinder.view.fragment.Chofer"
+        android:label="Home"
+        tools:layout="@layout/fragment_chofer" />
+
+    <fragment
+        android:id="@+id/fragmentPerfil"
+        android:name="com.gammasoft.busfinder.view.fragment.PerfilChofer"
+        android:label="Chofer"
+        tools:layout="@layout/fragment_perfil_admin_chofer" /> -->
 </navigation>

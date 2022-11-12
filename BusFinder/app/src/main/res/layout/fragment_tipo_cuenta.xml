@@ -11,17 +11,17 @@
         android:id="@+id/etqCrearCuenta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:fontFamily="@font/blogger_sans_medium"
-        android:gravity="start|center_vertical"
+        android:fontFamily="@font/phenomena_black"
+        android:gravity="start|center"
         android:text="Crear Cuenta"
-        android:textColor="@color/black"
-        android:textSize="45sp"
+        android:textColor="@color/black1"
+        android:textSize="55sp"
         android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
@@ -47,36 +47,30 @@
                 android:id="@+id/etqAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_margin="5dp"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/blogger_sans_bold"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="center"
                 android:text="ADMINISTRADOR"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/black1"
-                android:textSize="33sp" />
+                android:textSize="35sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etqAdmin"
+                android:layout_margin="5dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/blogger_sans_medium"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="start|center"
                 android:text="Para quienes son dueños o administran una línea de autobuses en Xalapa."
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/color"
-                android:textSize="19sp" />
+                android:textSize="22sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -104,29 +98,26 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:fontFamily="@font/blogger_sans_bold"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="center"
                 android:text="CHOFER"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/black1"
-                android:textSize="33sp" />
+                android:textSize="35sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etqChofer"
+                android:layout_margin="5dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/blogger_sans_medium"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="start|center"
                 android:text="Para quienes trabajan para una línea de autobuses en Xalapa."
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/color"
-                android:textSize="19sp" />
+                android:textSize="22sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -153,36 +144,30 @@
                 android:id="@+id/etqPublico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_margin="5dp"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/blogger_sans_bold"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="center"
                 android:text="PASAJERO"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/black1"
-                android:textSize="33sp" />
+                android:textSize="35sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/etqPublico"
+                android:layout_margin="5dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/blogger_sans_medium"
+                android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="start|center"
                 android:text="Para quienes hacen uso de los autobuses como transporte púnlico."
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/color"
-                android:textSize="19sp" />
+                android:textSize="22sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

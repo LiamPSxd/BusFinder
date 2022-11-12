@@ -12,11 +12,9 @@
     app:cardCornerRadius="30dp"
     app:cardElevation="10dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
@@ -24,54 +22,48 @@
             android:id="@+id/pin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/bg_translucent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:paddingTop="2dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingBottom="2dp"
-            android:fontFamily="@font/blogger_sans_bold_italic"
+            android:gravity="center"
+            android:background="@drawable/bg_translucent"
+            android:fontFamily="@font/phenomena_black"
             android:text="contador"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
+            android:layout_below="@+id/pin"
+            android:layout_centerHorizontal="true"
             android:background="@color/black" />
 
-        <include
-            android:id="@+id/frameChofer"
-            layout="@layout/frame_visualizar_chofer"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/etqNombre"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
-
-        <include
-            android:id="@+id/frameRuta"
-            layout="@layout/frame_visualizar_ruta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <include
-            android:id="@+id/frameParada"
-            layout="@layout/frame_visualizar_parada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <include
-            android:id="@+id/frameTarifa"
-            layout="@layout/frame_visualizar_tarifa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </LinearLayout>
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/phenomena_black"
+            android:gravity="start|center"
+            android:text="NOMBRE"
+            android:textColor="@color/black1"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

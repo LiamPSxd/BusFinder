@@ -24,13 +24,12 @@ class PrincipalAdministrador: AppCompatActivity(){
         setSupportActionBar(binding.toolbar)
         supportActionBar?.hide()
 
-        navController = findNavController(R.id.navHostAdministrador)
+        navController = findNavController(binding.navHostAdministrador.id)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navVisualizarAdmin, R.id.navBorrarAdmin, R.id.navAgregarAdmin /*, R.id.navModificarAdmin, R.id.navPerfilAdmin*/
-            )
+            setOf(R.id.fragmentMapa, R.id.fragmentHome, R.id.fragmentPerfil)
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navViewAdmin.setupWithNavController(navController)
     }

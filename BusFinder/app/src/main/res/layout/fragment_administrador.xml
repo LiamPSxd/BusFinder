@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CDC7C3"
     android:fitsSystemWindows="true">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -25,13 +26,9 @@
         android:id="@+id/contenedor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="-1dp"
         android:elevation="15dp" />
 </RelativeLayout>

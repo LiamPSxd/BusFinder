@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    map:cardBackgroundColor="@color/white"
+    map:cardCornerRadius="30dp"
+    map:cardElevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/mapa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            map:cameraTargetLat="19.53124"
+            map:cameraTargetLng="-96.91589"
+            map:cameraZoom="10" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

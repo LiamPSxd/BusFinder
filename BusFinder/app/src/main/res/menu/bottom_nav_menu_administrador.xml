@@ -3,27 +3,23 @@
     android:id="@+id/bottom_nav_menu_administrador">
 
     <item
-        android:id="@+id/visualizar"
-        android:icon="@drawable/visualizar"
-        android:title="Visualizar" />
+        android:id="@+id/fragmentMapa"
+        android:icon="@drawable/mapa"
+        android:title="Mapa"
+        android:enabled="true"
+        android:checkable="true" />
 
     <item
-        android:id="@+id/borrar"
-        android:icon="@drawable/borrar"
-        android:title="Borrar" />
+        android:id="@+id/fragmentHome"
+        android:icon="@drawable/home"
+        android:title="Home"
+        android:enabled="true"
+        android:checkable="true" />
 
     <item
-        android:id="@+id/agregar"
-        android:icon="@drawable/agregar"
-        android:title="Agregar" />
-
-    <item
-        android:id="@+id/modificar"
-        android:icon="@drawable/modificar"
-        android:title="Modificar" />
-
-    <item
-        android:id="@+id/perfil"
+        android:id="@+id/fragmentPerfil"
         android:icon="@drawable/perfil"
-        android:title="Perfil" />
+        android:title="Perfil"
+        android:enabled="true"
+        android:checkable="true"/>
 </menu>

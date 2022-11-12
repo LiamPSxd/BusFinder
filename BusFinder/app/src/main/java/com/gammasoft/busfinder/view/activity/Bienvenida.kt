@@ -1,9 +1,10 @@
 package com.gammasoft.busfinder.view.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.gammasoft.busfinder.databinding.ActivityBienvenidaBinding
 import com.gammasoft.busfinder.controller.BienvenidaEvento
+import com.gammasoft.busfinder.databinding.ActivityBienvenidaBinding
 
 class Bienvenida: AppCompatActivity(){
     private lateinit var binding: ActivityBienvenidaBinding
@@ -22,6 +23,6 @@ class Bienvenida: AppCompatActivity(){
         binding.btnCrearCuenta.setOnClickListener(evento)
 
         if(evento.sesion()) finish()
-        else setVisible(true)
+        else binding.bienvenida.visibility = View.VISIBLE
     }
 }

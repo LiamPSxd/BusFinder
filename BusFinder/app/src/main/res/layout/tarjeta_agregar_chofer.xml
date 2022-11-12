@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/agregarChofer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:animateLayoutChanges="true"
+    tools:context=".view.fragment.AgregarAdministrador">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/dragHandleImage"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                style="@style/DragHandleLight"
+                android:contentDescription="drag_handle" />
+
+            <TextView
+                android:id="@+id/ins1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="Ingrese el siguiente dato"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqRFC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/ins1"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="RFC"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtRFC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/ins1"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/etqRFC"
+                android:autofillHints="rfc"
+                android:backgroundTint="@color/color"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|center"
+                android:hint="RFC"
+                android:inputType="textPersonName"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/ins2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@+id/etqRFC"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="start|center"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:text="O seleccione el chofer"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqChoferes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/ins2"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="CHOFER"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spSeleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/ins2"
+                android:layout_toEndOf="@+id/etqChoferes"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/color"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/btnAceptar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@+id/spSeleccion"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/color15"
+                android:fontFamily="@font/phenomena_black"
+                android:gravity="center"
+                android:text="Agregar"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="50dp" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/spSeleccion"
+                android:layout_toStartOf="@+id/btnAceptar"
+                android:fontFamily="@font/phenomena_black"
+                android:gravity="center"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/cancelar"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="50dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/dragArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/tarjeta"
+        android:layout_alignStart="@+id/tarjeta"
+        android:layout_alignEnd="@+id/tarjeta"
+        android:layout_alignBottom="@+id/tarjeta"
+        android:elevation="15dp"/>
+</RelativeLayout>

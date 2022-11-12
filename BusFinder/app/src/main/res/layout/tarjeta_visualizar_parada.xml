@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/visualizarParada"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:animateLayoutChanges="true"
+    tools:context=".view.fragment.AgregarAdministrador">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/dragHandleImage"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                style="@style/DragHandleLight"
+                android:contentDescription="drag_handle" />
+
+            <TextView
+                android:id="@+id/etqParada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/dragHandleImage"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/phenomena_black"
+                android:gravity="start|center"
+                android:text="PARADA"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtParada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@+id/dragHandleImage"
+                android:layout_toEndOf="@+id/etqParada"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="parada"
+                android:textColor="@color/color"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btnBorrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/btnModificar"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Borrar Chofer"
+                app:srcCompat="@drawable/borrar" />
+
+            <ImageButton
+                android:id="@+id/btnModificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Modificar Chofer"
+                app:srcCompat="@drawable/editar" />
+
+            <TextView
+                android:id="@+id/etqRuta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_below="@+id/etqParada"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/phenomena_black"
+                android:gravity="start|center"
+                android:text="RUTA"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtRuta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_below="@+id/txtParada"
+                android:layout_toEndOf="@+id/etqRuta"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="ruta"
+                android:textColor="@color/color"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <include
+                android:id="@+id/mapa"
+                layout="@layout/fragment_mapa"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/txtRuta"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/dragArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/tarjeta"
+        android:layout_alignStart="@+id/tarjeta"
+        android:layout_alignEnd="@+id/tarjeta"
+        android:layout_alignBottom="@+id/tarjeta"
+        android:elevation="15dp"/>
+</RelativeLayout>

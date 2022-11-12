@@ -2,24 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_publico">
-    <!--app:startDestination="null">-->
-
-    <!-- <fragment
-        android:id="@+id/navVisualizarPublico"
-        android:name="com.example.busfinder.view.fragment.VisualizarPublico"
-        android:label="visualizarPublico"
-        tools:layout="@layout/fragment_visualizar_publico" />
+    android:id="@+id/nav_publico"
+    app:startDestination="@id/fragmentHome">
 
     <fragment
-        android:id="@+id/navMapaPublico"
-        android:name="com.example.busfinder.view.fragment.MapaPublico"
-        android:label="mapaPublico"
-        tools:layout="@layout/fragment_mapa_publico" />
+        android:id="@+id/fragmentHome"
+        android:name="com.gammasoft.busfinder.view.fragment.PublicoGeneral"
+        android:label="Home"
+        tools:layout="@layout/fragment_publico" />
 
     <fragment
-        android:id="@+id/navPerfilPublico"
-        android:name="com.example.busfinder.view.fragment.PerfilPublico"
-        android:label="perfilPublico"
-        tools:layout="@layout/fragment_perfil_publico" /> -->
+        android:id="@+id/fragmentMapa"
+        android:name="com.gammasoft.busfinder.view.fragment.Mapa"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_mapa" />
+
+    <fragment
+        android:id="@+id/fragmentPerfil"
+        android:name="com.gammasoft.busfinder.view.fragment.PerfilPublico"
+        android:label="PublicoGeneral"
+        tools:layout="@layout/fragment_perfil_publico" />
 </navigation>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/etqRFC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="RFC"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtRFC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/etqRFC"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints="rfc"
+                android:backgroundTint="@color/color"
+                android:maxLength="13"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|center"
+                android:hint="RFC"
+                android:inputType="textPersonName"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/etqNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/txtRFC"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="NOMBRE COMPLETO"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/etqNombre"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints="name"
+                android:backgroundTint="@color/color"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|center"
+                android:hint="apellido paterno materno nombre(s)"
+                android:inputType="textPersonName|textAutoCorrect"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/etqCelular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/txtNombre"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="CELULAR"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtCelular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/etqCelular"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints="phone"
+                android:backgroundTint="@color/color"
+                android:maxLength="10"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|center"
+                android:hint="número de celular"
+                android:inputType="phone"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/etqLinea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/txtCelular"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/phenomena_extra_bold"
+                android:gravity="start|center"
+                android:text="LÍNEA DE TRANSPORTE"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/txtLinea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/etqLinea"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:autofillHints="transporte"
+                android:backgroundTint="@color/color"
+                android:fontFamily="@font/phenomena_bold"
+                android:gravity="start|top"
+                android:hint="línea de transporte"
+                android:inputType="textMultiLine|textAutoCorrect"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnContinuarTipoAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:contentDescription="Continua con Administrador"
+        android:focusable="true"
+        app:backgroundTint="@color/color11"
+        app:fabSize="normal"
+        app:maxImageSize="50dp"
+        app:srcCompat="@drawable/ingresar" />
+</RelativeLayout>
