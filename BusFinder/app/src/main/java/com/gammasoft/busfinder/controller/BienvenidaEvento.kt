@@ -100,13 +100,11 @@ class BienvenidaEvento(private var activity: AppCompatActivity,
             "NO INTERNET" -> {
                 val localDB = LocalDataBase.getDB(activity).crud()
 
-                CoroutineScope(Dispatchers.IO).launch{
-                    localDB.getCuentas().observe(activity){
-                        cuentas = it as ArrayList<Cuenta>
-                    }
-
-                    if(iniciarPantallaPrincipal(cuentas)) res = true
+                localDB.getCuentas().observe(activity){
+                    cuentas = it as ArrayList<Cuenta>
                 }
+
+                if(iniciarPantallaPrincipal(cuentas)) res = true
             }
         }
 

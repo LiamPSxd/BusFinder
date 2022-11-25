@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.libraries.places.api.Places
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,8 +36,16 @@ class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickLis
     private lateinit var start: String
     private lateinit var end: String
 
+    private var mMarkerFrom: Marker? = null
+    private var mMarkerTo: Marker? = null
+    private var mFromLatLng:LatLng? = null
+    private var mToLatLng:LatLng? =null
+
     companion object{
         const val REQUEST_CODE_LOCATION = 0
+        private const val REQUEST_CODE_AUTOCOMPLETE_FROM = 1
+        private const val REQUEST_CODE_AUTOCOMPLETE_TO = 2
+        private const val TAG = "Mapa"
     }
 
     private val callback = OnMapReadyCallback{ map ->
@@ -57,6 +66,12 @@ class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickLis
 
         val mapa = childFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment?
         mapa?.getMapAsync(callback)
+
+        setupPlaces()
+    }
+
+    private fun setupPlaces(){
+        Places.initialize(app)
     }
 
     override fun onMapReady(googleMap: GoogleMap){

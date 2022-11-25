@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">BusFinder</string>
+    <string name="android_sdk_places_api_key">AIzaSyDCpEGLGBLBbjPPqUL10YlHlVkBYn505rM</string>
     <string name="facebook_app_id">5787552521309578</string>
     <string name="fb_login_protocol_scheme">fb5787552521309578</string>
     <string name="facebook_client_token">02fa499609fccfd11a889c37249584d1</string>
