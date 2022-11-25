@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_administrador"
-    app:startDestination="@id/fragmentHome">
+    app:startDestination="@id/fragmentHomeAdmin">
 
     <fragment
-        android:id="@+id/fragmentMapa"
+        android:id="@+id/fragmentMapaAdmin"
         android:name="com.gammasoft.busfinder.view.fragment.Mapa"
         android:label="Mapa"
         tools:layout="@layout/fragment_mapa" />
 
     <fragment
-        android:id="@+id/fragmentHome"
+        android:id="@+id/fragmentHomeAdmin"
         android:name="com.gammasoft.busfinder.view.fragment.Administrador"
         android:label="Home"
         tools:layout="@layout/fragment_administrador" />
 
     <fragment
-        android:id="@+id/fragmentPerfil"
-        android:name="com.gammasoft.busfinder.view.fragment.PerfilAdminChofer"
+        android:id="@+id/fragmentPerfilAdmin"
+        android:name="com.gammasoft.busfinder.view.fragment.PerfilAdministrador"
         android:label="Administrador"
         tools:layout="@layout/fragment_perfil_admin_chofer" />
 </navigation>

@@ -1,11 +1,9 @@
 package com.gammasoft.busfinder.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gammasoft.busfinder.controller.IniciarSesionEvento
 import com.gammasoft.busfinder.databinding.ActivityIniciarSesionBinding
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class IniciarSesion: AppCompatActivity(){
     private lateinit var binding: ActivityIniciarSesionBinding
@@ -26,14 +24,5 @@ class IniciarSesion: AppCompatActivity(){
         binding.btnTwitter.setOnClickListener(evento)
 
         binding.btnContinuar.setOnClickListener(evento)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
-        evento.callbackManager.onActivityResult(requestCode, resultCode, data)
-
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == evento.GOOGLE_SIGN_IN) evento.iniciarByGoogle(GoogleSignIn.getSignedInAccountFromIntent(data))
     }
 }

@@ -4,67 +4,94 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.controller.longpress.PopupHoverEvento
 import com.gammasoft.busfinder.controller.longpress.PopupInflaterEvento
 import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
 import com.gammasoft.busfinder.databinding.TarjetaTituloBinding
-import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
 import com.gammasoft.busfinder.view.dialog.BlurPopup
-import com.gammasoft.busfinder.view.dialog.MensajeAlerta
-import com.gammasoft.busfinder.view.fragment.*
+import com.gammasoft.busfinder.view.dialog.MensajeBlur
+import com.gammasoft.busfinder.view.fragment.ListaTarjeta
+import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.util.DebouncingClickListener
 import com.gammasoft.busfinder.view.util.checkAndUnregister
 import com.gammasoft.busfinder.view.util.onDebouncingClick
+import com.squareup.picasso.Picasso
 
 class TarjetaAdapter(private val fragment: TarjetaBase,
                      private val titulos: ArrayList<String>,
-                     private val colores: ArrayList<Int>,
                      private val fondos: ArrayList<Int>): RecyclerView.Adapter<TarjetaAdapter.ViewHolder>(){
+    private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(TarjetaTituloBinding.inflate(LayoutInflater.from(parent.context), parent, false), fragment)
+        ViewHolder(TarjetaTituloBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, i: Int) =
-        holder.bind(titulos[i], colores[i], fondos[i])
+        holder.bind(titulos[i], fondos[i])
 
     override fun getItemCount(): Int = titulos.size
 
-    inner class ViewHolder(var binding: TarjetaTituloBinding, private val fragment: TarjetaBase): RecyclerView.ViewHolder(binding.root), DebouncingClickListener, PopupInflaterEvento , PopupStateEvento, PopupHoverEvento{
+    inner class ViewHolder(private val binding: TarjetaTituloBinding): RecyclerView.ViewHolder(binding.root), DebouncingClickListener, PopupInflaterEvento , PopupStateEvento, PopupHoverEvento{
         private var longPressBlurPopup: BlurPopup? = null
 
-        fun bind(titulo: String, color: Int, fondo: Int){
+        fun bind(titulo: String, fondo: Int){
             longPressBlurPopup.checkAndUnregister()
 
-            binding.txtTitulo.text = titulo
-            binding.tarjeta.setBackgroundColor(color)
-            binding.image.setImageResource(fondo)
-            //Picasso.get().load(tile.imageUrl).into(cardThumb)
-            binding.tarjeta.onDebouncingClick(this@ViewHolder)
+            itemView.run{
+                binding.txtTitulo.text = titulo
+                binding.tarjeta.onDebouncingClick(this@ViewHolder)
+                Picasso.get().load(fondo).into(binding.image)
 
-            longPressBlurPopup = BlurPopup.Builder
-                .with(fragment)
-                .targetView(binding.tarjeta)
-                .baseBlurPopup(MensajeAlerta().mostrar())
-                .animationType(ANIM_FROM_BOTTOM)
-                .popupStateListener(this@ViewHolder)
-                .hoverListener(this@ViewHolder)
-                .build()
+                longPressBlurPopup = BlurPopup.Builder
+                    .with(fragment)
+                    .targetView(binding.tarjeta)
+                    .baseBlurPopup(MensajeBlur("CONSEJO", "Para ver $titulo toque la tarjeta").mostrar())
+                    .animationType(ANIM_FROM_BOTTOM)
+                    .popupStateListener(this@ViewHolder)
+                    .hoverListener(this@ViewHolder)
+                    .build()
+            }
 
             longPressBlurPopup?.register()
         }
 
         override fun onDebouncingClick(view: View){
-            when(fragment){
-                VisualizarAdministrador() -> fragment.pushFragment(ListaTarjeta(binding.txtTitulo.text.toString(), binding.tarjeta.background.toString().toInt()).newInstance(true))
+            val ides = ArrayList<String>()
 
-                AgregarAdministrador() -> fragment.pushFragment(TarjetaAgregar(AgregarAdministrador(), binding.txtTitulo.text.toString()))
+            when(binding.txtTitulo.text){
+                "CHOFERES" -> {
+                    localDB.getChoferes().observe(fragment){
+                        for(chofer in it) ides.add(chofer.getNombre())
+                    }
 
-                BorrarAdministrador() -> fragment.pushFragment(TarjetaBorrar(BorrarAdministrador(), binding.txtTitulo.text.toString()))
+                    fragment.pushPopup(ListaTarjeta(fragment, "Choferes", ides).mostrar(R.anim.float_up, R.anim.float_down))
+                }
 
-                    /*"Ruta" -> activity.pushFragment(ListOfCardsContainerFragment())
-                    view.context.getString(R.string.plain_card) -> activity.pushFragment(PlainCardFragment())
-                    view.context.getString(R.string.blur_popup_zoom) -> activity.pushPopup(SampleBlurPopup.newInstance(R.anim.zoom_in, R.anim.zoom_out))
-                    view.context.getString(R.string.blur_popup_float_up) -> activity.pushPopup(SampleBlurPopup.newInstance(R.anim.float_up, R.anim.sink_down))*/
+                "RUTAS" -> {
+                    localDB.getRutas().observe(fragment){
+                        for(ruta in it) ides.add(ruta.getNombre())
+                    }
+
+                    fragment.pushPopup(ListaTarjeta(fragment, "Rutas", ides).mostrar(R.anim.float_up, R.anim.float_down))
+                }
+
+                "PARADAS" -> {
+                    localDB.getParadas().observe(fragment){
+                        for(parada in it) ides.add(parada.getNombre())
+                    }
+
+                    fragment.pushPopup(ListaTarjeta(fragment, "Paradas", ides).mostrar(R.anim.float_up, R.anim.float_down))
+                }
+
+                "TARIFAS" -> {
+                    localDB.getTarifas().observe(fragment){
+                        for(tarifa in it) ides.add(tarifa.getNombre())
+                    }
+
+                    fragment.pushPopup(ListaTarjeta(fragment, "Tarifas", ides).mostrar(R.anim.float_up, R.anim.float_down))
+                }
             }
         }
 

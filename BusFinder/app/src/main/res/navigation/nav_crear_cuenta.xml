@@ -12,29 +12,29 @@
         tools:layout="@layout/fragment_tipo_cuenta">
 
         <action
-            android:id="@+id/fragmentTipoCuenta_TO_fragmentCrearCuenta"
-            app:destination="@+id/FragmentCrearCuenta" />
+            android:id="@+id/fragmentTipoCuenta_TO_fragmentCrearCuentaInicial"
+            app:destination="@+id/FragmentCrearCuentaInicial" />
 
         <action
-            android:id="@+id/fragmentTipoCuenta_TO_fragmentCrearCuenta2"
-            app:destination="@+id/FragmentCrearCuenta2" />
+            android:id="@+id/fragmentTipoCuenta_TO_fragmentCrearCuentaFinal"
+            app:destination="@+id/FragmentCrearCuentaFinal" />
     </fragment>
 
     <fragment
-        android:id="@+id/FragmentCrearCuenta"
+        android:id="@+id/FragmentCrearCuentaInicial"
         android:name="com.gammasoft.busfinder.view.fragment.CrearCuenta"
-        android:label="Crear Cuenta"
+        android:label="Crear Cuenta Inicial"
         tools:layout="@layout/fragment_crear_cuenta">
 
         <action
-            android:id="@+id/fragmentCrearCuenta_TO_fragmentCrearCuenta2"
-            app:destination="@+id/FragmentCrearCuenta2" />
+            android:id="@+id/fragmentCrearCuentaInicial_TO_fragmentCrearCuentaFinal"
+            app:destination="@+id/FragmentCrearCuentaFinal" />
     </fragment>
 
     <fragment
-        android:id="@+id/FragmentCrearCuenta2"
+        android:id="@+id/FragmentCrearCuentaFinal"
         android:name="com.gammasoft.busfinder.view.fragment.CrearCuenta2"
-        android:label="Crear Cuenta 2"
+        android:label="Crear Cuenta Final"
         tools:layout="@layout/fragment_crear_cuenta_2">
     </fragment>
 </navigation>

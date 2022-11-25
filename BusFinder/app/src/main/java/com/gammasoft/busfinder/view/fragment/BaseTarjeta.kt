@@ -6,12 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.IdRes
-import com.gammasoft.busfinder.view.activity.TarjetaBase
 import com.gammasoft.busfinder.view.dialog.BaseDialogFragment
 import com.gammasoft.busfinder.view.util.*
 import io.alterac.blurkit.BlurLayout
 
-abstract class BaseTarjeta: Base(), TarjetaContenedor{
+abstract class BaseTarjeta: Base(), TarjetaBaseContenedor{
     protected var isBlurEnabled = true
     var isInForeGround: Boolean = false
 
@@ -28,7 +27,7 @@ abstract class BaseTarjeta: Base(), TarjetaContenedor{
 
         if(isBlurEnabled){
             getBackgroundBlurLayout()?.isClickable = true
-            (getBackgroundBlurLayout() as BlurLayout?)?.beginBlur()
+            (getBackgroundBlurLayout() as? BlurLayout)?.beginBlur()
         }else getBackgroundBlurLayout()?.makeGone()
 
         isInForeGround = true
@@ -39,15 +38,14 @@ abstract class BaseTarjeta: Base(), TarjetaContenedor{
     @CallSuper
     override fun moveToBackGround(){
         getRootView()?.moveToBackGround(parentActivity().index)
-        parentActivity().getFragmentContainer()
-        //find(dragHandleId()).fadeOut()
+        activity?.findViewById<View>(dragHandleId())?.fadeOut()
         isInForeGround = false
     }
 
     @CallSuper
     override fun moveToForeGround(){
         getRootView()?.moveToForeGround()
-        //find(dragHandleId()).fadeIn()
+        activity?.findViewById<View>(dragHandleId())?.fadeIn()
         isInForeGround = true
     }
 
@@ -67,7 +65,8 @@ abstract class BaseTarjeta: Base(), TarjetaContenedor{
     @IdRes
     abstract fun dragHandleId(): Int
 
-    override fun parentActivity(): TarjetaBase = (activity as? TarjetaBase) ?: throw IllegalStateException("El Fragmento debe ser proveido por una BaseTarjeta")
+    //override fun parentActivity(): TarjetaBase = (parentFragment as? TarjetaBase) ?: throw IllegalStateException("El Fragmento debe ser proveido por una TarjetaBase")
+    override fun parentActivity(): TarjetaBase = parentFragment as TarjetaBase
 
     override fun onDestroyView(){
         getRootView()?.hideSoftKeyboard()

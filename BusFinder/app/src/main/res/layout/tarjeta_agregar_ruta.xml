@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/fondo"
     android:animateLayoutChanges="true"
-    tools:context=".view.fragment.AgregarAdministrador">
+    tools:context=".view.fragment.agregar.TarjetaRuta">
 
     <io.alterac.blurkit.BlurLayout
         android:id="@+id/blurLayout"
@@ -142,7 +142,7 @@
                 app:srcCompat="@drawable/limpiar" />
 
             <Button
-                android:id="@+id/btnAceptar"
+                android:id="@+id/btnAgregar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -167,7 +167,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="15dp"
                 android:layout_below="@+id/mapa"
-                android:layout_toStartOf="@+id/btnAceptar"
+                android:layout_toStartOf="@+id/btnAgregar"
                 android:fontFamily="@font/phenomena_black"
                 android:gravity="center"
                 android:text="Cancelar"
@@ -176,16 +176,11 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:cornerRadius="50dp" />
+
+            <View
+                android:id="@+id/dragArea"
+                style="@style/DragAreaWrap"
+                android:layout_height="40dp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
-    <View
-        android:id="@+id/dragArea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/tarjeta"
-        android:layout_alignStart="@+id/tarjeta"
-        android:layout_alignEnd="@+id/tarjeta"
-        android:layout_alignBottom="@+id/tarjeta"
-        android:elevation="15dp"/>
 </RelativeLayout>

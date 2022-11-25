@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Cuenta")
 data class Cuenta(@PrimaryKey @ColumnInfo(name = "correo") private var correo: String,
                   @ColumnInfo(name = "contrasenia") private var contrasenia: String,
-                  @ColumnInfo(name = "foto") private var foto: Int?,
+                  @ColumnInfo(name = "foto") private var foto: String,
                   @ColumnInfo(name = "tipo") private var tipo: Int,
+                  @ColumnInfo(name = "metodo") private var metodo: String,
                   @ColumnInfo(name = "estado") private var estado: Boolean){
-    constructor(): this("", "", 0, 3, true)
+    constructor(): this("", "", "", 3, "", true)
 
     fun setCorreo(correo: String){
         this.correo = correo
@@ -28,11 +29,11 @@ data class Cuenta(@PrimaryKey @ColumnInfo(name = "correo") private var correo: S
         return contrasenia
     }
 
-    fun setFoto(foto: Int){
+    fun setFoto(foto: String){
         this.foto = foto
     }
 
-    fun getFoto(): Int?{
+    fun getFoto(): String{
         return foto
     }
 
@@ -51,6 +52,14 @@ data class Cuenta(@PrimaryKey @ColumnInfo(name = "correo") private var correo: S
             2 -> "Publico General"
             else -> "Error"
         }
+    }
+
+    fun setMetodo(metodo: String){
+        this.metodo = metodo
+    }
+
+    fun getMetodo(): String{
+        return metodo
     }
 
     fun setEstado(estado: Boolean){

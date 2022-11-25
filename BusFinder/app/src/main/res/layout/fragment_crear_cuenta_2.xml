@@ -263,13 +263,15 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fotoPerfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/user" />
+            android:src="@drawable/user"
+            app:civ_border_color="@color/color"
+            app:civ_border_width="2dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnCambiarFotoPerfil"
@@ -289,7 +291,7 @@
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnContinuarTipoAdmin2"
+        android:id="@+id/btnContinuar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

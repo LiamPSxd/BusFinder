@@ -5,12 +5,12 @@ import androidx.annotation.AnimRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.gammasoft.busfinder.R
-import com.gammasoft.busfinder.view.activity.TarjetaBase
+import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
 import com.gammasoft.busfinder.view.dialog.BaseDialogFragment
 import com.gammasoft.busfinder.view.fragment.Base
 import com.gammasoft.busfinder.view.fragment.BaseTarjeta
-import com.gammasoft.busfinder.view.fragment.TarjetaContenedor
+import com.gammasoft.busfinder.view.fragment.TarjetaBaseContenedor
 
 fun FragmentManager.findCard(tag: String): BaseTarjeta? = this.findFragmentByTag(tag) as? BaseTarjeta
 
@@ -75,7 +75,7 @@ fun FragmentManager.moveCurrentCardToBackground(){
     val lastFragment = findLastFragment()
 
     lastFragment?.run{
-        (this as? TarjetaContenedor)?.moveToBackGround()
+        (this as? TarjetaBaseContenedor)?.moveToBackGround()
         onPause()
     }
 }
@@ -84,7 +84,7 @@ fun FragmentManager.movePreviousCardToForeground(){
     val lastFragment = findLastFragment()
 
     lastFragment?.run{
-        (this as? TarjetaContenedor)?.moveToForeGround()
+        (this as? TarjetaBaseContenedor)?.moveToForeGround()
         onResume()
     }
 }

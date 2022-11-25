@@ -80,9 +80,18 @@
             android:name=".view.activity.PrincipalPublico"
             android:exported="false" />
 
+        <activity android:name=".view.activity.Bienvenida"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.Splash" />
+        </activity>
+
         <activity
-            android:name=".view.activity.Bienvenida"
-            android:exported="true">
+            android:name=".view.activity.Splash"
+            android:exported="true"
+            android:theme="@style/Theme.BusFinder.Starting">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

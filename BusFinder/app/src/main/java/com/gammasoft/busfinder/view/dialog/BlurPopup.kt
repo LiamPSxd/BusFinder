@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import com.gammasoft.busfinder.controller.longpress.*
 import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento.Companion.DEFAULT_LONG_PRESS_DURATION
-import com.gammasoft.busfinder.view.activity.TarjetaBase
 import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
+import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.util.isTouchInsideView
 import com.gammasoft.busfinder.view.util.setDismissOnTouchOutside
 import com.gammasoft.busfinder.view.util.withAnimType
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
-open class BlurPopup private constructor(builder: Builder): PopupInterface{
+open class BlurPopup private constructor(builder: Builder): PopupInterface {
     internal val baseBlurPopup: BaseBlurPopup = builder.baseBlurPopup
     internal val parentActivity: TarjetaBase = builder.parentActivity
     internal val popupTag: String = builder.tag

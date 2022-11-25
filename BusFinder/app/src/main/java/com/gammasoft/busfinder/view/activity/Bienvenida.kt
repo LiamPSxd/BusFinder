@@ -22,8 +22,8 @@ class Bienvenida: AppCompatActivity(){
 
         binding.btnCrearCuenta.setOnClickListener(evento)
 
+        binding.bienvenida.visibility = View.INVISIBLE
         if(evento.sesion()) finish()
         else binding.bienvenida.visibility = View.VISIBLE
     }
 }
-

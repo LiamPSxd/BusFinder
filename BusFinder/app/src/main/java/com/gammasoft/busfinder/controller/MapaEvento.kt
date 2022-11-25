@@ -1,6 +1,6 @@
 package com.gammasoft.busfinder.controller
 
-import android.view.View
+/*import android.view.View
 import androidx.fragment.app.Fragment
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.FragmentMapaBinding
@@ -36,4 +36,4 @@ class MapaEvento(private val fragment: Fragment,
             Toast.makeText(this, "Mapa Actualizado", Toast.LENGTH_SHORT).show()
         }*/
     }
-}
+}*/

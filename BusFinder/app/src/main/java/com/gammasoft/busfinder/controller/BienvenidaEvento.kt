@@ -3,13 +3,15 @@ package com.gammasoft.busfinder.controller
 import android.content.Intent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.ActivityBienvenidaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.activity.*
 import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BienvenidaEvento(private var activity: AppCompatActivity,
                        private var binding: ActivityBienvenidaBinding): View.OnClickListener{
@@ -17,7 +19,7 @@ class BienvenidaEvento(private var activity: AppCompatActivity,
         when(v?.id){
             binding.btnIniciarSesion.id -> iniciarSesion()
             binding.btnCrearCuenta.id -> crearCuenta()
-            else -> MensajeAlerta("ERROR", "Acción no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+            else -> MensajeAlerta("ERROR", "Acción no encontrada").show(activity.supportFragmentManager, "Error")
         }
     }
 
@@ -29,47 +31,81 @@ class BienvenidaEvento(private var activity: AppCompatActivity,
         activity.startActivity(Intent(activity, CrearCuenta::class.java))
     }
 
-    fun sesion(): Boolean{
-        var res = false
-        lateinit var cuentas: List<Cuenta>
-        binding.bienvenida.visibility = View.INVISIBLE
+    private fun iniciarPantallaPrincipal(cuentas: ArrayList<Cuenta>): Boolean{
+        if(cuentas.size != 0) for(cuenta in cuentas){
+            if(cuenta.getEstado()){
+                when(cuenta.mostrarTipo()){
+                    "Administrador" -> {
+                        val intent = Intent(activity, PrincipalAdministrador::class.java)
+                        intent.putExtra("cuenta", cuenta.getCorreo())
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        activity.startActivity(intent)
+                        return true
+                    }
 
-        when(Conexion.comprobarConexion(activity)){
-            "WIFI" -> {
-                val cloudDB = CloudDataBase
+                    "Chofer" -> {
+                        val intent = Intent(activity, PrincipalChofer::class.java)
+                        intent.putExtra("cuenta", cuenta.getCorreo())
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        activity.startActivity(intent)
+                        return true
+                    }
 
-                cuentas = cloudDB.getCuentas()
-            }
+                    "Publico General" -> {
+                        val intent = Intent(activity, PrincipalPublico::class.java)
+                        intent.putExtra("cuenta", cuenta.getCorreo())
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        activity.startActivity(intent)
+                        return true
+                    }
 
-            "MOBILE", "NO INTERNET" -> {
-                val localDB = LocalDataBase.getDB(activity).crud()
-
-                localDB.getCuentas().observe(activity){
-                    cuentas = it
+                    "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la cuenta").show(activity.supportFragmentManager, "Advertencia")
+                    else -> MensajeAlerta("ERROR", "Actividad no encontrada").show(activity.supportFragmentManager, "Error")
                 }
             }
         }
 
-        for(cuenta in cuentas){
-            if(cuenta.getEstado()){
-                when(cuenta.mostrarTipo()){
-                    "Administrador" -> {
-                        activity.startActivity(Intent(activity, PrincipalAdministrador::class.java))
-                        res = true
+        return false
+    }
+
+    fun sesion(): Boolean{
+        var cuentas = ArrayList<Cuenta>()
+        var res = false
+
+        when(Conexion.comprobarConexion(activity)){
+            "WIFI", "MOBILE" -> CoroutineScope(Dispatchers.IO).launch{
+                CloudDataBase.cloudDataBase.collection("Cuenta").whereEqualTo("estado", true).get().addOnSuccessListener{
+                    for(cuenta in it) if(cuenta.exists()){
+                        var tipo = 3
+                        when(cuenta.getString("tipo").toString()){
+                            "Administrador" -> tipo = 0
+                            "Chofer" -> tipo = 1
+                            "Publico General" -> tipo = 2
+                        }
+
+                        cuentas.add(Cuenta(
+                            cuenta.getString("correo").toString(),
+                            cuenta.getString("contrasenia").toString(),
+                            cuenta.getString("foto").toString(),
+                            tipo,
+                            cuenta.getString("metodo").toString(),
+                            cuenta.getBoolean("estado").toString().toBoolean()
+                        ))
                     }
 
-                    "Chofer" -> {
-                        activity.startActivity(Intent(activity, PrincipalChofer::class.java))
-                        res = true
+                    if(iniciarPantallaPrincipal(cuentas)) res = true
+                }
+            }
+
+            "NO INTERNET" -> {
+                val localDB = LocalDataBase.getDB(activity).crud()
+
+                CoroutineScope(Dispatchers.IO).launch{
+                    localDB.getCuentas().observe(activity){
+                        cuentas = it as ArrayList<Cuenta>
                     }
 
-                    "Publico General" -> {
-                        activity.startActivity(Intent(activity, PrincipalPublico::class.java))
-                        res = true
-                    }
-
-                    "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la cuenta").mostrar(R.anim.zoom_in, R.anim.zoom_out)
-                    else -> MensajeAlerta("ERROR", "Actividad no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+                    if(iniciarPantallaPrincipal(cuentas)) res = true
                 }
             }
         }

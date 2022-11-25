@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDC7C3"
+    android:background="@color/fondo"
     tools:context=".view.activity.PrincipalAdministrador">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -33,22 +33,6 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_administrador" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAgregar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/navViewAdmin"
-        android:clickable="true"
-        android:contentDescription="Agregar chofer, ruta, parada o tarifa"
-        android:focusable="true"
-        app:backgroundTint="@color/color11"
-        app:fabSize="normal"
-        app:maxImageSize="70dp"
-        app:srcCompat="@drawable/agregar" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/navViewAdmin"
         android:layout_width="wrap_content"
@@ -63,6 +47,7 @@
         app:cardElevation="30dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

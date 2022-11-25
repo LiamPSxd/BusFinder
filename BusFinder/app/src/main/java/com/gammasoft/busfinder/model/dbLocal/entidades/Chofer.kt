@@ -10,7 +10,7 @@ data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario:
                   @ColumnInfo(name = "nombre") private var nombre: String,
                   @ColumnInfo(name = "numero_Celular") private var numCelular: Long,
                   @ColumnInfo(name = "linea_Transporte") private var linea: String,
-                  @ColumnInfo(name = "codigo") private var codigo: Int,
+                  @ColumnInfo(name = "codigo") private var codigo: Long,
                   @ColumnInfo(name = "noUsuarios") private var noUsuarios: Int,
                   @ColumnInfo(name = "calificacion") private var calificacion: Double){
     constructor(): this("", "", "", 0, "", 0, 0, 0.0)
@@ -55,11 +55,11 @@ data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario:
         return linea
     }
 
-    fun setCodigo(codigo: Int){
+    fun setCodigo(codigo: Long){
         this.codigo = codigo
     }
 
-    fun getCodigo(): Int{
+    fun getCodigo(): Long{
         return codigo
     }
 

@@ -48,9 +48,20 @@
     <style name="DragAreaWrap">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">-12dp</item>
+        <item name="android:layout_marginStart">-15dp</item>
+        <item name="android:layout_marginEnd">-15dp</item>
         <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:elevation">10dp</item>
-        <item name="android:layout_gravity">top|center_horizontal</item>
+    </style>
+    
+    <style name="etiqueta">
+        <item name="android:background">@drawable/etiqueta</item>
+        <item name="android:fontFamily">@font/phenomena_extra_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

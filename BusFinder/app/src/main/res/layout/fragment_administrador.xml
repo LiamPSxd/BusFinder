@@ -16,8 +16,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:clipToPadding="false"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/tarjeta_titulo" />
@@ -31,4 +31,63 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:elevation="15dp" />
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/btnAgregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:contentDescription="Agregar chofer, ruta, parada o tarifa"
+        android:focusable="true"
+        app:fab_addButtonColorNormal="@color/color12"
+        app:fab_addButtonColorPressed="@color/color11"
+        app:fab_addButtonSize="normal"
+        app:fab_labelStyle="@style/etiqueta"
+        app:maxImageSize="70dp">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarChofer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/color12"
+            app:fab_colorPressed="@color/color11"
+            app:fab_icon="@drawable/chofer"
+            app:fab_size="mini"
+            app:fab_title="Chofer" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarRuta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/color12"
+            app:fab_colorPressed="@color/color11"
+            app:fab_icon="@drawable/ruta"
+            app:fab_size="mini"
+            app:fab_title="Ruta" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarParada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/color12"
+            app:fab_colorPressed="@color/color11"
+            app:fab_icon="@drawable/parada"
+            app:fab_size="mini"
+            app:fab_title="Parada" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarTarifa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:maxImageSize="50dp"
+            app:fab_colorNormal="@color/color12"
+            app:fab_colorPressed="@color/color11"
+            app:fab_icon="@drawable/tarifa"
+            app:fab_size="mini"
+            app:fab_title="Tarifa" />
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </RelativeLayout>

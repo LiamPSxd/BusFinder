@@ -1,140 +1,83 @@
 package com.gammasoft.busfinder.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gammasoft.busfinder.R
-import com.gammasoft.busfinder.databinding.*
-import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
-import com.gammasoft.busfinder.view.dialog.MensajeAlerta
-import com.gammasoft.busfinder.view.fragment.ListaTarjeta
+import com.gammasoft.busfinder.controller.longpress.PopupHoverEvento
+import com.gammasoft.busfinder.controller.longpress.PopupInflaterEvento
+import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
+import com.gammasoft.busfinder.databinding.TarjetaListaBinding
+import com.gammasoft.busfinder.view.dialog.AnimType
+import com.gammasoft.busfinder.view.dialog.BlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeBlur
+import com.gammasoft.busfinder.view.fragment.TarjetaBase
+import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaChofer
+import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaParada
+import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaRuta
+import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaTarifa
+import com.gammasoft.busfinder.view.util.DebouncingClickListener
+import com.gammasoft.busfinder.view.util.checkAndUnregister
+import com.gammasoft.busfinder.view.util.onDebouncingClick
 
-class TarjetaLista(private val titulo: String,
-                   private val fragment: ListaTarjeta): RecyclerView.Adapter<TarjetaLista.ViewHolder>(){
-    private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
-    private var items = 0
-
-    override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder =
+class TarjetaLista(private val fragment: TarjetaBase,
+                   private val tipo: String,
+                   private val ides: ArrayList<String>): RecyclerView.Adapter<TarjetaLista.ViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(TarjetaListaBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, i: Int){
-        val c = holder.binding.frameChofer
-        val r = holder.binding.frameRuta
-        val p = holder.binding.frameParada
-        val t = holder.binding.frameTarifa
-        var contador = ""
-
-        when(titulo){
-            "Choferes" -> {
-                c.Chofer.visibility = VISIBLE
-                r.Ruta.visibility = GONE
-                p.Parada.visibility = GONE
-                t.Tarifa.visibility = GONE
-
-                rellenarChofer(c, i)
-                contador = "Chofer $i"
-            }
-
-            "Rutas" -> {
-                c.Chofer.visibility = GONE
-                r.Ruta.visibility = VISIBLE
-                p.Parada.visibility = GONE
-                t.Tarifa.visibility = GONE
-
-                rellenarRuta(r, i)
-                contador = "Ruta $i"
-            }
-
-            "Paradas" -> {
-                c.Chofer.visibility = GONE
-                r.Ruta.visibility = GONE
-                p.Parada.visibility = VISIBLE
-                t.Tarifa.visibility = GONE
-
-                rellenarParada(p, i)
-                contador = "Parada $i"
-            }
-
-            "Tarifas" -> {
-                c.Chofer.visibility = GONE
-                r.Ruta.visibility = GONE
-                p.Parada.visibility = GONE
-                t.Tarifa.visibility = VISIBLE
-
-                rellenarTarifa(t, i)
-                contador = "Tarifa $i"
-            }
-
-            else -> MensajeAlerta("Error", "Tarjeta no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
-        }
-
-        holder.binding.pin.text = contador
-
-        /*holder.binding.tarjeta.onReducingClick{
-                holder.binding.tarjeta.context.toast("This is reducing click")
-                activity.pushFragment(CardWithListFragment.newInstance(false))
-            }
-        }*/
+        if(i >= 0) holder.bind(ides[i], (i+1).toString())
+        else holder.bind("Agregue un dato para mostrarlo", "Nada que mostrar")
     }
 
-    override fun getItemCount(): Int = items
+    override fun getItemCount(): Int = ides.size
 
-    private fun rellenarChofer(chofer: FrameVisualizarChoferBinding, i: Int){
-        localDB.getChoferes().observe(fragment){ choferes ->
-            items = choferes.size
+    inner class ViewHolder(private val binding: TarjetaListaBinding): RecyclerView.ViewHolder(binding.root), DebouncingClickListener, PopupInflaterEvento, PopupStateEvento, PopupHoverEvento{
+        private var longPressBlurPopup: BlurPopup? = null
 
-            chofer.txtRFC.text = choferes[i].getRfc()
-            chofer.txtNombre.text = choferes[i].getNombre()
-            chofer.txtCelular.text = choferes[i].getNumCelular().toString()
-            chofer.txtCalificacion.progress = choferes[i].getCalificacion().toString().toInt()
-        }
-    }
+        fun bind(titulo: String, contador: String){
+            longPressBlurPopup.checkAndUnregister()
 
-    private fun rellenarRuta(ruta: FrameVisualizarRutaBinding, i: Int){
-        var resCalles = ""
+            itemView.run{
+                binding.pin.text = contador
+                binding.etqNombre.text = titulo
+                binding.tarjeta.onDebouncingClick(this@ViewHolder)
 
-        localDB.getRutas().observe(fragment){ rutas ->
-            items = rutas.size
-
-            ruta.txtNombre.text = rutas[i].getNombre()
-
-            localDB.getCallesIDByRutaID(rutas[i].getId()).observe(fragment){ calles ->
-                for(calle in calles){
-                    localDB.getCalleById(calle.getCalleID()).observe(fragment){
-                        resCalles += " ${it.getNombre()} - "
-                    }
-                }
+                longPressBlurPopup = BlurPopup.Builder
+                    .with(fragment)
+                    .targetView(binding.tarjeta)
+                    .baseBlurPopup(MensajeBlur(contador, titulo).mostrar())
+                    .animationType(AnimType.ANIM_FROM_BOTTOM)
+                    .popupStateListener(this@ViewHolder)
+                    .hoverListener(this@ViewHolder)
+                    .build()
             }
 
-            ruta.txtCalles.text = resCalles
+            longPressBlurPopup?.register()
         }
-    }
 
-    private fun rellenarParada(parada: FrameVisualizarParadaBinding, i: Int){
-        localDB.getParadas().observe(fragment){ paradas ->
-            items = paradas.size
+        override fun onDebouncingClick(view: View){
+            val id = binding.etqNombre.text.toString()
 
-            parada.txtNombre.text = paradas[i].getNombre()
+            when(tipo){
+                "CHOFERES" -> fragment.pushPopup(TarjetaChofer(fragment, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
 
-            localDB.getRutaIDByParadaID(paradas[i].getId()).observe(fragment){
-                localDB.getRutaById(it.getRutaID()).observe(fragment){ id ->
-                    parada.txtRuta.text = id.getNombre()
-                }
+                "RUTAS" -> fragment.pushPopup(TarjetaRuta(fragment, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+
+                "PARADAS" -> fragment.pushPopup(TarjetaParada(fragment, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+
+                "TARIFAS" -> fragment.pushPopup(TarjetaTarifa(fragment, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
             }
         }
+
+        override fun onViewInflated(tag: String?, rootView: View?){}
+
+        override fun onPopupShow(popupTag: String?){}
+
+        override fun onPopupDismiss(popupTag: String?){}
+
+        override fun onHoverChanged(view: View, isHovered: Boolean){}
     }
-
-    private fun rellenarTarifa(tarifa: FrameVisualizarTarifaBinding, i: Int){
-        localDB.getTarifas().observe(fragment){ tarifas ->
-            items = tarifas.size
-
-            tarifa.txtNombre.text = tarifas[i].getNombre()
-            val x = "$ + ${tarifas[i].getPrecio()} MXN"
-            tarifa.txtPrecio.text = x
-        }
-    }
-
-    inner class ViewHolder(var binding: TarjetaListaBinding): RecyclerView.ViewHolder(binding.root)
 }

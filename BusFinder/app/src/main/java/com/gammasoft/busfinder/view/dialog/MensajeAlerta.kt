@@ -1,53 +1,36 @@
 package com.gammasoft.busfinder.view.dialog
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.AnimRes
-import com.gammasoft.busfinder.R
+import androidx.fragment.app.DialogFragment
 import com.gammasoft.busfinder.databinding.TarjetaAlertaBinding
-import com.gammasoft.busfinder.view.util.withEnterAnim
-import com.gammasoft.busfinder.view.util.withExitAnim
-import io.alterac.blurkit.BlurLayout
 
-class MensajeAlerta(private var titulo: String?,
-                    private var mensaje: String?): BaseBlurPopup(){
-    constructor(): this("", "")
-
+class MensajeAlerta(private val titulo: String,
+                    private val mensaje: String): DialogFragment(){
     private var _binding: TarjetaAlertaBinding? = null
     private val binding get() = _binding!!
 
-    fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = MensajeAlerta(titulo, mensaje).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog{
+        _binding = TarjetaAlertaBinding.inflate(layoutInflater)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View{
-        super.onCreateView(inflater, container, savedInstanceState)
-        _binding = TarjetaAlertaBinding.inflate(inflater, container, false)
-        return binding.root
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setView(binding.root)
+
+        binding.etqTitulo.text = titulo
+        binding.txtMensaje.text = mensaje
+
+        binding.btnAceptar.setOnClickListener{ dismiss() }
+
+        val dialog = builder.create()
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return dialog
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.etqTitulo.text = titulo!!
-        binding.txtMensaje.text = mensaje!!
-    }
-
-    override fun getBlurLayout(): BlurLayout = binding.blurLayout
-
-    override fun getDragHandle(): View = binding.dragArea
-
-    override fun getRootView(): View = binding.tarjeta
-
-    override fun getBackgroundLayout(): ViewGroup = binding.blurLayout
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy(){
+        super.onDestroy()
         _binding = null
     }
 }

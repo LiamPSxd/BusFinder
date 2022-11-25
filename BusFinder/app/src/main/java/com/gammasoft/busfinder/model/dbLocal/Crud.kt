@@ -52,6 +52,9 @@ interface Crud{
     @Query("SELECT * FROM Chofer WHERE rfc = :rfc")
     fun getChoferByRFC(rfc: String): LiveData<Chofer>
 
+    @Query("SELECT * FROM Chofer WHERE nombre = :nombre")
+    fun getChoferByNombre(nombre: String): LiveData<Chofer>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addChoferes(vararg choferes: Chofer)
 
@@ -84,6 +87,9 @@ interface Crud{
     @Query("SELECT * FROM Ruta WHERE id = :id")
     fun getRutaById(id: Int): LiveData<Ruta>
 
+    @Query("SELECT * FROM Ruta WHERE nombre = :nombre")
+    fun getRutaByNombre(nombre: String): LiveData<Ruta>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addRutas(vararg rutas: Ruta)
 
@@ -115,6 +121,9 @@ interface Crud{
 
     @Query("SELECT * FROM Parada WHERE id = :id")
     fun getParadaById(id: Int): LiveData<Parada>
+
+    @Query("SELECT * FROM Parada WHERE nombre = :nombre")
+    fun getParadaByNombre(nombre: String): LiveData<Parada>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addParadas(vararg paradas: Parada)
@@ -196,7 +205,10 @@ interface Crud{
     @Query("SELECT * FROM CuentaAdministrador WHERE administrador_Usuario = :usuario")
     fun getCuentaAdministradorByUsuario(usuario: String): LiveData<CuentaAdministrador>
 
-    @Query("SELECT correo, contrasenia, foto, tipo, estado FROM Cuenta INNER JOIN CuentaAdministrador " +
+    @Query("SELECT * FROM CuentaAdministrador WHERE cuenta_Correo = :correo")
+    fun getCuentaAdministradorByCorreo(correo: String): LiveData<CuentaAdministrador>
+
+    @Query("SELECT correo, contrasenia, foto, tipo, metodo, estado FROM Cuenta INNER JOIN CuentaAdministrador " +
             "WHERE administrador_Usuario = :usuarioOCorreo OR cuenta_Correo = :usuarioOCorreo")
     fun getCuentaByAdministradorUsuarioOCuentaCorreo(usuarioOCorreo: String): LiveData<Cuenta>
 
@@ -216,7 +228,10 @@ interface Crud{
     @Query("SELECT * FROM CuentaChofer WHERE chofer_Usuario = :usuario")
     fun getCuentaChoferByUsuario(usuario: String): LiveData<CuentaChofer>
 
-    @Query("SELECT correo, contrasenia, foto, tipo, estado FROM Cuenta INNER JOIN CuentaChofer " +
+    @Query("SELECT * FROM CuentaChofer WHERE cuenta_Correo = :correo")
+    fun getCuentaChoferByCorreo(correo: String): LiveData<CuentaChofer>
+
+    @Query("SELECT correo, contrasenia, foto, tipo, metodo, estado FROM Cuenta INNER JOIN CuentaChofer " +
             "WHERE chofer_Usuario = :usuarioOCorreo OR cuenta_Correo = :usuarioOCorreo")
     fun getCuentaByChoferUsuarioOCuentaCorreo(usuarioOCorreo: String): LiveData<Cuenta>
 
@@ -236,7 +251,10 @@ interface Crud{
     @Query("SELECT * FROM CuentaPublico WHERE publico_General_Usuario = :usuario")
     fun getCuentaPublicoByUsuario(usuario: String): LiveData<CuentaPublico>
 
-    @Query("SELECT correo, contrasenia, foto, tipo, estado FROM Cuenta INNER JOIN CuentaPublico " +
+    @Query("SELECT * FROM CuentaPublico WHERE cuenta_Correo = :correo")
+    fun getCuentaPublicoByCorreo(correo: String): LiveData<CuentaPublico>
+
+    @Query("SELECT correo, contrasenia, foto, tipo, metodo, estado FROM Cuenta INNER JOIN CuentaPublico " +
             "WHERE publico_General_Usuario = :usuarioOCorreo OR cuenta_Correo = :usuarioOCorreo")
     fun getCuentaByPublicoUsuarioOCuentaCorreo(usuarioOCorreo: String): LiveData<Cuenta>
 

@@ -1,48 +1,63 @@
 package com.gammasoft.busfinder.controller
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
-import com.gammasoft.busfinder.R
-import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.net.UnknownHostException
 
-abstract class Conexion{
+class Conexion{
     companion object{
-        private fun ping(): Boolean {
-            val runtime = Runtime.getRuntime()
+        private var exitValue = 1
 
-            try{
-                val ipProcess = runtime.exec("/system/bin/ping -c 1 www.google.com")
-                val exitValue = ipProcess.waitFor()
-                ipProcess.destroy()
+        fun comprobarConexion(activity: Activity): String{
+            var conexion = "NO INTERNET"
 
-                return exitValue == 0
-            }catch(e: UnknownHostException){
-                MensajeAlerta("UnknownHostException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
-            }catch(e: IOException){
-                MensajeAlerta("IOException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
-            }catch(e: InterruptedException){
-                MensajeAlerta("InterruptedException", "${e.printStackTrace()}").mostrar(R.anim.zoom_in, R.anim.zoom_out)
+            val redInfo = (activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).allNetworkInfo
+
+            for(info in redInfo){
+                if(info.typeName.equals("WIFI", ignoreCase = true))
+                    if(info.isConnected && ping()) conexion = "WIFI"
+
+                if(info.typeName.equals("MOBILE", ignoreCase = true))
+                    if(info.isConnected && ping()) conexion = "MOBILE"
             }
+
+            return conexion
+        }
+
+        private fun ping(): Boolean{
+            try{
+                CoroutineScope(Dispatchers.IO).launch{
+                    val ipProcess = withContext(Dispatchers.IO){
+                        Runtime.getRuntime().exec("/system/bin/ping -c 1 www.google.com")
+                    }
+
+                    setExitValue(withContext(Dispatchers.IO){
+                        ipProcess.waitFor()
+                    })
+
+                    ipProcess.destroy()
+                }
+
+                return getExitValue() == 0
+            }catch(_: UnknownHostException){
+            }catch(_: IOException){
+            }catch(_: InterruptedException){}
 
             return false
         }
 
-        fun comprobarConexion(contexto: Context): String{
-            var res = "NO INTERNET"
+        private fun setExitValue(ev: Int){
+            exitValue = ev
+        }
 
-            val redInfo = (contexto.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).allNetworkInfo
-
-            for(info in redInfo){
-                if(info.typeName.equals("WIFI", ignoreCase = true))
-                    if(info.isConnected && ping()) res = "WIFI"
-
-                if(info.typeName.equals("MOBILE", ignoreCase = true))
-                    if(info.isConnected && ping()) res = "MOBILE"
-            }
-
-            return res
+        private fun getExitValue(): Int{
+            return exitValue
         }
     }
 }

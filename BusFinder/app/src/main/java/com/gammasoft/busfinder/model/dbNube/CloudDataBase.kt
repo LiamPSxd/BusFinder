@@ -5,6 +5,9 @@ import com.gammasoft.busfinder.model.dbLocal.entidades.*
 import com.gammasoft.busfinder.model.dbLocal.relaciones.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 abstract class CloudDataBase{
     companion object{
@@ -14,34 +17,100 @@ abstract class CloudDataBase{
         fun getAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
         fun delete(coleccion: String, documento: String){
-            cloudDataBase.collection(coleccion).document(documento).delete()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection(coleccion).document(documento).delete()
+            }
+        }
+
+        //CodigoAdministrador
+        fun addCodigoAdministrador(codigo: Codigo){
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CodigoAdministrador").document(codigo.getId()).set(
+                    hashMapOf(
+                        "valor" to codigo.getValor(),
+                        "estado" to codigo.getEstado()
+                    )
+                )
+            }
+        }
+
+        fun getCodigosAdministrador(): ArrayList<Codigo>{
+            val codigos = arrayListOf<Codigo>()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CodigoAdministrador").get().addOnSuccessListener{
+                    for(res in it){
+                        codigos.add(Codigo(
+                            res.id,
+                            res.getLong("valor").toString().toLong(),
+                            res.getBoolean("estado").toString().toBoolean(),
+                       ))
+                    }
+                }
+            }
+
+            return codigos
+        }
+
+        //CodigoChofer
+        fun addCodigoChofer(codigo: Codigo){
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CodigoChofer").document(codigo.getId()).set(
+                    hashMapOf(
+                        "valor" to codigo.getValor(),
+                        "estado" to codigo.getEstado()
+                    )
+                )
+            }
+        }
+
+        fun getCodigosChofer(): ArrayList<Codigo>{
+            val codigos = arrayListOf<Codigo>()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CodigoChofer").get().addOnSuccessListener{
+                    for(res in it){
+                        codigos.add(Codigo(
+                            res.id,
+                            res.getLong("valor").toString().toLong(),
+                            res.getBoolean("estado").toString().toBoolean(),
+                        ))
+                    }
+                }
+            }
+
+            return codigos
         }
 
         //Administrador
         fun addAdministrador(admin: Administrador){
-            cloudDataBase.collection("Administrador").document(admin.getUsuario()).set(
-                hashMapOf(
-                    "usuario" to admin.getUsuario(),
-                    "rfc" to admin.getRfc(),
-                    "nombre" to admin.getNombre(),
-                    "numeroCelular" to admin.getNumCelular(),
-                    "lineaTransporte" to admin.getLinea(),
-                    "codigo" to admin.getCodigo()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Administrador").document(admin.getUsuario()).set(
+                    hashMapOf(
+                        "usuario" to admin.getUsuario(),
+                        "rfc" to admin.getRfc(),
+                        "nombre" to admin.getNombre(),
+                        "numeroCelular" to admin.getNumCelular(),
+                        "lineaTransporte" to admin.getLinea(),
+                        "codigo" to admin.getCodigo()
+                    )
                 )
-            )
+            }
         }
 
         fun getAdministrador(documento: String): Administrador{
             val admin = Administrador()
 
-            cloudDataBase.collection("Administrador").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    admin.setUsuario(it.get("usuario") as String)
-                    admin.setRfc(it.get("rfc") as String)
-                    admin.setNombre(it.get("nombre") as String)
-                    admin.setNumCelular(it.get("numeroCelular") as Long)
-                    admin.setLinea(it.get("lineaTransporte") as String)
-                    admin.setCodigo(it.get("codigo") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Administrador").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        admin.setUsuario(it.getString("usuario").toString())
+                        admin.setRfc(it.getString("rfc").toString())
+                        admin.setNombre(it.getString("nombre").toString())
+                        admin.setNumCelular(it.getLong("numeroCelular").toString().toLong())
+                        admin.setLinea(it.getString("lineaTransporte").toString())
+                        admin.setCodigo(it.getLong("codigo").toString().toLong())
+                    }
                 }
             }
 
@@ -49,18 +118,20 @@ abstract class CloudDataBase{
         }
 
         fun getAdministradores(): ArrayList<Administrador>{
-            val admins = ArrayList<Administrador>()
+            val admins = arrayListOf<Administrador>()
 
-            cloudDataBase.collection("Administrador").get().addOnSuccessListener{
-                for(res in it){
-                    admins.add(Administrador(
-                        res.get("usuario") as String,
-                        res.get("rfc") as String,
-                        res.get("nombre") as String,
-                        res.get("numeroCelular") as Long,
-                        res.get("lineaTransporte") as String,
-                        res.get("codigo") as Int
-                    ))
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Administrador").get().addOnSuccessListener{
+                    for(res in it){
+                        admins.add(Administrador(
+                            res.getString("usuario").toString(),
+                            res.getString("rfc").toString(),
+                            res.getString("nombre").toString(),
+                            res.getLong("numeroCelular").toString().toLong(),
+                            res.getString("lineaTransporte").toString(),
+                            res.getLong("codigo").toString().toLong()
+                        ))
+                    }
                 }
             }
 
@@ -69,21 +140,25 @@ abstract class CloudDataBase{
 
         //Calle
         fun addCalle(calle: Calle){
-            cloudDataBase.collection("Calle").document(calle.getId().toString()).set(
-                hashMapOf(
-                    "id" to calle.getId(),
-                    "nombre" to calle.getNombre()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Calle").document(calle.getId().toString()).set(
+                    hashMapOf(
+                        "id" to calle.getId(),
+                        "nombre" to calle.getNombre()
+                    )
                 )
-            )
+            }
         }
 
         fun getCalle(documento: String): Calle{
             val calle = Calle()
 
-            cloudDataBase.collection("Calle").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    calle.setId(it.get("id") as Int)
-                    calle.setNombre(it.get("nombre") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Calle").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        calle.setId(it.getLong("id").toString().toInt())
+                        calle.setNombre(it.getString("nombre").toString())
+                    }
                 }
             }
 
@@ -92,33 +167,79 @@ abstract class CloudDataBase{
 
         //Chofer
         fun addChofer(chofer: Chofer){
-            cloudDataBase.collection("Chofer").document(chofer.getUsuario()).set(
-                hashMapOf(
-                    "usuario" to chofer.getUsuario(),
-                    "rfc" to chofer.getRfc(),
-                    "nombre" to chofer.getNombre(),
-                    "numeroCelular" to chofer.getNumCelular(),
-                    "lineaTransporte" to chofer.getLinea(),
-                    "codigo" to chofer.getCodigo(),
-                    "numeroUsuarios" to chofer.getNoUsuarios(),
-                    "calificacion" to chofer.getCalificacion()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Chofer").document(chofer.getUsuario()).set(
+                    hashMapOf(
+                        "usuario" to chofer.getUsuario(),
+                        "rfc" to chofer.getRfc(),
+                        "nombre" to chofer.getNombre(),
+                        "numeroCelular" to chofer.getNumCelular(),
+                        "lineaTransporte" to chofer.getLinea(),
+                        "codigo" to chofer.getCodigo(),
+                        "numeroUsuarios" to chofer.getNoUsuarios(),
+                        "calificacion" to chofer.getCalificacion()
+                    )
                 )
-            )
+            }
         }
 
         fun getChofer(documento: String): Chofer{
             val chofer = Chofer()
 
-            cloudDataBase.collection("Chofer").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    chofer.setUsuario(it.get("usuario") as String)
-                    chofer.setRfc(it.get("rfc") as String)
-                    chofer.setNombre(it.get("nombre") as String)
-                    chofer.setNumCelular(it.get("numeroCelular") as Long)
-                    chofer.setLinea(it.get("lineaTransporte") as String)
-                    chofer.setCodigo(it.get("codigo") as Int)
-                    chofer.setNoUsuarios(it.get("numeroUsuarios") as Int)
-                    chofer.setCalificacion(it.get("calificacion") as Double)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Chofer").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        chofer.setUsuario(it.getString("usuario").toString())
+                        chofer.setRfc(it.getString("rfc").toString())
+                        chofer.setNombre(it.getString("nombre").toString())
+                        chofer.setNumCelular(it.getLong("numeroCelular").toString().toLong())
+                        chofer.setLinea(it.getString("lineaTransporte").toString())
+                        chofer.setCodigo(it.getLong("codigo").toString().toLong())
+                        chofer.setNoUsuarios(it.getLong("numeroUsuarios").toString().toInt())
+                        chofer.setCalificacion(it.getDouble("calificacion").toString().toDouble())
+                    }
+                }
+            }
+
+            return chofer
+        }
+
+        fun getChoferByRFC(rfc: String): Chofer{
+            val chofer = Chofer()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Chofer").whereEqualTo("rfc", rfc).get().addOnCompleteListener{
+                    val res = it.result.documents[0]
+
+                    chofer.setUsuario(res.getString("usuario").toString())
+                    chofer.setRfc(res.getString("rfc").toString())
+                    chofer.setNombre(res.getString("nombre").toString())
+                    chofer.setNumCelular(res.getLong("numeroCelular").toString().toLong())
+                    chofer.setLinea(res.getString("lineaTransporte").toString())
+                    chofer.setCodigo(res.getLong("codigo").toString().toLong())
+                    chofer.setNoUsuarios(res.getLong("numeroUsuarios").toString().toInt())
+                    chofer.setCalificacion(res.getDouble("calificacion").toString().toDouble())
+                }
+            }
+
+            return chofer
+        }
+
+        fun getChoferByNombre(nombre: String): Chofer{
+            val chofer = Chofer()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Chofer").whereEqualTo("nombre", nombre).get().addOnCompleteListener{
+                    val res = it.result.documents[0]
+
+                    chofer.setUsuario(res.getString("usuario").toString())
+                    chofer.setRfc(res.getString("rfc").toString())
+                    chofer.setNombre(res.getString("nombre").toString())
+                    chofer.setNumCelular(res.getLong("numeroCelular").toString().toLong())
+                    chofer.setLinea(res.getString("lineaTransporte").toString())
+                    chofer.setCodigo(res.getLong("codigo").toString().toLong())
+                    chofer.setNoUsuarios(res.getLong("numeroUsuarios").toString().toInt())
+                    chofer.setCalificacion(res.getDouble("calificacion").toString().toDouble())
                 }
             }
 
@@ -128,18 +249,20 @@ abstract class CloudDataBase{
         fun getChoferes(): ArrayList<Chofer>{
             val choferes = ArrayList<Chofer>()
 
-            cloudDataBase.collection("Chofer").get().addOnSuccessListener{
-                for(res in it){
-                    choferes.add(Chofer(
-                        res.get("usuario") as String,
-                        res.get("rfc") as String,
-                        res.get("nombre") as String,
-                        res.get("numeroCelular") as Long,
-                        res.get("lineaTransporte") as String,
-                        res.get("codigo") as Int,
-                        res.get("numeroUsuarios") as Int,
-                        res.get("calificacion") as Double
-                    ))
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Chofer").get().addOnSuccessListener{
+                    for(res in it){
+                        choferes.add(Chofer(
+                            res.getString("usuario").toString(),
+                            res.getString("rfc").toString(),
+                            res.getString("nombre").toString(),
+                            res.getLong("numeroCelular").toString().toLong(),
+                            res.getString("lineaTransporte").toString(),
+                            res.getLong("codigo").toString().toLong(),
+                            res.getLong("numeroUsuarios").toString().toInt(),
+                            res.getDouble("calificacion").toString().toDouble()
+                        ))
+                    }
                 }
             }
 
@@ -148,23 +271,27 @@ abstract class CloudDataBase{
 
         //Coordenada
         fun addCoordenada(coordenada: Coordenada){
-            cloudDataBase.collection("Coordenada").document(coordenada.getId().toString()).set(
-                hashMapOf(
-                    "id" to coordenada.getId(),
-                    "latitud" to coordenada.getLatitud(),
-                    "longitud" to coordenada.getLongitud()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Coordenada").document(coordenada.getId().toString()).set(
+                    hashMapOf(
+                        "id" to coordenada.getId(),
+                        "latitud" to coordenada.getLatitud(),
+                        "longitud" to coordenada.getLongitud()
+                    )
                 )
-            )
+            }
         }
 
         fun getCoordenada(documento: String): Coordenada{
             val coordenada = Coordenada()
 
-            cloudDataBase.collection("Coordenada").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    coordenada.setId(it.get("id") as Int)
-                    coordenada.setLatitud(it.get("latitud") as Double)
-                    coordenada.setLongitud(it.get("longitud") as Double)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Coordenada").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        coordenada.setId(it.getLong("id").toString().toInt())
+                        coordenada.setLatitud(it.getDouble("latitud").toString().toDouble())
+                        coordenada.setLongitud(it.getDouble("longitud").toString().toDouble())
+                    }
                 }
             }
 
@@ -173,25 +300,29 @@ abstract class CloudDataBase{
 
         //Horario
         fun addHorario(horario: Horario){
-            cloudDataBase.collection("Horario").document(horario.getId().toString()).set(
-                hashMapOf(
-                    "id" to horario.getId(),
-                    "horaEntrada" to horario.getHoraEntrada(),
-                    "horaSalida" to horario.getHoraSalida(),
-                    "fecha" to horario.getFecha()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Horario").document(horario.getId().toString()).set(
+                    hashMapOf(
+                        "id" to horario.getId(),
+                        "horaEntrada" to horario.getHoraEntrada(),
+                        "horaSalida" to horario.getHoraSalida(),
+                        "fecha" to horario.getFecha()
+                    )
                 )
-            )
+            }
         }
 
         fun getHorario(documento: String): Horario{
             val horario = Horario()
 
-            cloudDataBase.collection("Horario").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    horario.setId(it.get("id") as Int)
-                    horario.setHoraEntrada(it.get("horaEntrada") as String)
-                    horario.setHoraSalida(it.get("horaSalida") as String)
-                    horario.setFecha(it.get("fecha") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Horario").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        horario.setId(it.getLong("id").toString().toInt())
+                        horario.setHoraEntrada(it.getString("horaEntrada").toString())
+                        horario.setHoraSalida(it.getString("horaSalida").toString())
+                        horario.setFecha(it.getString("fecha").toString())
+                    }
                 }
             }
 
@@ -200,27 +331,40 @@ abstract class CloudDataBase{
 
         //Cuenta
         fun addCuenta(cuenta: Cuenta){
-            cloudDataBase.collection("Cuenta").document(cuenta.getCorreo()).set(
-                hashMapOf(
-                    "correo" to cuenta.getCorreo(),
-                    "contrasenia" to cuenta.getContrasenia(),
-                    "foto" to cuenta.getFoto(),
-                    "tipo" to cuenta.mostrarTipo(),
-                    "estado" to cuenta.getEstado()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Cuenta").document(cuenta.getCorreo()).set(
+                    hashMapOf(
+                        "correo" to cuenta.getCorreo(),
+                        "contrasenia" to cuenta.getContrasenia(),
+                        "foto" to cuenta.getFoto(),
+                        "tipo" to cuenta.mostrarTipo(),
+                        "metodo" to cuenta.getMetodo(),
+                        "estado" to cuenta.getEstado()
+                    )
                 )
-            )
+            }
         }
 
         fun getCuenta(documento: String): Cuenta{
             val cuenta = Cuenta()
 
-            cloudDataBase.collection("Cuenta").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    cuenta.setCorreo(it.get("correo") as String)
-                    cuenta.setContrasenia(it.get("contrasenia") as String)
-                    cuenta.setFoto(it.get("foto") as Int)
-                    cuenta.setTipo(it.get("tipo") as Int)
-                    cuenta.setEstado(it.get("estado") as Boolean)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Cuenta").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        var tipo = 3
+                        when(it.getString("tipo")!!){
+                            "Administrador" -> tipo = 0
+                            "Chofer" -> tipo = 1
+                            "Publico General" -> tipo = 2
+                        }
+
+                        cuenta.setCorreo(it.getString("correo").toString())
+                        cuenta.setContrasenia(it.getString("contrasenia").toString())
+                        cuenta.setFoto(it.getString("foto").toString())
+                        cuenta.setTipo(tipo)
+                        cuenta.setMetodo(it.getString("metodo").toString())
+                        cuenta.setEstado(it.getBoolean("estado").toString().toBoolean())
+                    }
                 }
             }
 
@@ -230,15 +374,25 @@ abstract class CloudDataBase{
         fun getCuentas(): ArrayList<Cuenta>{
             val cuentas = ArrayList<Cuenta>()
 
-            cloudDataBase.collection("Cuenta").get().addOnSuccessListener{
-                for(res in it){
-                    cuentas.add(Cuenta(
-                        res.get("correo").toString(),
-                        res.get("contrasenia").toString(),
-                        res.get("foto").toString().toInt(),
-                        res.get("tipo").toString().toInt(),
-                        res.get("estado").toString().toBoolean()
-                    ))
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Cuenta").get().addOnSuccessListener{
+                    for(res in it.documents){
+                        var tipo = 3
+                        when(res.getString("tipo")!!){
+                            "Administrador" -> tipo = 0
+                            "Chofer" -> tipo = 1
+                            "Publico General" -> tipo = 2
+                        }
+
+                        cuentas.add(Cuenta(
+                            res.getString("correo").toString(),
+                            res.getString("contrasenia").toString(),
+                            res.getString("foto").toString(),
+                            tipo,
+                            res.getString("metodo").toString(),
+                            res.getBoolean("estado").toString().toBoolean()
+                        ))
+                    }
                 }
             }
 
@@ -247,41 +401,64 @@ abstract class CloudDataBase{
 
         //Parada
         fun addParada(parada: Parada){
-            cloudDataBase.collection("Parada").document(parada.getId().toString()).set(
-                hashMapOf(
-                    "id" to parada.getId(),
-                    "nombre" to parada.getNombre()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Parada").document(parada.getId().toString()).set(
+                    hashMapOf(
+                        "id" to parada.getId(),
+                        "nombre" to parada.getNombre()
+                    )
                 )
-            )
+            }
         }
 
         fun getParada(documento: String): Parada{
             val parada = Parada()
 
-            cloudDataBase.collection("Parada").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    parada.setId(it.get("id") as Int)
-                    parada.setNombre(it.get("nombre") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Parada").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        parada.setId(it.getLong("id").toString().toInt())
+                        parada.setNombre(it.getString("nombre").toString())
+                    }
                 }
             }
 
             return parada
         }
 
+        fun getParadas(): ArrayList<Parada>{
+            val paradas = ArrayList<Parada>()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Parada").get().addOnSuccessListener{
+                    for(res in it){
+                        paradas.add(Parada(
+                            res.getString("id").toString().toInt(),
+                            res.getString("nombre").toString(),
+                        ))
+                    }
+                }
+            }
+
+            return paradas
+        }
+
         //PublicoGeneral
         fun addPublicoGeneral(publico: PublicoGeneral){
-            cloudDataBase.collection("PublicoGeneral").document(publico.getUsuario()).set(
-                hashMapOf(
-                    "usuario" to publico.getUsuario()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("PublicoGeneral").document(publico.getUsuario()).set(
+                    hashMapOf("usuario" to publico.getUsuario())
                 )
-            )
+            }
         }
 
         fun getPublicoGeneral(documento: String): PublicoGeneral{
             val publico = PublicoGeneral()
 
-            cloudDataBase.collection("PublicoGeneral").document(documento).get().addOnSuccessListener{
-                if(it.exists()) publico.setUsuario(it.get("usuario") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("PublicoGeneral").document(documento).get().addOnSuccessListener{
+                    if(it.exists()) publico.setUsuario(it.getString("usuario").toString())
+                }
             }
 
             return publico
@@ -289,75 +466,121 @@ abstract class CloudDataBase{
 
         //Tarifa
         fun addTarifa(tarifa: Tarifa){
-            cloudDataBase.collection("Tarifa").document(tarifa.getNombre()).set(
-                hashMapOf(
-                    "nombre" to tarifa.getNombre(),
-                    "precio" to tarifa.getPrecio()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Tarifa").document(tarifa.getNombre()).set(
+                    hashMapOf(
+                        "nombre" to tarifa.getNombre(),
+                        "precio" to tarifa.getPrecio()
+                    )
                 )
-            )
+            }
         }
 
         fun getTarifa(documento: String): Tarifa{
             val tarifa = Tarifa()
 
-            cloudDataBase.collection("Tarifa").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    tarifa.setNombre(it.get("nombre") as String)
-                    tarifa.setPrecio(it.get("precio") as Double)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Tarifa").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        tarifa.setNombre(it.getString("nombre").toString())
+                        tarifa.setPrecio(it.getDouble("precio").toString().toDouble())
+                    }
                 }
             }
 
             return tarifa
         }
 
+        fun getTarifas(): ArrayList<Tarifa>{
+            val tarifas = ArrayList<Tarifa>()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Tarifa").get().addOnSuccessListener{
+                    for(res in it){
+                        tarifas.add(Tarifa(
+                            res.getString("nombre").toString(),
+                            res.getDouble("precio").toString().toDouble()
+                        ))
+                    }
+                }
+            }
+
+            return tarifas
+        }
+
         //Ruta
         fun addRuta(ruta: Ruta){
-            cloudDataBase.collection("Ruta").document(ruta.getId().toString()).set(
-                hashMapOf(
-                    "id" to ruta.getId(),
-                    "nombre" to ruta.getNombre()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Ruta").document(ruta.getId().toString()).set(
+                    hashMapOf(
+                        "id" to ruta.getId(),
+                        "nombre" to ruta.getNombre()
+                    )
                 )
-            )
+            }
         }
 
         fun getRuta(documento: String): Ruta{
             val ruta = Ruta()
 
-            cloudDataBase.collection("Ruta").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    ruta.setId(it.get("id") as Int)
-                    ruta.setNombre(it.get("nombre") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Ruta").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        ruta.setId(it.getLong("id").toString().toInt())
+                        ruta.setNombre(it.getString("nombre").toString())
+                    }
                 }
             }
 
             return ruta
         }
 
+        fun getRutas(): ArrayList<Ruta>{
+            val rutas = arrayListOf<Ruta>()
+
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Ruta").get().addOnSuccessListener{
+                    for(res in it){
+                        rutas.add(Ruta(
+                            res.getLong("id").toString().toInt(),
+                            res.getString("nombre").toString()
+                        ))
+                    }
+                }
+            }
+
+            return rutas
+        }
+
         //Unidad
         fun addUnidad(unidad: Unidad){
-            cloudDataBase.collection("Unidad").document(unidad.getPlaca()).set(
-                hashMapOf(
-                    "placa" to unidad.getPlaca(),
-                    "marca" to unidad.getMarca(),
-                    "modelo" to unidad.getModelo(),
-                    "numero" to unidad.getNumero(),
-                    "hora" to unidad.getHora(),
-                    "fecha" to unidad.getFecha()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Unidad").document(unidad.getPlaca()).set(
+                    hashMapOf(
+                        "placa" to unidad.getPlaca(),
+                        "marca" to unidad.getMarca(),
+                        "modelo" to unidad.getModelo(),
+                        "numero" to unidad.getNumero(),
+                        "hora" to unidad.getHora(),
+                        "fecha" to unidad.getFecha()
+                    )
                 )
-            )
+            }
         }
 
         fun getUnidad(documento: String): Unidad{
             val unidad = Unidad()
 
-            cloudDataBase.collection("Unidad").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    unidad.setPlaca(it.get("placa") as String)
-                    unidad.setMarca(it.get("marca") as String)
-                    unidad.setModelo(it.get("modelo") as String)
-                    unidad.setNumero(it.get("numero") as Int)
-                    unidad.setHora(it.get("hora") as String)
-                    unidad.setFecha(it.get("fecha") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("Unidad").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        unidad.setPlaca(it.getString("placa").toString())
+                        unidad.setMarca(it.getString("marca").toString())
+                        unidad.setModelo(it.getString("modelo").toString())
+                        unidad.setNumero(it.getLong("numero").toString().toInt())
+                        unidad.setHora(it.getString("hora").toString())
+                        unidad.setFecha(it.getString("fecha").toString())
+                    }
                 }
             }
 
@@ -366,21 +589,25 @@ abstract class CloudDataBase{
 
         //CalleCoordenada
         fun addCalleCoordenada(documento: String, calleCoor: CalleCoordenada){
-            cloudDataBase.collection("CalleCoordenada").document(documento).set(
-                hashMapOf(
-                    "calleID" to calleCoor.getCalleID(),
-                    "coordenadaID" to calleCoor.getCoordenadaID()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CalleCoordenada").document(documento).set(
+                    hashMapOf(
+                        "calleID" to calleCoor.getCalleID(),
+                        "coordenadaID" to calleCoor.getCoordenadaID()
+                    )
                 )
-            )
+            }
         }
 
         fun getCalleCoordenada(documento: String): CalleCoordenada{
             val calleCoor = CalleCoordenada()
 
-            cloudDataBase.collection("CalleCoordenada").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    calleCoor.setCalleID(it.get("calleID") as Int)
-                    calleCoor.setCoordenadaID(it.get("coordenadaID") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CalleCoordenada").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        calleCoor.setCalleID(it.getLong("calleID").toString().toInt())
+                        calleCoor.setCoordenadaID(it.getLong("coordenadaID").toString().toInt())
+                    }
                 }
             }
 
@@ -388,22 +615,26 @@ abstract class CloudDataBase{
         }
 
         //CuentaAdministrador
-        fun addCuentaAdministrador(documento: String, cuentaAdmin: CuentaAdministrador){
-            cloudDataBase.collection("CuentaAdministrador").document(documento).set(
-                hashMapOf(
-                    "cuentaCorreo" to cuentaAdmin.getCuentaCorreo(),
-                    "administradorUsuario" to cuentaAdmin.getAdminUsuario()
+        fun addCuentaAdministrador(cuentaAdmin: CuentaAdministrador){
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CuentaAdministrador").document(cuentaAdmin.getCuentaCorreo()).set(
+                    hashMapOf(
+                        "cuentaCorreo" to cuentaAdmin.getCuentaCorreo(),
+                        "administradorUsuario" to cuentaAdmin.getAdminUsuario()
+                    )
                 )
-            )
+            }
         }
 
         fun getCuentaAdministrador(documento: String): CuentaAdministrador{
             val cuentaAdmin = CuentaAdministrador()
 
-            cloudDataBase.collection("CuentaAdministrador").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    cuentaAdmin.setCuentaCorreo(it.get("cuentaCorreo") as String)
-                    cuentaAdmin.setAdminUsuario(it.get("administradorUsuario") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CuentaAdministrador").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        cuentaAdmin.setCuentaCorreo(it.getString("cuentaCorreo").toString())
+                        cuentaAdmin.setAdminUsuario(it.getString("administradorUsuario").toString())
+                    }
                 }
             }
 
@@ -411,22 +642,26 @@ abstract class CloudDataBase{
         }
 
         //CuentaChofer
-        fun addCuentaChofer(documento: String, cuentaChofer: CuentaChofer){
-            cloudDataBase.collection("CuentaChofer").document(documento).set(
-                hashMapOf(
-                    "cuentaCorreo" to cuentaChofer.getCuentaCorreo(),
-                    "choferUsuario" to cuentaChofer.getChoferUsuario()
+        fun addCuentaChofer(cuentaChofer: CuentaChofer){
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CuentaChofer").document(cuentaChofer.getCuentaCorreo()).set(
+                    hashMapOf(
+                        "cuentaCorreo" to cuentaChofer.getCuentaCorreo(),
+                        "choferUsuario" to cuentaChofer.getChoferUsuario()
+                    )
                 )
-            )
+            }
         }
 
         fun getCuentaChofer(documento: String): CuentaChofer{
             val cuentaChofer = CuentaChofer()
 
-            cloudDataBase.collection("CuentaChofer").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    cuentaChofer.setCuentaCorreo(it.get("cuentaCorreo") as String)
-                    cuentaChofer.setChoferUsuario(it.get("choferUsuario") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CuentaChofer").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        cuentaChofer.setCuentaCorreo(it.getString("cuentaCorreo").toString())
+                        cuentaChofer.setChoferUsuario(it.getString("choferUsuario").toString())
+                    }
                 }
             }
 
@@ -434,22 +669,26 @@ abstract class CloudDataBase{
         }
 
         //CuentaPublico
-        fun addCuentaPublico(documento: String, cuentaPublico: CuentaPublico){
-            cloudDataBase.collection("CuentaPublico").document(documento).set(
-                hashMapOf(
-                    "cuentaCorreo" to cuentaPublico.getCuentaCorreo(),
-                    "publicoGeneralUsuario" to cuentaPublico.getPublicoUsuario()
+        fun addCuentaPublico(cuentaPublico: CuentaPublico){
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CuentaPublico").document(cuentaPublico.getCuentaCorreo()).set(
+                    hashMapOf(
+                        "cuentaCorreo" to cuentaPublico.getCuentaCorreo(),
+                        "publicoGeneralUsuario" to cuentaPublico.getPublicoUsuario()
+                    )
                 )
-            )
+            }
         }
 
         fun getCuentaPublico(documento: String): CuentaPublico{
             val cuentaPublico = CuentaPublico()
 
-            cloudDataBase.collection("CuentaPublico").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    cuentaPublico.setCuentaCorreo(it.get("cuentaCorreo") as String)
-                    cuentaPublico.setPublicoUsuario(it.get("publicoGeneralUsuario") as String)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("CuentaPublico").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        cuentaPublico.setCuentaCorreo(it.getString("cuentaCorreo").toString())
+                        cuentaPublico.setPublicoUsuario(it.getString("publicoGeneralUsuario").toString())
+                    }
                 }
             }
 
@@ -458,27 +697,31 @@ abstract class CloudDataBase{
 
         //HorarioCUR
         fun addHorarioCUR(documento: String, horarioCUR: HorarioCUR){
-            cloudDataBase.collection("HorarioCUR").document(documento).set(
-                hashMapOf(
-                    "horarioID" to horarioCUR.getHorarioId(),
-                    "choferUsuario" to horarioCUR.getChoferUsuario(),
-                    "unidadPlaca" to horarioCUR.getUnidadPlaca(),
-                    "rutaIdaID" to horarioCUR.getRutaIdaId(),
-                    "rutaVenidaID" to horarioCUR.getRutaVenidaId()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("HorarioCUR").document(documento).set(
+                    hashMapOf(
+                        "horarioID" to horarioCUR.getHorarioId(),
+                        "choferUsuario" to horarioCUR.getChoferUsuario(),
+                        "unidadPlaca" to horarioCUR.getUnidadPlaca(),
+                        "rutaIdaID" to horarioCUR.getRutaIdaId(),
+                        "rutaVenidaID" to horarioCUR.getRutaVenidaId()
+                    )
                 )
-            )
+            }
         }
 
         fun getHorarioCUR(documento: String): HorarioCUR{
             val horarioCUR = HorarioCUR()
 
-            cloudDataBase.collection("HorarioCUR").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    horarioCUR.setHorarioId(it.get("horarioID") as Int)
-                    horarioCUR.setChoferUsuario(it.get("choferUsuario") as String)
-                    horarioCUR.setUnidadPlaca(it.get("unidadPlaca") as String)
-                    horarioCUR.setRutaIdaId(it.get("rutaIdaID") as Int)
-                    horarioCUR.setRutaVenidaId(it.get("rutaVenidaID") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("HorarioCUR").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        horarioCUR.setHorarioId(it.getLong("horarioID").toString().toInt())
+                        horarioCUR.setChoferUsuario(it.getString("choferUsuario").toString())
+                        horarioCUR.setUnidadPlaca(it.getString("unidadPlaca").toString())
+                        horarioCUR.setRutaIdaId(it.getLong("rutaIdaID").toString().toInt())
+                        horarioCUR.setRutaVenidaId(it.getLong("rutaVenidaID").toString().toInt())
+                    }
                 }
             }
 
@@ -487,21 +730,25 @@ abstract class CloudDataBase{
 
         //ParadaCoordenada
         fun addParadaCoordenada(documento: String, paradaCoor: ParadaCoordenada){
-            cloudDataBase.collection("ParadaCoordenada").document(documento).set(
-                hashMapOf(
-                    "paradaID" to paradaCoor.getParadaID(),
-                    "coordenadaID" to paradaCoor.getCoordenadaID()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("ParadaCoordenada").document(documento).set(
+                    hashMapOf(
+                        "paradaID" to paradaCoor.getParadaID(),
+                        "coordenadaID" to paradaCoor.getCoordenadaID()
+                    )
                 )
-            )
+            }
         }
 
         fun getParadaCoordenada(documento: String): ParadaCoordenada{
             val paradaCoor = ParadaCoordenada()
 
-            cloudDataBase.collection("ParadaCoordenada").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    paradaCoor.setParadaID(it.get("paradaID") as Int)
-                    paradaCoor.setCoordenadaID(it.get("coordenadaID") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("ParadaCoordenada").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        paradaCoor.setParadaID(it.getLong("paradaID").toString().toInt())
+                        paradaCoor.setCoordenadaID(it.getLong("coordenadaID").toString().toInt())
+                    }
                 }
             }
 
@@ -510,21 +757,25 @@ abstract class CloudDataBase{
 
         //RutaCalle
         fun addRutaCalle(documento: String, rutaCalle: RutaCalle){
-            cloudDataBase.collection("RutaCalle").document(documento).set(
-                hashMapOf(
-                    "rutaID" to rutaCalle.getRutaID(),
-                    "calleID" to rutaCalle.getCalleID()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("RutaCalle").document(documento).set(
+                    hashMapOf(
+                        "rutaID" to rutaCalle.getRutaID(),
+                        "calleID" to rutaCalle.getCalleID()
+                    )
                 )
-            )
+            }
         }
 
         fun getRutaCalle(documento: String): RutaCalle{
             val rutaCalle = RutaCalle()
 
-            cloudDataBase.collection("RutaCalle").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    rutaCalle.setRutaID(it.get("rutaID") as Int)
-                    rutaCalle.setCalleID(it.get("calleID") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("RutaCalle").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        rutaCalle.setRutaID(it.getLong("rutaID").toString().toInt())
+                        rutaCalle.setCalleID(it.getLong("calleID").toString().toInt())
+                    }
                 }
             }
 
@@ -533,21 +784,25 @@ abstract class CloudDataBase{
 
         //RutaParada
         fun addRutaParada(documento: String, rutaParada: RutaParada){
-            cloudDataBase.collection("RutaParada").document(documento).set(
-                hashMapOf(
-                    "rutaID" to rutaParada.getRutaID(),
-                    "paradaID" to rutaParada.getParadaID()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("RutaParada").document(documento).set(
+                    hashMapOf(
+                        "rutaID" to rutaParada.getRutaID(),
+                        "paradaID" to rutaParada.getParadaID()
+                    )
                 )
-            )
+            }
         }
 
         fun getRutaParada(documento: String): RutaParada{
             val rutaParada = RutaParada()
 
-            cloudDataBase.collection("RutaParada").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    rutaParada.setRutaID(it.get("rutaID") as Int)
-                    rutaParada.setParadaID(it.get("paradaID") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("RutaParada").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        rutaParada.setRutaID(it.getLong("rutaID").toString().toInt())
+                        rutaParada.setParadaID(it.getLong("paradaID").toString().toInt())
+                    }
                 }
             }
 
@@ -556,21 +811,25 @@ abstract class CloudDataBase{
 
         //UnidadCoordenada
         fun addUnidadCoordenada(documento: String, unidadCoor: UnidadCoordenada){
-            cloudDataBase.collection("UnidadCoordenada").document(documento).set(
-                hashMapOf(
-                    "unidadPlaca" to unidadCoor.getUnidadPlaca(),
-                    "coordenadaID" to unidadCoor.getCoordenadaID()
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("UnidadCoordenada").document(documento).set(
+                    hashMapOf(
+                        "unidadPlaca" to unidadCoor.getUnidadPlaca(),
+                        "coordenadaID" to unidadCoor.getCoordenadaID()
+                    )
                 )
-            )
+            }
         }
 
         fun getUnidadCoordenada(documento: String): UnidadCoordenada{
             val unidadCoor = UnidadCoordenada()
 
-            cloudDataBase.collection("UnidadCoordenada").document(documento).get().addOnSuccessListener{
-                if(it.exists()){
-                    unidadCoor.setUnidadPlaca(it.get("unidadPlaca") as String)
-                    unidadCoor.setCoordenadaID(it.get("coordenadaID") as Int)
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("UnidadCoordenada").document(documento).get().addOnSuccessListener{
+                    if(it.exists()){
+                        unidadCoor.setUnidadPlaca(it.getString("unidadPlaca").toString())
+                        unidadCoor.setCoordenadaID(it.getLong("coordenadaID").toString().toInt())
+                    }
                 }
             }
 

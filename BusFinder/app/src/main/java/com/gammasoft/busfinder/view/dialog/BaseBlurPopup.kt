@@ -10,9 +10,9 @@ import androidx.annotation.CallSuper
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
 import com.gammasoft.busfinder.controller.longpress.PopupTouchEvento
-import com.gammasoft.busfinder.view.activity.TarjetaBase
 import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
 import com.gammasoft.busfinder.view.fragment.Base
+import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.util.*
 import io.alterac.blurkit.BlurLayout
 
@@ -63,7 +63,7 @@ abstract class BaseBlurPopup: BaseDialogFragment(){
             }
         }
 
-        getBlurLayout()?.setOnClickListener{ if(dismissOnTouchOutside) activity?.onBackPressed() }
+        getBlurLayout()?.setOnClickListener{ if(dismissOnTouchOutside) activity?.onBackPressedDispatcher?.onBackPressed() }
     }
 
     override fun onStop(){
@@ -78,7 +78,7 @@ abstract class BaseBlurPopup: BaseDialogFragment(){
         getParentActivity().pushFragment(base, isAddToBackStack)
     }
 
-    internal fun getParentActivity(): TarjetaBase = activity as? TarjetaBase
+    internal fun getParentActivity(): TarjetaBase = activity as TarjetaBase?
         ?: throw IllegalStateException("Activity Padre de este popup debe ser un BaseCard")
 
     @CallSuper

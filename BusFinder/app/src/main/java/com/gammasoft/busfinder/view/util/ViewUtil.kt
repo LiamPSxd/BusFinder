@@ -145,9 +145,9 @@ fun <T: View> T.onDebouncingClick(action: T.() -> Unit){
 
             ACTION_MOVE -> {
                 try{
-                    if(isNullOrEmpty(originPoint)) originPoint = arrayListOf(event.rawX, event.rawY)
+                    if(isNullOrEmpty(originPoint.toString())) originPoint = arrayListOf(event.rawX, event.rawY)
 
-                    if(!isNullOrEmpty(originPoint)){
+                    if(!isNullOrEmpty(originPoint.toString())){
                         val deltaX = Math.abs(originPoint[0] - event.rawX)
                         val deltaY = Math.abs(originPoint[1] - event.rawY)
 
@@ -186,9 +186,9 @@ fun View.onElevatingClick(launchDelay: Long = 100, elevateBy: Float = 4f, action
             ACTION_CANCEL, ACTION_UP -> elevateDownAnimation.start()
 
             ACTION_MOVE -> {
-                if(isNullOrEmpty(originPoint)) originPoint = arrayListOf(event.rawX, event.rawY)
+                if(isNullOrEmpty(originPoint.toString())) originPoint = arrayListOf(event.rawX, event.rawY)
 
-                if(!isNullOrEmpty(originPoint)){
+                if(!isNullOrEmpty(originPoint.toString())){
                     val deltaX = Math.abs(originPoint[0] - event.rawX)
                     val deltaY = Math.abs(originPoint[1] - event.rawY)
 

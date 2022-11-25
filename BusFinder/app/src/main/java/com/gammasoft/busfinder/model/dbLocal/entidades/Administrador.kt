@@ -10,7 +10,7 @@ data class Administrador(@PrimaryKey @ColumnInfo(name = "usuario") private var u
                          @ColumnInfo(name = "nombre") private var nombre: String,
                          @ColumnInfo(name = "numero_Celular") private var numCelular: Long,
                          @ColumnInfo(name = "linea_Transporte") private var linea: String,
-                         @ColumnInfo(name = "codigo") private var codigo: Int){
+                         @ColumnInfo(name = "codigo") private var codigo: Long){
     constructor(): this("", "", "", 0, "", 0)
 
     fun setUsuario(usuario: String){
@@ -53,11 +53,11 @@ data class Administrador(@PrimaryKey @ColumnInfo(name = "usuario") private var u
         return linea
     }
 
-    fun setCodigo(codigo: Int){
+    fun setCodigo(codigo: Long){
         this.codigo = codigo
     }
 
-    fun getCodigo(): Int{
+    fun getCodigo(): Long{
         return codigo
     }
 

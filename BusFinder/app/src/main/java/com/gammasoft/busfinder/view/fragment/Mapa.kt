@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.gammasoft.busfinder.R
-import com.gammasoft.busfinder.controller.MapaEvento
 import com.gammasoft.busfinder.databinding.FragmentMapaBinding
 import com.gammasoft.busfinder.model.mapa.ApiService
 import com.gammasoft.busfinder.model.mapa.RutaResponse
@@ -31,8 +30,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener{
     private var _binding: FragmentMapaBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var evento: MapaEvento
 
     private lateinit var map: GoogleMap
     private lateinit var start: String
@@ -57,12 +54,6 @@ class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-
-        evento = MapaEvento(this, binding)
-
-        binding.btnAtras.setOnClickListener(evento)
-
-        binding.btnLimpiar.setOnClickListener(evento)
 
         val mapa = childFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment?
         mapa?.getMapAsync(callback)
@@ -168,9 +159,6 @@ class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickLis
             if(call.isSuccessful) drawRoute(call.body())
             else Log.i("aris","KO")
         }
-
-        binding.btnAtras.isEnabled = true
-        binding.btnLimpiar.isEnabled = true
     }
 
     private fun drawRoute(routeResponse: RutaResponse?) {
