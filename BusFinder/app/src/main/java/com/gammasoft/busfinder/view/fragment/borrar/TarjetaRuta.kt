@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaBorrarRutaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaRuta(private val localDB: Crud,
+                  private val bin: FragmentAdministradorBinding,
                   private val ruta: Ruta): BaseBlurPopup(){
     private var _binding: TarjetaBorrarRutaBinding? = null
     private val binding get() = _binding!!
@@ -43,6 +45,7 @@ class TarjetaRuta(private val localDB: Crud,
         binding.txtRuta.text = ruta.getNombre()
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -72,6 +75,7 @@ class TarjetaRuta(private val localDB: Crud,
                         }
 
                         Toast.makeText(requireContext(), "¡Ruta borrada con éxito!", Toast.LENGTH_SHORT).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
                         dismiss()
                     }
                 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarRutaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
@@ -19,13 +20,14 @@ import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
 
 class TarjetaRuta(private val fragment: TarjetaBase,
+                  private val bin: FragmentAdministradorBinding,
                   private val titulo: String,
                   private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarRutaBinding? = null
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(fragment, bin, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,14 +68,16 @@ class TarjetaRuta(private val fragment: TarjetaBase,
             inicio = fin
         }
 
+        bin.btnAgregar.visibility = View.GONE
+
         binding.btnBorrar.setOnClickListener{
             fragment.context?.vibrate(70L)
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaRuta(localDB, ruta).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaRuta(localDB, bin, ruta).mostrar())
         }
 
         binding.btnModificar.setOnClickListener{
             fragment.context?.vibrate(60L)
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaRuta(localDB, ruta).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaRuta(localDB, bin, ruta).mostrar())
         }
     }
 

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaModificarParadaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
@@ -28,6 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaParada(private val localDB: Crud,
+                    private val bin: FragmentAdministradorBinding,
                     private val parada: Parada): BaseBlurPopup(){
     private var _binding: TarjetaModificarParadaBinding? = null
     private val binding get() = _binding!!
@@ -35,7 +37,7 @@ class TarjetaParada(private val localDB: Crud,
     private var ruta = ""
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaParada(localDB, parada).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaParada(localDB, bin, parada).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -103,6 +105,7 @@ class TarjetaParada(private val localDB: Crud,
         }
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -130,6 +133,7 @@ class TarjetaParada(private val localDB: Crud,
                         }
 
                         Toast.makeText(requireContext(), "¡Parada modificada con éxito!", Toast.LENGTH_SHORT).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
                         dismiss()
                     }else MensajeAlerta("ERROR", "Hay más de una Parada").show(parentFragmentManager, "Error")
                 }else if(p.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el nombre de la Parada").show(parentFragmentManager, "Advertencia")

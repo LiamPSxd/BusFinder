@@ -10,6 +10,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaModificarTarifaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
@@ -24,12 +25,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaTarifa(private val localDB: Crud,
+                    private val bin: FragmentAdministradorBinding,
                     private val tarifa: Tarifa): BaseBlurPopup(){
     private var _binding: TarjetaModificarTarifaBinding? = null
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(localDB, tarifa).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(localDB, bin, tarifa).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,6 +80,7 @@ class TarjetaTarifa(private val localDB: Crud,
         )
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -95,6 +98,7 @@ class TarjetaTarifa(private val localDB: Crud,
                     }
 
                     Toast.makeText(requireContext(), "¡Tarifa modificada con éxito!", Toast.LENGTH_SHORT).show()
+                    bin.btnAgregar.visibility = View.VISIBLE
                     dismiss()
                 }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el Público").show(parentFragmentManager, "Advertencia")
             }

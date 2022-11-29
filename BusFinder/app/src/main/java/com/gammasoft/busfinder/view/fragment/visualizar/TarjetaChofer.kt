@@ -53,16 +53,18 @@ class TarjetaChofer(private val fragment: TarjetaBase,
             }
         }
 
+        bin.btnAgregar.visibility = View.GONE
+
         binding.btnBorrar.setOnClickListener{
             fragment.context?.vibrate(70L)
-            dismiss()
             fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaChofer(localDB, bin, chofer).mostrar())
+            dismiss()
         }
 
         binding.btnModificar.setOnClickListener{
             fragment.context?.vibrate(60L)
-            dismiss()
             fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaChofer(localDB, bin, chofer).mostrar())
+            dismiss()
         }
     }
 

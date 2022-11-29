@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaBorrarChoferBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaChofer(private val localDB: Crud,
+                    private val bin: FragmentAdministradorBinding,
                     private val chofer: Chofer): BaseBlurPopup(){
     private var _binding: TarjetaBorrarChoferBinding? = null
     private val binding get() = _binding!!
@@ -44,6 +46,7 @@ class TarjetaChofer(private val localDB: Crud,
         binding.txtNombre.text = chofer.getNombre()
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -58,6 +61,7 @@ class TarjetaChofer(private val localDB: Crud,
                         }
 
                         Toast.makeText(requireContext(), "¡Chofer borrado con éxito!", Toast.LENGTH_SHORT).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
                         dismiss()
                     }
                 }

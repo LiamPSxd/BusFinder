@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaBorrarParadaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaParada(private val localDB: Crud,
+                    private val bin: FragmentAdministradorBinding,
                     private val parada: Parada): BaseBlurPopup(){
     private var _binding: TarjetaBorrarParadaBinding? = null
     private val binding get() = _binding!!
@@ -43,6 +45,7 @@ class TarjetaParada(private val localDB: Crud,
         binding.txtParada.text = parada.getNombre()
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -63,6 +66,7 @@ class TarjetaParada(private val localDB: Crud,
                         }
 
                         Toast.makeText(requireContext(), "¡Parada borrada con éxito!", Toast.LENGTH_SHORT).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
                         dismiss()
                     }
                 }

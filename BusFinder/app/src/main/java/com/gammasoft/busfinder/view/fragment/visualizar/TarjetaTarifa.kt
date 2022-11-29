@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarTarifaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
@@ -17,6 +18,7 @@ import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
 
 class TarjetaTarifa(private val fragment: TarjetaBase,
+                    private val bin: FragmentAdministradorBinding,
                     private val titulo: String,
                     private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarTarifaBinding? = null
@@ -50,16 +52,18 @@ class TarjetaTarifa(private val fragment: TarjetaBase,
             }
         }
 
+        bin.btnAgregar.visibility = View.GONE
+
         binding.btnBorrar.setOnClickListener{
             fragment.context?.vibrate(70L)
             dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaTarifa(localDB, tarifa).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaTarifa(localDB, bin, tarifa).mostrar())
         }
 
         binding.btnModificar.setOnClickListener{
             fragment.context?.vibrate(60L)
             dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaTarifa(localDB, tarifa).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaTarifa(localDB, bin, tarifa).mostrar())
         }
     }
 

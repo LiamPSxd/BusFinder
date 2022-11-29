@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaModificarRutaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
@@ -25,12 +26,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaRuta(private val localDB: Crud,
+                  private val bin: FragmentAdministradorBinding,
                   private val ruta: Ruta): BaseBlurPopup(){
     private var _binding: TarjetaModificarRutaBinding? = null
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(localDB, ruta).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(localDB, bin, ruta).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,6 +86,7 @@ class TarjetaRuta(private val localDB: Crud,
         }
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -113,6 +116,7 @@ class TarjetaRuta(private val localDB: Crud,
                     }
 
                     Toast.makeText(requireContext(), "¡Ruta modificada con éxito!", Toast.LENGTH_SHORT).show()
+                    bin.btnAgregar.visibility = View.VISIBLE
                     dismiss()
                 }else if(ru.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el nombre de la Ruta").show(parentFragmentManager, "Advertencia")
                 else if(mapa.coordenadas.isEmpty()) MensajeAlerta("ADVERTENCIA", "Debe dibujar una Ruta").show(parentFragmentManager, "Advertencia")

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarParadaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
@@ -19,13 +20,14 @@ import com.google.android.gms.maps.model.LatLng
 import io.alterac.blurkit.BlurLayout
 
 class TarjetaParada(private val fragment: TarjetaBase,
+                    private val bin: FragmentAdministradorBinding,
                     private val titulo: String,
                     private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarParadaBinding? = null
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaParada(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaParada(fragment, bin, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,16 +62,18 @@ class TarjetaParada(private val fragment: TarjetaBase,
         val mapa = childFragmentManager.findFragmentById(R.id.mapa) as Mapa
         mapa.crearParada(LatLng(parada.getLatitud(), parada.getLongitud()))
 
+        bin.btnAgregar.visibility = View.GONE
+
         binding.btnBorrar.setOnClickListener{
             fragment.context?.vibrate(70L)
             dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaParada(localDB, parada).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaParada(localDB, bin, parada).mostrar())
         }
 
         binding.btnModificar.setOnClickListener{
             fragment.context?.vibrate(60L)
             dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaParada(localDB, parada).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaParada(localDB, bin, parada).mostrar())
         }
     }
 

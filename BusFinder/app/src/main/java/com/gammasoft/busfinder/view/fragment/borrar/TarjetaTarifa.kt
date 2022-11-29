@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaBorrarTarifaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
@@ -20,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaTarifa(private val localDB: Crud,
+                    private val bin: FragmentAdministradorBinding,
                     private val tarifa: Tarifa): BaseBlurPopup(){
     private var _binding: TarjetaBorrarTarifaBinding? = null
     private val binding get() = _binding!!
@@ -43,6 +45,7 @@ class TarjetaTarifa(private val localDB: Crud,
         binding.txtTarifa.text = tarifa.getNombre()
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -58,6 +61,7 @@ class TarjetaTarifa(private val localDB: Crud,
                     }
 
                     Toast.makeText(requireContext(), "¡Tarifa borrada con éxito!", Toast.LENGTH_SHORT).show()
+                    bin.btnAgregar.visibility = View.VISIBLE
                     dismiss()
                 }
             }

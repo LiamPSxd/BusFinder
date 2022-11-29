@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaModificarChoferBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
@@ -22,12 +23,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TarjetaChofer(private val localDB: Crud,
+                    private val bin: FragmentAdministradorBinding,
                     private val chofer: Chofer): BaseBlurPopup(){
     private var _binding: TarjetaModificarChoferBinding? = null
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(localDB, chofer).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(localDB, bin, chofer).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +47,7 @@ class TarjetaChofer(private val localDB: Crud,
         binding.txtRFC.text = Editable.Factory().newEditable(chofer.getRfc())
 
         binding.btnCancelar.setOnClickListener{
+            bin.btnAgregar.visibility = View.VISIBLE
             dismiss()
         }
 
@@ -74,6 +77,7 @@ class TarjetaChofer(private val localDB: Crud,
                             }
 
                             Toast.makeText(requireContext(), "¡Chofer modificado con éxito!", Toast.LENGTH_SHORT).show()
+                            bin.btnAgregar.visibility = View.VISIBLE
                             dismiss()
                         }else MensajeAlerta("ERROR", "No se encontró ningún chofer con ese dato").show(parentFragmentManager, "Error")
                     }
