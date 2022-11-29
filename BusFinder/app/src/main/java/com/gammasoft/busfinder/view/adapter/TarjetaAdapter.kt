@@ -8,6 +8,7 @@ import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.controller.longpress.PopupHoverEvento
 import com.gammasoft.busfinder.controller.longpress.PopupInflaterEvento
 import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaTituloBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.view.dialog.AnimType.Companion.ANIM_FROM_BOTTOM
@@ -21,6 +22,7 @@ import com.gammasoft.busfinder.view.util.onDebouncingClick
 import com.squareup.picasso.Picasso
 
 class TarjetaAdapter(private val fragment: TarjetaBase,
+                     private val bin: FragmentAdministradorBinding,
                      private val titulos: ArrayList<String>,
                      private val fondos: ArrayList<Int>): RecyclerView.Adapter<TarjetaAdapter.ViewHolder>(){
     private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
@@ -69,7 +71,7 @@ class TarjetaAdapter(private val fragment: TarjetaBase,
                             for(chofer in it) ides.add(listOf(chofer.getRfc(), chofer.getNombre()))
                         }
 
-                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
+                        fragment.pushPopup(ListaTarjeta(fragment, bin, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
 
                     "RUTAS" -> {
@@ -77,7 +79,7 @@ class TarjetaAdapter(private val fragment: TarjetaBase,
                             for(ruta in it) ides.add(listOf(ruta.getId().toString(), ruta.getNombre()))
                         }
 
-                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
+                        fragment.pushPopup(ListaTarjeta(fragment, bin, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
 
                     "PARADAS" -> {
@@ -85,7 +87,7 @@ class TarjetaAdapter(private val fragment: TarjetaBase,
                             for(parada in it) ides.add(listOf(parada.getId().toString(), parada.getNombre()))
                         }
 
-                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
+                        fragment.pushPopup(ListaTarjeta(fragment, bin, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
 
                     "TARIFAS" -> {
@@ -93,7 +95,7 @@ class TarjetaAdapter(private val fragment: TarjetaBase,
                             for(tarifa in it) ides.add(listOf(tarifa.getNombre(), tarifa.getNombre()))
                         }
 
-                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
+                        fragment.pushPopup(ListaTarjeta(fragment, bin, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
                 }
             }

@@ -87,8 +87,8 @@ class Mapa: Fragment(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap){
         map = googleMap
 
-        map.setMinZoomPreference(5f)
-        map.setMaxZoomPreference(10f)
+        map.setMinZoomPreference(1f)
+        map.setMaxZoomPreference(5f)
 
         map.setOnMyLocationButtonClickListener(evento)
         map.setOnMyLocationClickListener(evento)

@@ -11,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaAgregarTarifaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
@@ -24,15 +25,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TarjetaTarifa: BaseBlurPopup(){
+class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopup(){
     private var _binding: TarjetaAgregarTarifaBinding? = null
     private val binding get() = _binding!!
 
-    private val localDB = LocalDataBase.getDB(requireContext()).crud()
     private var tarifa = ""
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa().withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(bin).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +46,7 @@ class TarjetaTarifa: BaseBlurPopup(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(requireContext()).crud()
 
         val tarifas = ArrayList<String>()
         localDB.getTarifas().observe(this){
@@ -89,6 +90,7 @@ class TarjetaTarifa: BaseBlurPopup(){
 
         binding.btnCancelar.setOnClickListener{
             dismiss()
+            bin.btnAgregar.visibility = View.VISIBLE
         }
 
         binding.btnAgregar.setOnClickListener{
@@ -105,11 +107,14 @@ class TarjetaTarifa: BaseBlurPopup(){
 
                     val tarifa = Tarifa(publico, precio.toDouble(), admin)
 
-                    localDB.addTarifas(tarifa)
-                    CloudDataBase.addTarifa(tarifa)
+                    CoroutineScope(Dispatchers.IO).launch{
+                        localDB.addTarifas(tarifa)
+                        CloudDataBase.addTarifa(tarifa)
+                    }
 
                     Toast.makeText(requireContext(), "¡Tarifa agregada con éxito!", Toast.LENGTH_SHORT).show()
                     dismiss()
+                    bin.btnAgregar.visibility = View.VISIBLE
                 }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingreesar un Público").show(parentFragmentManager, "Advertencia")
             }
         }

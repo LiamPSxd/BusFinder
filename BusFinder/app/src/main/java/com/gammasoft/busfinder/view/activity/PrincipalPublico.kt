@@ -21,7 +21,7 @@ class PrincipalPublico: AppCompatActivity(){
 
     private val localDB = LocalDataBase.getDB(this).crud()
 
-    private lateinit var publico: PublicoGeneral
+    private var publico = PublicoGeneral()
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarChoferBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
@@ -17,15 +18,14 @@ import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
 
 class TarjetaChofer(private val fragment: TarjetaBase,
+                    private val bin: FragmentAdministradorBinding,
                     private val titulo: String,
                     private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarChoferBinding? = null
     private val binding get() = _binding!!
 
-    private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
-
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(fragment, bin, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +39,7 @@ class TarjetaChofer(private val fragment: TarjetaBase,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
         var chofer = Chofer()
         localDB.getChoferes().observe(viewLifecycleOwner){
@@ -55,13 +56,13 @@ class TarjetaChofer(private val fragment: TarjetaBase,
         binding.btnBorrar.setOnClickListener{
             fragment.context?.vibrate(70L)
             dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaChofer(localDB, chofer).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaChofer(localDB, bin, chofer).mostrar())
         }
 
         binding.btnModificar.setOnClickListener{
             fragment.context?.vibrate(60L)
             dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaChofer(localDB, chofer).mostrar())
+            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaChofer(localDB, bin, chofer).mostrar())
         }
     }
 

@@ -68,7 +68,9 @@ class TarjetaParada(private val localDB: Crud,
             localDB.getRutaById(it.getRutaID()).observe(viewLifecycleOwner){ r ->
                 for(i in 0 until rutas.size)
                     if(rutas[i] == r.getNombre()){
-                        localDB.deleteRutaParada(it)
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.deleteRutaParada(it)
+                        }
                         contador = i
                     }
             }
@@ -111,16 +113,20 @@ class TarjetaParada(private val localDB: Crud,
 
                 if(p.isNotEmpty() && ruta.isNotEmpty() && mapa.paradas.isNotEmpty()){
                     if(mapa.paradas.size == 1){
-                        parada.setNombre(p)
-                        parada.setLatitud(mapa.paradas[0].getLatitud())
-                        parada.setLongitud(mapa.paradas[0].getLongitud())
-                        localDB.updateParada(parada)
-                        CloudDataBase.addParada(parada)
+                        CoroutineScope(Dispatchers.IO).launch{
+                            parada.setNombre(p)
+                            parada.setLatitud(mapa.paradas[0].getLatitud())
+                            parada.setLongitud(mapa.paradas[0].getLongitud())
+                            localDB.updateParada(parada)
+                            CloudDataBase.addParada(parada)
+                        }
 
                         localDB.getRutaByNombre(ruta).observe(viewLifecycleOwner){
-                            val rP = RutaParada(it.getId(), parada.getId())
-                            localDB.addRutaParadas(rP)
-                            CloudDataBase.addRutaParada(rP)
+                            CoroutineScope(Dispatchers.IO).launch{
+                                val rP = RutaParada(it.getId(), parada.getId())
+                                localDB.addRutaParadas(rP)
+                                CloudDataBase.addRutaParada(rP)
+                            }
                         }
 
                         Toast.makeText(requireContext(), "¡Parada modificada con éxito!", Toast.LENGTH_SHORT).show()

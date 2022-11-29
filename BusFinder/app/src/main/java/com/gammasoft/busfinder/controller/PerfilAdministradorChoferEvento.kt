@@ -13,6 +13,9 @@ import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.activity.Bienvenida
 import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PerfilAdministradorChoferEvento(private val fragment: Fragment,
                                       private val binding: FragmentPerfilAdminChoferBinding,
@@ -39,18 +42,22 @@ class PerfilAdministradorChoferEvento(private val fragment: Fragment,
 
         when(cuenta.mostrarTipo()){
             "Administrador" -> {
-                localDB.deleteChoferes()
-                localDB.deleteRutas()
-                localDB.deleteParadas()
-                localDB.deleteTarifas()
-                localDB.deleteCoordenadas()
+                CoroutineScope(Dispatchers.IO).launch{
+                    localDB.deleteChoferes()
+                    localDB.deleteRutas()
+                    localDB.deleteParadas()
+                    localDB.deleteTarifas()
+                    localDB.deleteCoordenadas()
+                }
             }
 
             "Chofer" -> {
-                localDB.deleteRutas()
-                localDB.deleteParadas()
-                localDB.deleteTarifas()
-                localDB.deleteCoordenadas()
+                CoroutineScope(Dispatchers.IO).launch{
+                    localDB.deleteRutas()
+                    localDB.deleteParadas()
+                    localDB.deleteTarifas()
+                    localDB.deleteCoordenadas()
+                }
             }
         }
 

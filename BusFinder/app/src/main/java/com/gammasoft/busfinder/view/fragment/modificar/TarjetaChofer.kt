@@ -55,21 +55,23 @@ class TarjetaChofer(private val localDB: Crud,
                 if(rfc.isNotEmpty()){
                     CloudDataBase.cloudDataBase.collection("Chofer").whereEqualTo("rfc", rfc).get().addOnSuccessListener{
                         for(ch in it) if(ch.exists()){
-                            localDB.deleteChofer(chofer)
-                            chofer.setAdministrador("")
-                            CloudDataBase.addChofer(chofer)
+                            CoroutineScope(Dispatchers.IO).launch{
+                                localDB.deleteChofer(chofer)
+                                chofer.setAdministrador("")
+                                CloudDataBase.addChofer(chofer)
 
-                            chofer.setUsuario(ch.getString("usuario").toString())
-                            chofer.setRfc(ch.getString("rfc").toString())
-                            chofer.setNombre(ch.getString("nombre").toString())
-                            chofer.setNumCelular(ch.getString("numeroCelular").toString().toLong())
-                            chofer.setLinea(ch.getString("lineaTransporte").toString())
-                            chofer.setCodigo(ch.getString("codigo").toString().toLong())
-                            chofer.setNoUsuarios(ch.getString("numeroUsuarios").toString().toInt())
-                            chofer.setCalificacion(ch.getString("calificacion").toString().toDouble())
-                            chofer.setAdministrador(ch.getString("administrador").toString())
+                                chofer.setUsuario(ch.get("usuario").toString())
+                                chofer.setRfc(ch.get("rfc").toString())
+                                chofer.setNombre(ch.get("nombre").toString())
+                                chofer.setNumCelular(ch.get("numeroCelular").toString().toLong())
+                                chofer.setLinea(ch.get("lineaTransporte").toString())
+                                chofer.setCodigo(ch.get("codigo").toString().toLong())
+                                chofer.setNoUsuarios(ch.get("numeroUsuarios").toString().toInt())
+                                chofer.setCalificacion(ch.get("calificacion").toString().toDouble())
+                                chofer.setAdministrador(ch.get("administrador").toString())
 
-                            localDB.addChoferes(chofer)
+                                localDB.addChoferes(chofer)
+                            }
 
                             Toast.makeText(requireContext(), "¡Chofer modificado con éxito!", Toast.LENGTH_SHORT).show()
                             dismiss()

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaAgregarChoferBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
@@ -23,15 +24,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TarjetaChofer: BaseBlurPopup(){
+class TarjetaChofer(private val bin: FragmentAdministradorBinding): BaseBlurPopup(){
     private var _binding: TarjetaAgregarChoferBinding? = null
     private val binding get() = _binding!!
 
-    private val localDB = LocalDataBase.getDB(requireContext()).crud()
     private var chSpinner = ""
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer().withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(bin).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +45,7 @@ class TarjetaChofer: BaseBlurPopup(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(requireContext()).crud()
 
         val choferes = ArrayList<String>()
         localDB.getChoferes().observe(this){
@@ -69,6 +70,7 @@ class TarjetaChofer: BaseBlurPopup(){
 
         binding.btnCancelar.setOnClickListener{
             dismiss()
+            bin.btnAgregar.visibility = View.VISIBLE
         }
 
         binding.btnAgregar.setOnClickListener{
@@ -94,11 +96,14 @@ class TarjetaChofer: BaseBlurPopup(){
                             chofer.setAdministrador(bundle.getString("administrador").toString())
                         }
 
-                        localDB.addChoferes(chofer)
-                        CloudDataBase.addChofer(chofer)
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.addChoferes(chofer)
+                            CloudDataBase.addChofer(chofer)
+                        }
 
                         Toast.makeText(requireContext(), "¡Chofer agregado con éxito!", Toast.LENGTH_SHORT).show()
                         dismiss()
+                        bin.btnAgregar.visibility = View.VISIBLE
                     }else MensajeAlerta("ERROR", "No se encontró ningún chofer con ese dato").show(parentFragmentManager, "Error")
                 }
             }

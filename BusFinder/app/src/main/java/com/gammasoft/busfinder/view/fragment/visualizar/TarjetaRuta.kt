@@ -24,8 +24,6 @@ class TarjetaRuta(private val fragment: TarjetaBase,
     private var _binding: TarjetaVisualizarRutaBinding? = null
     private val binding get() = _binding!!
 
-    private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
-
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
                 @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
@@ -41,6 +39,7 @@ class TarjetaRuta(private val fragment: TarjetaBase,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
         var ruta = Ruta()
         localDB.getRutas().observe(viewLifecycleOwner){

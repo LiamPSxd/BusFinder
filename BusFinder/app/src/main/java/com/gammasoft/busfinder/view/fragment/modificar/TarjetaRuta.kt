@@ -53,7 +53,9 @@ class TarjetaRuta(private val localDB: Crud,
         localDB.getCoordenadasIDByRutaID(ruta.getId()).observe(viewLifecycleOwner){
             for(cR in it) localDB.getCoordenadaById(cR.getCoordenadaID()).observe(viewLifecycleOwner){ coor ->
                 coordenadas.add(coor)
-                localDB.deleteCoordenada(coor)
+                CoroutineScope(Dispatchers.IO).launch{
+                    localDB.deleteCoordenada(coor)
+                }
             }
         }
 
@@ -91,21 +93,23 @@ class TarjetaRuta(private val localDB: Crud,
                 mapa.agregar()
 
                 if(ru.isNotEmpty() && mapa.coordenadas.isNotEmpty()){
-                    ruta.setNombre(ru)
-                    localDB.updateRuta(ruta)
-                    CloudDataBase.addRuta(ruta)
+                    CoroutineScope(Dispatchers.IO).launch{
+                        ruta.setNombre(ru)
+                        localDB.updateRuta(ruta)
+                        CloudDataBase.addRuta(ruta)
 
-                    for(i in 0 until mapa.coordenadas.size){
-                        val id = if(i <= coordenadas.size-1) coordenadas[i].getId()
-                        else 0
+                        for(i in 0 until mapa.coordenadas.size){
+                            val id = if(i <= coordenadas.size-1) coordenadas[i].getId()
+                            else 0
 
-                        val coor = Coordenada(id, mapa.coordenadas[i].getLongitud(), mapa.coordenadas[i].getLatitud(), coordenadas[0].getAdministrador())
-                        localDB.addCoordenadas(coor)
-                        CloudDataBase.addCoordenada(coor)
+                            val coor = Coordenada(id, mapa.coordenadas[i].getLongitud(), mapa.coordenadas[i].getLatitud(), coordenadas[0].getAdministrador())
+                            localDB.addCoordenadas(coor)
+                            CloudDataBase.addCoordenada(coor)
 
-                        val rC = RutaCoordenada(ruta.getId(), coor.getId())
-                        localDB.addRutaCoordenadas(rC)
-                        CloudDataBase.addRutaCoordenada(rC)
+                            val rC = RutaCoordenada(ruta.getId(), coor.getId())
+                            localDB.addRutaCoordenadas(rC)
+                            CloudDataBase.addRutaCoordenada(rC)
+                        }
                     }
 
                     Toast.makeText(requireContext(), "¡Ruta modificada con éxito!", Toast.LENGTH_SHORT).show()

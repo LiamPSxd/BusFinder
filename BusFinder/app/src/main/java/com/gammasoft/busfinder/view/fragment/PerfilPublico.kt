@@ -17,7 +17,6 @@ class PerfilPublico: Fragment(){
     private val binding get() = _binding!!
 
     private lateinit var evento: PerfilPublicoEvento
-    private val localDB = LocalDataBase.getDB(this.requireContext()).crud()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +29,7 @@ class PerfilPublico: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(this.requireContext()).crud()
 
         var publico = PublicoGeneral()
         parentFragmentManager.setFragmentResultListener("Publico", this){ _, bundle ->

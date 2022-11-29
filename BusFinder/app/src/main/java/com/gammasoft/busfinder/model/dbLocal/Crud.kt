@@ -45,6 +45,9 @@ interface Crud{
     @Delete
     fun deleteAdministrador(administrador: Administrador)
 
+    @Query("DELETE FROM Administrador WHERE rfc = :rfc")
+    fun deleteAdministradoresByRFC(rfc: String)
+
     @Query("DELETE FROM Administrador")
     fun deleteAdministradores()
 

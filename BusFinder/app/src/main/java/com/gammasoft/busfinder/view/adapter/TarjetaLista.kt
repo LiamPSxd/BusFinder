@@ -8,6 +8,7 @@ import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.controller.longpress.PopupHoverEvento
 import com.gammasoft.busfinder.controller.longpress.PopupInflaterEvento
 import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaListaBinding
 import com.gammasoft.busfinder.view.dialog.AnimType
 import com.gammasoft.busfinder.view.dialog.BlurPopup
@@ -22,6 +23,7 @@ import com.gammasoft.busfinder.view.util.checkAndUnregister
 import com.gammasoft.busfinder.view.util.onDebouncingClick
 
 class TarjetaLista(private val fragment: TarjetaBase,
+                   private val bin: FragmentAdministradorBinding,
                    private val tipo: String,
                    private val ides: ArrayList<List<String>>): RecyclerView.Adapter<TarjetaLista.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -64,13 +66,13 @@ class TarjetaLista(private val fragment: TarjetaBase,
             val titulo = binding.etqNombre.text.toString()
 
             when(tipo){
-                "CHOFERES" -> fragment.pushPopup(TarjetaChofer(fragment, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+                "CHOFERES" -> fragment.pushPopup(TarjetaChofer(fragment, bin, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
 
-                "RUTAS" -> fragment.pushPopup(TarjetaRuta(fragment, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+                "RUTAS" -> fragment.pushPopup(TarjetaRuta(fragment, bin, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
 
-                "PARADAS" -> fragment.pushPopup(TarjetaParada(fragment, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+                "PARADAS" -> fragment.pushPopup(TarjetaParada(fragment, bin, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
 
-                "TARIFAS" -> fragment.pushPopup(TarjetaTarifa(fragment, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+                "TARIFAS" -> fragment.pushPopup(TarjetaTarifa(fragment, bin, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
             }
         }
 

@@ -260,37 +260,45 @@ class CrearCuenta2Evento(private val fragment: Fragment,
 
         CoroutineScope(Dispatchers.IO).launch{
             cloudDB.cloudDataBase.collection("CuentaPublico").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
-                for(publico in it) if(publico.exists())
-                    localDB.addCuentasPublico(CuentaPublico(publico.getString("cuentaCorreo").toString(), publico.getString("publicoGeneralUsuario").toString()))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(publico in it) if(publico.exists())
+                        localDB.addCuentasPublico(CuentaPublico(publico.get("cuentaCorreo").toString(), publico.get("publicoGeneralUsuario").toString()))
+                }
             }
 
             cloudDB.cloudDataBase.collection("CuentaPublico").whereEqualTo("publicoGeneralUsuario", usuario).get().addOnSuccessListener{
-                for(publico in it) if(publico.exists())
-                    localDB.addCuentasPublico(CuentaPublico(publico.getString("cuentaCorreo").toString(), publico.getString("publicoGeneralUsuario").toString()))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(publico in it) if(publico.exists())
+                        localDB.addCuentasPublico(CuentaPublico(publico.get("cuentaCorreo").toString(), publico.get("publicoGeneralUsuario").toString()))
+                }
             }
-        }
 
-        CoroutineScope(Dispatchers.IO).launch{
             cloudDB.cloudDataBase.collection("CuentaChofer").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
-                for(chofer in it) if(chofer.exists())
-                    localDB.addCuentasChofer(CuentaChofer(chofer.getString("cuentaCorreo").toString(), chofer.getString("choferUsuario").toString()))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(chofer in it) if(chofer.exists())
+                        localDB.addCuentasChofer(CuentaChofer(chofer.get("cuentaCorreo").toString(), chofer.get("choferUsuario").toString()))
+                }
             }
 
             cloudDB.cloudDataBase.collection("CuentaChofer").whereEqualTo("choferUsuario", usuario).get().addOnSuccessListener{
-                for(chofer in it) if(chofer.exists())
-                    localDB.addCuentasChofer(CuentaChofer(chofer.getString("cuentaCorreo").toString(), chofer.getString("choferUsuario").toString()))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(chofer in it) if(chofer.exists())
+                        localDB.addCuentasChofer(CuentaChofer(chofer.get("cuentaCorreo").toString(), chofer.get("choferUsuario").toString()))
+                }
             }
-        }
 
-        CoroutineScope(Dispatchers.IO).launch{
             cloudDB.cloudDataBase.collection("CuentaAdministrador").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
-                for(admin in it) if(admin.exists())
-                    localDB.addCuentasAdministrador(CuentaAdministrador(admin.getString("cuentaCorreo").toString(), admin.getString("administradorUsuario").toString()))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(admin in it) if(admin.exists())
+                        localDB.addCuentasAdministrador(CuentaAdministrador(admin.get("cuentaCorreo").toString(), admin.get("administradorUsuario").toString()))
+                }
             }
 
             cloudDB.cloudDataBase.collection("CuentaAdministrador").whereEqualTo("administradorUsuario", usuario).get().addOnSuccessListener{
-                for(admin in it) if(admin.exists())
-                    localDB.addCuentasAdministrador(CuentaAdministrador(admin.getString("cuentaCorreo").toString(), admin.getString("administradorUsuario").toString()))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(admin in it) if(admin.exists())
+                        localDB.addCuentasAdministrador(CuentaAdministrador(admin.get("cuentaCorreo").toString(), admin.get("administradorUsuario").toString()))
+                }
             }
         }
 
@@ -314,9 +322,9 @@ class CrearCuenta2Evento(private val fragment: Fragment,
 
     private fun finalizar(tipo: String, usuario: String, rfc: String, nombre: String, celular: Long, linea: String,
                           correo: String, contrasenia: String, foto: String){
-        localDB.deleteAdministradores()
-
         CoroutineScope(Dispatchers.IO).launch{
+            localDB.deleteAdministradoresByRFC("")
+
             when(tipo){
                 "Administrador_" -> {
                     if(codigo != 0L){

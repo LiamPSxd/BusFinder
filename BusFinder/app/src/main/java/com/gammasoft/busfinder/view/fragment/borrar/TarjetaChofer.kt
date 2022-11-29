@@ -51,9 +51,11 @@ class TarjetaChofer(private val localDB: Crud,
             CoroutineScope(Dispatchers.IO).launch{
                 localDB.getChoferByRFC(chofer.getRfc()).observe(viewLifecycleOwner){
                     if(it.getNombre() == chofer.getNombre()){
-                        localDB.deleteChofer(chofer)
-                        chofer.setAdministrador("")
-                        CloudDataBase.addChofer(chofer)
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.deleteChofer(chofer)
+                            chofer.setAdministrador("")
+                            CloudDataBase.addChofer(chofer)
+                        }
 
                         Toast.makeText(requireContext(), "¡Chofer borrado con éxito!", Toast.LENGTH_SHORT).show()
                         dismiss()

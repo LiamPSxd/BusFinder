@@ -87,10 +87,12 @@ class TarjetaTarifa(private val localDB: Crud,
                 val precio = binding.txtPrecio.text.toString()
 
                 if(publico.isNotEmpty() && precio.isNotEmpty()){
-                    tarifa.setNombre(publico)
-                    tarifa.setPrecio(precio.toDouble())
-                    localDB.updateTarifa(tarifa)
-                    CloudDataBase.addTarifa(tarifa)
+                    CoroutineScope(Dispatchers.IO).launch{
+                        tarifa.setNombre(publico)
+                        tarifa.setPrecio(precio.toDouble())
+                        localDB.updateTarifa(tarifa)
+                        CloudDataBase.addTarifa(tarifa)
+                    }
 
                     Toast.makeText(requireContext(), "¡Tarifa modificada con éxito!", Toast.LENGTH_SHORT).show()
                     dismiss()

@@ -77,19 +77,19 @@ class BienvenidaEvento(private var activity: AppCompatActivity,
                 CloudDataBase.cloudDataBase.collection("Cuenta").whereEqualTo("estado", true).get().addOnSuccessListener{
                     for(cuenta in it) if(cuenta.exists()){
                         var tipo = 3
-                        when(cuenta.getString("tipo").toString()){
+                        when(cuenta.get("tipo").toString()){
                             "Administrador" -> tipo = 0
                             "Chofer" -> tipo = 1
                             "Publico General" -> tipo = 2
                         }
 
                         cuentas.add(Cuenta(
-                            cuenta.getString("correo").toString(),
-                            cuenta.getString("contrasenia").toString(),
-                            cuenta.getString("foto").toString(),
+                            cuenta.get("correo").toString(),
+                            cuenta.get("contrasenia").toString(),
+                            cuenta.get("foto").toString(),
                             tipo,
-                            cuenta.getString("metodo").toString(),
-                            cuenta.getBoolean("estado").toString().toBoolean()
+                            cuenta.get("metodo").toString(),
+                            cuenta.get("estado").toString().toBoolean()
                         ))
                     }
 

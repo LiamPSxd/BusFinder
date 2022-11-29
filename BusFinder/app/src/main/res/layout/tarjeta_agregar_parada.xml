@@ -106,7 +106,7 @@
             <fragment
                 android:id="@+id/mapaParada"
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="425dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/ins2"
                 android:layout_alignParentStart="true"

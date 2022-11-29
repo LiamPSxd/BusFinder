@@ -38,6 +38,7 @@ class Administrador: TarjetaBase(){
         binding.recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         binding.recyclerView.adapter = TarjetaAdapter(
             this,
+            binding,
             arrayListOf("CHOFERES", "RUTAS", "PARADAS", "TARIFAS"),
             arrayListOf(R.drawable.bus, R.drawable.bus, R.drawable.bus, R.drawable.bus)
         )

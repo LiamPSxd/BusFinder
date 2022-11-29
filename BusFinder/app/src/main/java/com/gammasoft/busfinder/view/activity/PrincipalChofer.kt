@@ -26,7 +26,7 @@ class PrincipalChofer: AppCompatActivity(){
     private val localDB = LocalDataBase.getDB(this).crud()
     private val cloudDB = CloudDataBase.cloudDataBase
 
-    private lateinit var chofer: Chofer
+    private var chofer = Chofer()
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -67,9 +67,9 @@ class PrincipalChofer: AppCompatActivity(){
                 CoroutineScope(Dispatchers.IO).launch{
                     for(ruta in it) if(ruta.exists()){
                         localDB.addRutas(Ruta(
-                            ruta.getString("id").toString().toInt(),
-                            ruta.getString("nombre").toString(),
-                            ruta.getString("administrador").toString()
+                            ruta.get("id").toString().toInt(),
+                            ruta.get("nombre").toString(),
+                            ruta.get("administrador").toString()
                         ))
                     }
                 }
@@ -79,11 +79,11 @@ class PrincipalChofer: AppCompatActivity(){
                 CoroutineScope(Dispatchers.IO).launch{
                     for(parada in it) if(parada.exists()){
                         localDB.addParadas(Parada(
-                            parada.getString("id").toString().toInt(),
-                            parada.getString("nombre").toString(),
-                            parada.getString("longitud").toString().toDouble(),
-                            parada.getString("latitud").toString().toDouble(),
-                            parada.getString("administrador").toString()
+                            parada.get("id").toString().toInt(),
+                            parada.get("nombre").toString(),
+                            parada.get("longitud").toString().toDouble(),
+                            parada.get("latitud").toString().toDouble(),
+                            parada.get("administrador").toString()
                         ))
                     }
                 }
@@ -93,9 +93,9 @@ class PrincipalChofer: AppCompatActivity(){
                 CoroutineScope(Dispatchers.IO).launch{
                     for(tarifa in it) if(tarifa.exists()){
                         localDB.addTarifas(Tarifa(
-                            tarifa.getString("nombre").toString(),
-                            tarifa.getString("precio").toString().toDouble(),
-                            tarifa.getString("administrador").toString()
+                            tarifa.get("nombre").toString(),
+                            tarifa.get("precio").toString().toDouble(),
+                            tarifa.get("administrador").toString()
                         ))
                     }
                 }
@@ -105,10 +105,10 @@ class PrincipalChofer: AppCompatActivity(){
                 CoroutineScope(Dispatchers.IO).launch{
                     for(coordenada in it) if(coordenada.exists()){
                         localDB.addCoordenadas(Coordenada(
-                            coordenada.getString("id").toString().toInt(),
-                            coordenada.getString("longitud").toString().toDouble(),
-                            coordenada.getString("latitud").toString().toDouble(),
-                            coordenada.getString("administrador").toString()
+                            coordenada.get("id").toString().toInt(),
+                            coordenada.get("longitud").toString().toDouble(),
+                            coordenada.get("latitud").toString().toDouble(),
+                            coordenada.get("administrador").toString()
                         ))
                     }
                 }

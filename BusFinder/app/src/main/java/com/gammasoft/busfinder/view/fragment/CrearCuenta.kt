@@ -20,7 +20,6 @@ class CrearCuenta: Fragment(){
     private val binding get() = _binding!!
 
     private lateinit var evento: CrearCuentaEvento
-    private val localDB = LocalDataBase.getDB(requireContext()).crud()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,13 +32,16 @@ class CrearCuenta: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(requireContext()).crud()
 
         CoroutineScope(Dispatchers.IO).launch{
             CloudDataBase.cloudDataBase.collection("Administrador").get().addOnSuccessListener{
-                for(admin in it) if(admin.exists()) localDB.addAdministradores(Administrador(
-                    "", "", "", 0,
-                    admin.getString("lineaTransporte").toString(), 0
-                ))
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(admin in it) if(admin.exists()) localDB.addAdministradores(Administrador(
+                        "", "", "", 0,
+                        admin.get("lineaTransporte").toString(), 0
+                    ))
+                }
             }
         }
 

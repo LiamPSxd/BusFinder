@@ -52,18 +52,24 @@ class TarjetaRuta(private val localDB: Crud,
                     if(it.getNombre() == ruta.getNombre()){
                         localDB.getCoordenadasIDByRutaID(ruta.getId()).observe(viewLifecycleOwner){ coorRus ->
                             for(coorRu in coorRus){
-                                localDB.deleteRutaCoordenada(coorRu)
-                                CloudDataBase.delete("RutaCoordenada", "${coorRu.getRutaID()}")
+                                CoroutineScope(Dispatchers.IO).launch{
+                                    localDB.deleteRutaCoordenada(coorRu)
+                                    CloudDataBase.delete("RutaCoordenada", "${coorRu.getRutaID()}")
+                                }
 
                                 localDB.getCoordenadaById(coorRu.getCoordenadaID()).observe(viewLifecycleOwner){ coor ->
-                                    localDB.deleteCoordenada(coor)
-                                    CloudDataBase.delete("Coordenada", "${coor.getId()}")
+                                    CoroutineScope(Dispatchers.IO).launch{
+                                        localDB.deleteCoordenada(coor)
+                                        CloudDataBase.delete("Coordenada", "${coor.getId()}")
+                                    }
                                 }
                             }
                         }
 
-                        localDB.deleteRuta(ruta)
-                        CloudDataBase.delete("Ruta", "${ruta.getId()}")
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.deleteRuta(ruta)
+                            CloudDataBase.delete("Ruta", "${ruta.getId()}")
+                        }
 
                         Toast.makeText(requireContext(), "¡Ruta borrada con éxito!", Toast.LENGTH_SHORT).show()
                         dismiss()

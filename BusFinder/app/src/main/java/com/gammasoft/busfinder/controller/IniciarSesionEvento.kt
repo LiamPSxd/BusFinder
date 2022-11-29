@@ -76,24 +76,24 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
                 if(cuenta.exists()){
                     lateinit var intent: Intent
 
-                    when(cuenta.getString("tipo").toString()){
+                    when(cuenta.get("tipo").toString()){
                         "Administrador" -> {
                             intent = Intent(activity, PrincipalAdministrador::class.java)
-                            intent.putExtra("cuenta", cuenta.getString("correo").toString())
+                            intent.putExtra("cuenta", cuenta.get("correo").toString())
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             activity.startActivity(intent)
                         }
 
                         "Chofer" -> {
                             intent = Intent(activity, PrincipalChofer::class.java)
-                            intent.putExtra("cuenta", cuenta.getString("correo").toString())
+                            intent.putExtra("cuenta", cuenta.get("correo").toString())
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             activity.startActivity(intent)
                         }
 
                         "Publico General" -> {
                             intent = Intent(activity, PrincipalPublico::class.java)
-                            intent.putExtra("cuenta", cuenta.getString("correo").toString())
+                            intent.putExtra("cuenta", cuenta.get("correo").toString())
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                             activity.startActivity(intent)
                         }
@@ -110,15 +110,15 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
         CoroutineScope(Dispatchers.IO).launch{
             cloudDB.cloudDataBase.collection("CuentaPublico").document(correo).get().addOnSuccessListener{ cp ->
                 if(cp.exists())
-                    iniciarPantallaPrincipalByRS(cp.getString("cuentaCorreo").toString())
+                    iniciarPantallaPrincipalByRS(cp.get("cuentaCorreo").toString())
                 else{
                     cloudDB.cloudDataBase.collection("CuentaChofer").document(correo).get().addOnSuccessListener{ cch ->
                         if(cch.exists())
-                            iniciarPantallaPrincipalByRS(cch.getString("cuentaCorreo").toString())
+                            iniciarPantallaPrincipalByRS(cch.get("cuentaCorreo").toString())
                         else{
                             cloudDB.cloudDataBase.collection("CuentaAdministrador").document(correo).get().addOnSuccessListener{ ca ->
                                 if(ca.exists())
-                                    iniciarPantallaPrincipalByRS(ca.getString("cuentaCorreo").toString())
+                                    iniciarPantallaPrincipalByRS(ca.get("cuentaCorreo").toString())
                                 else MensajeAlerta("ERROR", "Actividad Principal no encontrada").show(activity.supportFragmentManager, "Error")
                             }
                         }
@@ -189,19 +189,19 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
             cloudDB.cloudDataBase.collection("Cuenta").document(correo).get().addOnSuccessListener{ cuenta ->
                 if(cuenta.exists()){
                     var tipo = 3
-                    when(cuenta.getString("tipo").toString()){
+                    when(cuenta.get("tipo").toString()){
                         "Administrador" -> tipo = 0
                         "Chofer" -> tipo = 1
                         "Publico General" -> tipo = 2
                     }
 
                     iniciarPantallaPrincipalByCorreo(Cuenta(
-                        cuenta.getString("correo").toString(),
-                        cuenta.getString("contrasenia").toString(),
-                        cuenta.getString("foto").toString(),
+                        cuenta.get("correo").toString(),
+                        cuenta.get("contrasenia").toString(),
+                        cuenta.get("foto").toString(),
                         tipo,
-                        cuenta.getString("metodo").toString(),
-                        cuenta.getBoolean("estado").toString().toBoolean()
+                        cuenta.get("metodo").toString(),
+                        cuenta.get("estado").toString().toBoolean()
                     ), contrasenia)
                 }
             }
@@ -221,15 +221,15 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
         CoroutineScope(Dispatchers.IO).launch{
             cloudDB.cloudDataBase.collection("CuentaPublico").document(correo).get().addOnSuccessListener{ cp ->
                 if(cp.exists())
-                    iniciarSesionCorreoFirebase(cp.getString("cuentaCorreo").toString(), contrasenia)
+                    iniciarSesionCorreoFirebase(cp.get("cuentaCorreo").toString(), contrasenia)
                 else{
                     cloudDB.cloudDataBase.collection("CuentaChofer").document(correo).get().addOnSuccessListener{ cch ->
                         if(cch.exists())
-                            iniciarSesionCorreoFirebase(cch.getString("cuentaCorreo").toString(), contrasenia)
+                            iniciarSesionCorreoFirebase(cch.get("cuentaCorreo").toString(), contrasenia)
                         else{
                             cloudDB.cloudDataBase.collection("CuentaAdministrador").document(correo).get().addOnSuccessListener{ ca ->
                                 if(ca.exists())
-                                    iniciarSesionCorreoFirebase(ca.getString("cuentaCorreo").toString(), contrasenia)
+                                    iniciarSesionCorreoFirebase(ca.get("cuentaCorreo").toString(), contrasenia)
                                 else MensajeAlerta("ERROR", "No se encontró ninguna cuenta con esos datos").show(activity.supportFragmentManager, "Error")
                             }
                         }

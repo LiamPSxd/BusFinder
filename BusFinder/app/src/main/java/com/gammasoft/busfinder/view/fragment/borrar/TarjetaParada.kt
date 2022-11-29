@@ -51,12 +51,16 @@ class TarjetaParada(private val localDB: Crud,
                 localDB.getParadaById(parada.getId()).observe(viewLifecycleOwner){
                     if(it.getLatitud() == parada.getLatitud()){
                         localDB.getRutaIDByParadaID(parada.getId()).observe(viewLifecycleOwner){ ruP ->
-                            localDB.deleteRutaParada(ruP)
-                            CloudDataBase.delete("RutaParada", "${ruP.getRutaID()}")
+                            CoroutineScope(Dispatchers.IO).launch{
+                                localDB.deleteRutaParada(ruP)
+                                CloudDataBase.delete("RutaParada", "${ruP.getRutaID()}")
+                            }
                         }
 
-                        localDB.deleteParada(parada)
-                        CloudDataBase.delete("Parada", "${parada.getId()}")
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.deleteParada(parada)
+                            CloudDataBase.delete("Parada", "${parada.getId()}")
+                        }
 
                         Toast.makeText(requireContext(), "¡Parada borrada con éxito!", Toast.LENGTH_SHORT).show()
                         dismiss()

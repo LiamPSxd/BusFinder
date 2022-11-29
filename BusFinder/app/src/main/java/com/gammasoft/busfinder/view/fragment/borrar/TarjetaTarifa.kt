@@ -50,9 +50,11 @@ class TarjetaTarifa(private val localDB: Crud,
             CoroutineScope(Dispatchers.IO).launch{
                 localDB.getTarifaByNombre(tarifa.getNombre()).observe(viewLifecycleOwner){
                     if(it.getPrecio() == tarifa.getPrecio()){
-                        localDB.deleteTarifa(tarifa)
-                        tarifa.setAdministrador("")
-                        CloudDataBase.addTarifa(tarifa)
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.deleteTarifa(tarifa)
+                            tarifa.setAdministrador("")
+                            CloudDataBase.addTarifa(tarifa)
+                        }
                     }
 
                     Toast.makeText(requireContext(), "¡Tarifa borrada con éxito!", Toast.LENGTH_SHORT).show()

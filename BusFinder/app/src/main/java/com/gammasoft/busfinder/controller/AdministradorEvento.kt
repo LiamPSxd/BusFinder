@@ -26,24 +26,28 @@ class AdministradorEvento(private val fragment: TarjetaBase,
     private fun agregarChofer(){
         fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
-        fragment.pushPopup(TarjetaChofer().mostrar(R.anim.zoom_in, R.anim.zoom_out))
+        binding.btnAgregar.visibility = View.GONE
+        fragment.pushPopup(TarjetaChofer(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
     private fun agregarRuta(){
         fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
-        fragment.pushPopup(TarjetaRuta().mostrar(R.anim.zoom_in, R.anim.zoom_out))
+        binding.btnAgregar.visibility = View.GONE
+        fragment.pushPopup(TarjetaRuta(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
     private fun agregarParada(){
         fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
-        fragment.pushPopup(TarjetaParada().mostrar(R.anim.zoom_in, R.anim.zoom_out))
+        binding.btnAgregar.visibility = View.GONE
+        fragment.pushPopup(TarjetaParada(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
     private fun agregarTarifa(){
         fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
-        fragment.pushPopup(TarjetaTarifa().mostrar(R.anim.zoom_in, R.anim.zoom_out))
+        binding.btnAgregar.visibility = View.GONE
+        fragment.pushPopup(TarjetaTarifa(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 }

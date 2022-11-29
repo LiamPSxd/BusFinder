@@ -17,7 +17,6 @@ class PerfilAdministrador: Fragment(){
     private val binding get() = _binding!!
 
     private lateinit var evento: PerfilAdministradorChoferEvento
-    private val localDB = LocalDataBase.getDB(this.requireContext()).crud()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +29,7 @@ class PerfilAdministrador: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(this.requireContext()).crud()
 
         var admin = Administrador()
         parentFragmentManager.setFragmentResultListener("Administrador", this){ _, bundle ->

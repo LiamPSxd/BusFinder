@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaAgregarRutaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
@@ -22,14 +23,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TarjetaRuta: BaseBlurPopup(){
+class TarjetaRuta(private val bin: FragmentAdministradorBinding): BaseBlurPopup(){
     private var _binding: TarjetaAgregarRutaBinding? = null
     private val binding get() = _binding!!
 
-    private val localDB = LocalDataBase.getDB(requireContext()).crud()
-
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta().withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(bin).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +42,7 @@ class TarjetaRuta: BaseBlurPopup(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+        val localDB = LocalDataBase.getDB(requireContext()).crud()
 
         val mapa = childFragmentManager.findFragmentById(R.id.mapaRuta) as Mapa
         mapa.parada = false
@@ -58,6 +58,7 @@ class TarjetaRuta: BaseBlurPopup(){
 
         binding.btnCancelar.setOnClickListener{
             dismiss()
+            bin.btnAgregar.visibility = View.VISIBLE
         }
 
         binding.btnAgregar.setOnClickListener{
@@ -77,17 +78,22 @@ class TarjetaRuta: BaseBlurPopup(){
                         coor.setAdministrador(admin)
                         val rC = RutaCoordenada(r.getId(), coor.getId())
 
-                        localDB.addCoordenadas(coor)
-                        localDB.addRutaCoordenadas(rC)
-                        CloudDataBase.addCoordenada(coor)
-                        CloudDataBase.addRutaCoordenada(rC)
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.addCoordenadas(coor)
+                            localDB.addRutaCoordenadas(rC)
+                            CloudDataBase.addCoordenada(coor)
+                            CloudDataBase.addRutaCoordenada(rC)
+                        }
                     }
 
-                    localDB.addRutas(r)
-                    CloudDataBase.addRuta(r)
+                    CoroutineScope(Dispatchers.IO).launch{
+                        localDB.addRutas(r)
+                        CloudDataBase.addRuta(r)
+                    }
 
                     Toast.makeText(requireContext(), "¡Ruta agregada con éxito!", Toast.LENGTH_SHORT).show()
                     dismiss()
+                    bin.btnAgregar.visibility = View.VISIBLE
                 }else if(ruta.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar la Ruta").show(parentFragmentManager, "Advertencia")
                 else if(mapa.coordenadas.isEmpty()) MensajeAlerta("ADVERTENCIA", "Debe dibujar una Ruta").show(parentFragmentManager, "Advertencia")
             }
