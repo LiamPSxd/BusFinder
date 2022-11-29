@@ -14,9 +14,8 @@ import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.squareup.picasso.Picasso
 
 class PerfilPublicoEvento(private val fragment: Fragment,
-                          private val binding: FragmentPerfilPublicoBinding): View.OnClickListener{
-    var cuenta = Cuenta()
-
+                          private val binding: FragmentPerfilPublicoBinding,
+                          private val cuenta: Cuenta): View.OnClickListener{
     override fun onClick(v: View?){
         when(v?.id){
             binding.btnCambiarFotoPerfil.id -> cambiarFotoPerfil()

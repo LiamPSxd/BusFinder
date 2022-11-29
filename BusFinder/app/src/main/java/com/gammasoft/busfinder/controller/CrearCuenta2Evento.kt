@@ -40,7 +40,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CrearCuenta2Evento(private val fragment: Fragment,
                          private val binding: FragmentCrearCuenta2Binding): View.OnClickListener{
@@ -48,7 +47,7 @@ class CrearCuenta2Evento(private val fragment: Fragment,
     private val cloudDB = CloudDataBase
 
     private val callbackManager = CallbackManager.Factory.create()
-    private var codigo: Long = 0
+    private var codigo = 0L
 
     override fun onClick(v: View?){
         when(v?.id){
@@ -108,7 +107,7 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                         val linea = fragment.arguments?.getString("linea").orEmpty()
 
                         when(fragment.arguments?.getString("tipo")){
-                            "Administrador" -> {
+                            "Administrador_" -> {
                                 val admin = Administrador(usuario, rfc, nombre, celular, linea, 0)
                                 val cu = Cuenta(correo, "GOOGLE${admin.getUsuario()}", foto, 0, "Google", true)
                                 val cuAdmin = CuentaAdministrador(cu.getCorreo(), admin.getUsuario())
@@ -123,8 +122,8 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                 fragment.startActivity(intent)
                             }
 
-                            "Chofer" -> {
-                                val chofer = Chofer(usuario, rfc, nombre, celular, linea, 0, 0, 0.0)
+                            "Chofer_" -> {
+                                val chofer = Chofer(usuario, rfc, nombre, celular, linea, 0, 0, 0.0, "")
                                 val cu = Cuenta(correo, "GOOGLE${chofer.getUsuario()}", foto, 1, "Google", true)
                                 val cuChofer = CuentaChofer(cu.getCorreo(), chofer.getUsuario())
 
@@ -138,7 +137,7 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                 fragment.startActivity(intent)
                             }
 
-                            "Publico" ->{
+                            "Publico_" ->{
                                 val publico = PublicoGeneral(usuario)
                                 val cu = Cuenta(correo, "GOOGLE${publico.getUsuario()}", foto, 2, "Google", true)
                                 val cuPublico = CuentaPublico(cu.getCorreo(), publico.getUsuario())
@@ -185,7 +184,7 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                             val linea = fragment.arguments?.getString("linea").orEmpty()
 
                                             when(fragment.arguments?.getString("tipo")){
-                                                "Administrador" -> {
+                                                "Administrador_" -> {
                                                     val admin = Administrador(usuario, rfc, nombre, celular, linea, 0)
                                                     val cu = Cuenta(correo, "FACEBOOK${admin.getUsuario()}", foto, 0, "Facebook", true)
                                                     val cuAdmin = CuentaAdministrador(cu.getCorreo(), admin.getUsuario())
@@ -200,8 +199,8 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                                     fragment.startActivity(intent)
                                                 }
 
-                                                "Chofer" -> {
-                                                    val chofer = Chofer(usuario, rfc, nombre, celular, linea, 0, 0, 0.0)
+                                                "Chofer_" -> {
+                                                    val chofer = Chofer(usuario, rfc, nombre, celular, linea, 0, 0, 0.0, "")
                                                     val cu = Cuenta(correo, "FACEBOOK${chofer.getUsuario()}", foto, 1, "Facebook", true)
                                                     val cuChofer = CuentaChofer(cu.getCorreo(), chofer.getUsuario())
 
@@ -215,7 +214,7 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                                     fragment.startActivity(intent)
                                                 }
 
-                                                "Publico" ->{
+                                                "Publico_" ->{
                                                     val publico = PublicoGeneral(usuario)
                                                     val cu = Cuenta(correo, "FACEBOOK${publico.getUsuario()}", foto, 2, "Facebook", true)
                                                     val cuPublico = CuentaPublico(cu.getCorreo(), publico.getUsuario())
@@ -260,29 +259,51 @@ class CrearCuenta2Evento(private val fragment: Fragment,
         var res = true
 
         CoroutineScope(Dispatchers.IO).launch{
-            cloudDB.cloudDataBase.collection("CuentaPublico").document(usuario).get().addOnSuccessListener{ cp ->
-                if(cp.exists() && cp.getString("publicoGeneralUsuario").toString().isNotEmpty()) res = false
-                else
-                    cloudDB.cloudDataBase.collection("CuentaChofer").document(usuario).get().addOnSuccessListener{ cch ->
-                        if(cch.exists() && cch.getString("choferUsuario").toString().isNotEmpty()) res = false
-                        else
-                            cloudDB.cloudDataBase.collection("CuentaAdministrador").document(usuario).get().addOnSuccessListener{ ca ->
-                                if(ca.exists() && ca.getString("administradorUsuario").toString().isNotEmpty()) res = false
-                                else
-                                    localDB.getCuentaByAdministradorUsuarioOCuentaCorreo(usuario).observe(fragment){ admin ->
-                                        if(admin != null) res = false
-                                        else
-                                            localDB.getCuentaByChoferUsuarioOCuentaCorreo(usuario).observe(fragment){ chofer ->
-                                                if(chofer != null) res = false
-                                                else
-                                                    localDB.getCuentaByPublicoUsuarioOCuentaCorreo(usuario).observe(fragment){ publico ->
-                                                        if(publico != null) res = false
-                                                    }
-                                            }
-                                    }
-                            }
-                    }
+            cloudDB.cloudDataBase.collection("CuentaPublico").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
+                for(publico in it) if(publico.exists())
+                    localDB.addCuentasPublico(CuentaPublico(publico.getString("cuentaCorreo").toString(), publico.getString("publicoGeneralUsuario").toString()))
             }
+
+            cloudDB.cloudDataBase.collection("CuentaPublico").whereEqualTo("publicoGeneralUsuario", usuario).get().addOnSuccessListener{
+                for(publico in it) if(publico.exists())
+                    localDB.addCuentasPublico(CuentaPublico(publico.getString("cuentaCorreo").toString(), publico.getString("publicoGeneralUsuario").toString()))
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch{
+            cloudDB.cloudDataBase.collection("CuentaChofer").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
+                for(chofer in it) if(chofer.exists())
+                    localDB.addCuentasChofer(CuentaChofer(chofer.getString("cuentaCorreo").toString(), chofer.getString("choferUsuario").toString()))
+            }
+
+            cloudDB.cloudDataBase.collection("CuentaChofer").whereEqualTo("choferUsuario", usuario).get().addOnSuccessListener{
+                for(chofer in it) if(chofer.exists())
+                    localDB.addCuentasChofer(CuentaChofer(chofer.getString("cuentaCorreo").toString(), chofer.getString("choferUsuario").toString()))
+            }
+        }
+
+        CoroutineScope(Dispatchers.IO).launch{
+            cloudDB.cloudDataBase.collection("CuentaAdministrador").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
+                for(admin in it) if(admin.exists())
+                    localDB.addCuentasAdministrador(CuentaAdministrador(admin.getString("cuentaCorreo").toString(), admin.getString("administradorUsuario").toString()))
+            }
+
+            cloudDB.cloudDataBase.collection("CuentaAdministrador").whereEqualTo("administradorUsuario", usuario).get().addOnSuccessListener{
+                for(admin in it) if(admin.exists())
+                    localDB.addCuentasAdministrador(CuentaAdministrador(admin.getString("cuentaCorreo").toString(), admin.getString("administradorUsuario").toString()))
+            }
+        }
+
+        localDB.getCuentaByPublicoUsuarioOCuentaCorreo(usuario).observe(fragment){ publico ->
+            if(publico != null) res = false
+            else
+                localDB.getCuentaByChoferUsuarioOCuentaCorreo(usuario).observe(fragment) { chofer ->
+                    if (chofer != null) res = false
+                    else
+                        localDB.getCuentaByAdministradorUsuarioOCuentaCorreo(usuario).observe(fragment){ admin ->
+                            if(admin != null) res = false
+                        }
+                }
         }
 
         return res
@@ -291,12 +312,64 @@ class CrearCuenta2Evento(private val fragment: Fragment,
     private fun verificarCorreo(correo: String): Boolean =
         Patterns.EMAIL_ADDRESS.matcher(correo).matches()
 
-    private suspend fun getCodigo(tipo: String) =
-        withContext(Dispatchers.IO){
-            MensajeCodigo(tipo, clickListener = {
-                codigo = it
-            }).show(fragment.parentFragmentManager, "Codigo")
+    private fun finalizar(tipo: String, usuario: String, rfc: String, nombre: String, celular: Long, linea: String,
+                          correo: String, contrasenia: String, foto: String){
+        localDB.deleteAdministradores()
+
+        CoroutineScope(Dispatchers.IO).launch{
+            when(tipo){
+                "Administrador_" -> {
+                    if(codigo != 0L){
+                        val a = Administrador(usuario, rfc, nombre, celular, linea, codigo)
+                        val c = Cuenta(correo, contrasenia, foto, 0, "Correo", true)
+                        val cA = CuentaAdministrador(c.getCorreo(), a.getUsuario())
+
+                        localDB.addAdministradores(a)
+                        localDB.addCuentas(c)
+                        localDB.addCuentasAdministrador(cA)
+
+                        cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
+                            if(it.isSuccessful){
+                                cloudDB.addAdministrador(a)
+                                cloudDB.addCuenta(c)
+                                cloudDB.addCuentaAdministrador(cA)
+                            }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
+                        }
+
+                        val intent = Intent(fragment.context, PrincipalAdministrador::class.java)
+                        intent.putExtra("cuenta", c.getCorreo())
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        fragment.startActivity(intent)
+                    }
+                }
+
+                "Chofer_" -> {
+                    if(codigo != 0L){
+                        val ch = Chofer(usuario, rfc, nombre, celular, linea, codigo, 0, 0.0, "")
+                        val c = Cuenta(correo, contrasenia, foto, 1, "Correo", true)
+                        val cCh = CuentaChofer(c.getCorreo(), ch.getUsuario())
+
+                        localDB.addChoferes(ch)
+                        localDB.addCuentas(c)
+                        localDB.addCuentasChofer(cCh)
+
+                        cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
+                            if(it.isSuccessful){
+                                cloudDB.addChofer(ch)
+                                cloudDB.addCuenta(c)
+                                cloudDB.addCuentaChofer(cCh)
+                            }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
+                        }
+
+                        val intent = Intent(fragment.context, PrincipalChofer::class.java)
+                        intent.putExtra("cuenta", c.getCorreo())
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        fragment.startActivity(intent)
+                    }
+                }
+            }
         }
+    }
 
     private fun registrar(){
         when(Conexion.comprobarConexion(fragment.requireActivity())){
@@ -314,70 +387,22 @@ class CrearCuenta2Evento(private val fragment: Fragment,
 
                 if(usuario.isNotEmpty() && correo.isNotEmpty() && contrasenia.isNotEmpty() && confContrasenia.isNotEmpty()){
                     if(verificarUsuarioCorreoRegistrado(usuario) && verificarCorreo(correo) && contrasenia.length >= 6 && contrasenia == confContrasenia){
-                        when(fragment.arguments?.getString("tipo")){
-                            "Administrador" -> {
-                                CoroutineScope(Dispatchers.IO).launch{
-                                    getCodigo("Administrador")
-
-                                    withContext(Dispatchers.IO){
-                                        if(codigo != 0.toLong()){
-                                            val a = Administrador(usuario, rfc, nombre, celular, linea, this@CrearCuenta2Evento.codigo)
-                                            val c = Cuenta(correo, contrasenia, foto, 0, "Correo", true)
-                                            val cA = CuentaAdministrador(c.getCorreo(), a.getUsuario())
-
-                                            localDB.addAdministradores(a)
-                                            localDB.addCuentas(c)
-                                            localDB.addCuentasAdministrador(cA)
-
-                                            cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
-                                                if(it.isSuccessful){
-                                                    cloudDB.addAdministrador(a)
-                                                    cloudDB.addCuenta(c)
-                                                    cloudDB.addCuentaAdministrador(cA)
-                                                }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
-                                            }
-
-                                            val intent = Intent(fragment.context, PrincipalAdministrador::class.java)
-                                            intent.putExtra("cuenta", c.getCorreo())
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                            fragment.startActivity(intent)
-                                        }
-                                    }
-                                }
+                        when(val tipo = fragment.arguments?.getString("tipo")){
+                            "Administrador_" -> {
+                                MensajeCodigo(tipo, clickListener = {
+                                    codigo = it
+                                    finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, contrasenia, foto)
+                                }).show(fragment.parentFragmentManager, "Codigo")
                             }
 
-                            "Chofer" -> {
-                                CoroutineScope(Dispatchers.IO).launch{
-                                    getCodigo("Chofer")
-
-                                    withContext(Dispatchers.IO){
-                                        if(codigo != 0.toLong()){
-                                            val ch = Chofer(usuario, rfc, nombre, celular, linea, this@CrearCuenta2Evento.codigo, 0, 0.0)
-                                            val c = Cuenta(correo, contrasenia, foto, 1, "Correo", true)
-                                            val cCh = CuentaChofer(c.getCorreo(), ch.getUsuario())
-
-                                            localDB.addChoferes(ch)
-                                            localDB.addCuentas(c)
-                                            localDB.addCuentasChofer(cCh)
-
-                                            cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
-                                                if(it.isSuccessful){
-                                                    cloudDB.addChofer(ch)
-                                                    cloudDB.addCuenta(c)
-                                                    cloudDB.addCuentaChofer(cCh)
-                                                }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
-                                            }
-
-                                            val intent = Intent(fragment.context, PrincipalChofer::class.java)
-                                            intent.putExtra("cuenta", c.getCorreo())
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                            fragment.startActivity(intent)
-                                        }
-                                    }
-                                }
+                            "Chofer_" -> {
+                                MensajeCodigo(tipo, clickListener = {
+                                    codigo = it
+                                    finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, contrasenia, foto)
+                                }).show(fragment.parentFragmentManager, "Codigo")
                             }
 
-                            "Publico" -> {
+                            "Publico_" -> {
                                 CoroutineScope(Dispatchers.IO).launch{
                                     val p = PublicoGeneral(usuario)
                                     val c = Cuenta(correo, contrasenia, foto, 2, "Correo", true)

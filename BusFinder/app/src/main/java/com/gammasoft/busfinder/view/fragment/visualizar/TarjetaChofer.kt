@@ -11,11 +11,13 @@ import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
 import com.gammasoft.busfinder.view.fragment.TarjetaBase
+import com.gammasoft.busfinder.view.util.vibrate
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
 
 class TarjetaChofer(private val fragment: TarjetaBase,
+                    private val titulo: String,
                     private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarChoferBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +25,7 @@ class TarjetaChofer(private val fragment: TarjetaBase,
     private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(fragment, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,20 +41,26 @@ class TarjetaChofer(private val fragment: TarjetaBase,
         super.onViewCreated(view, savedInstanceState)
 
         var chofer = Chofer()
-
-        localDB.getChoferByNombre(id).observe(viewLifecycleOwner){ ch ->
-            binding.txtRFC.text = ch.getRfc()
-            binding.txtNombre.text = ch.getNombre()
-            binding.txtCelular.text = ch.getNumCelular().toString()
-            binding.txtCalificacion.progress = ch.getCalificacion().toInt()
-            chofer = ch
+        localDB.getChoferes().observe(viewLifecycleOwner){
+            for(ch in it) if(ch.getRfc() == id && ch.getNombre() == titulo){
+                binding.txtRFC.text = ch.getRfc()
+                binding.txtNombre.text = ch.getNombre()
+                binding.txtCelular.text = ch.getNumCelular().toString()
+                binding.txtCalificacion.progress = ch.getCalificacion().toInt()
+                chofer = ch
+                break
+            }
         }
 
         binding.btnBorrar.setOnClickListener{
+            fragment.context?.vibrate(70L)
+            dismiss()
             fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaChofer(localDB, chofer).mostrar())
         }
 
         binding.btnModificar.setOnClickListener{
+            fragment.context?.vibrate(60L)
+            dismiss()
             fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaChofer(localDB, chofer).mostrar())
         }
     }

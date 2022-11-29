@@ -230,7 +230,7 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
                             cloudDB.cloudDataBase.collection("CuentaAdministrador").document(correo).get().addOnSuccessListener{ ca ->
                                 if(ca.exists())
                                     iniciarSesionCorreoFirebase(ca.getString("cuentaCorreo").toString(), contrasenia)
-                                else MensajeAlerta("ERROR", "Cuenta no encontrada en la Nube").show(activity.supportFragmentManager, "Error")
+                                else MensajeAlerta("ERROR", "No se encontró ninguna cuenta con esos datos").show(activity.supportFragmentManager, "Error")
                             }
                         }
                     }
@@ -268,7 +268,7 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
                 "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la Actividad Principal").show(activity.supportFragmentManager, "Avertencia")
                 else -> MensajeAlerta("ERROR", "Actividad no encontrada").show(activity.supportFragmentManager, "Error")
             }
-        }else MensajeAlerta("ADVERTENCIA", "No existe una cuenta con esos datos").show(activity.supportFragmentManager, "Avertencia")
+        }else MensajeAlerta("ERROR", "No se encontró ninguna cuenta con esos datos").show(activity.supportFragmentManager, "Avertencia")
     }
 
     private fun iniciar(){

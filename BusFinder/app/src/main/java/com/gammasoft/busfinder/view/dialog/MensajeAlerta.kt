@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.gammasoft.busfinder.databinding.TarjetaAlertaBinding
+import com.gammasoft.busfinder.view.util.vibrate
 
 class MensajeAlerta(private val titulo: String,
                     private val mensaje: String): DialogFragment(){
@@ -15,6 +16,8 @@ class MensajeAlerta(private val titulo: String,
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog{
         _binding = TarjetaAlertaBinding.inflate(layoutInflater)
+
+        context?.vibrate(80L)
 
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)

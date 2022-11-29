@@ -1,19 +1,27 @@
 package com.gammasoft.busfinder.view.fragment.modificar
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaModificarTarifaBinding
 import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
+import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TarjetaTarifa(private val localDB: Crud,
                     private val tarifa: Tarifa): BaseBlurPopup(){
@@ -35,6 +43,21 @@ class TarjetaTarifa(private val localDB: Crud,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
+
+        binding.txtTarifa.text = Editable.Factory().newEditable(tarifa.getNombre())
+        binding.txtPrecio.text = tarifa.getPrecio().toString()
+        binding.skPrecio.progress = tarifa.getPrecio().toString().toInt()
+
+        val publicos = ArrayList<String>()
+        localDB.getTarifas().observe(viewLifecycleOwner){
+            for(publico in it) publicos.add(publico.getNombre())
+        }
+
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            publicos
+        ).also{ binding.txtTarifa.setAdapter(it) }
 
         binding.skPrecio.setOnSeekBarChangeListener(
             object: SeekBar.OnSeekBarChangeListener{
@@ -58,7 +81,22 @@ class TarjetaTarifa(private val localDB: Crud,
             dismiss()
         }
 
-        binding.btnModificar.setOnClickListener{}
+        binding.btnModificar.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch{
+                val publico = binding.txtTarifa.text.toString()
+                val precio = binding.txtPrecio.text.toString()
+
+                if(publico.isNotEmpty() && precio.isNotEmpty()){
+                    tarifa.setNombre(publico)
+                    tarifa.setPrecio(precio.toDouble())
+                    localDB.updateTarifa(tarifa)
+                    CloudDataBase.addTarifa(tarifa)
+
+                    Toast.makeText(requireContext(), "¡Tarifa modificada con éxito!", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el Público").show(parentFragmentManager, "Advertencia")
+            }
+        }
     }
 
     override fun onDestroy(){

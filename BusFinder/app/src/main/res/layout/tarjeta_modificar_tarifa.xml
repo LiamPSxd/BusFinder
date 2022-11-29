@@ -69,7 +69,7 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <MultiAutoCompleteTextView
                 android:id="@+id/txtTarifa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 android:fontFamily="@font/phenomena_bold"
                 android:gravity="start|center"
                 android:hint="ingrese el otro público"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textAutoCorrect"
                 android:textColor="@color/black1"
                 android:textSize="22sp"
                 android:enabled="false"
@@ -115,7 +115,7 @@
                 android:layout_toEndOf="@+id/etqPrecio"
                 android:fontFamily="@font/phenomena_extra_bold"
                 android:gravity="start|center"
-                android:text="00"
+                android:text="05"
                 android:textColor="@color/black1"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -133,8 +133,8 @@
                 android:fontFamily="@font/phenomena_extra_bold"
                 android:textColor="@color/black1"
                 android:textSize="22sp"
-                android:max="20"
-                android:progress="3"
+                android:max="25"
+                android:progress="5"
                 android:progressTint="@color/color12"
                 android:progressBackgroundTint="@color/color11"
                 android:splitTrack="true"

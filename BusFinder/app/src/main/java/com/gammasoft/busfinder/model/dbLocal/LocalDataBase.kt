@@ -8,12 +8,11 @@ import com.gammasoft.busfinder.model.dbLocal.entidades.*
 import com.gammasoft.busfinder.model.dbLocal.relaciones.*
 
 @Database(entities = [Cuenta::class, Administrador::class, Chofer::class,
-    PublicoGeneral::class, Ruta::class, Calle::class, Parada::class,
-    Coordenada::class, Unidad::class, Tarifa::class, Horario::class,
-    CuentaAdministrador::class, CuentaChofer::class, CuentaPublico::class,
-    ParadaCoordenada::class, CalleCoordenada::class, RutaCalle::class,
+    PublicoGeneral::class, Ruta::class, Parada::class, Coordenada::class,
+    Unidad::class, Tarifa::class, Horario::class, CuentaAdministrador::class,
+    CuentaChofer::class, CuentaPublico::class, RutaCoordenada::class,
     RutaParada::class, UnidadCoordenada::class, HorarioCUR::class],
-    version = 3,
+    version = 4,
     exportSchema = false)
 abstract class LocalDataBase: RoomDatabase(){
     abstract fun crud(): Crud

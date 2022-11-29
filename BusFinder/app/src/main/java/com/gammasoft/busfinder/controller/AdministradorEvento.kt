@@ -9,6 +9,7 @@ import com.gammasoft.busfinder.view.fragment.agregar.TarjetaChofer
 import com.gammasoft.busfinder.view.fragment.agregar.TarjetaParada
 import com.gammasoft.busfinder.view.fragment.agregar.TarjetaRuta
 import com.gammasoft.busfinder.view.fragment.agregar.TarjetaTarifa
+import com.gammasoft.busfinder.view.util.vibrate
 
 class AdministradorEvento(private val fragment: TarjetaBase,
                           private val binding: FragmentAdministradorBinding): View.OnClickListener{
@@ -23,21 +24,25 @@ class AdministradorEvento(private val fragment: TarjetaBase,
     }
 
     private fun agregarChofer(){
+        fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
         fragment.pushPopup(TarjetaChofer().mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
     private fun agregarRuta(){
+        fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
         fragment.pushPopup(TarjetaRuta().mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
     private fun agregarParada(){
+        fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
         fragment.pushPopup(TarjetaParada().mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
     private fun agregarTarifa(){
+        fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
         fragment.pushPopup(TarjetaTarifa().mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }

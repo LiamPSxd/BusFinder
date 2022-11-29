@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts.PickVisualMedia
 import androidx.fragment.app.Fragment
 import com.facebook.login.LoginManager
 import com.gammasoft.busfinder.databinding.FragmentPerfilAdminChoferBinding
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.activity.Bienvenida
@@ -14,9 +15,8 @@ import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.squareup.picasso.Picasso
 
 class PerfilAdministradorChoferEvento(private val fragment: Fragment,
-                                      private val binding: FragmentPerfilAdminChoferBinding): View.OnClickListener{
-    var cuenta = Cuenta()
-
+                                      private val binding: FragmentPerfilAdminChoferBinding,
+                                      private val cuenta: Cuenta): View.OnClickListener{
     override fun onClick(v: View?){
         when(v?.id){
             binding.btnCambiarFotoPerfil.id -> cambiarFotoPerfil()
@@ -33,7 +33,26 @@ class PerfilAdministradorChoferEvento(private val fragment: Fragment,
         pickMedia.launch(PickVisualMediaRequest(PickVisualMedia.ImageOnly))
 
     private fun cerrarSesion(){
+        val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
+
         cuenta.setEstado(false)
+
+        when(cuenta.mostrarTipo()){
+            "Administrador" -> {
+                localDB.deleteChoferes()
+                localDB.deleteRutas()
+                localDB.deleteParadas()
+                localDB.deleteTarifas()
+                localDB.deleteCoordenadas()
+            }
+
+            "Chofer" -> {
+                localDB.deleteRutas()
+                localDB.deleteParadas()
+                localDB.deleteTarifas()
+                localDB.deleteCoordenadas()
+            }
+        }
 
         when(cuenta.getMetodo()){
             "Correo", "Google" -> CloudDataBase.getAuth().signOut()

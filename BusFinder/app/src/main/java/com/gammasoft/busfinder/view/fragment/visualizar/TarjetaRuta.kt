@@ -8,14 +8,18 @@ import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarRutaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
 import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.fragment.Mapa
 import com.gammasoft.busfinder.view.fragment.TarjetaBase
+import com.gammasoft.busfinder.view.util.vibrate
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
 
 class TarjetaRuta(private val fragment: TarjetaBase,
+                  private val titulo: String,
                   private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarRutaBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +27,7 @@ class TarjetaRuta(private val fragment: TarjetaBase,
     private val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(fragment, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,17 +43,37 @@ class TarjetaRuta(private val fragment: TarjetaBase,
         super.onViewCreated(view, savedInstanceState)
 
         var ruta = Ruta()
+        localDB.getRutas().observe(viewLifecycleOwner){
+            for(ru in it) if(ru.getId() == id.toInt() && ru.getNombre() == titulo){
+                binding.txtRuta.text = ru.getNombre()
+                ruta = ru
+                break
+            }
+        }
 
-        localDB.getRutaByNombre(id).observe(viewLifecycleOwner){ ru ->
-            binding.txtRuta.text = ru.getNombre()
-            ruta = ru
+        val mapa = childFragmentManager.findFragmentById(R.id.mapa) as Mapa
+
+        val coordenadas = ArrayList<Coordenada>()
+        localDB.getCoordenadasIDByRutaID(ruta.getId()).observe(viewLifecycleOwner){
+            for(cR in it) localDB.getCoordenadaById(cR.getCoordenadaID()).observe(viewLifecycleOwner){ coor ->
+                coordenadas.add(coor)
+            }
+        }
+
+        var inicio = "${coordenadas[0].getLongitud()},${coordenadas[0].getLatitud()}"
+        for(i in 1 until coordenadas.size){
+            val fin = "${coordenadas[i].getLongitud()},${coordenadas[i].getLatitud()}"
+            mapa.crearRutas(inicio, fin)
+            inicio = fin
         }
 
         binding.btnBorrar.setOnClickListener{
+            fragment.context?.vibrate(70L)
             fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaRuta(localDB, ruta).mostrar())
         }
 
         binding.btnModificar.setOnClickListener{
+            fragment.context?.vibrate(60L)
             fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaRuta(localDB, ruta).mostrar())
         }
     }

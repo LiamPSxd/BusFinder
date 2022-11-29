@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaAgregarChoferBinding
@@ -14,6 +15,7 @@ import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
@@ -62,7 +64,6 @@ class TarjetaChofer: BaseBlurPopup(){
                 onItemSelectedListener = SpinnerEvento()
                 prompt = "Seleccione un Chofer"
                 gravity = Gravity.START
-                setBackgroundResource(R.color.white)
             }
         }
 
@@ -75,18 +76,31 @@ class TarjetaChofer: BaseBlurPopup(){
                 val chRFC = binding.txtRFC.text.toString()
                 var chofer = Chofer()
 
-                if(chRFC.isNotEmpty()){
-                    localDB.getChoferByRFC(chRFC).observe(this@TarjetaChofer){
-                        chofer = it
+                if(chRFC.isEmpty() && chSpinner.isEmpty()){
+                    MensajeAlerta("ERROR", "Debe ingresar o seleccionar un Chofer").show(parentFragmentManager, "Advertencia")
+                }else{
+                    if(chRFC.isNotEmpty()){
+                        localDB.getChoferByRFC(chRFC).observe(viewLifecycleOwner){
+                            chofer = it
+                        }
+                    }else if(chSpinner.isNotEmpty()){
+                        localDB.getChoferByNombre(chSpinner).observe(this@TarjetaChofer){
+                            chofer = it
+                        }
                     }
-                }else if(chSpinner.isNotEmpty()){
-                    localDB.getChoferByNombre(chSpinner).observe(this@TarjetaChofer){
-                        chofer = it
-                    }
-                }
 
-                localDB.addChoferes(chofer)
-                CloudDataBase.addChofer(chofer)
+                    if(chofer.getNombre() != ""){
+                        parentFragmentManager.setFragmentResultListener("Administrador", this@TarjetaChofer){ _, bundle ->
+                            chofer.setAdministrador(bundle.getString("administrador").toString())
+                        }
+
+                        localDB.addChoferes(chofer)
+                        CloudDataBase.addChofer(chofer)
+
+                        Toast.makeText(requireContext(), "¡Chofer agregado con éxito!", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }else MensajeAlerta("ERROR", "No se encontró ningún chofer con ese dato").show(parentFragmentManager, "Error")
+                }
             }
         }
     }

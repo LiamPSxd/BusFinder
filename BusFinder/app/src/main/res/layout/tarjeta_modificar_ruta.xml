@@ -106,33 +106,33 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <include
-                android:id="@+id/mapa"
-                layout="@layout/fragment_mapa"
+            <fragment
+                android:id="@+id/mapaRutaMod"
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/ins2"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:name="com.google.android.gms.maps.SupportMapFragment" />
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                tools:layout="@layout/fragment_mapa" />
 
             <ImageButton
                 android:id="@+id/btnAtras"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="10dp"
                 android:layout_below="@+id/ins2"
-                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/btnLimpiar"
                 android:backgroundTint="#00000000"
                 android:contentDescription="Borrar acción"
                 app:srcCompat="@drawable/atras" />
 
             <ImageButton
                 android:id="@+id/btnLimpiar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
                 android:layout_below="@+id/ins2"
@@ -145,9 +145,9 @@
                 android:id="@+id/btnModificar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
-                android:layout_below="@+id/mapa"
+                android:layout_below="@+id/mapaRutaMod"
                 android:layout_alignParentEnd="true"
                 android:backgroundTint="@color/btnModificar"
                 android:fontFamily="@font/phenomena_black"
@@ -164,9 +164,9 @@
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                android:layout_below="@+id/mapa"
+                android:layout_below="@+id/mapaRutaMod"
                 android:layout_toStartOf="@+id/btnModificar"
                 android:fontFamily="@font/phenomena_black"
                 android:gravity="center"

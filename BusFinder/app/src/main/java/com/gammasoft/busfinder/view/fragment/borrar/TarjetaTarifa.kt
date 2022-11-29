@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaBorrarTarifaBinding
@@ -24,7 +25,7 @@ class TarjetaTarifa(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(localDB, tarifa).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +48,16 @@ class TarjetaTarifa(private val localDB: Crud,
 
         binding.btnBorrar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch{
-                localDB.deleteTarifa(tarifa)
-                CloudDataBase.delete("Tarifa", tarifa.getNombre())
+                localDB.getTarifaByNombre(tarifa.getNombre()).observe(viewLifecycleOwner){
+                    if(it.getPrecio() == tarifa.getPrecio()){
+                        localDB.deleteTarifa(tarifa)
+                        tarifa.setAdministrador("")
+                        CloudDataBase.addTarifa(tarifa)
+                    }
+
+                    Toast.makeText(requireContext(), "¡Tarifa borrada con éxito!", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
             }
         }
     }

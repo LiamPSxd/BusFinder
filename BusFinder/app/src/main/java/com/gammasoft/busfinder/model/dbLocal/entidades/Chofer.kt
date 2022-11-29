@@ -12,8 +12,9 @@ data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario:
                   @ColumnInfo(name = "linea_Transporte") private var linea: String,
                   @ColumnInfo(name = "codigo") private var codigo: Long,
                   @ColumnInfo(name = "noUsuarios") private var noUsuarios: Int,
-                  @ColumnInfo(name = "calificacion") private var calificacion: Double){
-    constructor(): this("", "", "", 0, "", 0, 0, 0.0)
+                  @ColumnInfo(name = "calificacion") private var calificacion: Double,
+                  @ColumnInfo(name = "administrador") private var administrador: String){
+    constructor(): this("", "", "", 0, "", 0, 0, 0.0, "")
 
     fun setUsuario(usuario: String){
         this.usuario = usuario
@@ -79,6 +80,14 @@ data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario:
 
     fun getCalificacion(): Double{
         return calificacion
+    }
+
+    fun setAdministrador(administrador: String){
+        this.administrador = administrador
+    }
+
+    fun getAdministrador(): String{
+        return administrador
     }
 
     override fun toString(): String{

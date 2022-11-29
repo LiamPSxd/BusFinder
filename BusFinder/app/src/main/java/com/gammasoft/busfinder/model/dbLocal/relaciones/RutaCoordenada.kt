@@ -5,31 +5,31 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
-import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
+import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
 
-@Entity(tableName = "ParadaCoordenada",
-        primaryKeys = ["parada_ID", "coordenada_ID"],
-        indices = [Index(value = ["parada_ID"]), Index(value = ["coordenada_ID"])],
+@Entity(tableName = "RutaCoordenada",
+        primaryKeys = ["ruta_ID", "coordenada_ID"],
+        indices = [Index(value = ["ruta_ID"]), Index(value = ["coordenada_ID"])],
         foreignKeys = [
             ForeignKey(
-                entity = Parada::class,
+                entity = Ruta::class,
                 parentColumns = ["id"],
-                childColumns = ["parada_ID"]),
+                childColumns = ["ruta_ID"]),
             ForeignKey(
                 entity = Coordenada::class,
                 parentColumns = ["id"],
                 childColumns = ["coordenada_ID"])
         ])
-data class ParadaCoordenada(@ColumnInfo(name = "parada_ID") private var paradaID: Int,
-                            @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
+data class RutaCoordenada(@ColumnInfo(name = "ruta_ID") private var rutaID: Int,
+                     @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
     constructor(): this(0, 0)
 
-    fun setParadaID(paradaID: Int){
-        this.paradaID = paradaID
+    fun setRutaID(rutaID: Int){
+        this.rutaID = rutaID
     }
 
-    fun getParadaID(): Int{
-        return paradaID
+    fun getRutaID(): Int{
+        return rutaID
     }
 
     fun setCoordenadaID(coordenadaID: Int){

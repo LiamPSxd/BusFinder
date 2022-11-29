@@ -4,17 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaAgregarRutaBinding
+import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
+import com.gammasoft.busfinder.model.dbLocal.relaciones.RutaCoordenada
+import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.view.fragment.Mapa
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TarjetaRuta: BaseBlurPopup(){
     private var _binding: TarjetaAgregarRutaBinding? = null
     private val binding get() = _binding!!
+
+    private val localDB = LocalDataBase.getDB(requireContext()).crud()
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
                 @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta().withEnterAnim(enterAnim).withExitAnim(exitAnim)
@@ -32,15 +44,54 @@ class TarjetaRuta: BaseBlurPopup(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAtras.setOnClickListener{}
+        val mapa = childFragmentManager.findFragmentById(R.id.mapaRuta) as Mapa
+        mapa.parada = false
+        mapa.ruta = true
 
-        binding.btnLimpiar.setOnClickListener{}
+        binding.btnAtras.setOnClickListener{
+            mapa.deshacer()
+        }
+
+        binding.btnLimpiar.setOnClickListener{
+            mapa.limpiarMapa()
+        }
 
         binding.btnCancelar.setOnClickListener{
             dismiss()
         }
 
-        binding.btnAgregar.setOnClickListener{}
+        binding.btnAgregar.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch{
+                val ruta = binding.txtRuta.text.toString()
+                mapa.agregar()
+
+                if(ruta.isNotEmpty() && mapa.coordenadas.isNotEmpty()){
+                    var admin = ""
+                    parentFragmentManager.setFragmentResultListener("Administrador", this@TarjetaRuta){ _, bundle ->
+                        admin = bundle.getString("administrador").toString()
+                    }
+
+                    val r = Ruta(ruta, admin)
+
+                    for(coor in mapa.coordenadas) {
+                        coor.setAdministrador(admin)
+                        val rC = RutaCoordenada(r.getId(), coor.getId())
+
+                        localDB.addCoordenadas(coor)
+                        localDB.addRutaCoordenadas(rC)
+                        CloudDataBase.addCoordenada(coor)
+                        CloudDataBase.addRutaCoordenada(rC)
+                    }
+
+                    localDB.addRutas(r)
+                    CloudDataBase.addRuta(r)
+
+                    Toast.makeText(requireContext(), "¡Ruta agregada con éxito!", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }else if(ruta.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar la Ruta").show(parentFragmentManager, "Advertencia")
+                else if(mapa.coordenadas.isEmpty()) MensajeAlerta("ADVERTENCIA", "Debe dibujar una Ruta").show(parentFragmentManager, "Advertencia")
+            }
+        }
     }
 
     override fun onDestroy(){

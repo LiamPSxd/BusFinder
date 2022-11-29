@@ -5,12 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Horario")
-data class Horario(@PrimaryKey(autoGenerate = true)
-                   @ColumnInfo(name = "id") private var id: Int,
+data class Horario(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") private var id: Int,
                    @ColumnInfo(name = "hora_Entrada") private var horaEntrada: String,
                    @ColumnInfo(name = "hora_Salida") private var horaSalida: String,
                    @ColumnInfo(name = "fecha") private var fecha: String){
     constructor(): this(0, "", "", "")
+    constructor(horaEntrada: String, horaSalida: String, fecha: String): this(0, horaEntrada, horaSalida, fecha)
 
     fun setId(id: Int){
         this.id = id

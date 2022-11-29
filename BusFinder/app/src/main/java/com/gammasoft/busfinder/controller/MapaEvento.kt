@@ -1,39 +1,16 @@
 package com.gammasoft.busfinder.controller
 
-/*import android.view.View
+import android.location.Location
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.gammasoft.busfinder.R
-import com.gammasoft.busfinder.databinding.FragmentMapaBinding
-import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import com.google.android.gms.maps.GoogleMap
 
-class MapaEvento(private val fragment: Fragment,
-                 private val binding: FragmentMapaBinding): View.OnClickListener{
-    override fun onClick(v: View?){
-        when(v?.id){
-            //binding.btnAtras.id -> retroceder()
-            //binding.btnLimpiar.id -> limpiar()
-            else -> MensajeAlerta("ERROR", "Acción no encontrada").mostrar(R.anim.zoom_in, R.anim.zoom_out)
-        }
-
-        /*binding.btnCalculateRoute.setOnClickListener {
-            binding.btnMapClear.isEnabled = false
-            binding.btnCalculateRoute.isEnabled = false
-            start = ""
-            end = ""
-            if(::map.isInitialized){
-                map.setOnMapClickListener {
-                    if(start.isEmpty()){
-                        //Se necesitan ambas coordenadas juntas ejemplo (255515,51541)
-                        start = "${it.longitude},${it.latitude}"
-                    }else if(end.isEmpty()){
-                        end = "${it.longitude},${it.latitude}"
-                        createRoute()
-                    }
-                }
-            }
-        }
-        binding.btnMapClear.setOnClickListener {
-            Toast.makeText(this, "Mapa Actualizado", Toast.LENGTH_SHORT).show()
-        }*/
+class MapaEvento(private val fragment: Fragment): GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener{
+    override fun onMyLocationButtonClick(): Boolean{
+        Toast.makeText(fragment.context, "Llevándolo a su localización", Toast.LENGTH_SHORT).show()
+        return false
     }
-}*/
+
+    override fun onMyLocationClick(coordenadas: Location) =
+        Toast.makeText(fragment.context, "Estás en ${coordenadas.latitude}, ${coordenadas.longitude}", Toast.LENGTH_SHORT).show()
+}

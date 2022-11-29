@@ -4,6 +4,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/tarjeta"
         android:layout_width="match_parent"
@@ -31,10 +35,10 @@
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:fontFamily="@font/phenomena_black"
-                    android:text="Título del Aviso/Error/Éxito"
+                    android:fontFamily="@font/outfit_extra_bold"
+                    android:text="Título (Aviso/Error/Éxito)"
                     android:textColor="@color/black"
-                    android:textSize="25sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <ScrollView
@@ -43,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/etqTitulo"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true">
+                    android:layout_alignParentEnd="true" >
 
                     <TextView
                         android:id="@+id/txtMensaje"
@@ -52,10 +56,10 @@
                         android:gravity="start|center"
                         android:padding="10dp"
                         android:maxLines="30"
-                        android:fontFamily="@font/phenomena_extra_bold"
+                        android:fontFamily="@font/outfit_bold"
                         android:text="Información del Mensaje"
                         android:textColor="@color/black1"
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textStyle="normal" />
                 </ScrollView>
 
@@ -63,17 +67,17 @@
                     android:id="@+id/btnAceptar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@+id/scrollView"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
                     android:backgroundTint="@color/color15"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_bold"
                     android:text="Aceptar"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:cornerRadius="50dp" />
             </RelativeLayout>
@@ -83,5 +87,10 @@
             android:id="@+id/drag_handle_image"
             style="@style/DragHandleLight"
             android:contentDescription="drag_handle" />
+
+        <View
+            android:id="@+id/dragArea"
+            style="@style/DragAreaWrap"
+            android:layout_height="60dp" />
     </androidx.cardview.widget.CardView>
 </FrameLayout>

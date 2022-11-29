@@ -5,10 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Ruta")
-data class Ruta(@PrimaryKey(autoGenerate = true)
-                @ColumnInfo(name = "id") private var id: Int,
-                @ColumnInfo(name = "nombre") private var nombre: String){
-    constructor(): this(0, "")
+data class Ruta(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") private var id: Int,
+                @ColumnInfo(name = "nombre") private var nombre: String,
+                @ColumnInfo(name = "administrador") private var administrador: String){
+    constructor(): this(0, "", "")
+    constructor(nombre: String, administrador: String): this(0, nombre, administrador)
 
     fun setId(id: Int){
         this.id = id
@@ -24,6 +25,14 @@ data class Ruta(@PrimaryKey(autoGenerate = true)
 
     fun getNombre(): String{
         return nombre
+    }
+
+    fun setAdministrador(administrador: String){
+        this.administrador = administrador
+    }
+
+    fun getAdministrador(): String{
+        return administrador
     }
 
     override fun toString(): String{

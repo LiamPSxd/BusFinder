@@ -7,14 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaAgregarParadaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.model.dbLocal.relaciones.RutaParada
+import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
+import com.gammasoft.busfinder.view.fragment.Mapa
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class TarjetaParada: BaseBlurPopup(){
     private var _binding: TarjetaAgregarParadaBinding? = null
@@ -39,6 +47,10 @@ class TarjetaParada: BaseBlurPopup(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
+        val mapa = childFragmentManager.findFragmentById(R.id.mapaParada) as Mapa
+        mapa.ruta = false
+        mapa.parada = true
+
         val rutas = ArrayList<String>()
         localDB.getRutas().observe(this){
             for(ruta in it) rutas.add(ruta.getNombre())
@@ -57,19 +69,47 @@ class TarjetaParada: BaseBlurPopup(){
                 onItemSelectedListener = SpinnerEvento()
                 prompt = "Seleccione una Ruta"
                 gravity = Gravity.START
-                setBackgroundResource(R.color.white)
             }
         }
 
-        binding.btnAtras.setOnClickListener{}
+        binding.btnAtras.setOnClickListener{
+            mapa.deshacer()
+        }
 
-        binding.btnLimpiar.setOnClickListener{}
+        binding.btnLimpiar.setOnClickListener{
+            mapa.limpiarMapa()
+        }
 
         binding.btnCancelar.setOnClickListener{
             dismiss()
         }
 
-        binding.btnAgregar.setOnClickListener{}
+        binding.btnAgregar.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch{
+                mapa.agregar()
+
+                if(ruta.isNotEmpty() && mapa.paradas.isNotEmpty()){
+                    localDB.getRutaByNombre(ruta).observe(this@TarjetaParada){
+                        for(parada in mapa.paradas){
+                            parentFragmentManager.setFragmentResultListener("Administrador", this@TarjetaParada){ _, bundle ->
+                                parada.setAdministrador(bundle.getString("administrador").toString())
+                            }
+
+                            val rutaParada = RutaParada(it.getId(), parada.getId())
+
+                            localDB.addParadas(parada)
+                            localDB.addRutaParadas(rutaParada)
+                            CloudDataBase.addParada(parada)
+                            CloudDataBase.addRutaParada(rutaParada)
+                        }
+
+                        Toast.makeText(requireContext(), "¡Parada(s) agregada(s) con éxito!", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                }else if(ruta.isEmpty()) MensajeAlerta("ADVERTENCIA", "Debe seleccionar una Ruta").show(parentFragmentManager, "Advertencia")
+                else if(mapa.paradas.isEmpty()) MensajeAlerta("ADVERTENCIA", "Debe seleccionar una o más Paradas").show(parentFragmentManager, "Advertencia")
+            }
+        }
     }
 
     override fun onDestroy(){

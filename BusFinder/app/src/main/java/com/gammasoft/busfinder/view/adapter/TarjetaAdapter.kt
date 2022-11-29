@@ -58,39 +58,43 @@ class TarjetaAdapter(private val fragment: TarjetaBase,
         }
 
         override fun onDebouncingClick(view: View){
-            val ides = ArrayList<String>()
+            val ides = ArrayList<List<String>>()
 
-            when(binding.txtTitulo.text){
-                "CHOFERES" -> {
-                    localDB.getChoferes().observe(fragment){
-                        for(chofer in it) ides.add(chofer.getNombre())
+            fragment.parentFragmentManager.setFragmentResultListener("Administrador", fragment){ _, bundle ->
+                val rfc = bundle.getString("administrador").toString()
+
+                when(val titulo = binding.txtTitulo.text.toString()){
+                    "CHOFERES" -> {
+                        localDB.getChoferesByAdministrador(rfc).observe(fragment){
+                            for(chofer in it) ides.add(listOf(chofer.getRfc(), chofer.getNombre()))
+                        }
+
+                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
 
-                    fragment.pushPopup(ListaTarjeta(fragment, "Choferes", ides).mostrar(R.anim.float_up, R.anim.float_down))
-                }
+                    "RUTAS" -> {
+                        localDB.getRutasByAdministrador(rfc).observe(fragment){
+                            for(ruta in it) ides.add(listOf(ruta.getId().toString(), ruta.getNombre()))
+                        }
 
-                "RUTAS" -> {
-                    localDB.getRutas().observe(fragment){
-                        for(ruta in it) ides.add(ruta.getNombre())
+                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
 
-                    fragment.pushPopup(ListaTarjeta(fragment, "Rutas", ides).mostrar(R.anim.float_up, R.anim.float_down))
-                }
+                    "PARADAS" -> {
+                        localDB.getParadasByAdministrador(rfc).observe(fragment){
+                            for(parada in it) ides.add(listOf(parada.getId().toString(), parada.getNombre()))
+                        }
 
-                "PARADAS" -> {
-                    localDB.getParadas().observe(fragment){
-                        for(parada in it) ides.add(parada.getNombre())
+                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
 
-                    fragment.pushPopup(ListaTarjeta(fragment, "Paradas", ides).mostrar(R.anim.float_up, R.anim.float_down))
-                }
+                    "TARIFAS" -> {
+                        localDB.getTarifasByAdministrador(rfc).observe(fragment){
+                            for(tarifa in it) ides.add(listOf(tarifa.getNombre(), tarifa.getNombre()))
+                        }
 
-                "TARIFAS" -> {
-                    localDB.getTarifas().observe(fragment){
-                        for(tarifa in it) ides.add(tarifa.getNombre())
+                        fragment.pushPopup(ListaTarjeta(fragment, titulo, ides).mostrar(R.anim.float_up, R.anim.float_down))
                     }
-
-                    fragment.pushPopup(ListaTarjeta(fragment, "Tarifas", ides).mostrar(R.anim.float_up, R.anim.float_down))
                 }
             }
         }

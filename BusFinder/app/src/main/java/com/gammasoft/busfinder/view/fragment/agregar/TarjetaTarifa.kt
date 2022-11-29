@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaAgregarTarifaBinding
@@ -15,6 +16,7 @@ import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
+import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.gammasoft.busfinder.view.util.withEnterAnim
 import com.gammasoft.busfinder.view.util.withExitAnim
 import io.alterac.blurkit.BlurLayout
@@ -64,7 +66,6 @@ class TarjetaTarifa: BaseBlurPopup(){
                 onItemSelectedListener = SpinnerEvento()
                 prompt = "Seleccione un Público"
                 gravity = Gravity.START
-                setBackgroundResource(R.color.white)
             }
         }
 
@@ -92,14 +93,24 @@ class TarjetaTarifa: BaseBlurPopup(){
 
         binding.btnAgregar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch{
+                val precio = binding.txtPrecio.text.toString()
                 val publico = if(tarifa == "Otro") binding.txtOtro.text.toString()
                 else tarifa
 
-                val precio = binding.txtPrecio.text.toString().toDouble()
+                if(publico.isNotEmpty() && precio.isNotEmpty()){
+                    var admin = ""
+                    parentFragmentManager.setFragmentResultListener("Administrador", this@TarjetaTarifa){ _, bundle ->
+                        admin = bundle.getString("administrador").toString()
+                    }
 
-                val tarifa = Tarifa(publico, precio)
-                localDB.addTarifas(tarifa)
-                CloudDataBase.addTarifa(tarifa)
+                    val tarifa = Tarifa(publico, precio.toDouble(), admin)
+
+                    localDB.addTarifas(tarifa)
+                    CloudDataBase.addTarifa(tarifa)
+
+                    Toast.makeText(requireContext(), "¡Tarifa agregada con éxito!", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingreesar un Público").show(parentFragmentManager, "Advertencia")
             }
         }
     }

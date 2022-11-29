@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.gammasoft.busfinder.controller.PerfilAdministradorChoferEvento
 import com.gammasoft.busfinder.databinding.FragmentPerfilAdminChoferBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
+import com.gammasoft.busfinder.model.dbLocal.entidades.Administrador
 import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
 import com.squareup.picasso.Picasso
 
@@ -30,33 +31,32 @@ class PerfilAdministrador: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        evento = PerfilAdministradorChoferEvento(this, binding)
-
-        var cuentas = ArrayList<Cuenta>()
-        localDB.getCuentas().observe(viewLifecycleOwner){
-            cuentas = it as ArrayList<Cuenta>
-        }
-
-        if(cuentas.size != 0) for(cuenta in cuentas){
-            if(cuenta.getEstado() && cuenta.mostrarTipo() == "Administrador"){
-                evento.cuenta = cuenta
-
-                Picasso.get().load(cuenta.getFoto()).into(binding.fotoPerfil)
-                binding.txtCorreo.text = cuenta.getCorreo()
-
-                localDB.getCuentaAdministradorByCorreo(cuenta.getCorreo()).observe(viewLifecycleOwner){
-                    localDB.getAdministradorByUsuario(it.getAdminUsuario()).observe(viewLifecycleOwner){ admin ->
-                        binding.txtUsuario.text = admin.getUsuario()
-                        binding.txtNombre.text = admin.getNombre()
-                        binding.txtRFC.text = admin.getRfc()
-                        binding.txtCelular.text = admin.getNumCelular().toString()
-                        binding.txtLinea.text = admin.getLinea()
-                    }
-                }
-
-                break
+        var admin = Administrador()
+        parentFragmentManager.setFragmentResultListener("Administrador", this){ _, bundle ->
+            localDB.getAdministradorByRFC(bundle.getString("administrador").toString()).observe(viewLifecycleOwner){
+                admin = it
             }
         }
+
+        var cuenta = Cuenta()
+        localDB.getCuentaAdministradorByUsuario(admin.getUsuario()).observe(viewLifecycleOwner){
+            localDB.getCuentaByCorreo(it.getCuentaCorreo()).observe(viewLifecycleOwner){ c ->
+                cuenta = c
+            }
+        }
+
+        if(cuenta.getEstado() && cuenta.mostrarTipo() == "Administrador"){
+            Picasso.get().load(cuenta.getFoto()).into(binding.fotoPerfil)
+            binding.txtCorreo.text = cuenta.getCorreo()
+
+            binding.txtUsuario.text = admin.getUsuario()
+            binding.txtNombre.text = admin.getNombre()
+            binding.txtRFC.text = admin.getRfc()
+            binding.txtCelular.text = admin.getNumCelular().toString()
+            binding.txtLinea.text = admin.getLinea()
+        }
+
+        evento = PerfilAdministradorChoferEvento(this, binding, cuenta)
 
         binding.btnCambiarFotoPerfil.setOnClickListener(evento)
 

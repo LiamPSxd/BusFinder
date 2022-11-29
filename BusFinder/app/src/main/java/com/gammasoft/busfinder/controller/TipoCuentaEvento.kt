@@ -12,11 +12,11 @@ class TipoCuentaEvento(private val fragment: Fragment,
                        private val binding: FragmentTipoCuentaBinding): View.OnClickListener{
     override fun onClick(v: View?){
         when(v?.id){
-            binding.trjAdmin.id -> binding.trjAdmin.findNavController().navigate(R.id.fragmentTipoCuenta_TO_fragmentCrearCuentaInicial, bundleOf("tipo" to "Administrador"))
+            binding.trjAdmin.id -> binding.trjAdmin.findNavController().navigate(R.id.fragmentTipoCuenta_TO_fragmentCrearCuentaInicial, bundleOf("tipo" to "Administrador_"))
 
-            binding.trjChofer.id -> binding.trjChofer.findNavController().navigate(R.id.fragmentTipoCuenta_TO_fragmentCrearCuentaInicial, bundleOf("tipo" to "Chofer"))
+            binding.trjChofer.id -> binding.trjChofer.findNavController().navigate(R.id.fragmentTipoCuenta_TO_fragmentCrearCuentaInicial, bundleOf("tipo" to "Chofer_"))
 
-            binding.trjPublico.id -> binding.trjPublico.findNavController().navigate(R.id.fragmentTipoCuenta_TO_fragmentCrearCuentaFinal, bundleOf("tipo" to "Publico"))
+            binding.trjPublico.id -> binding.trjPublico.findNavController().navigate(R.id.fragmentTipoCuenta_TO_fragmentCrearCuentaFinal, bundleOf("tipo" to "Publico_"))
 
             else -> MensajeAlerta("ERROR", "Acción no encontrada").show(fragment.parentFragmentManager, "Error")
         }

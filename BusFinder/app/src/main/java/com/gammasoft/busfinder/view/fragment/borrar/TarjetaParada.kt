@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaBorrarParadaBinding
@@ -24,7 +25,7 @@ class TarjetaParada(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaParada(localDB, parada).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +48,20 @@ class TarjetaParada(private val localDB: Crud,
 
         binding.btnBorrar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch{
-                localDB.deleteParada(parada)
-                CloudDataBase.delete("Parada", "${parada.getId()}")
+                localDB.getParadaById(parada.getId()).observe(viewLifecycleOwner){
+                    if(it.getLatitud() == parada.getLatitud()){
+                        localDB.getRutaIDByParadaID(parada.getId()).observe(viewLifecycleOwner){ ruP ->
+                            localDB.deleteRutaParada(ruP)
+                            CloudDataBase.delete("RutaParada", "${ruP.getRutaID()}")
+                        }
+
+                        localDB.deleteParada(parada)
+                        CloudDataBase.delete("Parada", "${parada.getId()}")
+
+                        Toast.makeText(requireContext(), "¡Parada borrada con éxito!", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                }
             }
         }
     }

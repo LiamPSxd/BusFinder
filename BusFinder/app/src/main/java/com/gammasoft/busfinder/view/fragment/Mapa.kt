@@ -2,55 +2,55 @@ package com.gammasoft.busfinder.view.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Location
+import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.gammasoft.busfinder.R
+import com.gammasoft.busfinder.controller.MapaEvento
 import com.gammasoft.busfinder.databinding.FragmentMapaBinding
+import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
+import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
 import com.gammasoft.busfinder.model.mapa.ApiService
 import com.gammasoft.busfinder.model.mapa.RutaResponse
+import com.gammasoft.busfinder.model.mapa.RutaTiempo
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.libraries.places.api.Places
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
-class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener{
+class Mapa: Fragment(), OnMapReadyCallback{
     private var _binding: FragmentMapaBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var map: GoogleMap
-    private lateinit var start: String
-    private lateinit var end: String
+    private lateinit var evento: MapaEvento
+    lateinit var map: GoogleMap
 
-    private var mMarkerFrom: Marker? = null
-    private var mMarkerTo: Marker? = null
-    private var mFromLatLng:LatLng? = null
-    private var mToLatLng:LatLng? =null
+    var ruta = false
+    var parada = false
 
-    companion object{
-        const val REQUEST_CODE_LOCATION = 0
-        private const val REQUEST_CODE_AUTOCOMPLETE_FROM = 1
-        private const val REQUEST_CODE_AUTOCOMPLETE_TO = 2
-        private const val TAG = "Mapa"
-    }
+    private var start = ""
+    private var end = ""
 
-    private val callback = OnMapReadyCallback{ map ->
-        onMapReady(map)
-    }
+    private val polylines = ArrayList<Polyline>()
+    private val oldStarts = ArrayList<String>()
+    private val markers = ArrayList<Marker>()
+    val coordenadas = ArrayList<Coordenada>()
+    val paradas = ArrayList<Parada>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,100 +64,140 @@ class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        val mapa = childFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment?
-        mapa?.getMapAsync(callback)
+        val mapa = childFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment
+        mapa.getMapAsync(this)
 
-        setupPlaces()
-    }
+        evento = MapaEvento(this)
 
-    private fun setupPlaces(){
-        Places.initialize(app)
+        if(::map.isInitialized) map.setOnMapClickListener{
+            if(ruta && !parada){
+                if(start.isEmpty()) start = "${it.longitude},${it.latitude}"
+                else if(end.isEmpty()){
+                    end = "${it.longitude},${it.latitude}"
+                    crearRuta()
+                }
+            }
+
+            if(parada && !ruta) crearParada(LatLng(it.latitude, it.longitude))
+
+            if(!parada && !ruta) cambiarParada(LatLng(it.latitude, it.longitude))
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap){
         map = googleMap
 
-        crearParadas(LatLng(19.5526134, -96.8890588), "Aquí estoy yo")
+        map.setMinZoomPreference(5f)
+        map.setMaxZoomPreference(10f)
 
-        crearRutas(PolylineOptions()
-            .add(
-                LatLng(19.53991574288343, -96.92276466462953),
-                LatLng(19.540233813705463, -96.92241405506256),
-                LatLng(19.54044740693508, -96.92247038143638),
-                LatLng(19.54049543377456, -96.9226943458784),
-                LatLng(19.54078233065668, -96.92314227478974),
-                LatLng(19.541019936498692, -96.92349900859429),
-                LatLng(19.54143069045066, -96.92422856943733),
-                LatLng(19.541811110871418, -96.92517807142134),
-                LatLng(19.541787097649618, -96.92530145306846),
-                LatLng(19.541641754386117, -96.92558576721044),
-                LatLng(19.5412992493038, -96.92622010963619),
-                LatLng(19.541897052903984, -96.9265728201177),
-                LatLng(19.541861665016516, -96.92668144958483),
-                LatLng(19.541957717839203, -96.92674716371836),
-                LatLng(19.5417769868219, -96.92693223613153),
-                LatLng(19.541660712214288, -96.92693491834041),
-                LatLng(19.541655656794678, -96.9272044803335)
-            )
-            .width(15f)
-            .color(ContextCompat.getColor(requireActivity(), R.color.black))
-        )
-
-        map.setOnMyLocationButtonClickListener(this)
-        map.setOnMyLocationClickListener(this)
+        map.setOnMyLocationButtonClickListener(evento)
+        map.setOnMyLocationClickListener(evento)
         activarLocalizacion()
     }
 
-    override fun onMyLocationButtonClick(): Boolean{
-        Toast.makeText(
-            requireActivity(),
-            "Llevándolo a su localización",
-            Toast.LENGTH_SHORT
-        ).show()
-        return false
-    }
-
-    override fun onMyLocationClick(coordenadas: Location){
-        Toast.makeText(
-            requireActivity(),
-            "Estás en ${coordenadas.latitude}, ${coordenadas.longitude}",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ){
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
-            REQUEST_CODE_LOCATION -> if(grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                map.isMyLocationEnabled = true
+    fun deshacer(){
+        if(ruta){
+            if(polylines.isEmpty() && oldStarts.isEmpty()){
+                start = ""
+                end = ""
+                Toast.makeText(requireContext(), "No hay nada que deshacer", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(
-                    requireActivity(),
-                    "Para activar la Localización ver a ajustes y acepta los permisos",
-                    Toast.LENGTH_SHORT
-                ).show()
+                polylines[polylines.size-1].remove()
+                polylines.removeAt(polylines.size-1)
+
+                val menos = if(oldStarts.size == 1) 1
+                else 2
+
+                start = oldStarts[oldStarts.size-menos]
+                oldStarts.removeAt(oldStarts.size-1)
             }
-            else -> {}
+        }else if(parada){
+            if(markers.isEmpty()) Toast.makeText(requireContext(), "No hay nada que deshacer", Toast.LENGTH_SHORT).show()
+            else{
+                markers[markers.size-1].remove()
+                markers.removeAt(markers.size-1)
+            }
         }
     }
 
-    override fun onResume(){
-        super.onResume()
-        if(!::map.isInitialized) return
+    fun limpiarMapa(){
+        map.clear()
 
-        if(!isLocationPermissionGranted()){
-            map.isMyLocationEnabled = false
-            Toast.makeText(
-                requireActivity(),
-                "Para activar la Localización ver a ajustes y acepta los permisos",
-                Toast.LENGTH_SHORT
-            ).show()
+        if(ruta){
+            polylines.clear()
+            oldStarts.clear()
+            coordenadas.clear()
+            start = ""
+            end = ""
+        }else if(parada){
+            markers.clear()
+            paradas.clear()
         }
+
+        Toast.makeText(requireContext(), "¡Mapa liampiado!", Toast.LENGTH_SHORT).show()
+    }
+
+    fun crearParada(coordenadas: LatLng){
+        val titulo = Geocoder(requireContext(), Locale("spanish", "mexico")).getFromLocation(coordenadas.latitude, coordenadas.longitude, 1)
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 10f))
+        //map.moveCamera(CameraUpdateFactory.newLatLng(coordenadas))
+        markers.add(map.addMarker(MarkerOptions().position(coordenadas).title(titulo?.get(0)?.getAddressLine(0) ?: ""))!!)
+    }
+
+    fun cambiarParada(coordenadas: LatLng){
+        val titulo = Geocoder(requireContext(), Locale("spanish", "mexico")).getFromLocation(coordenadas.latitude, coordenadas.longitude, 1)
+        val i = markers.size-1
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(markers[i].position.latitude, markers[i].position.longitude), 10f))
+
+        Thread.sleep(500)
+        markers[i].remove()
+        markers.removeAt(i)
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 10f))
+        markers.add(map.addMarker(MarkerOptions().position(coordenadas).title(titulo?.get(0)?.getAddressLine(0) ?: ""))!!)
+    }
+
+    private fun crearRuta(){
+        CoroutineScope(Dispatchers.IO).launch{
+            val call = getRetrofit().create(ApiService::class.java).getRuta("5b3ce3597851110001cf6248ea69c2e44f1b4c03af75022305d4da4b", start, end)
+            val time = getRetrofit().create(ApiService::class.java).getTiempo("5b3ce3597851110001cf6248ea69c2e44f1b4c03af75022305d4da4b", start, end)
+
+            if(call.isSuccessful){
+                drawRoute(call.body(), time.body())
+                start = end
+                end = ""
+            }
+        }
+    }
+
+    fun crearRutas(inicio: String, fin: String){
+        CoroutineScope(Dispatchers.IO).launch{
+            val call = getRetrofit().create(ApiService::class.java).getRuta("5b3ce3597851110001cf6248ea69c2e44f1b4c03af75022305d4da4b", inicio, fin)
+            val time = getRetrofit().create(ApiService::class.java).getTiempo("5b3ce3597851110001cf6248ea69c2e44f1b4c03af75022305d4da4b", inicio, fin)
+
+            if(call.isSuccessful){
+                drawRoute(call.body(), time.body())
+                start = fin
+                end = ""
+
+                withContext(Dispatchers.IO){ Thread.sleep(500) }
+            }
+        }
+    }
+
+    fun agregar(){
+        if(ruta && polylines.isNotEmpty()){
+            coordenadas.add(Coordenada(polylines[0].points.first().longitude, polylines[0].points.first().latitude, ""))
+            coordenadas.add(Coordenada(polylines[0].points.last().longitude, polylines[0].points.last().latitude, ""))
+
+            for(i in 1 until polylines.size){
+                polylines[i].points.last{
+                    coordenadas.add(Coordenada(it.longitude, it.latitude, ""))
+                }
+            }
+        }else if(parada && markers.isNotEmpty())
+            for(marker in markers) paradas.add(Parada(marker.title.toString(), marker.position.longitude, marker.position.latitude, ""))
     }
 
     private fun getRetrofit(): Retrofit{
@@ -167,77 +207,74 @@ class Mapa: Fragment(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickLis
             .build()
     }
 
-    private fun createRoute(){
-        CoroutineScope(Dispatchers.IO).launch{
-            val call = getRetrofit().create(ApiService::class.java).getRuta("5b3ce3597851110001cf6248f62a7458dd98445899871a22a91b71ce", start, end)
-
-            if(call.isSuccessful) drawRoute(call.body())
-            else Log.i("aris","KO")
-        }
+    private fun addPolyline(newPolyline: Polyline){
+        polylines.add(newPolyline)
+        oldStarts.add(start)
     }
 
-    private fun drawRoute(routeResponse: RutaResponse?) {
+    private fun drawRoute(routeResponse: RutaResponse?, timeResponse: RutaTiempo?){
         val polylineOptions = PolylineOptions()
 
         routeResponse?.features?.first()?.geometry?.coordinates?.forEach{
             polylineOptions.add(LatLng(it[1], it[0]))
+            polylineOptions.width(15f)
+            polylineOptions.color(ContextCompat.getColor(requireContext(), R.color.color11))
+
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it[1], it[0]), 10f))
         }
 
-        this.activity?.runOnUiThread{
+        activity?.runOnUiThread{
             val poly = map.addPolyline(polylineOptions)
+            poly.startCap = RoundCap()
+            poly.endCap = RoundCap()
+            poly.isClickable = true
+            map.setOnPolylineClickListener{
+                timeResponse?.features?.first()?.properties?.summary?.forEach{
+                    poly.tag = "Distancia: ${it.value.distance}, Duración: ${it.key.duration}"
+                }
+            }
+            /*poly.endCap = CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.img_agregar))
+            poly.pattern = listOf(
+                Dot(), Gap(10f), Dash(50f), Gap(10f)
+            )*/
+
+            addPolyline(poly)
         }
     }
 
-    private fun crearParadas(coordenadas: LatLng, text: String){
-        map.addMarker(MarkerOptions().position(coordenadas).title(text))
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 18f))
-        //map.moveCamera(CameraUpdateFactory.newLatLng(coordenadas))
-    }
-
-    private fun crearRutas(polyLineOptions: PolylineOptions){
-        val polyline: Polyline = map.addPolyline(polyLineOptions)
-        polyline.startCap = RoundCap()
-        //polyline.endCap = CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.img_agregar))
-
-        /*polyline.pattern = listOf(
-            Dot(), Gap(10f), Dash(50f), Gap(10f)
-        )*/
-
-        polyline.isClickable = true
-        map.setOnPolylineClickListener{
-            polyline.color = ContextCompat.getColor(requireActivity(), R.color.black)
-        }
-    }
-
-    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
-        requireActivity(),
+    private fun isLocationPermissionGranted() =
+        ContextCompat.checkSelfPermission(
+        requireContext(),
         Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
+    private val requestPermission = registerForActivityResult(RequestPermission()){ isGaranted ->
+        if(isGaranted) map.isMyLocationEnabled = true
+        else Toast.makeText(requireActivity(), "Para activar la Localización ver a ajustes y acepta los permisos", Toast.LENGTH_SHORT).show()
+    }
+
     private fun requestLocationPermission(){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)){
-            Toast.makeText(
+        if(ActivityCompat.shouldShowRequestPermissionRationale(
                 requireActivity(),
-                "Ve a ajustes y acepta los permisos",
-                Toast.LENGTH_SHORT
-            ).show()
-        }else{
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE_LOCATION
-            )
-        }
+                Manifest.permission.ACCESS_FINE_LOCATION)
+        ) Toast.makeText(requireActivity(), "Ve a ajustes y acepta los permisos", Toast.LENGTH_SHORT).show()
+        else requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     private fun activarLocalizacion(){
         if(!::map.isInitialized) return
 
-        if(isLocationPermissionGranted()){
-            map.isMyLocationEnabled = true
-        }else{
-            requestLocationPermission()
+        if(isLocationPermissionGranted()) map.isMyLocationEnabled = true
+        else requestLocationPermission()
+    }
+
+    override fun onResume(){
+        super.onResume()
+        if(!::map.isInitialized) return
+
+        if(!isLocationPermissionGranted()){
+            map.isMyLocationEnabled = false
+            Toast.makeText(requireActivity(), "Para activar la Localización ve a ajustes y acepta los permisos", Toast.LENGTH_SHORT).show()
         }
     }
 }

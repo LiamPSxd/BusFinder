@@ -38,11 +38,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_extra_bold"
                     android:gravity="start|center"
-                    android:text="USUARIO"
+                    android:text="Usuario"
                     android:textColor="@color/black1"
-                    android:textSize="22sp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -55,11 +55,11 @@
                     android:layout_below="@+id/etqUsuario"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/phenomena_extra_bold"
+                    android:fontFamily="@font/outfit_bold"
                     android:gravity="start|center"
                     android:text="usuario"
                     android:textColor="@color/color"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -70,11 +70,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtUsuario"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_extra_bold"
                     android:gravity="start|center"
-                    android:text="CORREO"
+                    android:text="Correo"
                     android:textColor="@color/black1"
-                    android:textSize="22sp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -87,11 +87,11 @@
                     android:layout_below="@+id/etqCorreo"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/phenomena_extra_bold"
+                    android:fontFamily="@font/outfit_bold"
                     android:gravity="start|center"
                     android:text="correo"
                     android:textColor="@color/color"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -102,11 +102,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtCorreo"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_extra_bold"
                     android:gravity="start|center"
-                    android:text="NOMBRE"
+                    android:text="Nombre"
                     android:textColor="@color/black1"
-                    android:textSize="22sp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -119,11 +119,11 @@
                     android:layout_below="@+id/etqNombre"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/phenomena_extra_bold"
+                    android:fontFamily="@font/outfit_bold"
                     android:gravity="start|center"
                     android:text="nombre completo"
                     android:textColor="@color/color"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -134,11 +134,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtNombre"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_extra_bold"
                     android:gravity="start|center"
                     android:text="RFC"
                     android:textColor="@color/black1"
-                    android:textSize="22sp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -151,11 +151,11 @@
                     android:layout_below="@+id/etqRFC"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/phenomena_extra_bold"
+                    android:fontFamily="@font/outfit_bold"
                     android:gravity="start|center"
                     android:text="rfc"
                     android:textColor="@color/color"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -166,11 +166,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtRFC"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_extra_bold"
                     android:gravity="start|center"
-                    android:text="CELULAR"
+                    android:text="Celular"
                     android:textColor="@color/black1"
-                    android:textSize="22sp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -183,11 +183,11 @@
                     android:layout_below="@+id/etqCelular"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/phenomena_extra_bold"
+                    android:fontFamily="@font/outfit_bold"
                     android:gravity="start|center"
                     android:text="celular"
                     android:textColor="@color/color"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -198,11 +198,11 @@
                     android:layout_marginStart="10dp"
                     android:layout_below="@+id/txtCelular"
                     android:layout_alignParentStart="true"
-                    android:fontFamily="@font/phenomena_black"
+                    android:fontFamily="@font/outfit_extra_bold"
                     android:gravity="start|center"
-                    android:text="LÍNEA DE TRANSPORTE"
+                    android:text="Línea de Transporte"
                     android:textColor="@color/black1"
-                    android:textSize="22sp"
+                    android:textSize="21sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -216,11 +216,12 @@
                     android:layout_below="@+id/etqLinea"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/phenomena_extra_bold"
+                    android:fontFamily="@font/outfit_bold"
                     android:gravity="start|center"
+                    android:maxLines="3"
                     android:text="línea"
                     android:textColor="@color/color"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -230,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="22dp"
+            android:layout_marginEnd="25dp"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/fondo1"
             android:backgroundTint="@color/color11"
@@ -238,28 +239,29 @@
             android:gravity="center"
             android:text="Cerrar Sesión"
             android:textColor="@color/fondo"
-            android:textSize="20sp"
-            app:cornerRadius="50dp" />
+            android:textSize="22sp"
+            app:cornerRadius="30dp" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/subRelative2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/fotoPerfil"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:src="@drawable/user"
-            app:civ_border_color="@color/color"
-            app:civ_border_width="2dp" />
+            app:civ_border_color="@color/white"
+            app:civ_circle_background_color="@color/white"
+            app:civ_border_width="4dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnCambiarFotoPerfil"

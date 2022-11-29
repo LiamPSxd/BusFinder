@@ -98,16 +98,16 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <include
+            <fragment
                 android:id="@+id/mapa"
-                layout="@layout/fragment_mapa"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_below="@+id/txtRuta"
                 android:layout_marginTop="15dp"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"/>
+                android:layout_alignParentEnd="true"
+                tools:layout="@layout/fragment_mapa" />
 
             <View
                 android:id="@+id/dragArea"

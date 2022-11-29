@@ -29,8 +29,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:elevation="15dp" />
+        android:layout_alignParentBottom="true" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/btnAgregar"

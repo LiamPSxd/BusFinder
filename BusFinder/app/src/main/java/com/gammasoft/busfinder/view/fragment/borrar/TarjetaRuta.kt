@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.TarjetaBorrarRutaBinding
@@ -24,7 +25,7 @@ class TarjetaRuta(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(localDB, ruta).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = this.withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,8 +48,27 @@ class TarjetaRuta(private val localDB: Crud,
 
         binding.btnBorrar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch{
-                localDB.deleteRuta(ruta)
-                CloudDataBase.delete("Ruta", "${ruta.getId()}")
+                localDB.getRutaById(ruta.getId()).observe(viewLifecycleOwner){
+                    if(it.getNombre() == ruta.getNombre()){
+                        localDB.getCoordenadasIDByRutaID(ruta.getId()).observe(viewLifecycleOwner){ coorRus ->
+                            for(coorRu in coorRus){
+                                localDB.deleteRutaCoordenada(coorRu)
+                                CloudDataBase.delete("RutaCoordenada", "${coorRu.getRutaID()}")
+
+                                localDB.getCoordenadaById(coorRu.getCoordenadaID()).observe(viewLifecycleOwner){ coor ->
+                                    localDB.deleteCoordenada(coor)
+                                    CloudDataBase.delete("Coordenada", "${coor.getId()}")
+                                }
+                            }
+                        }
+
+                        localDB.deleteRuta(ruta)
+                        CloudDataBase.delete("Ruta", "${ruta.getId()}")
+
+                        Toast.makeText(requireContext(), "¡Ruta borrada con éxito!", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                }
             }
         }
     }

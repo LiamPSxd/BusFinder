@@ -15,7 +15,7 @@ import io.alterac.blurkit.BlurLayout
 
 class ListaTarjeta(private val fragment: TarjetaBase,
                    private val titulo: String,
-                   private val ides: ArrayList<String>): BaseBlurPopup(){
+                   private val ides: ArrayList<List<String>>): BaseBlurPopup(){
     private var _binding: FragmentListaTarjetaBinding? = null
     private val binding get() = _binding!!
 

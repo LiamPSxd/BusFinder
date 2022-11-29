@@ -9,6 +9,7 @@ import com.gammasoft.busfinder.controller.PerfilPublicoEvento
 import com.gammasoft.busfinder.databinding.FragmentPerfilPublicoBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Cuenta
+import com.gammasoft.busfinder.model.dbLocal.entidades.PublicoGeneral
 import com.squareup.picasso.Picasso
 
 class PerfilPublico: Fragment(){
@@ -30,27 +31,28 @@ class PerfilPublico: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
 
-        evento = PerfilPublicoEvento(this, binding)
-
-        var cuentas = ArrayList<Cuenta>()
-        localDB.getCuentas().observe(viewLifecycleOwner){
-            cuentas = it as ArrayList<Cuenta>
-        }
-
-        if(cuentas.size != 0) for(cuenta in cuentas){
-            if(cuenta.getEstado() && cuenta.mostrarTipo() == "Publico General"){
-                evento.cuenta = cuenta
-
-                Picasso.get().load(cuenta.getFoto()).into(binding.fotoPerfil)
-                binding.txtCorreo.text = cuenta.getCorreo()
-
-                localDB.getCuentaPublicoByCorreo(cuenta.getCorreo()).observe(viewLifecycleOwner){
-                    binding.txtUsuario.text = it.getPublicoUsuario()
-                }
-
-                break
+        var publico = PublicoGeneral()
+        parentFragmentManager.setFragmentResultListener("Publico", this){ _, bundle ->
+            localDB.getPublicoGeneralByUsuario(bundle.getString("publico").toString()).observe(viewLifecycleOwner){
+                publico = it
             }
         }
+
+        var cuenta = Cuenta()
+        localDB.getCuentaPublicoByUsuario(publico.getUsuario()).observe(viewLifecycleOwner){
+            localDB.getCuentaByCorreo(it.getCuentaCorreo()).observe(viewLifecycleOwner){ c ->
+                cuenta = c
+            }
+        }
+
+        if(cuenta.getEstado() && cuenta.mostrarTipo() == "Publico General"){
+            Picasso.get().load(cuenta.getFoto()).into(binding.fotoPerfil)
+            binding.txtCorreo.text = cuenta.getCorreo()
+
+            binding.txtUsuario.text = publico.getUsuario()
+        }
+
+        evento = PerfilPublicoEvento(this, binding, cuenta)
 
         binding.btnCambiarFotoPerfil.setOnClickListener(evento)
 
