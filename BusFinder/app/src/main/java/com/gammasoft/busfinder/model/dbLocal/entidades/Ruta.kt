@@ -36,6 +36,6 @@ data class Ruta(@PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") privat
     }
 
     override fun toString(): String{
-        return "Ruta $nombre"
+        return "Ruta $nombre de $administrador"
     }
 }

@@ -9,7 +9,6 @@ import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarTarifaBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
-import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
 import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.util.vibrate
@@ -19,13 +18,12 @@ import io.alterac.blurkit.BlurLayout
 
 class TarjetaTarifa(private val fragment: TarjetaBase,
                     private val bin: FragmentAdministradorBinding,
-                    private val titulo: String,
                     private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarTarifaBinding? = null
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(fragment, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(fragment, bin, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,34 +39,32 @@ class TarjetaTarifa(private val fragment: TarjetaBase,
         super.onViewCreated(view, savedInstanceState)
         val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
-        var tarifa = Tarifa()
-        localDB.getTarifas().observe(viewLifecycleOwner){
-            for(ta in it) if(ta.getNombre() == titulo && ta.getNombre() == id){
+        bin.btnAgregar.visibility = View.GONE
+
+        localDB.getTarifaByNombre(id).observe(viewLifecycleOwner){ ta ->
+            if(ta != null){
                 binding.txtPublico.text = ta.getNombre()
                 val precio = "${ta.getPrecio()} MXN"
                 binding.txtPrecio.text = precio
-                tarifa = ta
-                break
+
+                binding.btnBorrar.setOnClickListener{
+                    fragment.context?.vibrate(80L)
+                    fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaTarifa(localDB, bin, ta).mostrar())
+                    dismiss()
+                }
+
+                binding.btnModificar.setOnClickListener{
+                    fragment.context?.vibrate(50L)
+                    fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaTarifa(localDB, bin, ta).mostrar())
+                    dismiss()
+                }
             }
-        }
-
-        bin.btnAgregar.visibility = View.GONE
-
-        binding.btnBorrar.setOnClickListener{
-            fragment.context?.vibrate(70L)
-            dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaTarifa(localDB, bin, tarifa).mostrar())
-        }
-
-        binding.btnModificar.setOnClickListener{
-            fragment.context?.vibrate(60L)
-            dismiss()
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaTarifa(localDB, bin, tarifa).mostrar())
         }
     }
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

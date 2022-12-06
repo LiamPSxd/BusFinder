@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.gammasoft.busfinder.controller.CrearCuentaEvento
 import com.gammasoft.busfinder.databinding.FragmentCrearCuentaBinding
+import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Administrador
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
@@ -19,6 +20,7 @@ class CrearCuenta: Fragment(){
     private var _binding: FragmentCrearCuentaBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var localDB: Crud
     private lateinit var evento: CrearCuentaEvento
 
     override fun onCreateView(
@@ -32,7 +34,7 @@ class CrearCuenta: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        val localDB = LocalDataBase.getDB(requireContext()).crud()
+        localDB = LocalDataBase.getDB(requireContext()).crud()
 
         CoroutineScope(Dispatchers.IO).launch{
             CloudDataBase.cloudDataBase.collection("Administrador").get().addOnSuccessListener{
@@ -63,6 +65,7 @@ class CrearCuenta: Fragment(){
 
     override fun onDestroy(){
         super.onDestroy()
+        localDB.deleteAdministradoresByRFC("")
         _binding = null
     }
 }

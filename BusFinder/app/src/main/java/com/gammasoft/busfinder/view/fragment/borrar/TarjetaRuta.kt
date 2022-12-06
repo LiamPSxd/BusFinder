@@ -27,7 +27,7 @@ class TarjetaRuta(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = this.withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaRuta(localDB, bin, ruta).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,34 +50,27 @@ class TarjetaRuta(private val localDB: Crud,
         }
 
         binding.btnBorrar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                localDB.getRutaById(ruta.getId()).observe(viewLifecycleOwner){
-                    if(it.getNombre() == ruta.getNombre()){
-                        localDB.getCoordenadasIDByRutaID(ruta.getId()).observe(viewLifecycleOwner){ coorRus ->
-                            for(coorRu in coorRus){
-                                CoroutineScope(Dispatchers.IO).launch{
-                                    localDB.deleteRutaCoordenada(coorRu)
-                                    CloudDataBase.delete("RutaCoordenada", "${coorRu.getRutaID()}")
-                                }
+            localDB.getRutaById(ruta.getId()).observe(viewLifecycleOwner){
+                if(it != null) if(it.getNombre() == ruta.getNombre()){
+                    localDB.getCoordenadasIDByRutaID(ruta.getId()).observe(viewLifecycleOwner){ coorRus ->
+                        for(i in coorRus.indices-1){
+                            CoroutineScope(Dispatchers.IO).launch{
+                                localDB.deleteRutaCoordenada(coorRus[i])
+                                CloudDataBase.delete("RutaCoordenada", "${coorRus[i].getRutaID()}${coorRus[i].getCoordenadaID()}")
+                                localDB.deleteCoordenadaById(coorRus[i].getCoordenadaID())
+                                CloudDataBase.delete("Coordenada", "${coorRus[i].getCoordenadaID()}")
 
-                                localDB.getCoordenadaById(coorRu.getCoordenadaID()).observe(viewLifecycleOwner){ coor ->
-                                    CoroutineScope(Dispatchers.IO).launch{
-                                        localDB.deleteCoordenada(coor)
-                                        CloudDataBase.delete("Coordenada", "${coor.getId()}")
-                                    }
+                                if(i == coorRus.size-1){
+                                    localDB.deleteRuta(it)
+                                    CloudDataBase.delete("Ruta", "${ruta.getId()}")
                                 }
                             }
                         }
-
-                        CoroutineScope(Dispatchers.IO).launch{
-                            localDB.deleteRuta(ruta)
-                            CloudDataBase.delete("Ruta", "${ruta.getId()}")
-                        }
-
-                        Toast.makeText(requireContext(), "¡Ruta borrada con éxito!", Toast.LENGTH_SHORT).show()
-                        bin.btnAgregar.visibility = View.VISIBLE
-                        dismiss()
                     }
+
+                    Toast.makeText(requireContext(), "¡Ruta borrada con éxito!", Toast.LENGTH_LONG).show()
+                    bin.btnAgregar.visibility = View.VISIBLE
+                    dismiss()
                 }
             }
         }
@@ -85,6 +78,7 @@ class TarjetaRuta(private val localDB: Crud,
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

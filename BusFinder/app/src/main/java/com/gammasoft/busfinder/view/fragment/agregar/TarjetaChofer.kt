@@ -1,5 +1,7 @@
 package com.gammasoft.busfinder.view.fragment.agregar
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaAgregarChoferBinding
+import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
@@ -24,9 +27,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TarjetaChofer(private val bin: FragmentAdministradorBinding): BaseBlurPopup(){
+class TarjetaChofer(private val bin: FragmentAdministradorBinding): BaseBlurPopup(), AdapterView.OnItemSelectedListener{
     private var _binding: TarjetaAgregarChoferBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var prefs: SharedPreferences
+    private lateinit var localDB: Crud
 
     private var chSpinner = ""
 
@@ -45,12 +51,13 @@ class TarjetaChofer(private val bin: FragmentAdministradorBinding): BaseBlurPopu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        val localDB = LocalDataBase.getDB(requireContext()).crud()
+        localDB = LocalDataBase.getDB(requireContext()).crud()
 
         val choferes = ArrayList<String>()
         localDB.getChoferes().observe(this){
-            for(chofer in it) choferes.add(chofer.getNombre())
+            for(chofer in it) if(chofer.getNombre() != "") choferes.add(chofer.getNombre())
         }
+        choferes.add("Seleccione un Chofer")
 
         ArrayAdapter(
             requireContext(),
@@ -62,56 +69,80 @@ class TarjetaChofer(private val bin: FragmentAdministradorBinding): BaseBlurPopu
             with(binding.spSeleccion){
                 adapter = it
                 setSelection(0, false)
-                onItemSelectedListener = SpinnerEvento()
-                prompt = "Seleccione un Chofer"
+                onItemSelectedListener = this@TarjetaChofer
                 gravity = Gravity.START
             }
         }
 
         binding.btnCancelar.setOnClickListener{
-            dismiss()
             bin.btnAgregar.visibility = View.VISIBLE
+            dismiss()
         }
 
         binding.btnAgregar.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch{
                 val chRFC = binding.txtRFC.text.toString()
-                var chofer = Chofer()
 
-                if(chRFC.isEmpty() && chSpinner.isEmpty()){
-                    MensajeAlerta("ERROR", "Debe ingresar o seleccionar un Chofer").show(parentFragmentManager, "Advertencia")
-                }else{
+                if(chRFC.isEmpty() && (chSpinner.isEmpty() || chSpinner == "Seleccione un Chofer")) MensajeAlerta("ERROR", "Debe ingresar o seleccionar un Chofer").show(parentFragmentManager, "Advertencia")
+                else{
                     if(chRFC.isNotEmpty()){
-                        localDB.getChoferByRFC(chRFC).observe(viewLifecycleOwner){
-                            chofer = it
-                        }
+                        if(chRFC.length == 13){
+                            activity?.runOnUiThread{
+                                localDB.getChoferByRFC(chRFC).observe(viewLifecycleOwner){
+                                    if(it != null) agregar(it)
+                                    else MensajeAlerta("ERROR", "No se encontró ningún Chofer con ese dato").show(parentFragmentManager, "Error")
+                                }
+                            }
+                        }else MensajeAlerta("ADVERTENCIA", "El RFC debe tener 13 caracteres").show(parentFragmentManager, "Advertencia")
                     }else if(chSpinner.isNotEmpty()){
-                        localDB.getChoferByNombre(chSpinner).observe(this@TarjetaChofer){
-                            chofer = it
+                        activity?.runOnUiThread{
+                            localDB.getChoferByNombre(chSpinner).observe(viewLifecycleOwner){
+                                if(it != null) agregar(it)
+                                else MensajeAlerta("ERROR", "No se encontró ningún Chofer con ese dato").show(parentFragmentManager, "Error")
+                            }
                         }
                     }
-
-                    if(chofer.getNombre() != ""){
-                        parentFragmentManager.setFragmentResultListener("Administrador", this@TarjetaChofer){ _, bundle ->
-                            chofer.setAdministrador(bundle.getString("administrador").toString())
-                        }
-
-                        CoroutineScope(Dispatchers.IO).launch{
-                            localDB.addChoferes(chofer)
-                            CloudDataBase.addChofer(chofer)
-                        }
-
-                        Toast.makeText(requireContext(), "¡Chofer agregado con éxito!", Toast.LENGTH_SHORT).show()
-                        dismiss()
-                        bin.btnAgregar.visibility = View.VISIBLE
-                    }else MensajeAlerta("ERROR", "No se encontró ningún chofer con ese dato").show(parentFragmentManager, "Error")
                 }
             }
         }
     }
 
+    private fun agregar(chofer: Chofer){
+        if(chofer.getRfc().isNotEmpty()){
+            prefs = requireActivity().getSharedPreferences(activity?.getString(R.string.prefs_file), Context.MODE_PRIVATE)
+            localDB.getCuentaAdministradorByCorreo(prefs.getString("correo", null)!!).observe(viewLifecycleOwner){
+                localDB.getAdministradorByUsuario(it.getAdminUsuario()).observe(viewLifecycleOwner){ a ->
+                    if(chofer.getAdministrador() != a.getRfc()){
+                        chofer.setAdministrador(a.getRfc())
+
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.addChoferes(chofer)
+                        }
+
+                        localDB.getChoferByRFC(chofer.getRfc()).observe(viewLifecycleOwner){
+                            CoroutineScope(Dispatchers.IO).launch{
+                                CloudDataBase.addChofer(it)
+                            }
+                        }
+
+                        Toast.makeText(requireContext(), "¡Chofer agregado con éxito!", Toast.LENGTH_LONG).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
+                        dismiss()
+                    }else if(chofer.getAdministrador() == a.getRfc()) MensajeAlerta("ERROR", "El Chofer ya está agregado").show(parentFragmentManager, "Error")
+                }
+            }
+        }else MensajeAlerta("ERROR", "Chofer no encontrado").show(parentFragmentManager, "Error")
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
+        chSpinner = parent?.getItemAtPosition(position).toString()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?){}
+
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 
@@ -122,12 +153,4 @@ class TarjetaChofer(private val bin: FragmentAdministradorBinding): BaseBlurPopu
     override fun getRootView(): View = binding.tarjeta
 
     override fun getBackgroundLayout(): ViewGroup = binding.blurLayout
-
-    inner class SpinnerEvento: AdapterView.OnItemSelectedListener{
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
-            chSpinner = parent?.getItemAtPosition(position).toString()
-        }
-
-        override fun onNothingSelected(parent: AdapterView<*>?){}
-    }
 }

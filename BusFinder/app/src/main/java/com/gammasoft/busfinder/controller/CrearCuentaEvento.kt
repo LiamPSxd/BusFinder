@@ -24,7 +24,7 @@ class CrearCuentaEvento(private val fragment: Fragment,
         val linea = binding.txtLinea.text.toString()
 
         if(rfc.isNotEmpty() && nombre.isNotEmpty() && celular.isNotEmpty() && linea.isNotEmpty()){
-            if(rfc.length == 13){
+            if(rfc.length == 13 && celular.length == 10){
                 val bundle = bundleOf(
                     "tipo" to fragment.arguments?.getString("tipo"),
                     "rfc" to rfc,
@@ -34,7 +34,8 @@ class CrearCuentaEvento(private val fragment: Fragment,
                 )
 
                 binding.btnContinuar.findNavController().navigate(R.id.fragmentCrearCuentaInicial_TO_fragmentCrearCuentaFinal, bundle)
-            }else MensajeAlerta("ADVERTENCIA", "RFC inclompleto").show(fragment.parentFragmentManager, "Avertencia")
+            }else if(rfc.length != 13) MensajeAlerta("ADVERTENCIA", "RFC inclompleto").show(fragment.parentFragmentManager, "Avertencia")
+            else if(celular.length != 10) MensajeAlerta("ADVERTENCIA", "Número de celular inclompleto").show(fragment.parentFragmentManager, "Avertencia")
         }else if(rfc.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar su RFC").show(fragment.parentFragmentManager, "Avertencia")
         else if(nombre.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar su Nombre").show(fragment.parentFragmentManager, "Avertencia")
         else if(celular.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar su Número de Celular").show(fragment.parentFragmentManager, "Avertencia")

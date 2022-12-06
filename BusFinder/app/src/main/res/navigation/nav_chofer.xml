@@ -21,5 +21,5 @@
         android:id="@+id/fragmentPerfilChofer"
         android:name="com.gammasoft.busfinder.view.fragment.PerfilChofer"
         android:label="Chofer"
-        tools:layout="@layout/fragment_perfil_admin_chofer" /> -->
+        tools:layout="@layout/fragment_perfil_admin_chofer" />
 </navigation>

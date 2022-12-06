@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/modificarParada"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/fondo"
     android:animateLayoutChanges="true"
     tools:context=".view.fragment.modificar.TarjetaParada">
@@ -26,7 +27,10 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp">
+            android:paddingTop="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/dragHandleImage"
@@ -85,7 +89,7 @@
                     android:id="@+id/txtParada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:padding="10dp"
                     android:autofillHints="rfc"
                     android:inputType="textPersonName"
                     android:fontFamily="@font/outfit_medium"
@@ -144,16 +148,27 @@
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
-            <fragment
-                android:id="@+id/mapaParadaMod"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mapa"
                 android:layout_width="match_parent"
-                android:layout_height="425dp"
+                android:layout_height="360dp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/ins2"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                tools:layout="@layout/fragment_mapa" />
+                map:cardBackgroundColor="@color/white"
+                map:cardCornerRadius="30dp"
+                map:cardElevation="0dp">
+
+                <fragment
+                    android:id="@+id/mapaModificarParada"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    map:cameraTargetLat="19.527162"
+                    map:cameraTargetLng="-96.923894"
+                    map:cameraZoom="19" />
+            </androidx.cardview.widget.CardView>
 
             <ImageButton
                 android:id="@+id/btnAtras"
@@ -184,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@+id/mapaParadaMod"
+                android:layout_below="@+id/mapa"
                 android:layout_alignParentEnd="true"
                 android:backgroundTint="@color/btnModificar"
                 android:fontFamily="@font/outfit_bold"
@@ -203,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_below="@+id/mapaParadaMod"
+                android:layout_below="@+id/mapa"
                 android:layout_toStartOf="@+id/btnModificar"
                 android:fontFamily="@font/outfit_bold"
                 android:gravity="center"
@@ -213,11 +228,12 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:cornerRadius="50dp" />
-
-            <View
-                android:id="@+id/dragArea"
-                style="@style/DragAreaWrap"
-                android:layout_alignBottom="@id/ins1" />
         </RelativeLayout>
+
+        <View
+            android:id="@+id/dragArea"
+            style="@style/DragAreaWrap"
+            android:layout_height="60dp"
+            android:layout_margin="0dp" />
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

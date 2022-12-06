@@ -27,7 +27,7 @@ class TarjetaChofer(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = this.withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(localDB, bin, chofer).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,19 +51,17 @@ class TarjetaChofer(private val localDB: Crud,
         }
 
         binding.btnBorrar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                localDB.getChoferByRFC(chofer.getRfc()).observe(viewLifecycleOwner){
-                    if(it.getNombre() == chofer.getNombre()){
-                        CoroutineScope(Dispatchers.IO).launch{
-                            localDB.deleteChofer(chofer)
-                            chofer.setAdministrador("")
-                            CloudDataBase.addChofer(chofer)
-                        }
-
-                        Toast.makeText(requireContext(), "¡Chofer borrado con éxito!", Toast.LENGTH_SHORT).show()
-                        bin.btnAgregar.visibility = View.VISIBLE
-                        dismiss()
+            localDB.getChoferByRFC(chofer.getRfc()).observe(viewLifecycleOwner){
+                if(it != null) if(it.getNombre() == chofer.getNombre()){
+                    CoroutineScope(Dispatchers.IO).launch{
+                        localDB.deleteChofer(chofer)
+                        chofer.setAdministrador("")
+                        CloudDataBase.addChofer(chofer)
                     }
+
+                    Toast.makeText(requireContext(), "¡Chofer borrado con éxito!", Toast.LENGTH_LONG).show()
+                    bin.btnAgregar.visibility = View.VISIBLE
+                    dismiss()
                 }
             }
         }
@@ -71,6 +69,7 @@ class TarjetaChofer(private val localDB: Crud,
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

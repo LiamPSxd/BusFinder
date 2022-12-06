@@ -27,7 +27,7 @@ class TarjetaTarifa(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaTarifa(localDB, bin, tarifa).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,26 +50,24 @@ class TarjetaTarifa(private val localDB: Crud,
         }
 
         binding.btnBorrar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                localDB.getTarifaByNombre(tarifa.getNombre()).observe(viewLifecycleOwner){
-                    if(it.getPrecio() == tarifa.getPrecio()){
-                        CoroutineScope(Dispatchers.IO).launch{
-                            localDB.deleteTarifa(tarifa)
-                            tarifa.setAdministrador("")
-                            CloudDataBase.addTarifa(tarifa)
-                        }
+            localDB.getTarifaByNombre(tarifa.getNombre()).observe(viewLifecycleOwner){
+                if(it != null) if(it.getPrecio() == tarifa.getPrecio()){
+                    CoroutineScope(Dispatchers.IO).launch{
+                        localDB.deleteTarifa(tarifa)
+                        CloudDataBase.delete("Tarifa", tarifa.getNombre())
                     }
-
-                    Toast.makeText(requireContext(), "¡Tarifa borrada con éxito!", Toast.LENGTH_SHORT).show()
-                    bin.btnAgregar.visibility = View.VISIBLE
-                    dismiss()
                 }
+
+                Toast.makeText(requireContext(), "¡Tarifa borrada con éxito!", Toast.LENGTH_LONG).show()
+                bin.btnAgregar.visibility = View.VISIBLE
+                dismiss()
             }
         }
     }
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

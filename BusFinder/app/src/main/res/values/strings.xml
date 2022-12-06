@@ -4,4 +4,5 @@
     <string name="facebook_app_id">5787552521309578</string>
     <string name="fb_login_protocol_scheme">fb5787552521309578</string>
     <string name="facebook_client_token">02fa499609fccfd11a889c37249584d1</string>
+    <string name="prefs_file">com.gammasoft.busfinder.PREFERENCE_FILE_KEY</string>
 </resources>

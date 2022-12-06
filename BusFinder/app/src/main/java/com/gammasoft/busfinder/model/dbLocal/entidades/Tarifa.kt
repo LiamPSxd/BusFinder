@@ -35,6 +35,6 @@ data class Tarifa(@PrimaryKey @ColumnInfo(name = "nombre") private var nombre: S
     }
 
     override fun toString(): String{
-        return "Tarifa de $nombre con un Coste de $precio"
+        return "Tarifa de $nombre con un coste de $precio"
     }
 }

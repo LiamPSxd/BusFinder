@@ -67,6 +67,9 @@ interface Crud{
     @Query("SELECT * FROM Chofer WHERE administrador = :administrador")
     fun getChoferesByAdministrador(administrador: String): LiveData<List<Chofer>>
 
+    @Query("SELECT * FROM Chofer WHERE rfc = :rfc AND administrador = :administrador")
+    fun getChoferByRFCYAdministrador(rfc: String, administrador: String): LiveData<Chofer>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addChoferes(vararg choferes: Chofer)
 
@@ -227,6 +230,9 @@ interface Crud{
     @Delete
     fun deleteCoordenada(coordenada: Coordenada)
 
+    @Query("DELETE FROM Coordenada WHERE id = :id")
+    fun deleteCoordenadaById(id: Int)
+
     @Query("DELETE FROM Coordenada")
     fun deleteCoordenadas()
 
@@ -314,6 +320,9 @@ interface Crud{
 
     @Query("SELECT * FROM RutaCoordenada WHERE ruta_ID = :rutaID")
     fun getCoordenadasIDByRutaID(rutaID: Int): LiveData<List<RutaCoordenada>>
+
+    @Query("SELECT * FROM RutaCoordenada WHERE ruta_ID = :rutaID")
+    fun getRutaCoordenadaByRutaID(rutaID: Int): LiveData<RutaCoordenada>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addRutaCoordenadas(vararg rutaCoordenadas: RutaCoordenada)

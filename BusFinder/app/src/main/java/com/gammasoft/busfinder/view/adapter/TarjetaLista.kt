@@ -10,16 +10,12 @@ import com.gammasoft.busfinder.controller.longpress.PopupInflaterEvento
 import com.gammasoft.busfinder.controller.longpress.PopupStateEvento
 import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaListaBinding
-import com.gammasoft.busfinder.view.dialog.AnimType
-import com.gammasoft.busfinder.view.dialog.BlurPopup
-import com.gammasoft.busfinder.view.dialog.MensajeBlur
 import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaChofer
 import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaParada
 import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaRuta
 import com.gammasoft.busfinder.view.fragment.visualizar.TarjetaTarifa
 import com.gammasoft.busfinder.view.util.DebouncingClickListener
-import com.gammasoft.busfinder.view.util.checkAndUnregister
 import com.gammasoft.busfinder.view.util.onDebouncingClick
 
 class TarjetaLista(private val fragment: TarjetaBase,
@@ -30,36 +26,35 @@ class TarjetaLista(private val fragment: TarjetaBase,
         ViewHolder(TarjetaListaBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, i: Int){
-        if(ides.isNotEmpty()) holder.bind(ides[i][1], ides[i][0], (i+1).toString())
-        else holder.bind("Agregue un dato para mostrarlo", "", "Nada que mostrar")
+        holder.bind(ides[i][0], ides[i][1], (i+1).toString())
     }
 
     override fun getItemCount(): Int = ides.size
 
     inner class ViewHolder(private val binding: TarjetaListaBinding): RecyclerView.ViewHolder(binding.root), DebouncingClickListener, PopupInflaterEvento, PopupStateEvento, PopupHoverEvento{
-        private var longPressBlurPopup: BlurPopup? = null
+        //private var longPressBlurPopup: BlurPopup? = null
         private var id = ""
 
-        fun bind(titulo: String, id: String, contador: String){
-            longPressBlurPopup.checkAndUnregister()
+        fun bind(id: String, titulo: String, contador: String){
+            //longPressBlurPopup.checkAndUnregister()
             this.id = id
 
             itemView.run{
-                binding.pin.text = contador
+                binding.pin.text = if(id == "Nada que mostrar") id else contador
                 binding.etqNombre.text = titulo
                 binding.tarjeta.onDebouncingClick(this@ViewHolder)
 
-                longPressBlurPopup = BlurPopup.Builder
+                /*longPressBlurPopup = BlurPopup.Builder
                     .with(fragment)
                     .targetView(binding.tarjeta)
                     .baseBlurPopup(MensajeBlur(contador, titulo).mostrar())
                     .animationType(AnimType.ANIM_FROM_BOTTOM)
                     .popupStateListener(this@ViewHolder)
                     .hoverListener(this@ViewHolder)
-                    .build()
+                    .build()*/
             }
 
-            longPressBlurPopup?.register()
+            //longPressBlurPopup?.register()
         }
 
         override fun onDebouncingClick(view: View){
@@ -72,7 +67,7 @@ class TarjetaLista(private val fragment: TarjetaBase,
 
                 "PARADAS" -> fragment.pushPopup(TarjetaParada(fragment, bin, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
 
-                "TARIFAS" -> fragment.pushPopup(TarjetaTarifa(fragment, bin, titulo, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+                "TARIFAS" -> fragment.pushPopup(TarjetaTarifa(fragment, bin, id).mostrar(R.anim.zoom_in, R.anim.zoom_out))
             }
         }
 

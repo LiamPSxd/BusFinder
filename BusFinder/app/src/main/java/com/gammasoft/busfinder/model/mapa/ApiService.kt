@@ -10,6 +10,7 @@ interface ApiService{
                         @Query("start", encoded = true) start: String,
                         @Query("end", encoded = true) end: String): Response<RutaResponse>
 
+    @GET("/v2/directions/driving-car")
     suspend fun getTiempo(@Query("api_key") key: String,
                         @Query("start", encoded = true) start: String,
                         @Query("end", encoded = true) end: String): Response<RutaTiempo>

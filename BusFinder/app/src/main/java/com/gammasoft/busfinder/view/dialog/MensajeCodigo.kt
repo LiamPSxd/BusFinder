@@ -17,7 +17,7 @@ class MensajeCodigo(private val tipo: String,
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog{
         _binding = TarjetaCodigoBinding.inflate(layoutInflater)
 
-        context?.vibrate(60L)
+        context?.vibrate(80L)
 
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)

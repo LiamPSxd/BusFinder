@@ -20,8 +20,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:name="com.google.android.gms.maps.SupportMapFragment"
-            map:cameraTargetLat="19.53124"
-            map:cameraTargetLng="-96.91589"
-            map:cameraZoom="10" />
+            map:cameraTargetLat="19.527162"
+            map:cameraTargetLng="-96.923894"
+            map:cameraZoom="18" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

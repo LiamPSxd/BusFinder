@@ -21,7 +21,7 @@ import com.gammasoft.busfinder.model.dbLocal.entidades.Ruta
                 childColumns = ["coordenada_ID"])
         ])
 data class RutaCoordenada(@ColumnInfo(name = "ruta_ID") private var rutaID: Int,
-                     @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
+                          @ColumnInfo(name = "coordenada_ID") private var coordenadaID: Int){
     constructor(): this(0, 0)
 
     fun setRutaID(rutaID: Int){

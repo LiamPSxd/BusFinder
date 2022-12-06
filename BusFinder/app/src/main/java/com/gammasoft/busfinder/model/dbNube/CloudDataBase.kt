@@ -66,7 +66,8 @@ abstract class CloudDataBase{
                         "lineaTransporte" to chofer.getLinea(),
                         "codigo" to chofer.getCodigo(),
                         "numeroUsuarios" to chofer.getNoUsuarios(),
-                        "calificacion" to chofer.getCalificacion()
+                        "calificacion" to chofer.getCalificacion(),
+                        "administrador" to chofer.getAdministrador()
                     )
                 )
             }
@@ -87,7 +88,8 @@ abstract class CloudDataBase{
                 cloudDataBase.collection("Ruta").document(ruta.getId().toString()).set(
                     hashMapOf(
                         "id" to ruta.getId(),
-                        "nombre" to ruta.getNombre()
+                        "nombre" to ruta.getNombre(),
+                        "administrador" to ruta.getAdministrador()
                     )
                 )
             }
@@ -99,7 +101,10 @@ abstract class CloudDataBase{
                 cloudDataBase.collection("Parada").document(parada.getId().toString()).set(
                     hashMapOf(
                         "id" to parada.getId(),
-                        "nombre" to parada.getNombre()
+                        "nombre" to parada.getNombre(),
+                        "longitud" to parada.getLongitud(),
+                        "latitud" to parada.getLatitud(),
+                        "administrador" to parada.getAdministrador()
                     )
                 )
             }
@@ -127,7 +132,8 @@ abstract class CloudDataBase{
                 cloudDataBase.collection("Tarifa").document(tarifa.getNombre()).set(
                     hashMapOf(
                         "nombre" to tarifa.getNombre(),
-                        "precio" to tarifa.getPrecio()
+                        "precio" to tarifa.getPrecio(),
+                        "administrador" to tarifa.getAdministrador()
                     )
                 )
             }
@@ -154,7 +160,8 @@ abstract class CloudDataBase{
                     hashMapOf(
                         "id" to coordenada.getId(),
                         "latitud" to coordenada.getLatitud(),
-                        "longitud" to coordenada.getLongitud()
+                        "longitud" to coordenada.getLongitud(),
+                        "administrador" to coordenada.getAdministrador()
                     )
                 )
             }
@@ -199,7 +206,7 @@ abstract class CloudDataBase{
     //RutaCoordenda
         fun addRutaCoordenada(rutaCoordenada: RutaCoordenada){
             CoroutineScope(Dispatchers.IO).launch{
-                cloudDataBase.collection("RutaCoordenada").document(rutaCoordenada.getRutaID().toString()).set(
+                cloudDataBase.collection("RutaCoordenada").document("${rutaCoordenada.getRutaID()}${rutaCoordenada.getCoordenadaID()}").set(
                     hashMapOf(
                         "rutaID" to rutaCoordenada.getRutaID(),
                         "coordenadaID" to rutaCoordenada.getCoordenadaID()
@@ -211,7 +218,7 @@ abstract class CloudDataBase{
     //RutaParada
         fun addRutaParada(rutaParada: RutaParada){
             CoroutineScope(Dispatchers.IO).launch{
-                cloudDataBase.collection("RutaParada").document(rutaParada.getRutaID().toString()).set(
+                cloudDataBase.collection("RutaParada").document("${rutaParada.getRutaID()}${rutaParada.getParadaID()}").set(
                     hashMapOf(
                         "rutaID" to rutaParada.getRutaID(),
                         "paradaID" to rutaParada.getParadaID()
@@ -223,7 +230,7 @@ abstract class CloudDataBase{
     //UnidadCoordenada
         fun addUnidadCoordenada(unidadCoor: UnidadCoordenada){
             CoroutineScope(Dispatchers.IO).launch{
-                cloudDataBase.collection("UnidadCoordenada").document(unidadCoor.getUnidadPlaca()).set(
+                cloudDataBase.collection("UnidadCoordenada").document("${unidadCoor.getUnidadPlaca()}${unidadCoor.getCoordenadaID()}").set(
                     hashMapOf(
                         "unidadPlaca" to unidadCoor.getUnidadPlaca(),
                         "coordenadaID" to unidadCoor.getCoordenadaID()
@@ -252,6 +259,7 @@ abstract class CloudDataBase{
             CoroutineScope(Dispatchers.IO).launch{
                 cloudDataBase.collection("CodigoAdministrador").document(codigo.getId()).set(
                     hashMapOf(
+                        "id" to codigo.getId(),
                         "valor" to codigo.getValor(),
                         "estado" to codigo.getEstado()
                     )
@@ -264,6 +272,7 @@ abstract class CloudDataBase{
             CoroutineScope(Dispatchers.IO).launch{
                 cloudDataBase.collection("CodigoChofer").document(codigo.getId()).set(
                     hashMapOf(
+                        "id" to codigo.getId(),
                         "valor" to codigo.getValor(),
                         "estado" to codigo.getEstado()
                     )

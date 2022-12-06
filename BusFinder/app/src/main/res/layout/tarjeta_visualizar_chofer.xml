@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_below="@+id/dragHandleImage"
                 android:layout_alignParentStart="true"
                 android:fontFamily="@font/outfit_extra_bold"
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_below="@+id/etqRFC"
                 android:layout_alignParentStart="true"
                 android:fontFamily="@font/outfit_extra_bold"
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_below="@+id/etqNombre"
                 android:layout_alignParentStart="true"
                 android:fontFamily="@font/outfit_extra_bold"
@@ -130,11 +130,43 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/etqLinea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/etqCelular"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Línea"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtLinea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/txtCelular"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/etqCelular"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="línea"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/etqCalificacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:layout_below="@+id/etqCelular"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/etqLinea"
                 android:layout_alignParentStart="true"
                 android:fontFamily="@font/outfit_extra_bold"
                 android:gravity="start|center"
@@ -145,10 +177,11 @@
 
             <RatingBar
                 android:id="@+id/txtCalificacion"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_below="@+id/txtCelular"
+                android:layout_below="@+id/txtLinea"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@+id/etqCalificacion"
                 android:backgroundTint="@color/white"
@@ -156,6 +189,7 @@
                 android:progress="20"
                 android:numStars="5"
                 android:rating="0"
+                android:isIndicator="true"
                 android:progressBackgroundTint="@color/color3"
                 android:progressTint="#E6B625" />
 

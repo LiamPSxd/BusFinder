@@ -1,6 +1,7 @@
 package com.gammasoft.busfinder.controller
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.util.Patterns
 import android.view.View
@@ -106,35 +107,19 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                         val celular = fragment.arguments?.getString("celular")?.toLong() ?: 0
                         val linea = fragment.arguments?.getString("linea").orEmpty()
 
-                        when(fragment.arguments?.getString("tipo")){
+                        when(val tipo = fragment.arguments?.getString("tipo")){
                             "Administrador_" -> {
-                                val admin = Administrador(usuario, rfc, nombre, celular, linea, 0)
-                                val cu = Cuenta(correo, "GOOGLE${admin.getUsuario()}", foto, 0, "Google", true)
-                                val cuAdmin = CuentaAdministrador(cu.getCorreo(), admin.getUsuario())
-
-                                cloudDB.addAdministrador(admin)
-                                cloudDB.addCuenta(cu)
-                                cloudDB.addCuentaAdministrador(cuAdmin)
-
-                                val intent = Intent(fragment.context, PrincipalAdministrador::class.java)
-                                intent.putExtra("cuenta", cu.getCorreo())
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                fragment.startActivity(intent)
+                                MensajeCodigo(tipo, clickListener = {
+                                    codigo = it
+                                    finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, "GOOGLE $usuario", foto, "Google")
+                                }).show(fragment.parentFragmentManager, "Codigo")
                             }
 
                             "Chofer_" -> {
-                                val chofer = Chofer(usuario, rfc, nombre, celular, linea, 0, 0, 0.0, "")
-                                val cu = Cuenta(correo, "GOOGLE${chofer.getUsuario()}", foto, 1, "Google", true)
-                                val cuChofer = CuentaChofer(cu.getCorreo(), chofer.getUsuario())
-
-                                cloudDB.addChofer(chofer)
-                                cloudDB.addCuenta(cu)
-                                cloudDB.addCuentaChofer(cuChofer)
-
-                                val intent = Intent(fragment.context, PrincipalChofer::class.java)
-                                intent.putExtra("cuenta", cu.getCorreo())
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                fragment.startActivity(intent)
+                                MensajeCodigo(tipo, clickListener = {
+                                    codigo = it
+                                    finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, "GOOGLE $usuario", foto, "Google")
+                                }).show(fragment.parentFragmentManager, "Codigo")
                             }
 
                             "Publico_" ->{
@@ -142,14 +127,24 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                 val cu = Cuenta(correo, "GOOGLE${publico.getUsuario()}", foto, 2, "Google", true)
                                 val cuPublico = CuentaPublico(cu.getCorreo(), publico.getUsuario())
 
+                                val prefs = fragment.requireActivity().getSharedPreferences(fragment.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                                prefs.putString("correo", cu.getCorreo())
+                                prefs.putString("contrasenia", cu.getContrasenia())
+                                prefs.putString("foto", cu.getFoto())
+                                prefs.putString("tipo", cu.mostrarTipo())
+                                prefs.putString("metodo", cu.getMetodo())
+                                prefs.putString("estado", cu.getEstado().toString())
+                                prefs.apply()
+
                                 cloudDB.addPublicoGeneral(publico)
                                 cloudDB.addCuenta(cu)
                                 cloudDB.addCuentaPublico(cuPublico)
 
                                 val intent = Intent(fragment.context, PrincipalPublico::class.java)
-                                intent.putExtra("cuenta", cu.getCorreo())
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                fragment.startActivity(intent)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                fragment.activity?.startActivity(intent)
+                                fragment.activity?.finish()
                             }
                         }
                     }else MensajeAlerta("ERROR", "Se ha producido un error al autenticar tu cuenta por Google").show(fragment.parentFragmentManager, "Error")
@@ -183,35 +178,19 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                             val celular = fragment.arguments?.getString("celular")?.toLong() ?: 0
                                             val linea = fragment.arguments?.getString("linea").orEmpty()
 
-                                            when(fragment.arguments?.getString("tipo")){
+                                            when(val tipo = fragment.arguments?.getString("tipo")){
                                                 "Administrador_" -> {
-                                                    val admin = Administrador(usuario, rfc, nombre, celular, linea, 0)
-                                                    val cu = Cuenta(correo, "FACEBOOK${admin.getUsuario()}", foto, 0, "Facebook", true)
-                                                    val cuAdmin = CuentaAdministrador(cu.getCorreo(), admin.getUsuario())
-
-                                                    cloudDB.addAdministrador(admin)
-                                                    cloudDB.addCuenta(cu)
-                                                    cloudDB.addCuentaAdministrador(cuAdmin)
-
-                                                    val intent = Intent(fragment.context, PrincipalAdministrador::class.java)
-                                                    intent.putExtra("cuenta", cu.getCorreo())
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                                    fragment.startActivity(intent)
+                                                    MensajeCodigo(tipo, clickListener = {
+                                                        codigo = it
+                                                        finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, "FACEBOOK $usuario", foto, "Facebook")
+                                                    }).show(fragment.parentFragmentManager, "Codigo")
                                                 }
 
                                                 "Chofer_" -> {
-                                                    val chofer = Chofer(usuario, rfc, nombre, celular, linea, 0, 0, 0.0, "")
-                                                    val cu = Cuenta(correo, "FACEBOOK${chofer.getUsuario()}", foto, 1, "Facebook", true)
-                                                    val cuChofer = CuentaChofer(cu.getCorreo(), chofer.getUsuario())
-
-                                                    cloudDB.addChofer(chofer)
-                                                    cloudDB.addCuenta(cu)
-                                                    cloudDB.addCuentaChofer(cuChofer)
-
-                                                    val intent = Intent(fragment.context, PrincipalChofer::class.java)
-                                                    intent.putExtra("cuenta", cu.getCorreo())
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                                    fragment.startActivity(intent)
+                                                    MensajeCodigo(tipo, clickListener = {
+                                                        codigo = it
+                                                        finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, "FACEBOOK $usuario", foto, "Facebook")
+                                                    }).show(fragment.parentFragmentManager, "Codigo")
                                                 }
 
                                                 "Publico_" ->{
@@ -219,14 +198,24 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                                     val cu = Cuenta(correo, "FACEBOOK${publico.getUsuario()}", foto, 2, "Facebook", true)
                                                     val cuPublico = CuentaPublico(cu.getCorreo(), publico.getUsuario())
 
+                                                    val prefs = fragment.requireActivity().getSharedPreferences(fragment.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                                                    prefs.putString("correo", cu.getCorreo())
+                                                    prefs.putString("contrasenia", cu.getContrasenia())
+                                                    prefs.putString("foto", cu.getFoto())
+                                                    prefs.putString("tipo", cu.mostrarTipo())
+                                                    prefs.putString("metodo", cu.getMetodo())
+                                                    prefs.putString("estado", cu.getEstado().toString())
+                                                    prefs.apply()
+
                                                     cloudDB.addPublicoGeneral(publico)
                                                     cloudDB.addCuenta(cu)
                                                     cloudDB.addCuentaPublico(cuPublico)
 
                                                     val intent = Intent(fragment.context, PrincipalPublico::class.java)
-                                                    intent.putExtra("cuenta", cu.getCorreo())
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                                    fragment.startActivity(intent)
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                                    fragment.activity?.startActivity(intent)
+                                                    fragment.activity?.finish()
                                                 }
                                             }
                                         }else MensajeAlerta("ERROR", "Se ha producido un error al autenticar tu cuenta por Facebook").show(fragment.parentFragmentManager, "Error")
@@ -259,6 +248,13 @@ class CrearCuenta2Evento(private val fragment: Fragment,
         var res = true
 
         CoroutineScope(Dispatchers.IO).launch{
+            cloudDB.cloudDataBase.collection("Cuenta").get().addOnSuccessListener{
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(cuenta in it) if(cuenta.exists())
+                        localDB.addCuentas(Cuenta(cuenta.get("correo").toString(), "", "", 3, "", false))
+                }
+            }
+
             cloudDB.cloudDataBase.collection("CuentaPublico").whereEqualTo("cuentaCorreo", usuario).get().addOnSuccessListener{
                 CoroutineScope(Dispatchers.IO).launch{
                     for(publico in it) if(publico.exists())
@@ -314,6 +310,13 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                 }
         }
 
+        CoroutineScope(Dispatchers.IO).launch{
+            localDB.deleteCuentas()
+            localDB.deleteCuentasPublico()
+            localDB.deleteCuentasChofer()
+            localDB.deleteCuentasAdministrador()
+        }
+
         return res
     }
 
@@ -321,65 +324,68 @@ class CrearCuenta2Evento(private val fragment: Fragment,
         Patterns.EMAIL_ADDRESS.matcher(correo).matches()
 
     private fun finalizar(tipo: String, usuario: String, rfc: String, nombre: String, celular: Long, linea: String,
-                          correo: String, contrasenia: String, foto: String){
+                          correo: String, contrasenia: String, foto: String, metodo: String){
         CoroutineScope(Dispatchers.IO).launch{
-            localDB.deleteAdministradoresByRFC("")
+            val prefs = fragment.requireActivity().getSharedPreferences(fragment.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+            prefs.putString("correo", correo)
+            prefs.putString("contrasenia", contrasenia)
+            prefs.putString("foto", foto)
 
             when(tipo){
                 "Administrador_" -> {
                     if(codigo != 0L){
                         val a = Administrador(usuario, rfc, nombre, celular, linea, codigo)
-                        val c = Cuenta(correo, contrasenia, foto, 0, "Correo", true)
+                        val c = Cuenta(correo, contrasenia, foto, 0, metodo, true)
                         val cA = CuentaAdministrador(c.getCorreo(), a.getUsuario())
 
                         localDB.addAdministradores(a)
                         localDB.addCuentas(c)
                         localDB.addCuentasAdministrador(cA)
+                        cloudDB.addAdministrador(a)
+                        cloudDB.addCuenta(c)
+                        cloudDB.addCuentaAdministrador(cA)
 
-                        cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
-                            if(it.isSuccessful){
-                                cloudDB.addAdministrador(a)
-                                cloudDB.addCuenta(c)
-                                cloudDB.addCuentaAdministrador(cA)
-                            }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
-                        }
+                        prefs.putString("tipo", c.mostrarTipo())
 
                         val intent = Intent(fragment.context, PrincipalAdministrador::class.java)
-                        intent.putExtra("cuenta", c.getCorreo())
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        fragment.startActivity(intent)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        fragment.activity?.startActivity(intent)
                     }
                 }
 
                 "Chofer_" -> {
                     if(codigo != 0L){
                         val ch = Chofer(usuario, rfc, nombre, celular, linea, codigo, 0, 0.0, "")
-                        val c = Cuenta(correo, contrasenia, foto, 1, "Correo", true)
+                        val c = Cuenta(correo, contrasenia, foto, 1, metodo, true)
                         val cCh = CuentaChofer(c.getCorreo(), ch.getUsuario())
 
                         localDB.addChoferes(ch)
                         localDB.addCuentas(c)
                         localDB.addCuentasChofer(cCh)
+                        cloudDB.addChofer(ch)
+                        cloudDB.addCuenta(c)
+                        cloudDB.addCuentaChofer(cCh)
 
-                        cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
-                            if(it.isSuccessful){
-                                cloudDB.addChofer(ch)
-                                cloudDB.addCuenta(c)
-                                cloudDB.addCuentaChofer(cCh)
-                            }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
-                        }
+                        prefs.putString("tipo", c.mostrarTipo())
 
                         val intent = Intent(fragment.context, PrincipalChofer::class.java)
-                        intent.putExtra("cuenta", c.getCorreo())
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        fragment.startActivity(intent)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        fragment.activity?.startActivity(intent)
                     }
                 }
             }
+
+            fragment.activity?.finish()
+            prefs.putString("metodo", metodo)
+            prefs.putString("estado", "true")
+            prefs.apply()
         }
     }
 
     private fun registrar(){
+        Conexion.comprobarConexion(fragment.requireActivity())
         when(Conexion.comprobarConexion(fragment.requireActivity())){
             "WIFI", "MOBILE" -> {
                 val foto = binding.fotoPerfil.drawable.toString()
@@ -397,17 +403,25 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                     if(verificarUsuarioCorreoRegistrado(usuario) && verificarCorreo(correo) && contrasenia.length >= 6 && contrasenia == confContrasenia){
                         when(val tipo = fragment.arguments?.getString("tipo")){
                             "Administrador_" -> {
-                                MensajeCodigo(tipo, clickListener = {
-                                    codigo = it
-                                    finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, contrasenia, foto)
-                                }).show(fragment.parentFragmentManager, "Codigo")
+                                cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
+                                    if(it.isSuccessful){
+                                        MensajeCodigo(tipo, clickListener = {
+                                            codigo = it
+                                            finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, contrasenia, foto, "Correo")
+                                        }).show(fragment.parentFragmentManager, "Codigo")
+                                    }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
+                                }
                             }
 
                             "Chofer_" -> {
-                                MensajeCodigo(tipo, clickListener = {
-                                    codigo = it
-                                    finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, contrasenia, foto)
-                                }).show(fragment.parentFragmentManager, "Codigo")
+                                cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
+                                    if(it.isSuccessful){
+                                        MensajeCodigo(tipo, clickListener = {
+                                            codigo = it
+                                            finalizar(tipo, usuario, rfc, nombre, celular, linea, correo, contrasenia, foto, "Correo")
+                                        }).show(fragment.parentFragmentManager, "Codigo")
+                                    }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
+                                }
                             }
 
                             "Publico_" -> {
@@ -416,22 +430,30 @@ class CrearCuenta2Evento(private val fragment: Fragment,
                                     val c = Cuenta(correo, contrasenia, foto, 2, "Correo", true)
                                     val cP = CuentaPublico(c.getCorreo(), p.getUsuario())
 
-                                    localDB.addPublicoGeneral(p)
-                                    localDB.addCuentas(c)
-                                    localDB.addCuentasPublico(cP)
-
                                     cloudDB.getAuth().createUserWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
                                         if(it.isSuccessful){
+                                            localDB.addPublicoGeneral(p)
+                                            localDB.addCuentas(c)
+                                            localDB.addCuentasPublico(cP)
                                             cloudDB.addPublicoGeneral(p)
                                             cloudDB.addCuenta(c)
                                             cloudDB.addCuentaPublico(cP)
                                         }else MensajeAlerta("ERROR", "Se ha producido un error al autenticarte por Correo").show(fragment.parentFragmentManager, "Error")
                                     }
 
+                                    val prefs = fragment.requireActivity().getSharedPreferences(fragment.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                                    prefs.putString("correo", c.getCorreo())
+                                    prefs.putString("contrasenia", c.getContrasenia())
+                                    prefs.putString("foto", c.getFoto())
+                                    prefs.putString("tipo", c.mostrarTipo())
+                                    prefs.putString("metodo", c.getMetodo())
+                                    prefs.putString("estado", c.getEstado().toString())
+                                    prefs.apply()
+
                                     val intent = Intent(fragment.context, PrincipalPublico::class.java)
-                                    intent.putExtra("cuenta", c.getCorreo())
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                                    fragment.startActivity(intent)
+                                    fragment.activity?.startActivity(intent)
+                                    fragment.activity?.finish()
                                 }
                             }
                         }

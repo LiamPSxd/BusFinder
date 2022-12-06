@@ -48,11 +48,11 @@ class TarjetaTarifa(private val localDB: Crud,
 
         binding.txtTarifa.text = Editable.Factory().newEditable(tarifa.getNombre())
         binding.txtPrecio.text = tarifa.getPrecio().toString()
-        binding.skPrecio.progress = tarifa.getPrecio().toString().toInt()
+        binding.skPrecio.progress = tarifa.getPrecio().toString().toDouble().toInt()
 
         val publicos = ArrayList<String>()
         localDB.getTarifas().observe(viewLifecycleOwner){
-            for(publico in it) publicos.add(publico.getNombre())
+            for(publico in it) if(publico.getNombre() != "") publicos.add(publico.getNombre())
         }
 
         ArrayAdapter(
@@ -85,28 +85,30 @@ class TarjetaTarifa(private val localDB: Crud,
         }
 
         binding.btnModificar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                val publico = binding.txtTarifa.text.toString()
-                val precio = binding.txtPrecio.text.toString()
+            val publico = binding.txtTarifa.text.toString()
+            val precio = binding.txtPrecio.text.toString()
 
-                if(publico.isNotEmpty() && precio.isNotEmpty()){
-                    CoroutineScope(Dispatchers.IO).launch{
-                        tarifa.setNombre(publico)
-                        tarifa.setPrecio(precio.toDouble())
-                        localDB.updateTarifa(tarifa)
-                        CloudDataBase.addTarifa(tarifa)
-                    }
+            if(publico.isNotEmpty() && precio.isNotEmpty()){
+                CoroutineScope(Dispatchers.IO).launch{
+                    localDB.deleteTarifa(tarifa)
+                    CloudDataBase.delete("Tarifa", tarifa.getNombre())
 
-                    Toast.makeText(requireContext(), "¡Tarifa modificada con éxito!", Toast.LENGTH_SHORT).show()
-                    bin.btnAgregar.visibility = View.VISIBLE
-                    dismiss()
-                }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el Público").show(parentFragmentManager, "Advertencia")
-            }
+                    tarifa.setNombre(publico)
+                    tarifa.setPrecio(precio.toDouble())
+                    localDB.addTarifas(tarifa)
+                    CloudDataBase.addTarifa(tarifa)
+                }
+
+                Toast.makeText(requireContext(), "¡Tarifa modificada con éxito!", Toast.LENGTH_LONG).show()
+                bin.btnAgregar.visibility = View.VISIBLE
+                dismiss()
+            }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el Público").show(parentFragmentManager, "Advertencia")
         }
     }
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

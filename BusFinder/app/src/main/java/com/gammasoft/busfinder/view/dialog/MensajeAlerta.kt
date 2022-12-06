@@ -17,7 +17,7 @@ class MensajeAlerta(private val titulo: String,
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog{
         _binding = TarjetaAlertaBinding.inflate(layoutInflater)
 
-        context?.vibrate(80L)
+        context?.vibrate(100L)
 
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)

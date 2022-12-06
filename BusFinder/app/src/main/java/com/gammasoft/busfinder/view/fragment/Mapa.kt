@@ -2,7 +2,6 @@ package com.gammasoft.busfinder.view.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,33 +14,19 @@ import androidx.fragment.app.Fragment
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.controller.MapaEvento
 import com.gammasoft.busfinder.databinding.FragmentMapaBinding
-import com.gammasoft.busfinder.model.dbLocal.entidades.Coordenada
-import com.gammasoft.busfinder.model.dbLocal.entidades.Parada
-import com.gammasoft.busfinder.model.mapa.ApiService
-import com.gammasoft.busfinder.model.mapa.RutaResponse
-import com.gammasoft.busfinder.model.mapa.RutaTiempo
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 class Mapa: Fragment(), OnMapReadyCallback{
     private var _binding: FragmentMapaBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var evento: MapaEvento
-    lateinit var map: GoogleMap
+    private lateinit var map: GoogleMap
 
-    var ruta = false
-    var parada = false
+    /*private var ruta = false
+    private var parada = false
 
     private var start = ""
     private var end = ""
@@ -49,8 +34,8 @@ class Mapa: Fragment(), OnMapReadyCallback{
     private val polylines = ArrayList<Polyline>()
     private val oldStarts = ArrayList<String>()
     private val markers = ArrayList<Marker>()
-    val coordenadas = ArrayList<Coordenada>()
-    val paradas = ArrayList<Parada>()
+    private val coordenadas = ArrayList<Coordenada>()
+    private val paradas = ArrayList<Parada>()*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,9 +52,7 @@ class Mapa: Fragment(), OnMapReadyCallback{
         val mapa = childFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment
         mapa.getMapAsync(this)
 
-        evento = MapaEvento(this)
-
-        if(::map.isInitialized) map.setOnMapClickListener{
+        /*if(::map.isInitialized) map.setOnMapClickListener{
             if(ruta && !parada){
                 if(start.isEmpty()) start = "${it.longitude},${it.latitude}"
                 else if(end.isEmpty()){
@@ -81,21 +64,22 @@ class Mapa: Fragment(), OnMapReadyCallback{
             if(parada && !ruta) crearParada(LatLng(it.latitude, it.longitude))
 
             if(!parada && !ruta) cambiarParada(LatLng(it.latitude, it.longitude))
-        }
+        }*/
     }
 
     override fun onMapReady(googleMap: GoogleMap){
         map = googleMap
 
-        map.setMinZoomPreference(1f)
-        map.setMaxZoomPreference(5f)
+        map.setMinZoomPreference(10f)
+        map.setMaxZoomPreference(21f)
 
+        evento = MapaEvento(this, map)
         map.setOnMyLocationButtonClickListener(evento)
         map.setOnMyLocationClickListener(evento)
         activarLocalizacion()
     }
 
-    fun deshacer(){
+    /*fun deshacer(){
         if(ruta){
             if(polylines.isEmpty() && oldStarts.isEmpty()){
                 start = ""
@@ -145,7 +129,7 @@ class Mapa: Fragment(), OnMapReadyCallback{
         markers.add(map.addMarker(MarkerOptions().position(coordenadas).title(titulo?.get(0)?.getAddressLine(0) ?: ""))!!)
     }
 
-    fun cambiarParada(coordenadas: LatLng){
+    private fun cambiarParada(coordenadas: LatLng){
         val titulo = Geocoder(requireContext(), Locale("spanish", "mexico")).getFromLocation(coordenadas.latitude, coordenadas.longitude, 1)
         val i = markers.size-1
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(markers[i].position.latitude, markers[i].position.longitude), 10f))
@@ -240,7 +224,7 @@ class Mapa: Fragment(), OnMapReadyCallback{
 
             addPolyline(poly)
         }
-    }
+    }*/
 
     private fun isLocationPermissionGranted() =
         ContextCompat.checkSelfPermission(
@@ -276,5 +260,10 @@ class Mapa: Fragment(), OnMapReadyCallback{
             map.isMyLocationEnabled = false
             Toast.makeText(requireActivity(), "Para activar la Localización ve a ajustes y acepta los permisos", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+        _binding = null
     }
 }

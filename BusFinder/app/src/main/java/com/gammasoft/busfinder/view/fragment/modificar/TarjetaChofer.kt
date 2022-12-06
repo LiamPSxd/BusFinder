@@ -52,42 +52,50 @@ class TarjetaChofer(private val localDB: Crud,
         }
 
         binding.btnModificar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                val rfc = binding.txtRFC.text.toString()
+            val rfc = binding.txtRFC.text.toString()
 
-                if(rfc.isNotEmpty()){
-                    CloudDataBase.cloudDataBase.collection("Chofer").whereEqualTo("rfc", rfc).get().addOnSuccessListener{
-                        for(ch in it) if(ch.exists()){
+            if(rfc.isNotEmpty() && rfc.length == 13){
+                CloudDataBase.cloudDataBase.collection("Chofer").whereEqualTo("rfc", rfc).get().addOnSuccessListener{
+                    for(ch in it) if(ch.exists()){
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.deleteChofer(chofer)
+                            chofer.setAdministrador("")
+                            CloudDataBase.addChofer(chofer)
+                        }
+
+                        chofer.setUsuario(ch.get("usuario").toString())
+                        chofer.setRfc(ch.get("rfc").toString())
+                        chofer.setNombre(ch.get("nombre").toString())
+                        chofer.setNumCelular(ch.get("numeroCelular").toString().toLong())
+                        chofer.setLinea(ch.get("lineaTransporte").toString())
+                        chofer.setCodigo(ch.get("codigo").toString().toLong())
+                        chofer.setNoUsuarios(ch.get("numeroUsuarios").toString().toInt())
+                        chofer.setCalificacion(ch.get("calificacion").toString().toDouble())
+                        chofer.setAdministrador(ch.get("administrador").toString())
+
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.addChoferes(chofer)
+                        }
+
+                        localDB.getChoferByRFC(chofer.getRfc()).observe(viewLifecycleOwner){
                             CoroutineScope(Dispatchers.IO).launch{
-                                localDB.deleteChofer(chofer)
-                                chofer.setAdministrador("")
-                                CloudDataBase.addChofer(chofer)
-
-                                chofer.setUsuario(ch.get("usuario").toString())
-                                chofer.setRfc(ch.get("rfc").toString())
-                                chofer.setNombre(ch.get("nombre").toString())
-                                chofer.setNumCelular(ch.get("numeroCelular").toString().toLong())
-                                chofer.setLinea(ch.get("lineaTransporte").toString())
-                                chofer.setCodigo(ch.get("codigo").toString().toLong())
-                                chofer.setNoUsuarios(ch.get("numeroUsuarios").toString().toInt())
-                                chofer.setCalificacion(ch.get("calificacion").toString().toDouble())
-                                chofer.setAdministrador(ch.get("administrador").toString())
-
-                                localDB.addChoferes(chofer)
+                                CloudDataBase.addChofer(it)
                             }
+                        }
 
-                            Toast.makeText(requireContext(), "¡Chofer modificado con éxito!", Toast.LENGTH_SHORT).show()
-                            bin.btnAgregar.visibility = View.VISIBLE
-                            dismiss()
-                        }else MensajeAlerta("ERROR", "No se encontró ningún chofer con ese dato").show(parentFragmentManager, "Error")
-                    }
-                }else if(rfc.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el RFC del Chofer").show(parentFragmentManager, "Advertencia")
-            }
+                        Toast.makeText(requireContext(), "¡Chofer modificado con éxito!", Toast.LENGTH_LONG).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
+                        dismiss()
+                    }else MensajeAlerta("ERROR", "No se encontró ningún chofer con ese dato").show(parentFragmentManager, "Error")
+                }
+            }else if(rfc.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar el RFC del Chofer").show(parentFragmentManager, "Advertencia")
+            else if(rfc.length != 13) MensajeAlerta("ADVERTENCIA", "El RFC está incompleto").show(parentFragmentManager, "Advertencia")
         }
     }
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

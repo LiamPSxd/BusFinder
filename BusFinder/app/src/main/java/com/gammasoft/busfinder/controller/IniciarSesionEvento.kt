@@ -1,6 +1,7 @@
 package com.gammasoft.busfinder.controller
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -76,26 +77,38 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
                 if(cuenta.exists()){
                     lateinit var intent: Intent
 
+                    val prefs = activity.getSharedPreferences(activity.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+                    prefs.putString("correo", cuenta.get("correo").toString())
+                    prefs.putString("contrasenia", cuenta.get("contrasenia").toString())
+                    prefs.putString("foto", cuenta.get("foto").toString())
+                    prefs.putString("tipo", cuenta.get("tipo").toString())
+                    prefs.putString("metodo", cuenta.get("metodo").toString())
+                    prefs.putString("estado", cuenta.get("estado").toString())
+                    prefs.apply()
+
                     when(cuenta.get("tipo").toString()){
                         "Administrador" -> {
                             intent = Intent(activity, PrincipalAdministrador::class.java)
-                            intent.putExtra("cuenta", cuenta.get("correo").toString())
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             activity.startActivity(intent)
+                            activity.finish()
                         }
 
                         "Chofer" -> {
                             intent = Intent(activity, PrincipalChofer::class.java)
-                            intent.putExtra("cuenta", cuenta.get("correo").toString())
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             activity.startActivity(intent)
+                            activity.finish()
                         }
 
                         "Publico General" -> {
                             intent = Intent(activity, PrincipalPublico::class.java)
-                            intent.putExtra("cuenta", cuenta.get("correo").toString())
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             activity.startActivity(intent)
+                            activity.finish()
                         }
 
                         "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la cuenta").show(activity.supportFragmentManager, "Avertencia")
@@ -212,7 +225,7 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
         CoroutineScope(Dispatchers.IO).launch{
             cloudDB.getAuth().signInWithEmailAndPassword(correo, contrasenia).addOnCompleteListener{
                 if(it.isSuccessful) obtenerCuentaCorreo2(correo, contrasenia)
-                else MensajeAlerta("ERROR", "No se pudo  iniciar sesión con Firebase").show(activity.supportFragmentManager, "Error")
+                else MensajeAlerta("ERROR", "Los datos no son correctos").show(activity.supportFragmentManager, "Error")
             }
         }
     }
@@ -243,38 +256,52 @@ class IniciarSesionEvento(private val activity: AppCompatActivity,
         if(cuenta.getContrasenia() == contrasenia){
             lateinit var intent: Intent
 
+            val prefs = activity.getSharedPreferences(activity.getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
+            prefs.putString("correo", cuenta.getCorreo())
+            prefs.putString("contrasenia", cuenta.getContrasenia())
+            prefs.putString("foto", cuenta.getFoto())
+            prefs.putString("tipo", cuenta.mostrarTipo())
+            prefs.putString("metodo", cuenta.getMetodo())
+            prefs.putString("estado", cuenta.getEstado().toString())
+            prefs.apply()
+
             when(cuenta.mostrarTipo()){
                 "Administrador" -> {
                     intent = Intent(activity, PrincipalAdministrador::class.java)
-                    intent.putExtra("cuenta", cuenta.getCorreo())
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     activity.startActivity(intent)
+                    activity.finish()
                 }
 
                 "Chofer" -> {
                     intent = Intent(activity, PrincipalChofer::class.java)
-                    intent.putExtra("cuenta", cuenta.getCorreo())
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     activity.startActivity(intent)
+                    activity.finish()
                 }
 
                 "Publico General" -> {
                     intent = Intent(activity, PrincipalPublico::class.java)
-                    intent.putExtra("cuenta", cuenta.getCorreo())
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     activity.startActivity(intent)
+                    activity.finish()
                 }
 
                 "Error" -> MensajeAlerta("ADVERTENCIA", "No se ha encontrado la Actividad Principal").show(activity.supportFragmentManager, "Avertencia")
                 else -> MensajeAlerta("ERROR", "Actividad no encontrada").show(activity.supportFragmentManager, "Error")
             }
-        }else MensajeAlerta("ERROR", "No se encontró ninguna cuenta con esos datos").show(activity.supportFragmentManager, "Avertencia")
+        }else MensajeAlerta("ADVERTENCIA", "Los datos no son correctos").show(activity.supportFragmentManager, "Avertencia")
     }
 
     private fun iniciar(){
         val usuarioOCorreo = binding.txtUsuarioOCorreo.text.toString()
         val contrasenia = binding.txtContrasenia.text.toString()
 
+        Conexion.comprobarConexion(activity)
+        Conexion.comprobarConexion(activity)
         if(usuarioOCorreo.isNotEmpty() && contrasenia.isNotEmpty() && contrasenia.length >= 6){
             when(Conexion.comprobarConexion(activity)){
                 "WIFI", "MOBILE" -> verificarCorreoCloud(usuarioOCorreo, contrasenia)

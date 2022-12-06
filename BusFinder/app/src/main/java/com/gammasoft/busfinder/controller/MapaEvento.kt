@@ -5,7 +5,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 
-class MapaEvento(private val fragment: Fragment): GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener{
+class MapaEvento(private val fragment: Fragment,
+                 private val mapa: GoogleMap): GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener{
     override fun onMyLocationButtonClick(): Boolean{
         Toast.makeText(fragment.context, "Llevándolo a su localización", Toast.LENGTH_SHORT).show()
         return false

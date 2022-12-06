@@ -73,7 +73,7 @@ data class Chofer(@PrimaryKey @ColumnInfo(name = "usuario") private var usuario:
     }
 
     fun setCalificacion(valor: Double){
-        calificacion = ((calificacion*getNoUsuarios()) + valor)
+        calificacion = ((calificacion * getNoUsuarios()) + valor)
         setNoUsuarios(getNoUsuarios() + 1)
         calificacion /= noUsuarios
     }

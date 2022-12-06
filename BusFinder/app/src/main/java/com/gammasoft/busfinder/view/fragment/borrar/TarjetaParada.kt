@@ -27,7 +27,7 @@ class TarjetaParada(private val localDB: Crud,
     private val binding get() = _binding!!
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
-                @AnimRes exitAnim: Int = R.anim.zoom_out) = withEnterAnim(enterAnim).withExitAnim(exitAnim)
+                @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaParada(localDB, bin, parada).withEnterAnim(enterAnim).withExitAnim(exitAnim)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,24 +50,21 @@ class TarjetaParada(private val localDB: Crud,
         }
 
         binding.btnBorrar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                localDB.getParadaById(parada.getId()).observe(viewLifecycleOwner){
-                    if(it.getLatitud() == parada.getLatitud()){
-                        localDB.getRutaIDByParadaID(parada.getId()).observe(viewLifecycleOwner){ ruP ->
+            localDB.getParadaById(parada.getId()).observe(viewLifecycleOwner){
+                if(it != null) if(it.getLatitud() == parada.getLatitud() && it.getLongitud() == parada.getLongitud()){
+                    localDB.getRutaIDByParadaID(parada.getId()).observe(viewLifecycleOwner){ ruP ->
+                        if(ruP != null){
                             CoroutineScope(Dispatchers.IO).launch{
                                 localDB.deleteRutaParada(ruP)
-                                CloudDataBase.delete("RutaParada", "${ruP.getRutaID()}")
+                                localDB.deleteParada(it)
+                                CloudDataBase.delete("RutaParada", "${ruP.getRutaID()}${ruP.getParadaID()}")
+                                CloudDataBase.delete("Parada", "${parada.getId()}")
                             }
-                        }
 
-                        CoroutineScope(Dispatchers.IO).launch{
-                            localDB.deleteParada(parada)
-                            CloudDataBase.delete("Parada", "${parada.getId()}")
+                            Toast.makeText(requireContext(), "¡Parada borrada con éxito!", Toast.LENGTH_LONG).show()
+                            bin.btnAgregar.visibility = View.VISIBLE
+                            dismiss()
                         }
-
-                        Toast.makeText(requireContext(), "¡Parada borrada con éxito!", Toast.LENGTH_SHORT).show()
-                        bin.btnAgregar.visibility = View.VISIBLE
-                        dismiss()
                     }
                 }
             }
@@ -76,6 +73,7 @@ class TarjetaParada(private val localDB: Crud,
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

@@ -1,5 +1,7 @@
 package com.gammasoft.busfinder.view.fragment.visualizar
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +11,6 @@ import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaVisualizarChoferBinding
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
-import com.gammasoft.busfinder.model.dbLocal.entidades.Chofer
 import com.gammasoft.busfinder.view.dialog.BaseBlurPopup
 import com.gammasoft.busfinder.view.fragment.TarjetaBase
 import com.gammasoft.busfinder.view.util.vibrate
@@ -23,6 +24,8 @@ class TarjetaChofer(private val fragment: TarjetaBase,
                     private val id: String): BaseBlurPopup(){
     private var _binding: TarjetaVisualizarChoferBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var prefs: SharedPreferences
 
     fun mostrar(@AnimRes enterAnim: Int = R.anim.zoom_in,
                 @AnimRes exitAnim: Int = R.anim.zoom_out) = TarjetaChofer(fragment, bin, titulo, id).withEnterAnim(enterAnim).withExitAnim(exitAnim)
@@ -41,35 +44,39 @@ class TarjetaChofer(private val fragment: TarjetaBase,
         super.onViewCreated(view, savedInstanceState)
         val localDB = LocalDataBase.getDB(fragment.requireContext()).crud()
 
-        var chofer = Chofer()
-        localDB.getChoferes().observe(viewLifecycleOwner){
-            for(ch in it) if(ch.getRfc() == id && ch.getNombre() == titulo){
-                binding.txtRFC.text = ch.getRfc()
-                binding.txtNombre.text = ch.getNombre()
-                binding.txtCelular.text = ch.getNumCelular().toString()
-                binding.txtCalificacion.progress = ch.getCalificacion().toInt()
-                chofer = ch
-                break
-            }
-        }
-
         bin.btnAgregar.visibility = View.GONE
 
-        binding.btnBorrar.setOnClickListener{
-            fragment.context?.vibrate(70L)
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaChofer(localDB, bin, chofer).mostrar())
-            dismiss()
-        }
+        prefs = requireActivity().getSharedPreferences(activity?.getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        localDB.getCuentaAdministradorByCorreo(prefs.getString("correo", null)!!).observe(viewLifecycleOwner){
+            localDB.getAdministradorByUsuario(it.getAdminUsuario()).observe(viewLifecycleOwner){ a ->
+                localDB.getChoferByRFCYAdministrador(id, a.getRfc()).observe(viewLifecycleOwner){ ch ->
+                    if(ch != null) if(ch.getNombre() == titulo){
+                        binding.txtRFC.text = ch.getRfc()
+                        binding.txtNombre.text = ch.getNombre()
+                        binding.txtCelular.text = ch.getNumCelular().toString()
+                        binding.txtLinea.text = ch.getLinea()
+                        binding.txtCalificacion.progress = ch.getCalificacion().toInt()
 
-        binding.btnModificar.setOnClickListener{
-            fragment.context?.vibrate(60L)
-            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaChofer(localDB, bin, chofer).mostrar())
-            dismiss()
+                        binding.btnBorrar.setOnClickListener{
+                            fragment.context?.vibrate(80L)
+                            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.borrar.TarjetaChofer(localDB, bin, ch).mostrar())
+                            dismiss()
+                        }
+
+                        binding.btnModificar.setOnClickListener{
+                            fragment.context?.vibrate(50L)
+                            fragment.pushPopup(com.gammasoft.busfinder.view.fragment.modificar.TarjetaChofer(localDB, bin, ch).mostrar())
+                            dismiss()
+                        }
+                    }
+                }
+            }
         }
     }
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 

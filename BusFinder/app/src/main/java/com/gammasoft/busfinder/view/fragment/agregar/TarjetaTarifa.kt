@@ -1,5 +1,7 @@
 package com.gammasoft.busfinder.view.fragment.agregar
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import androidx.annotation.AnimRes
 import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.databinding.TarjetaAgregarTarifaBinding
+import com.gammasoft.busfinder.model.dbLocal.Crud
 import com.gammasoft.busfinder.model.dbLocal.LocalDataBase
 import com.gammasoft.busfinder.model.dbLocal.entidades.Tarifa
 import com.gammasoft.busfinder.model.dbNube.CloudDataBase
@@ -25,9 +28,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopup(){
+class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopup(), AdapterView.OnItemSelectedListener{
     private var _binding: TarjetaAgregarTarifaBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var prefs: SharedPreferences
+    private lateinit var localDB: Crud
 
     private var tarifa = ""
 
@@ -46,12 +52,13 @@ class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopu
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        val localDB = LocalDataBase.getDB(requireContext()).crud()
+        localDB = LocalDataBase.getDB(requireContext()).crud()
 
         val tarifas = ArrayList<String>()
         localDB.getTarifas().observe(this){
-            for(tarifa in it) tarifas.add(tarifa.getNombre())
+            for(tarifa in it) if(tarifa.getNombre() != "") tarifas.add(tarifa.getNombre())
         }
+        tarifas.add("Seleccione un Público")
         tarifas.add("Otro")
 
         ArrayAdapter(
@@ -64,8 +71,7 @@ class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopu
             with(binding.spSeleccion){
                 adapter = it
                 setSelection(0, false)
-                onItemSelectedListener = SpinnerEvento()
-                prompt = "Seleccione un Público"
+                onItemSelectedListener = this@TarjetaTarifa
                 gravity = Gravity.START
             }
         }
@@ -89,39 +95,53 @@ class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopu
         )
 
         binding.btnCancelar.setOnClickListener{
-            dismiss()
             bin.btnAgregar.visibility = View.VISIBLE
+            dismiss()
         }
 
         binding.btnAgregar.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch{
-                val precio = binding.txtPrecio.text.toString()
-                val publico = if(tarifa == "Otro") binding.txtOtro.text.toString()
-                else tarifa
+            val precio = binding.txtPrecio.text.toString()
+            val publico = if(tarifa == "Otro") binding.txtOtro.text.toString()
+            else tarifa
 
-                if(publico.isNotEmpty() && precio.isNotEmpty()){
-                    var admin = ""
-                    parentFragmentManager.setFragmentResultListener("Administrador", this@TarjetaTarifa){ _, bundle ->
-                        admin = bundle.getString("administrador").toString()
+            if((publico.isNotEmpty() && publico != "Seleccione un Público") && precio.isNotEmpty()){
+                prefs = requireActivity().getSharedPreferences(activity?.getString(R.string.prefs_file), Context.MODE_PRIVATE)
+                localDB.getCuentaAdministradorByCorreo(prefs.getString("correo", null)!!).observe(viewLifecycleOwner){
+                    localDB.getAdministradorByUsuario(it.getAdminUsuario()).observe(viewLifecycleOwner){ a ->
+                        val tarifa = Tarifa(publico, precio.toDouble(), a.getRfc())
+
+                        CoroutineScope(Dispatchers.IO).launch{
+                            localDB.addTarifas(tarifa)
+                        }
+
+                        localDB.getTarifaByNombre(tarifa.getNombre()).observe(viewLifecycleOwner){
+                            CoroutineScope(Dispatchers.IO).launch{
+                                CloudDataBase.addTarifa(it)
+                            }
+                        }
+
+                        Toast.makeText(requireContext(), "¡Tarifa agregada con éxito!", Toast.LENGTH_LONG).show()
+                        bin.btnAgregar.visibility = View.VISIBLE
+                        dismiss()
                     }
-
-                    val tarifa = Tarifa(publico, precio.toDouble(), admin)
-
-                    CoroutineScope(Dispatchers.IO).launch{
-                        localDB.addTarifas(tarifa)
-                        CloudDataBase.addTarifa(tarifa)
-                    }
-
-                    Toast.makeText(requireContext(), "¡Tarifa agregada con éxito!", Toast.LENGTH_SHORT).show()
-                    dismiss()
-                    bin.btnAgregar.visibility = View.VISIBLE
-                }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingreesar un Público").show(parentFragmentManager, "Advertencia")
-            }
+                }
+            }else if(publico.isEmpty()) MensajeAlerta("ADVERTENCIA", "Falta ingresar un Público").show(parentFragmentManager, "Advertencia")
+            else if(publico == "Seleccione un Público") MensajeAlerta("ERROR", "Seleccione otro Público").show(parentFragmentManager, "Error")
         }
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
+        tarifa = parent?.getItemAtPosition(position).toString()
+        binding.txtOtro.isEnabled = tarifa == "Otro"
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?){
+        binding.txtOtro.isEnabled = parent?.selectedItem == "Otro"
     }
 
     override fun onDestroy(){
         super.onDestroy()
+        bin.btnAgregar.visibility = View.VISIBLE
         _binding = null
     }
 
@@ -132,14 +152,4 @@ class TarjetaTarifa(private val bin: FragmentAdministradorBinding): BaseBlurPopu
     override fun getRootView(): View = binding.tarjeta
 
     override fun getBackgroundLayout(): ViewGroup = binding.blurLayout
-
-    inner class SpinnerEvento: AdapterView.OnItemSelectedListener{
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long){
-            tarifa = parent?.getItemAtPosition(position).toString()
-
-            binding.txtOtro.isEnabled = tarifa == "Otro"
-        }
-
-        override fun onNothingSelected(parent: AdapterView<*>?){}
-    }
 }
