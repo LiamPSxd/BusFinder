@@ -5,10 +5,7 @@ import com.gammasoft.busfinder.R
 import com.gammasoft.busfinder.databinding.FragmentAdministradorBinding
 import com.gammasoft.busfinder.view.dialog.MensajeAlerta
 import com.gammasoft.busfinder.view.fragment.TarjetaBase
-import com.gammasoft.busfinder.view.fragment.agregar.TarjetaChofer
-import com.gammasoft.busfinder.view.fragment.agregar.TarjetaParada
-import com.gammasoft.busfinder.view.fragment.agregar.TarjetaRuta
-import com.gammasoft.busfinder.view.fragment.agregar.TarjetaTarifa
+import com.gammasoft.busfinder.view.fragment.agregar.*
 import com.gammasoft.busfinder.view.util.vibrate
 
 class AdministradorEvento(private val fragment: TarjetaBase,
@@ -19,6 +16,7 @@ class AdministradorEvento(private val fragment: TarjetaBase,
             binding.btnAgregarRuta.id -> agregarRuta()
             binding.btnAgregarParada.id -> agregarParada()
             binding.btnAgregarTarifa.id -> agregarTarifa()
+            binding.btnAgregarReporte.id -> agregarReporte()
             else -> MensajeAlerta("ERROR", "Acción no encontrada").show(fragment.parentFragmentManager, "Error")
         }
     }
@@ -49,5 +47,12 @@ class AdministradorEvento(private val fragment: TarjetaBase,
         binding.btnAgregar.collapse()
         binding.btnAgregar.visibility = View.GONE
         fragment.pushPopup(TarjetaTarifa(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+    }
+
+    private fun agregarReporte(){
+        fragment.context?.vibrate(60L)
+        binding.btnAgregar.collapse()
+        binding.btnAgregar.visibility = View.GONE
+        fragment.pushPopup(TarjetaReporte(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 }

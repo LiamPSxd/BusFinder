@@ -79,6 +79,16 @@
             app:fab_title="Parada" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarReporte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/color12"
+            app:fab_colorPressed="@color/color11"
+            app:fab_icon="@drawable/parada"
+            app:fab_size="mini"
+            app:fab_title="Reporte" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAgregarTarifa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
