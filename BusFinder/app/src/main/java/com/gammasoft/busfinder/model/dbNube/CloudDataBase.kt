@@ -167,6 +167,19 @@ abstract class CloudDataBase{
             }
         }
 
+    //QuejaSugerencia
+        fun addQuejaSugerencia(quejaSugerencia: QuejaSugerencia){
+            CoroutineScope(Dispatchers.IO).launch{
+                cloudDataBase.collection("SugerenciaQueja").document(quejaSugerencia.getId().toString()).set(
+                    hashMapOf(
+                        "id" to quejaSugerencia.getId(),
+                        "descripcion" to quejaSugerencia.getDescripcion(),
+                        "usuario" to quejaSugerencia.getUsuario()
+                    )
+                )
+            }
+        }
+
     //CuentaAdministrador
         fun addCuentaAdministrador(cuentaAdmin: CuentaAdministrador){
             CoroutineScope(Dispatchers.IO).launch{

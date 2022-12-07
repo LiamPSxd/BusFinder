@@ -44,7 +44,7 @@ class PrincipalChofer: AppCompatActivity(){
         navController = supportFragmentManager.findFragmentById(R.id.navHostChofer)!!.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.fragmentMapaChofer, R.id.fragmentHomeChofer, R.id.fragmentPerfilChofer)
+            setOf(R.id.fragmentMapaChofer, R.id.fragmentHomeChofer, R.id.fragmentQuejaSugerencia, R.id.fragmentPerfilChofer)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -167,6 +167,20 @@ class PrincipalChofer: AppCompatActivity(){
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+
+                cloudDB.collection("SugerenciaQueja").get().addOnSuccessListener{ qs ->
+                    CoroutineScope(Dispatchers.IO).launch{
+                        for(q in qs) if(q.exists()){
+                            localDB.addSugerenciaQueja(
+                                QuejaSugerencia(
+                                    q.get("id").toString().toInt(),
+                                    q.get("descripcion").toString(),
+                                    q.get("usuario").toString()
+                                )
+                            )
                         }
                     }
                 }

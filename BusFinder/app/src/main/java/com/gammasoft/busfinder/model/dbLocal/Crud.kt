@@ -236,6 +236,28 @@ interface Crud{
     @Query("DELETE FROM Coordenada")
     fun deleteCoordenadas()
 
+//SugerenciaQueja
+    @Query("SELECT * FROM SugerenciaQueja")
+    fun getSugerenciasQuejas(): LiveData<List<QuejaSugerencia>>
+
+    @Query("SELECT * FROM SugerenciaQueja WHERE id = :id")
+    fun getSugerenciasQuejasById(id: Int): LiveData<QuejaSugerencia>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addSugerenciaQueja(vararg quejaSugerencia: QuejaSugerencia)
+
+    @Update
+    fun updateSugerenciaQueja(vararg quejaSugerencia: QuejaSugerencia)
+
+    @Delete
+    fun deleteSugerenciaQueja(quejaSugerencia: QuejaSugerencia)
+
+    @Query("DELETE FROM SugerenciaQueja WHERE id = :id")
+    fun deleteSugerenciaQueja(id: Int)
+
+    @Query("DELETE FROM SugerenciaQueja")
+    fun deleteSugerenciasQuejas()
+
 //CuentaAdministrador
     @Query("SELECT * FROM CuentaAdministrador")
     fun getCuentasAdministrador(): LiveData<List<CuentaAdministrador>>

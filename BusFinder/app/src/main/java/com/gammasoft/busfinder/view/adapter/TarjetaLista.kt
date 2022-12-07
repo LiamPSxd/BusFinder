@@ -32,29 +32,16 @@ class TarjetaLista(private val fragment: TarjetaBase,
     override fun getItemCount(): Int = ides.size
 
     inner class ViewHolder(private val binding: TarjetaListaBinding): RecyclerView.ViewHolder(binding.root), DebouncingClickListener, PopupInflaterEvento, PopupStateEvento, PopupHoverEvento{
-        //private var longPressBlurPopup: BlurPopup? = null
         private var id = ""
 
         fun bind(id: String, titulo: String, contador: String){
-            //longPressBlurPopup.checkAndUnregister()
             this.id = id
 
             itemView.run{
                 binding.pin.text = if(id == "Nada que mostrar") id else contador
                 binding.etqNombre.text = titulo
                 binding.tarjeta.onDebouncingClick(this@ViewHolder)
-
-                /*longPressBlurPopup = BlurPopup.Builder
-                    .with(fragment)
-                    .targetView(binding.tarjeta)
-                    .baseBlurPopup(MensajeBlur(contador, titulo).mostrar())
-                    .animationType(AnimType.ANIM_FROM_BOTTOM)
-                    .popupStateListener(this@ViewHolder)
-                    .hoverListener(this@ViewHolder)
-                    .build()*/
             }
-
-            //longPressBlurPopup?.register()
         }
 
         override fun onDebouncingClick(view: View){

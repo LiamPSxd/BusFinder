@@ -16,7 +16,8 @@ class AdministradorEvento(private val fragment: TarjetaBase,
             binding.btnAgregarRuta.id -> agregarRuta()
             binding.btnAgregarParada.id -> agregarParada()
             binding.btnAgregarTarifa.id -> agregarTarifa()
-            binding.btnAgregarReporte.id -> agregarReporte()
+            binding.btnAgregarUnidad.id -> agregarUnidad()
+            //binding.btnAgregarReporte.id -> agregarReporte()
             else -> MensajeAlerta("ERROR", "Acción no encontrada").show(fragment.parentFragmentManager, "Error")
         }
     }
@@ -49,10 +50,17 @@ class AdministradorEvento(private val fragment: TarjetaBase,
         fragment.pushPopup(TarjetaTarifa(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
     }
 
-    private fun agregarReporte(){
+    private fun agregarUnidad(){
+        fragment.context?.vibrate(60L)
+        binding.btnAgregar.collapse()
+        binding.btnAgregar.visibility = View.GONE
+        fragment.pushPopup(TarjetaUnidad(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
+    }
+
+    /*private fun agregarReporte(){
         fragment.context?.vibrate(60L)
         binding.btnAgregar.collapse()
         binding.btnAgregar.visibility = View.GONE
         fragment.pushPopup(TarjetaReporte(binding).mostrar(R.anim.zoom_in, R.anim.zoom_out))
-    }
+    }*/
 }

@@ -17,6 +17,13 @@
         android:checkable="true" />
 
     <item
+        android:id="@+id/fragmentQuejaSugerencia"
+        android:icon="@drawable/buzon"
+        android:title="Quejas"
+        android:enabled="true"
+        android:checkable="true"/>
+
+    <item
         android:id="@+id/fragmentPerfilAdmin"
         android:icon="@drawable/perfil"
         android:title="Perfil"

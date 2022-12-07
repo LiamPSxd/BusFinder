@@ -9,9 +9,9 @@ import com.gammasoft.busfinder.model.dbLocal.relaciones.*
 
 @Database(entities = [Cuenta::class, Administrador::class, Chofer::class,
     PublicoGeneral::class, Ruta::class, Parada::class, Coordenada::class,
-    Unidad::class, Tarifa::class, Horario::class, CuentaAdministrador::class,
-    CuentaChofer::class, CuentaPublico::class, RutaCoordenada::class,
-    RutaParada::class, UnidadCoordenada::class, HorarioCUR::class],
+    Unidad::class, Tarifa::class, Horario::class, QuejaSugerencia::class,
+    CuentaAdministrador::class, CuentaChofer::class, CuentaPublico::class,
+    RutaCoordenada::class, RutaParada::class, UnidadCoordenada::class, HorarioCUR::class],
     version = 4,
     exportSchema = false)
 abstract class LocalDataBase: RoomDatabase(){

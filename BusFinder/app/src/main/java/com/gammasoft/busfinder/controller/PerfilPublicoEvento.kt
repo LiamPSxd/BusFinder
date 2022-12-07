@@ -59,6 +59,7 @@ class PerfilPublicoEvento(private val fragment: PerfilPublico,
             localDB.deleteParadas()
             localDB.deleteTarifas()
             localDB.deleteCoordenadas()
+            localDB.deleteSugerenciasQuejas()
         }
 
         CoroutineScope(Dispatchers.IO).launch{

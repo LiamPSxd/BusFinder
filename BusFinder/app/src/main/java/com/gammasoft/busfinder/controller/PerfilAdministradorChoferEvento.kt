@@ -62,6 +62,7 @@ class PerfilAdministradorChoferEvento(private val fragment: Fragment,
                     localDB.deleteParadas()
                     localDB.deleteTarifas()
                     localDB.deleteCoordenadas()
+                    localDB.deleteSugerenciasQuejas()
                 }
             }
 
@@ -71,6 +72,7 @@ class PerfilAdministradorChoferEvento(private val fragment: Fragment,
                     localDB.deleteParadas()
                     localDB.deleteTarifas()
                     localDB.deleteCoordenadas()
+                    localDB.deleteSugerenciasQuejas()
                 }
             }
         }

@@ -42,7 +42,7 @@ class PrincipalPublico: AppCompatActivity(){
         navController = supportFragmentManager.findFragmentById(R.id.navHostPublico)!!.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.fragmentHomePublico, R.id.fragmentMapaPublico, R.id.fragmentPerfilPublico)
+            setOf(R.id.fragmentHomePublico, R.id.fragmentMapaPublico, R.id.fragmentQuejaSugerencia, R.id.fragmentPerfilPublico)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -158,6 +158,20 @@ class PrincipalPublico: AppCompatActivity(){
                                 ))
                             }
                         }
+                    }
+                }
+            }
+
+            cloudDB.collection("SugerenciaQueja").get().addOnSuccessListener{ qs ->
+                CoroutineScope(Dispatchers.IO).launch{
+                    for(q in qs) if(q.exists()){
+                        localDB.addSugerenciaQueja(
+                            QuejaSugerencia(
+                                q.get("id").toString().toInt(),
+                                q.get("descripcion").toString(),
+                                q.get("usuario").toString()
+                            )
+                        )
                     }
                 }
             }

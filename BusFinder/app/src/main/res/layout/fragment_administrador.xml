@@ -98,5 +98,16 @@
             app:fab_icon="@drawable/tarifa"
             app:fab_size="mini"
             app:fab_title="Tarifa" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAgregarUnidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:maxImageSize="50dp"
+            app:fab_colorNormal="@color/color12"
+            app:fab_colorPressed="@color/color11"
+            app:fab_icon="@drawable/bus"
+            app:fab_size="mini"
+            app:fab_title="Tarifa" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 </RelativeLayout>

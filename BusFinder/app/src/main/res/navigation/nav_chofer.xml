@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_chofer" />
 
     <fragment
+        android:id="@+id/fragmentQuejaSugerencia"
+        android:name="com.gammasoft.busfinder.view.fragment.QuejaSugerencia"
+        android:label="QuejaSugerencia"
+        tools:layout="@layout/fragment_queja_sugerencia" />
+
+    <fragment
         android:id="@+id/fragmentPerfilChofer"
         android:name="com.gammasoft.busfinder.view.fragment.PerfilChofer"
         android:label="Chofer"

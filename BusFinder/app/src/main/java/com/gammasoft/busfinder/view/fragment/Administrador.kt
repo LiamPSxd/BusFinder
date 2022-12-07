@@ -34,9 +34,10 @@ class Administrador: TarjetaBase(){
         binding.btnAgregarRuta.setOnClickListener(evento)
         binding.btnAgregarParada.setOnClickListener(evento)
         binding.btnAgregarTarifa.setOnClickListener(evento)
-        binding.btnAgregarReporte.setOnClickListener(evento)
+        binding.btnAgregarUnidad.setOnClickListener(evento)
+        //binding.btnAgregarReporte.setOnClickListener(evento)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = TarjetaAdapter(
             this,
             binding,
