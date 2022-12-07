@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_nav_menu_administrador">
+
+    <item
+        android:id="@+id/fragmentMapaAdmin"
+        android:icon="@drawable/mapa"
+        android:title="Mapa"
+        android:enabled="true"
+        android:checkable="true" />
+
+    <item
+        android:id="@+id/fragmentHomeAdmin"
+        android:icon="@drawable/home"
+        android:title="Home"
+        android:enabled="true"
+        android:checkable="true" />
+
+    <item
+        android:id="@+id/fragmentQuejaSugerencia"
+        android:icon="@drawable/buzon"
+        android:title="Quejas"
+        android:enabled="true"
+        android:checkable="true"/>
+
+    <item
+        android:id="@+id/fragmentPerfilAdmin"
+        android:icon="@drawable/perfil"
+        android:title="Perfil"
+        android:enabled="true"
+        android:checkable="true"/>
+</menu>

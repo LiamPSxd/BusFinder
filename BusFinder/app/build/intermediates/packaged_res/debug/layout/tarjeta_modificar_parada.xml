@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/modificarParada"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/fondo"
+    android:animateLayoutChanges="true"
+    tools:context=".view.fragment.modificar.TarjetaParada">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="5dp">
+
+            <ImageView
+                android:id="@+id/dragHandleImage"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                style="@style/DragHandleLight"
+                android:contentDescription="drag_handle" />
+
+            <TextView
+                android:id="@+id/ins1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Modifique los siguientes datos"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etqParada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_below="@+id/ins1"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Parada"
+                android:fontFamily="@font/outfit_medium"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textStyle="bold"
+                android:textColorHint="@color/color"
+                app:hintAnimationEnabled="true"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="0dp"
+                app:boxCollapsedPaddingTop="10dp"
+                app:boxBackgroundColor="@color/fondo"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusBottomEnd="25dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtParada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:autofillHints="rfc"
+                    android:inputType="textPersonName"
+                    android:fontFamily="@font/outfit_medium"
+                    android:textColor="@color/black1"
+                    android:textSize="22sp"
+                    android:textColorHighlight="@color/color14"
+                    android:gravity="start|center" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/etqRutas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/etqParada"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Ruta"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spSeleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/etqParada"
+                android:layout_toEndOf="@+id/etqRutas"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/color"
+                android:fontFamily="@font/outfit_medium"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/ins2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@+id/etqRutas"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="start|center"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:text="Marque la nueva parada"
+                android:textColor="@color/black1"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mapa"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/ins2"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                map:cardBackgroundColor="@color/white"
+                map:cardCornerRadius="30dp"
+                map:cardElevation="0dp">
+
+                <fragment
+                    android:id="@+id/mapaModificarParada"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    map:cameraTargetLat="19.527162"
+                    map:cameraTargetLng="-96.923894"
+                    map:cameraZoom="19" />
+            </androidx.cardview.widget.CardView>
+
+            <ImageButton
+                android:id="@+id/btnAtras"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/ins2"
+                android:layout_toStartOf="@+id/btnLimpiar"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Borrar acción"
+                app:srcCompat="@drawable/atras" />
+
+            <ImageButton
+                android:id="@+id/btnLimpiar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/ins2"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Limpiar acciones"
+                app:srcCompat="@drawable/limpiar" />
+
+            <Button
+                android:id="@+id/btnModificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/mapa"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="@color/btnModificar"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="center"
+                android:text="Modificar"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="50dp" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/mapa"
+                android:layout_toStartOf="@+id/btnModificar"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="center"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/cancelar"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cornerRadius="50dp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/dragArea"
+            style="@style/DragAreaWrap"
+            android:layout_height="60dp"
+            android:layout_margin="0dp" />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

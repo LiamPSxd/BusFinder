@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="black1">#201E1E</color>
+    <color name="btnBorrar">#F47474</color>
+    <color name="btnModificar">#DDCC5E</color>
+    <color name="cancelar">#931414</color>
+    <color name="color">#4A4A4A</color>
+    <color name="color0">#7C7C7C</color>
+    <color name="color1">#a49b97</color>
+    <color name="color10">#6da0ad</color>
+    <color name="color11">#29545b</color>
+    <color name="color12">#406b72</color>
+    <color name="color13">#57828a</color>
+    <color name="color14">#6d99a1</color>
+    <color name="color15">#84b0b8</color>
+    <color name="color2">#bbb4b0</color>
+    <color name="color3">#d2cdc9</color>
+    <color name="color4">#e8e6e2</color>
+    <color name="color5">#fffffb</color>
+    <color name="color6">#2933c4</color>
+    <color name="color7">#4849d3</color>
+    <color name="color8">#3d707c</color>
+    <color name="color9">#558894</color>
+    <color name="fondo">#e9eaf1</color>
+    <color name="fondo1">#EAE9E7</color>
+    <color name="fondo2">#d4d4da</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="android_sdk_places_api_key">AIzaSyDCpEGLGBLBbjPPqUL10YlHlVkBYn505rM</string>
+    <string name="app_name">BusFinder</string>
+    <string name="default_web_client_id" translatable="false">1099088393270-a2g7gdsqce3jtbhs60hsv330aakahhv0.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">5787552521309578</string>
+    <string name="facebook_client_token">02fa499609fccfd11a889c37249584d1</string>
+    <string name="fb_login_protocol_scheme">fb5787552521309578</string>
+    <string name="gcm_defaultSenderId" translatable="false">1099088393270</string>
+    <string name="google_api_key" translatable="false">AIzaSyAyDQuj92clibFDw06WcqkzzbY5GCUQlTk</string>
+    <string name="google_app_id" translatable="false">1:1099088393270:android:b7b431c53ec2c8e0bb5497</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAyDQuj92clibFDw06WcqkzzbY5GCUQlTk</string>
+    <string name="google_storage_bucket" translatable="false">busfinder-9e961.appspot.com</string>
+    <string name="prefs_file">com.gammasoft.busfinder.PREFERENCE_FILE_KEY</string>
+    <string name="project_id" translatable="false">busfinder-9e961</string>
+    <style name="BlurLayoutFullScreen">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:visibility">invisible</item>
+        <item name="blk_blurRadius">20</item>
+        <item name="blk_downscaleFactor">0.12</item>
+        <item name="blk_fps">0</item>
+    </style>
+    <style name="DialogAnimationsFromBottom">
+        <item name="android:windowEnterAnimation">@anim/float_up</item>
+        <item name="android:windowExitAnimation">@anim/sink_down</item>
+    </style>
+    <style name="DialogAnimationsFromCenter">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
+    <style name="DialogAnimationsFromLeft">
+        <item name="android:windowEnterAnimation">@anim/float_right</item>
+        <item name="android:windowExitAnimation">@anim/sink_left</item>
+    </style>
+    <style name="DialogAnimationsFromRight">
+        <item name="android:windowEnterAnimation">@anim/float_left</item>
+        <item name="android:windowExitAnimation">@anim/sink_right</item>
+    </style>
+    <style name="DialogAnimationsFromTop">
+        <item name="android:windowEnterAnimation">@anim/float_down</item>
+        <item name="android:windowExitAnimation">@anim/sink_up</item>
+    </style>
+    <style name="DragAreaWrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">-12dp</item>
+        <item name="android:layout_marginStart">-15dp</item>
+        <item name="android:layout_marginEnd">-15dp</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:elevation">10dp</item>
+    </style>
+    <style name="DragHandleLight">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:src">@drawable/drag_handle_light</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:layout_gravity">top|center_horizontal</item>
+    </style>
+    <style name="Theme.BusFinder" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        
+        <item name="colorPrimary">@color/color11</item>
+        <item name="colorPrimaryVariant">@color/fondo</item>
+        <item name="colorOnPrimary">@color/black</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/fondo</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="colorAccent">@color/black1</item>
+        <item name="android:textColorLink">@color/black1</item>
+        <item name="android:textColorHint">@color/color</item>
+        <item name="android:textCursorDrawable">@color/black1</item>
+        <item name="android:textColorHighlight">@color/color0</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.BusFinder.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="Theme.BusFinder.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.BusFinder.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="Theme.BusFinder.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/color11</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.BusFinder</item>
+    </style>
+    <style name="etiqueta">
+        <item name="android:background">@drawable/etiqueta</item>
+        <item name="android:fontFamily">@font/phenomena_extra_bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <declare-styleable name="DeckViewPager">
+        <attr format="integer" name="padding_percentage"/>
+        <attr format="dimension" name="padding_dp"/>
+        <attr format="float" name="min_alpha"/>
+    </declare-styleable>
+</resources>

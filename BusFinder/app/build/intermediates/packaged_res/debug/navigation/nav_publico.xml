@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_publico"
+    app:startDestination="@id/fragmentHomePublico">
+
+    <fragment
+        android:id="@+id/fragmentHomePublico"
+        android:name="com.gammasoft.busfinder.view.fragment.PublicoGeneral"
+        android:label="Home"
+        tools:layout="@layout/fragment_publico" />
+
+    <fragment
+        android:id="@+id/fragmentMapaPublico"
+        android:name="com.gammasoft.busfinder.view.fragment.Mapa"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_mapa" />
+
+    <fragment
+        android:id="@+id/fragmentQuejaSugerencia"
+        android:name="com.gammasoft.busfinder.view.fragment.QuejaSugerencia"
+        android:label="QuejaSugerencia"
+        tools:layout="@layout/fragment_queja_sugerencia" />
+
+    <fragment
+        android:id="@+id/fragmentPerfilPublico"
+        android:name="com.gammasoft.busfinder.view.fragment.PerfilPublico"
+        android:label="PublicoGeneral"
+        tools:layout="@layout/fragment_perfil_publico" />
+</navigation>

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "nav_administrador",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "nav_chofer",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "nav_crear_cuenta",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  },
+  {
+    "name": "nav_publico",
+    "navigationXmlIds": [],
+    "deepLinks": []
+  }
+]

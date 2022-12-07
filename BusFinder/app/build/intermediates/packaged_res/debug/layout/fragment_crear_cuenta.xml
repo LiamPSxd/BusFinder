@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etqRFC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="RFC"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textStyle="bold"
+                android:textColorHint="@color/color"
+                app:hintAnimationEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="13"
+                app:counterTextColor="@color/black1"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="0dp"
+                app:boxCollapsedPaddingTop="10dp"
+                app:boxBackgroundColor="@color/fondo"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusBottomEnd="25dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtRFC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:autofillHints="rfc"
+                    android:fontFamily="@font/outfit_medium"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black1"
+                    android:textSize="22sp"
+                    android:textColorHighlight="@color/color14"
+                    android:gravity="start|center" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etqNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/etqRFC"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Nombre Completo"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textStyle="bold"
+                android:textColorHint="@color/color"
+                app:hintAnimationEnabled="true"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="0dp"
+                app:boxCollapsedPaddingTop="10dp"
+                app:boxBackgroundColor="@color/fondo"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusBottomEnd="25dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:autofillHints="name"
+                    android:fontFamily="@font/outfit_medium"
+                    android:inputType="textPersonName|textAutoCorrect"
+                    android:textColor="@color/black1"
+                    android:textSize="22sp"
+                    android:textColorHighlight="@color/color14"
+                    android:gravity="start|center" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etqCelular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_below="@+id/etqNombre"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Celular"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textStyle="bold"
+                android:textColorHint="@color/color"
+                app:hintAnimationEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:counterTextColor="@color/black1"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="0dp"
+                app:boxCollapsedPaddingTop="10dp"
+                app:boxBackgroundColor="@color/fondo"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusBottomEnd="25dp" >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCelular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:autofillHints="phone"
+                    android:fontFamily="@font/outfit_medium"
+                    android:inputType="phone"
+                    android:textColor="@color/black1"
+                    android:textSize="22sp"
+                    android:textColorHighlight="@color/color14"
+                    android:gravity="start|center" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etqLinea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="15dp"
+                android:layout_below="@+id/etqCelular"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:hint="Línea de Transporte"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:textColor="@color/black1"
+                android:textStyle="bold"
+                android:textColorHint="@color/color"
+                app:hintAnimationEnabled="true"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="0dp"
+                app:boxCollapsedPaddingTop="10dp"
+                app:boxBackgroundColor="@color/fondo"
+                app:boxCornerRadiusTopStart="25dp"
+                app:boxCornerRadiusTopEnd="25dp"
+                app:boxCornerRadiusBottomStart="25dp"
+                app:boxCornerRadiusBottomEnd="25dp" >
+
+                <MultiAutoCompleteTextView
+                    android:id="@+id/txtLinea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:autofillHints="transporte"
+                    android:fontFamily="@font/outfit_medium"
+                    android:inputType="textMultiLine|textAutoCorrect"
+                    android:textColor="@color/black1"
+                    android:hint=" "
+                    android:textSize="22sp"
+                    android:textColorHighlight="@color/color14"
+                    android:gravity="start|top" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnContinuar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:contentDescription="Continua con Administrador"
+        android:focusable="true"
+        app:backgroundTint="@color/color11"
+        app:fabSize="normal"
+        app:maxImageSize="50dp"
+        app:srcCompat="@drawable/ingresar" />
+</RelativeLayout>

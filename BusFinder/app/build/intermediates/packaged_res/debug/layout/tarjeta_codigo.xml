@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/etqTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:fontFamily="@font/outfit_extra_bold"
+                    android:text="Introduzca el código"
+                    android:textColor="@color/black1"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etqCodigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_below="@+id/etqTitulo"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:hint="Código"
+                    android:fontFamily="@font/outfit_medium"
+                    android:gravity="center"
+                    android:textColor="@color/black1"
+                    android:textStyle="bold"
+                    android:textColorHint="@color/color"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="6"
+                    app:counterTextColor="@color/black1"
+                    app:hintAnimationEnabled="true"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeWidth="0dp"
+                    app:boxCollapsedPaddingTop="10dp"
+                    app:boxBackgroundColor="@color/fondo"
+                    app:boxCornerRadiusTopStart="25dp"
+                    app:boxCornerRadiusTopEnd="25dp"
+                    app:boxCornerRadiusBottomStart="25dp"
+                    app:boxCornerRadiusBottomEnd="25dp" >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtCodigo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="14dp"
+                        android:autofillHints="password"
+                        android:inputType="number"
+                        android:fontFamily="@font/outfit_bold"
+                        android:textColor="@color/black1"
+                        android:textSize="22sp"
+                        android:textColorHighlight="@color/color14"
+                        android:gravity="start|center"
+                        android:textStyle="normal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btnAceptar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/etqCodigo"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:backgroundTint="@color/color15"
+                    android:fontFamily="@font/outfit_bold"
+                    android:text="Aceptar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="50dp" />
+            </RelativeLayout>
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/drag_handle_image"
+            style="@style/DragHandleLight"
+            android:contentDescription="drag_handle" />
+
+        <View
+            android:id="@+id/dragArea"
+            style="@style/DragAreaWrap"
+            android:layout_height="60dp" />
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

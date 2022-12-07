@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/visualizarChofer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:animateLayoutChanges="true"
+    tools:context=".view.fragment.visualizar.TarjetaChofer">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp">
+
+            <ImageView
+                android:id="@+id/dragHandleImage"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                style="@style/DragHandleLight"
+                android:contentDescription="drag_handle" />
+
+            <TextView
+                android:id="@+id/etqRFC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/dragHandleImage"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="RFC"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtRFC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/dragHandleImage"
+                android:layout_toEndOf="@+id/etqRFC"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="rfc"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/etqRFC"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Nombre"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/txtRFC"
+                android:layout_toEndOf="@+id/etqNombre"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="nombre"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqCelular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/etqNombre"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Celular"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtCelular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/txtNombre"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/etqCelular"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="celular"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqLinea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/etqCelular"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Línea"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtLinea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/txtCelular"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/etqCelular"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="línea"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqCalificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginStart="8dp"
+                android:layout_below="@+id/etqLinea"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Calificación"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/txtCalificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/txtLinea"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/etqCalificacion"
+                android:backgroundTint="@color/white"
+                android:gravity="start|center"
+                android:progress="20"
+                android:numStars="5"
+                android:rating="0"
+                android:isIndicator="true"
+                android:progressBackgroundTint="@color/color3"
+                android:progressTint="#E6B625" />
+
+            <View
+                android:id="@+id/dragArea"
+                style="@style/DragAreaWrap"
+                android:layout_marginTop="55dp"
+                android:layout_marginBottom="-15dp"
+                android:layout_below="@+id/btnBorrar"
+                android:layout_alignBottom="@+id/txtCalificacion" />
+
+            <ImageButton
+                android:id="@+id/btnBorrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/btnModificar"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Borrar Chofer"
+                app:srcCompat="@drawable/borrar" />
+
+            <ImageButton
+                android:id="@+id/btnModificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Modificar Chofer"
+                app:srcCompat="@drawable/editar" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/visualizarTarifa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:animateLayoutChanges="true"
+    tools:context=".view.fragment.visualizar.TarjetaTarifa">
+
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/blurLayout"
+        style="@style/BlurLayoutFullScreen" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/dragHandleImage"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                style="@style/DragHandleLight"
+                android:contentDescription="drag_handle" />
+
+            <TextView
+                android:id="@+id/etqPublico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="6dp"
+                android:layout_below="@+id/dragHandleImage"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Público"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPublico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_below="@+id/dragHandleImage"
+                android:layout_toEndOf="@+id/etqPublico"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="público"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/etqPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="6dp"
+                android:layout_below="@+id/etqPublico"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/outfit_extra_bold"
+                android:gravity="start|center"
+                android:text="Precio   $"
+                android:textColor="@color/black1"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="5dp"
+                android:layout_below="@+id/txtPublico"
+                android:layout_toEndOf="@+id/etqPrecio"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/outfit_bold"
+                android:gravity="start|center"
+                android:text="precio"
+                android:textColor="@color/color"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/dragArea"
+                style="@style/DragAreaWrap"
+                android:layout_marginTop="55dp"
+                android:layout_marginBottom="-15dp"
+                android:layout_below="@+id/btnBorrar"
+                android:layout_alignBottom="@+id/txtPrecio" />
+
+            <ImageButton
+                android:id="@+id/btnBorrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/btnModificar"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Borrar Chofer"
+                app:srcCompat="@drawable/borrar" />
+
+            <ImageButton
+                android:id="@+id/btnModificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#00000000"
+                android:contentDescription="Modificar Chofer"
+                app:srcCompat="@drawable/editar" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_administrador"
+    app:startDestination="@id/fragmentHomeAdmin">
+
+    <fragment
+        android:id="@+id/fragmentMapaAdmin"
+        android:name="com.gammasoft.busfinder.view.fragment.Mapa"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_mapa" />
+
+    <fragment
+        android:id="@+id/fragmentHomeAdmin"
+        android:name="com.gammasoft.busfinder.view.fragment.Administrador"
+        android:label="Home"
+        tools:layout="@layout/fragment_administrador" />
+
+    <fragment
+        android:id="@+id/fragmentQuejaSugerencia"
+        android:name="com.gammasoft.busfinder.view.fragment.QuejaSugerencia"
+        android:label="QuejaSugerencia"
+        tools:layout="@layout/fragment_queja_sugerencia" />
+
+    <fragment
+        android:id="@+id/fragmentPerfilAdmin"
+        android:name="com.gammasoft.busfinder.view.fragment.PerfilAdministrador"
+        android:label="Administrador"
+        tools:layout="@layout/fragment_perfil_admin_chofer" />
+</navigation>

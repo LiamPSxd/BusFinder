@@ -1,0 +1,566 @@
+[
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/navigation_nav_administrador.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/navigation/nav_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_atras.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\atras.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_facebook.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\facebook.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_activity_crear_cuenta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_crear_cuenta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_semi_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_semi_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_nav_header_main.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_crear_cuenta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_crear_cuenta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_borrar_tarifa.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_tarifa.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/navigation_nav_chofer.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/navigation/nav_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_salir.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\salir.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_activity_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_modificar_tarifa.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\navigation_nav_crear_cuenta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\navigation\\nav_crear_cuenta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_ingresar.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\ingresar.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_crear_cuenta_2.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_crear_cuenta_2.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_black.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_black.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_lista_tarjeta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_lista_tarjeta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_perfil_publico.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_perfil_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\navigation_nav_administrador.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\navigation\\nav_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_black.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_black.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_drag_handle_light.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\drag_handle_light.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_ruta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\ruta.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/menu_bottom_nav_menu_publico.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/menu/bottom_nav_menu_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_medium.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_medium.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_administrador.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_buzon.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\buzon.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_extra_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_extra_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\animator_reduce_size.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\animator\\reduce_size.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_float_left.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\float_left.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_color_tube_regular.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\color_tube_regular.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_visualizar_ruta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_black.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_black.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_activity_bienvenida.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_bienvenida.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_side_nav_bar.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\side_nav_bar.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_sink_right.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\sink_right.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_editar.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\editar.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_float_up.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\float_up.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_agregar_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\menu_bottom_nav_menu_publico.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\menu\\bottom_nav_menu_publico.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/menu_bottom_nav_menu_chofer.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/menu/bottom_nav_menu_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_float_right.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\float_right.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_agregar_tarifa.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_sink_up.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\sink_up.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_agregar_parada.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_thin.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_thin.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_light.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_light.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_splash.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\splash.png"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/navigation_nav_publico.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/navigation/nav_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_activity_publico.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-pngs-66:\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_borrar_ruta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_ruta.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/layout_fragment_queja_sugerencia.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/layout/fragment_queja_sugerencia.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_mapa.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\mapa.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_activity_administrador.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_bg_translucent.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\bg_translucent.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\xml_data_extraction_rules.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_modificar_ruta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_queja_sugerencia.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_queja_sugerencia.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_visualizar_tarifa.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_visualizar_parada.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_etiqueta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\etiqueta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_sink_down.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\sink_down.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_extra_light.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_extra_light.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_queja_sugerencia.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_queja_sugerencia.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\animator_original_size.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\animator\\original_size.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_gogoia_regular.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\gogoia_regular.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_light.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_light.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_thin.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_thin.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_lista.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_lista.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_google.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\google.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_float_down.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\float_down.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_gammasoft.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\gammasoft.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_zoom_out.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\zoom_out.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_bus.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\bus.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_perfil.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\perfil.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_camara.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\camara.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_borrar.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\borrar.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_borrar_parada.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_semi_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_semi_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_tipo_cuenta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_tipo_cuenta.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/menu_bottom_nav_menu_administrador.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/menu/bottom_nav_menu_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_extra_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_extra_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_twitter.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\twitter.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_modificar_parada.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_limpiar.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\limpiar.png"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/layout_fragment_administrador.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/layout/fragment_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\xml_backup_rules.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_visualizar_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_ic_launcher_background.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\navigation_nav_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\navigation\\nav_chofer.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-merged_res-71:/layout_tarjeta_agregar_unidad.xml.flat",
+        "source": "com.gammasoft.busfinder.app-main-73:/layout/tarjeta_agregar_unidad.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_regular.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_regular.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_user.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\user.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_regular.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_regular.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_home.png.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\home.png"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_crear_cuenta_tipo.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_crear_cuenta_tipo.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_baloo_thambi.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\baloo_thambi.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_light.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_light.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_alerta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_alerta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\menu_bottom_nav_menu_administrador.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\menu\\bottom_nav_menu_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_heavy.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_heavy.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_modificar_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_blur.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_blur.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_publico.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_perfil_admin_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_perfil_admin_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\menu_bottom_nav_menu_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\menu\\bottom_nav_menu_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_parada.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_bold.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_bold.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_tarifa.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_activity_iniciar_sesion.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_iniciar_sesion.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_titulo.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_titulo.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_dinero.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\dinero.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_borrar_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_agregar_ruta.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_fragment_mapa.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_mapa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_phenomena_thin.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\phenomena_thin.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_extra_light.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_extra_light.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_outfit_regular.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\outfit_regular.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_chofer.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_sink_left.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\sink_left.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\drawable_agregar.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\drawable\\agregar.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\navigation_nav_publico.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\navigation\\nav_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\layout_tarjeta_codigo.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_codigo.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_intro_script_trial_medium.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\intro_script_trial_medium.ttf"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\anim_zoom_in.xml.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\anim\\zoom_in.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-merged_res-71:\\font_gogoia_deco.ttf.flat",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\font\\gogoia_deco.ttf"
+    }
+]

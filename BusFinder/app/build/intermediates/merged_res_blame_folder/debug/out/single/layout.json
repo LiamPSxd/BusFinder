@@ -1,0 +1,178 @@
+[
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_visualizar_ruta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_crear_cuenta_2.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_crear_cuenta_2.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_modificar_parada.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_crear_cuenta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_crear_cuenta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_lista_tarjeta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_lista_tarjeta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\activity_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_mapa.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_mapa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_perfil_publico.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_perfil_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_borrar_tarifa.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\activity_publico.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_publico.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-mergeDebugResources-70:/layout/tarjeta_agregar_unidad.xml",
+        "source": "com.gammasoft.busfinder.app-main-73:/layout/tarjeta_agregar_unidad.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_borrar_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_codigo.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_codigo.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_perfil_admin_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_perfil_admin_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_blur.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_blur.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_agregar_ruta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_agregar_tarifa.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_visualizar_parada.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_parada.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-mergeDebugResources-70:/layout/fragment_queja_sugerencia.xml",
+        "source": "com.gammasoft.busfinder.app-main-73:/layout/fragment_queja_sugerencia.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_lista.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_lista.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\activity_iniciar_sesion.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_iniciar_sesion.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\activity_administrador.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\nav_header_main.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\activity_crear_cuenta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_crear_cuenta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_tipo_cuenta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_tipo_cuenta.xml"
+    },
+    {
+        "merged": "com.gammasoft.busfinder.app-mergeDebugResources-70:/layout/fragment_administrador.xml",
+        "source": "com.gammasoft.busfinder.app-main-73:/layout/fragment_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_visualizar_tarifa.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_administrador.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_administrador.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_modificar_ruta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\activity_bienvenida.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\activity_bienvenida.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_crear_cuenta_tipo.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_crear_cuenta_tipo.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_agregar_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_queja_sugerencia.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_queja_sugerencia.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_modificar_tarifa.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_tarifa.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_visualizar_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_visualizar_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_queja_sugerencia.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_queja_sugerencia.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_agregar_parada.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_agregar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_alerta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_alerta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_titulo.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_titulo.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_borrar_ruta.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_ruta.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_borrar_parada.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_borrar_parada.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_publico.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_publico.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\fragment_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\fragment_chofer.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-mergeDebugResources-70:\\layout\\tarjeta_modificar_chofer.xml",
+        "source": "D:\\AndroidStudio\\.gradle\\daemon\\7.4\\com.gammasoft.busfinder.app-main-73:\\layout\\tarjeta_modificar_chofer.xml"
+    }
+]
